@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace blindness
@@ -13,14 +14,14 @@ namespace blindness
         private float xRotation;
         private float yRotation;
 
-        // Start is called before the first frame update
+        
+
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
-        // Update is called once per frame
         void Update()
         {
             var mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensX;
