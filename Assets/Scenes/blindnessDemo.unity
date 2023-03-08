@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd923d9cebbc1f46bbfed03ce45ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightingContainer: {fileID: 0}
+  lightingContainer: {fileID: 728456669}
 --- !u!1 &1155441091
 GameObject:
   m_ObjectHideFlags: 0
