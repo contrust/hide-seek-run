@@ -371,7 +371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 728456670}
   m_Layer: 0
-  m_Name: GlobalLightningContainer
+  m_Name: GlobalLightingContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd923d9cebbc1f46bbfed03ce45ee29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightningContainer: {fileID: 728456669}
+  lightingContainer: {fileID: 0}
 --- !u!1 &1155441091
 GameObject:
   m_ObjectHideFlags: 0

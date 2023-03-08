@@ -7,12 +7,12 @@ namespace blindness
 {
     public class LightDisabler : MonoBehaviour
     {
-        public GameObject lightningContainer;
+        public GameObject lightingContainer;
         private List<Light> _lights;
 
         public void Start()
         {
-            _lights = lightningContainer.GetComponentsInChildren<Light>().ToList();
+            _lights = lightingContainer.GetComponentsInChildren<Light>().ToList();
         }
 
         private void OnPreCull()
