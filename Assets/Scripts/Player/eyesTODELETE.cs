@@ -17,6 +17,5 @@ namespace Transport.Player
 					e.layer = LayerMask.NameToLayer("IgnoreCamera");
 				}
 		}
-
 	}
 }

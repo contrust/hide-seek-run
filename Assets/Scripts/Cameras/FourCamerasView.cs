@@ -1,46 +1,71 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 using MouseButton = UnityEngine.UIElements.MouseButton;
 
 public class FourCamerasView : MonoBehaviour
 {
+    private Camera camera;
+
+    private IEnumerable<Camera> Cameras => matchSettings.Victims.Select(v => v.GetComponentInChildren<Camera>());
     private bool isEnabled;
-    public Camera[] cameras = new Camera[4];
+
+    private MatchSettings matchSettings;
+    private Rect[] rects = {
+        new Rect(0, 0, 0.5f, 0.5f),
+        new Rect(0.5f, 0, 0.5f, 0.5f),
+        new Rect(0, 0.5f, 0.5f, 0.5f),
+        new Rect(0.5f, 0.5f, 0.5f, 0.5f),
+    };
+
+    private Hunter hunter;
+
+    private void Start()
+    {
+        matchSettings = GameObject.FindObjectOfType<MatchSettings>();
+        camera = Camera.main;
+        hunter = GetComponent<Hunter>();
+    }
 
     void Update()
     {
         /*
          * Added this method for testing purposes
          */
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (_isEnabled) DisableView();
+            if (isEnabled) DisableView();
             else EnableView();
         }
     }
 
     public void EnableView()
     {
-        foreach (var cam in cameras)
+        var i = 0;
+        foreach (Camera cam in Cameras)
         {
             cam.enabled = true;
+            cam.rect = rects[i];
+            i++;
         }
-        cameras[0].rect = new Rect(0, 0, 0.5f, 0.5f);
-        cameras[1].rect = new Rect(0.5f, 0, 0.5f, 0.5f);
-        cameras[2].rect = new Rect(0, 0.5f, 0.5f, 0.5f);
-        cameras[3].rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+        camera.enabled = false;
         isEnabled = true;
+        hunter.SetLight();
     }
 
     public void DisableView()
     {
-        foreach (var cam in cameras)
+        foreach (var cam in Cameras)
         {
             cam.enabled = false;
         }
         isEnabled = false;
+        camera.enabled = true;
+        hunter.SetDark();
     }
 }
