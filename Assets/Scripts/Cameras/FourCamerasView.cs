@@ -7,7 +7,7 @@ using MouseButton = UnityEngine.UIElements.MouseButton;
 
 public class FourCamerasView : MonoBehaviour
 {
-    private bool _isEnabled;
+    private bool isEnabled;
     public Camera[] cameras = new Camera[4];
 
     public void EnableView()
@@ -20,7 +20,7 @@ public class FourCamerasView : MonoBehaviour
         cameras[1].rect = new Rect(0.5f, 0, 0.5f, 0.5f);
         cameras[2].rect = new Rect(0, 0.5f, 0.5f, 0.5f);
         cameras[3].rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
-        _isEnabled = true;
+        isEnabled = true;
     }
 
     public void DisableView()
@@ -29,6 +29,6 @@ public class FourCamerasView : MonoBehaviour
         {
             cam.enabled = false;
         }
-        _isEnabled = false;
+        isEnabled = false;
     }
 }
