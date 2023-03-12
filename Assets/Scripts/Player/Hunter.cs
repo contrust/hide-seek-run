@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Mirror;
 using Transport;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Hunter : NetworkBehaviour
 {
@@ -20,6 +21,8 @@ public class Hunter : NetworkBehaviour
         }
     }
 
+    public LayerMask Render;
+
     private float blindness;
     private Coroutine blindnessCoroutine;
     private CustomNetworkManager networkManager;
@@ -27,6 +30,7 @@ public class Hunter : NetworkBehaviour
     
     [SerializeField] private GameObject victim;
     [SerializeField] private Material skybox;
+    [SerializeField] private Camera overlayCamera;
 
 
     private void Start()
@@ -44,6 +48,8 @@ public class Hunter : NetworkBehaviour
         RenderSettings.fogColor = Color.black;
         RenderSettings.skybox = skybox;
         blindnessCoroutine = StartCoroutine(BlindnessCoroutine());
+        Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
+        Camera.main.cullingMask = Render;
     }
 
     private void OnClientConnected()
