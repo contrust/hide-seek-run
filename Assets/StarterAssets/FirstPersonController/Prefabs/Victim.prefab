@@ -231,8 +231,9 @@ GameObject:
   - component: {fileID: 8820605171170571755}
   - component: {fileID: 7246098508915712204}
   - component: {fileID: 8584274055967416159}
+  - component: {fileID: -5668628269928127200}
   m_Layer: 8
-  m_Name: PlayerCapsule
+  m_Name: Victim
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,3 +529,15 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   Parent: {fileID: 4135013735270702856}
+--- !u!114 &-5668628269928127200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3cc92248af96144aaa75ef961a0db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

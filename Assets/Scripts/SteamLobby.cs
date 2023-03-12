@@ -10,12 +10,15 @@ namespace Transport
         protected Callback<LobbyCreated_t> LobbyCreated;
         protected Callback<GameLobbyJoinRequested_t> JoinRequested;
         protected Callback<LobbyEnter_t> LobbyEntered;
-        private NetworkManager _networkManager;
+        
+        
+        private NetworkManager networkManager;
         private const string HostAddressKey = "HostAddress";
         [SerializeField] private GameObject button;
+        
         private void Start()
         {
-            _networkManager = GetComponent<NetworkManager>();
+            networkManager = GetComponent<NetworkManager>();
             if (!SteamManager.Initialized) return;
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
             JoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
@@ -24,7 +27,7 @@ namespace Transport
 
         public void HostLobby()
         {
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, _networkManager.maxConnections);
+            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
             Destroy(button);
         }
 
@@ -35,7 +38,7 @@ namespace Transport
             {
                 return;
             }
-            _networkManager.StartHost();
+            networkManager.StartHost();
             SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey,
                 SteamUser.GetSteamID().ToString());
         }
@@ -48,9 +51,11 @@ namespace Transport
         private void OnLobbyEntered(LobbyEnter_t callback)
         {
             if (NetworkServer.active) return;
-            _networkManager.networkAddress =
+            networkManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
-            _networkManager.StartClient();
+            networkManager.StartClient();
+            if (button) 
+                Destroy(button);
         }
     }
 }
