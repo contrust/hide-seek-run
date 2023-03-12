@@ -10,6 +10,18 @@ public class FourCamerasView : MonoBehaviour
     private bool _isEnabled;
     public Camera[] cameras = new Camera[4];
 
+    void Update()
+    {
+        /*
+         * Added this method for testing purposes
+         */
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (_isEnabled) DisableView();
+            else EnableView();
+        }
+    }
+
     public void EnableView()
     {
         foreach (var cam in cameras)
