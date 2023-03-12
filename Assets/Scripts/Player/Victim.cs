@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class Victim : MonoBehaviour
+public class Victim : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private Material skybox;
+    private void Start()
+    {   
+        // if (isLocalPlayer) Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Init()
     {
-        
+        RenderSettings.skybox = skybox;
+        RenderSettings.fogDensity = 0.025f;
+        RenderSettings.fogColor = new Color(124, 177, 207, 255);
     }
 }

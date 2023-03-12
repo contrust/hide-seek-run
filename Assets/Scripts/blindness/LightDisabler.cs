@@ -7,23 +7,11 @@ namespace blindness
 {
     public class LightDisabler : MonoBehaviour
     {
-        public GameObject lightingContainer;
-        private List<Light> _lights;
 
         public void Start()
         {
-            _lights = lightingContainer.GetComponentsInChildren<Light>().ToList();
-        }
-
-        private void OnPreCull()
-        {
-            foreach (var lightSource in _lights)
-            {
-                if (lightSource != null)
-                {
-                    lightSource.enabled = false;
-                }
-            }
+            RenderSettings.fogDensity = 1;
+            RenderSettings.fogColor = Color.black;
         }
     }
 }
