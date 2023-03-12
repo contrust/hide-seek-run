@@ -7,9 +7,11 @@ public class Victim : NetworkBehaviour
 {
     [SyncVar] public int Health;
     [SerializeField] private Material skybox;
+    private MatchSettings matchSettings;
 
     private void Start()
-    {   
+    {
+        matchSettings = FindObjectOfType<MatchSettings>();
         // if (isLocalPlayer) Init();
     }
 
@@ -24,6 +26,9 @@ public class Victim : NetworkBehaviour
     {
         Health -= damage;
         if (Health <= 0)
+        {
+            matchSettings.Victims.Remove(this);
             Destroy(gameObject);
+        }
     }
 }
