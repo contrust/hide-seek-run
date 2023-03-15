@@ -605,6 +605,8 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
+  slider: {fileID: 1367660048065523953, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
+  mouseSensitivity: 1
   cursorLocked: 1
   cursorInputForLook: 1
 --- !u!114 &8616685848737228376

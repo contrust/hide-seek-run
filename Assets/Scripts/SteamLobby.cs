@@ -15,6 +15,7 @@ namespace Transport
         private NetworkManager networkManager;
         private const string HostAddressKey = "HostAddress";
         [SerializeField] private GameObject button;
+        [SerializeField] private GameObject slider;
         
         private void Start()
         {
@@ -29,6 +30,7 @@ namespace Transport
         {
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
             Destroy(button);
+            SensitivitySetActive(false);
         }
 
 
@@ -56,6 +58,13 @@ namespace Transport
             networkManager.StartClient();
             if (button) 
                 Destroy(button);
+            SensitivitySetActive(false);
+        }
+
+        private void SensitivitySetActive(bool setActive)
+        {
+            foreach(Transform child in slider.transform) 
+                child.gameObject.SetActive(setActive);
         }
     }
 }

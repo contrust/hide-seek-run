@@ -69,6 +69,8 @@ namespace StarterAssets
 
 		private const float Threshold = 0.01f;
 
+		[SerializeField] private UIHelper uihelper;
+
 		private bool IsCurrentDeviceMouse
 		{
 			get
@@ -91,6 +93,7 @@ namespace StarterAssets
 			controller = GetComponent<CharacterController>();
 			input = GetComponent<StarterAssetsInputs>();
 			playerInput = GetComponent<PlayerInput>();
+			uihelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
 
 			// reset our timeouts on start
 			jumpTimeoutDelta = JumpTimeout;
@@ -103,12 +106,20 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			PauseMenu();
 		}
 
 		private void LateUpdate()
 		{
 			if(!controller.enabled) return;
 			CameraRotation();
+		}
+
+		private void PauseMenu()
+		{
+			if (!Input.GetKeyDown(KeyCode.Escape)) return;
+			uihelper.Pause();
+			uihelper.SensitivitySetActive(uihelper.isPause);
 		}
 
 		private void GroundedCheck()
