@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SymbolManager: MonoBehaviour
 {
-    public readonly List<Material> possibleSymbols;
+    public List<Material> possibleSymbols;
     [SerializeField] private GameObject symbol;
-    public readonly Material noneSymbol;
+    public Material noneSymbol;
     private GameObject[] symbolInserters;
     private Material currentSymbol;
 
