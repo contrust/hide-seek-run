@@ -119,7 +119,12 @@ namespace StarterAssets
 		{
 			if (!Input.GetKeyDown(KeyCode.Escape)) return;
 			uihelper.Pause();
-			uihelper.SensitivitySetActive(uihelper.isPause);
+		}
+
+		private void InsertSymbol()
+		{
+			if (!Input.GetKeyDown(KeyCode.E)) return;
+			
 		}
 
 		private void GroundedCheck()

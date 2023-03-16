@@ -16,6 +16,7 @@ public class UIHelper : MonoBehaviour
     public void Pause()
     {
         isPause = !isPause;
+        SensitivitySetActive(isPause);
     }
 
     public void SensitivitySetActive(bool setActive)

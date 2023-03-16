@@ -571,6 +571,7 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735270702863}
   TopClamp: 89
   BottomClamp: -89
+  uihelper: {fileID: 0}
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,7 +606,6 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
-  slider: {fileID: 1367660048065523953, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
   mouseSensitivity: 1
   cursorLocked: 1
   cursorInputForLook: 1
