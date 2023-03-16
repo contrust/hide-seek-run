@@ -858,5 +858,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c404bab136e844db8bdd5f705e7748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SymbolInserterRadius: 1
-  SymbolInserterLayer: 0
+  SymbolInserterRadius: 5

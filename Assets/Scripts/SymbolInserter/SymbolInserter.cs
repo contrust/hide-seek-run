@@ -31,6 +31,7 @@ public class SymbolInserter : MonoBehaviour
 
     public void Insert()
     {
+        if (!possibleToInsert) return;
         symbolManager.CheckInsertedSymbol(chosenSymbol);
         StartCoroutine(InsertionTimeOutCoroutine());
     }
@@ -56,7 +57,7 @@ public class SymbolInserter : MonoBehaviour
     public void ChangeSymbol()
     {
         chosenSymbol = possibleSymbols[currentSymbolIndex];
-        screen.GetComponent<MeshRenderer>().material = chosenSymbol;
+        screenMeshRenderer.material = chosenSymbol;
         currentSymbolIndex++;
         if (currentSymbolIndex == possibleSymbols.Count)
             currentSymbolIndex = 0;

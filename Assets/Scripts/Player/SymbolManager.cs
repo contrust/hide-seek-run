@@ -16,10 +16,11 @@ public class SymbolManager: MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(ChangeSymbol());
         symbolMeshRenderer = symbol.GetComponent<MeshRenderer>();
         symbolInsertersGO = GameObject.FindGameObjectsWithTag("SymbolInserter");
         symbolInserters = symbolInsertersGO.Select(x => x.GetComponent<SymbolInserter>()).ToArray();
+        StartCoroutine(ChangeSymbol());
+        
     }
 
     private IEnumerator ChangeSymbol()
