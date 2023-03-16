@@ -12,14 +12,19 @@ public class SymbolInserter : MonoBehaviour
     private Material chosenSymbol;
     private int currentSymbolIndex;
 
+    private MeshRenderer meshRenderer;
+
     private bool possibleToInsert;
     [SerializeField] private float insertionTimeOut = 10f;
 
     [SerializeField] private GameObject screen;
+    private MeshRenderer screenMeshRenderer;
     void Start()
     {
         //Кажется, лучше спаунить Inserter вместе с охотником и спокойно получать SymbolManager здесь
         StartCoroutine(TryGetSymbolManager());
+        meshRenderer = GetComponent<MeshRenderer>();
+        screenMeshRenderer = screen.GetComponent<MeshRenderer>();
         currentSymbolIndex = 0;
         possibleToInsert = true;
     }
@@ -40,12 +45,12 @@ public class SymbolInserter : MonoBehaviour
 
     private void CorrectInsertion()
     {
-        GetComponent<MeshRenderer>().material = correctColor;
+        meshRenderer.material = correctColor;
     }
 
     private void WrongInsertion()
     {
-        GetComponent<MeshRenderer>().material = wrongColor;
+        meshRenderer.material = wrongColor;
     }
 
     public void ChangeSymbol()
@@ -61,7 +66,7 @@ public class SymbolInserter : MonoBehaviour
     {
         possibleToInsert = false;
         yield return new WaitForSeconds(insertionTimeOut);
-        GetComponent<MeshRenderer>().material = neutralColor;
+        screenMeshRenderer.material = neutralColor;
         possibleToInsert = true;
     }
     

@@ -13,6 +13,7 @@ public class ButtonChange : MonoBehaviour, IInserterButton
     
     public void Press()
     {
+        Debug.Log("Change");
         symbolInserter.ChangeSymbol();
     }
 }

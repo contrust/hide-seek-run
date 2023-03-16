@@ -12,6 +12,7 @@ public class ButtonInsert : MonoBehaviour, IInserterButton
     }
     public void Press()
     {
+        Debug.Log("Insert");
         symbolInserter.Insert();
     }
 }

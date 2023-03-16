@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 public class SymbolInsert : MonoBehaviour
 {
-    [SerializeField] private float SymbolInserterRadius = 1f;
+    [SerializeField] private float SymbolInserterRadius = 5f;
     private Camera mainCamera;
 
 
@@ -14,11 +15,16 @@ public class SymbolInsert : MonoBehaviour
     {
         mainCamera = Camera.main;
     }
-    
-    
+
+    private void Update()
+    {
+        PressButton();
+    }
+
+
     private void PressButton()
     {
-        if (!Input.GetKeyDown(KeyCode.E)) return;
+        if (!Input.GetKeyDown(KeyCode.Q)) return;
         var inserterButton = FindSymbolInserterButton();
         inserterButton?.Press();
     }
