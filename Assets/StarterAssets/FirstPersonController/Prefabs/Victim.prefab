@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: -5668628269928127200}
   - component: {fileID: 194772003508196257}
   - component: {fileID: 5377385871901113657}
+  - component: {fileID: 5604934843922529409}
   m_Layer: 9
   m_Name: Victim
   m_TagString: Player
@@ -845,3 +846,17 @@ MonoBehaviour:
   eyes:
   - {fileID: 7927630724010839241}
   - {fileID: 6817658253478081013}
+--- !u!114 &5604934843922529409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c404bab136e844db8bdd5f705e7748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SymbolInserterRadius: 1
+  SymbolInserterLayer: 0

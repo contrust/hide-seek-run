@@ -9,6 +9,8 @@ TagManager:
   - Panel
   - SensSlider
   - UIHelper
+  - SymbolInserter
+  - Hunter
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Ground
   - IgnoreCamera
   - Victim
-  - 
+  - SymbolInserter
   - 
   - 
   - 

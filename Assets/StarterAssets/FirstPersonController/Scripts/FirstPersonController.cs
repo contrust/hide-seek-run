@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Mirror;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace StarterAssets
 {
@@ -71,6 +72,8 @@ namespace StarterAssets
 
 		[SerializeField] private UIHelper uihelper;
 
+
+
 		private bool IsCurrentDeviceMouse
 		{
 			get
@@ -119,12 +122,6 @@ namespace StarterAssets
 		{
 			if (!Input.GetKeyDown(KeyCode.Escape)) return;
 			uihelper.Pause();
-		}
-
-		private void InsertSymbol()
-		{
-			if (!Input.GetKeyDown(KeyCode.E)) return;
-			
 		}
 
 		private void GroundedCheck()
