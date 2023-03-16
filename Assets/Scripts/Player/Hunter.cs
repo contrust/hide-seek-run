@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Hunter : NetworkBehaviour
 {
@@ -33,7 +35,6 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private Material lightSkybox;
     [SerializeField] private Camera overlayCamera;
     [SerializeField] private Color fogColor;
-
 
     private void Start()
     {

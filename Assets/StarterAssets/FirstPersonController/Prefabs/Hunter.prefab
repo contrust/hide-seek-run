@@ -560,6 +560,89 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2537492291807147109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6001176267417589335}
+  - component: {fileID: 1266177260981011465}
+  - component: {fileID: 4007067584056922806}
+  m_Layer: 0
+  m_Name: Symbol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6001176267417589335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537492291807147109}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.1240001, z: -0.2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8997996947095583982}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1266177260981011465
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537492291807147109}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4007067584056922806
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537492291807147109}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 129
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1a47fc0cfbbc34f4185eabc0e14b65b0, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2900726560742078344
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +1046,7 @@ GameObject:
   - component: {fileID: 6469024593486652518}
   - component: {fileID: 6282165276386327336}
   - component: {fileID: 5476336959705800085}
+  - component: {fileID: 8793162555626595489}
   m_Layer: 8
   m_Name: Hunter
   m_TagString: Player
@@ -986,6 +1070,7 @@ Transform:
   - {fileID: 5393215578589016641}
   - {fileID: 5090042591608758077}
   - {fileID: 3361215048505486275}
+  - {fileID: 6001176267417589335}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1039,6 +1124,7 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735270702863}
   TopClamp: 89
   BottomClamp: -89
+  uihelper: {fileID: 0}
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,7 +1159,6 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   analogMovement: 0
-  slider: {fileID: 1367660048065523953, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
   mouseSensitivity: 1
   cursorLocked: 1
   cursorInputForLook: 1
@@ -1335,3 +1420,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a81f56ff0e073bfadf6678e44a1d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8793162555626595489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737a160b4a086314db708a8f70199c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleSymbols:
+  - {fileID: 2100000, guid: 122a7e714417c494fadcdcc35944bc6a, type: 2}
+  - {fileID: 2100000, guid: 1a47fc0cfbbc34f4185eabc0e14b65b0, type: 2}
+  - {fileID: 2100000, guid: 1c8da7fcf0722e047b7a3b4f12be9a89, type: 2}
+  symbol: {fileID: 2537492291807147109}
+  noneSymbol: {fileID: 2100000, guid: 49a4700fa6b0ebc44b450a9024276270, type: 2}
