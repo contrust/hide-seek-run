@@ -5,7 +5,9 @@ using UnityEngine.Serialization;
 
 public class CustomNetworkManager : NetworkManager
 {
-    public event Action OnClientConnected = delegate { };
+    public event Action<GameObject> OnServerAddedPlayer = delegate { };
+    public event Action OnClientConnected = delegate {  };
+
     [FormerlySerializedAs("MatchController")]
     public MatchSettings MatchSettings;
 
@@ -17,7 +19,8 @@ public class CustomNetworkManager : NetworkManager
             : Instantiate(playerPrefab);
         player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
         NetworkServer.AddPlayerForConnection(conn, player);
-
+        
+        Debug.Log("Connected");
         
         var isHunter = player.GetComponent<Hunter>() is not null;
         if (isHunter) 
@@ -25,6 +28,18 @@ public class CustomNetworkManager : NetworkManager
         else 
             MatchSettings.Victims.Add(player.GetComponent<Victim>());
 
+        OnServerAddedPlayer.Invoke(player);
+    }
+
+    public override void OnClientSceneChanged()
+    {
+        base.OnClientSceneChanged();
         OnClientConnected.Invoke();
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        OnClientConnected = () => { };
     }
 }

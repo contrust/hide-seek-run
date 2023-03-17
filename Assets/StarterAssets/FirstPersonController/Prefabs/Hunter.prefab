@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 6715548732809918401}
   - component: {fileID: 2985642854870127890}
   - component: {fileID: 5770352170893350598}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Symbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1144,7 @@ GameObject:
   - component: {fileID: 6469024593486652518}
   - component: {fileID: 6282165276386327336}
   - component: {fileID: 5476336959705800085}
-  - component: {fileID: 3696552569495843900}
+  - component: {fileID: 8845684972202013765}
   m_Layer: 8
   m_Name: Hunter
   m_TagString: Player
@@ -1471,6 +1471,7 @@ MonoBehaviour:
   lightSkybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   overlayCamera: {fileID: 360427262}
   fogColor: {r: 0.4862745, g: 0.69411767, b: 0.8117647, a: 0}
+  SymbolMeshRenderer: {fileID: 2985642854870127890}
 --- !u!114 &6469024593486652518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,7 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a81f56ff0e073bfadf6678e44a1d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3696552569495843900
+--- !u!114 &8845684972202013765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1531,9 +1532,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737a160b4a086314db708a8f70199c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   possibleSymbols:
   - {fileID: 2100000, guid: 122a7e714417c494fadcdcc35944bc6a, type: 2}
   - {fileID: 2100000, guid: 1a47fc0cfbbc34f4185eabc0e14b65b0, type: 2}
   - {fileID: 2100000, guid: 1c8da7fcf0722e047b7a3b4f12be9a89, type: 2}
-  symbol: {fileID: 2165247203840464677}
   noneSymbol: {fileID: 2100000, guid: 49a4700fa6b0ebc44b450a9024276270, type: 2}

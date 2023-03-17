@@ -1,16 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class SymbolInserter : MonoBehaviour
+public class SymbolInserter : NetworkBehaviour
 {
-    [SerializeField] private Material neutralColor;
-    [SerializeField] private Material wrongColor;
-    [SerializeField] private Material correctColor;
+    [SerializeField] private Color neutralColor;
+    [SerializeField] private Color wrongColor;
+    [SerializeField] private Color correctColor;
+
+
+    [SyncVar(hook = nameof(SetColor))] private Color currentColor;
+    
+    
+    
     private SymbolManager symbolManager;
     private List<Material> possibleSymbols;
-    private Material chosenSymbol;
-    private int currentSymbolIndex;
+    private int chosenSymbol;
+    [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
     private MeshRenderer meshRenderer;
 
@@ -19,20 +27,34 @@ public class SymbolInserter : MonoBehaviour
 
     [SerializeField] private GameObject screen;
     private MeshRenderer screenMeshRenderer;
+    
+    
     void Start()
     {
         //Кажется, лучше спаунить Inserter вместе с охотником и спокойно получать SymbolManager здесь
-        StartCoroutine(TryGetSymbolManager());
         meshRenderer = GetComponent<MeshRenderer>();
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
         currentSymbolIndex = 0;
         possibleToInsert = true;
+        symbolManager = FindObjectOfType<SymbolManager>();
+        possibleSymbols = symbolManager.possibleSymbols;
+    }
+
+
+    private void SetColor(Color oldColor, Color newColor)
+    {
+        meshRenderer.material.color = newColor;
+    }
+
+    private void SetDisplay(int oldNumber, int newNumber)
+    {
+        screenMeshRenderer.material = possibleSymbols[currentSymbolIndex];
     }
 
     public void Insert()
     {
         if (!possibleToInsert) return;
-        symbolManager.CheckInsertedSymbol(chosenSymbol);
+        symbolManager.CheckInsertedSymbol(currentSymbolIndex);
         StartCoroutine(InsertionTimeOutCoroutine());
     }
 
@@ -46,28 +68,24 @@ public class SymbolInserter : MonoBehaviour
 
     private void CorrectInsertion()
     {
-        meshRenderer.material = correctColor;
+        currentColor = correctColor;
     }
 
     private void WrongInsertion()
     {
-        meshRenderer.material = wrongColor;
+        currentColor = wrongColor;
     }
 
     public void ChangeSymbol()
     {
-        chosenSymbol = possibleSymbols[currentSymbolIndex];
-        screenMeshRenderer.material = chosenSymbol;
-        currentSymbolIndex++;
-        if (currentSymbolIndex == possibleSymbols.Count)
-            currentSymbolIndex = 0;
+        currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, possibleSymbols.Count);
     }
     
     private IEnumerator InsertionTimeOutCoroutine()
     {
         possibleToInsert = false;
         yield return new WaitForSeconds(insertionTimeOut);
-        screenMeshRenderer.material = neutralColor;
+        currentColor = neutralColor;
         possibleToInsert = true;
     }
     
@@ -87,6 +105,5 @@ public class SymbolInserter : MonoBehaviour
                 break;
         }
         possibleSymbols = symbolManager.possibleSymbols;
-        chosenSymbol = symbolManager.noneSymbol;
     }
 }

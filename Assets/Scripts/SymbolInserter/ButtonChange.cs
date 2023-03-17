@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class ButtonChange : MonoBehaviour, IInserterButton
 {
-    [SerializeField] private GameObject symbolInserterGO;
-    private SymbolInserter symbolInserter;
-    void Start()
-    {
-        symbolInserter = symbolInserterGO.GetComponent<SymbolInserter>();
-    }
-    
+    [SerializeField] private SymbolInserter symbolInserter;
+
     public void Press()
     {
         Debug.Log("Change");

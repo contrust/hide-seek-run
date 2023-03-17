@@ -1,41 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class SymbolManager: MonoBehaviour
+public class SymbolManager: NetworkBehaviour
 {
     public List<Material> possibleSymbols;
-    [SerializeField] private GameObject symbol;
     private MeshRenderer symbolMeshRenderer;
     public Material noneSymbol;
     private GameObject[] symbolInsertersGO;
     private SymbolInserter[] symbolInserters;
-    private Material currentSymbol;
+    
+    [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
 
 
     void Start()
     {
-        symbolMeshRenderer = symbol.GetComponent<MeshRenderer>();
-        symbolInsertersGO = GameObject.FindGameObjectsWithTag("SymbolInserter");
-        symbolInserters = symbolInsertersGO.Select(x => x.GetComponent<SymbolInserter>()).ToArray();
-        StartCoroutine(ChangeSymbol());
-        
+        symbolInserters = FindObjectsByType<SymbolInserter>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
+        if (isLocalPlayer)
+            StartCoroutine(ChangeSymbol());
+    }
+    
+    
+    private void SetMaterial(int oldNumber, int newNumber)
+    {
+        GetComponent<Hunter>().SymbolMeshRenderer.material = possibleSymbols[newNumber];
     }
 
     private IEnumerator ChangeSymbol()
     {
         while (true)
         {
-            currentSymbol = possibleSymbols[Random.Range(0, possibleSymbols.Count)];
-            symbolMeshRenderer.material = currentSymbol;
+            currentSymbol = Random.Range(0, possibleSymbols.Count);
             yield return new WaitForSeconds(10f);
         }
     }
 
-    public void CheckInsertedSymbol(Material insertedSymbol)
+    public void CheckInsertedSymbol(int insertedSymbol)
     {
         foreach (var symbolInserter in symbolInserters)
-            symbolInserter.InsertionResult(insertedSymbol.Equals(currentSymbol));
+            symbolInserter.InsertionResult(insertedSymbol == currentSymbol);
     }
 }

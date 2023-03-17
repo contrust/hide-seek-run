@@ -35,11 +35,12 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private Material lightSkybox;
     [SerializeField] private Camera overlayCamera;
     [SerializeField] private Color fogColor;
+    
+    public MeshRenderer SymbolMeshRenderer;
 
     private void Start()
     {
         networkManager = GameObject.Find("NetworkManager").GetComponent<CustomNetworkManager>();
-        networkManager.OnClientConnected += OnClientConnected;
         matchSettings = networkManager.MatchSettings;
         if (isLocalPlayer) Init();
     }
@@ -70,11 +71,6 @@ public class Hunter : NetworkBehaviour
         paused = false;
     }
 
-    private void OnClientConnected()
-    {
-        Debug.Log("Client connected");
-    }
-    
     private IEnumerator BlindnessCoroutine()
     {
         var startTime = Time.time;
