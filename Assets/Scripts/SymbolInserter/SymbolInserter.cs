@@ -20,35 +20,36 @@ public class SymbolInserter : NetworkBehaviour
     private int chosenSymbol;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
-    private MeshRenderer meshRenderer;
+    [SerializeField] private MeshRenderer meshRenderer;
 
     private bool possibleToInsert;
     [SerializeField] private float insertionTimeOut = 10f;
 
     [SerializeField] private GameObject screen;
     private MeshRenderer screenMeshRenderer;
-    
-    
+
+
     void Start()
     {
         //Кажется, лучше спаунить Inserter вместе с охотником и спокойно получать SymbolManager здесь
-        meshRenderer = GetComponent<MeshRenderer>();
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
+        currentColor = neutralColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
-        symbolManager = FindObjectOfType<SymbolManager>();
-        possibleSymbols = symbolManager.possibleSymbols;
+        StartCoroutine(TryGetSymbolManager());
     }
 
 
     private void SetColor(Color oldColor, Color newColor)
     {
+        Debug.Log("SetColor");
         meshRenderer.material.color = newColor;
     }
 
     private void SetDisplay(int oldNumber, int newNumber)
     {
-        screenMeshRenderer.material = possibleSymbols[currentSymbolIndex];
+        Debug.Log("SetDisplay");
+        screenMeshRenderer.material = possibleSymbols[newNumber];
     }
 
     public void Insert()

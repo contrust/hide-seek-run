@@ -10,15 +10,26 @@ public class SymbolInserterSpawner : NetworkBehaviour
 	[SerializeField] private Transform position;
 
 
-	private void Start()
+	public override void OnStartServer()
 	{
 		SpawnInserter();
 	}
 	
+	[Server]
 	private void SpawnInserter()
 	{
 		Debug.Log("spawn");
 		var obj = Instantiate(inserter, position.position, Quaternion.identity);
 		NetworkServer.Spawn(obj);
+	}
+
+
+	private IEnumerator WaitNetworkServerActive(Action callback)
+	{
+		while (!NetworkServer.active)
+		{
+			yield return null;
+		}
+		callback();
 	}
 }

@@ -2,31 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SymbolInsert : MonoBehaviour
+public class SymbolInsert : NetworkBehaviour
 {
     [SerializeField] private float SymbolInserterRadius = 5f;
     private Camera mainCamera;
-
+    private SymbolInserter symbolInserter;
+    
 
     private void Start()
     {
         mainCamera = Camera.main;
     }
-
+    
+    public override void OnStartServer()
+    {
+        symbolInserter = FindObjectOfType<SymbolInserter>();
+    }
+    
     private void Update()
     {
-        PressButton();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            var inserterButton = FindSymbolInserterButton();
+            if (inserterButton is null) return;
+            
+            PressButton(inserterButton is ButtonInsert);
+        }
     }
 
-
-    private void PressButton()
+    [Command]
+    private void PressButton(bool action)
     {
-        if (!Input.GetKeyDown(KeyCode.Q)) return;
-        var inserterButton = FindSymbolInserterButton();
-        inserterButton?.Press();
+        if (action)
+            symbolInserter.Insert();
+        else
+            symbolInserter.ChangeSymbol();
     }
 
     private IInserterButton FindSymbolInserterButton()
