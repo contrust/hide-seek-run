@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: -5668628269928127200}
   - component: {fileID: 194772003508196257}
   - component: {fileID: 5377385871901113657}
+  - component: {fileID: 3208081639301676494}
   m_Layer: 9
   m_Name: Victim
   m_TagString: Player
@@ -604,6 +605,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  changeCameraMode: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -843,3 +845,19 @@ MonoBehaviour:
   eyes:
   - {fileID: 7927630724010839241}
   - {fileID: 6817658253478081013}
+--- !u!114 &3208081639301676494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d57be012f749e3ab656e7c5feb3e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCam: {fileID: 5372278936354443758}
+  interactionDistance: 10
+  interactionUI: {fileID: 0}
+  interactionText: {fileID: 0}
