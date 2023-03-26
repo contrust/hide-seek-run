@@ -20,7 +20,7 @@ public class SymbolInserter : NetworkBehaviour
     private SymbolManager symbolManager;
     private List<Material> possibleSymbols;
     private int chosenSymbol;
-    private int correctInsertions = 2;
+    [SyncVar(hook = nameof(SetCorrectInsertions))] private int correctInsertions;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
     [SerializeField] private MeshRenderer meshRenderer;
@@ -30,12 +30,14 @@ public class SymbolInserter : NetworkBehaviour
 
     [SerializeField] private GameObject screen;
     private MeshRenderer screenMeshRenderer;
+    private MatchSettings matchSettings;
 
 
     void Start()
     {
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
         uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
+        matchSettings = FindObjectOfType<MatchSettings>();
         currentColor = neutralColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
@@ -53,6 +55,12 @@ public class SymbolInserter : NetworkBehaviour
     {
         Debug.Log("SetDisplay");
         screenMeshRenderer.material = possibleSymbols[newNumber];
+    }
+    
+    private void SetCorrectInsertions(int oldNumber, int newNumber)
+    {
+        if (correctInsertions == matchSettings.CountCorrectSymbolsToWin) 
+            CommitVictimsVictory();
     }
 
     public void Insert()
@@ -74,16 +82,12 @@ public class SymbolInserter : NetworkBehaviour
     private void CorrectInsertion()
     {
         currentColor = correctColor;
-        // correctInsertions++;
-        // if (correctInsertions == 3)
-        // {
-        //     CommitSurvivorsVictory();
-        // }
+        correctInsertions++;
     }
 
-    private void CommitSurvivorsVictory()
+    private void CommitVictimsVictory()
     {
-        uiHelper.ShowSurvivorsVictoryScreen();
+        uiHelper.ShowVictimsVictoryScreen();
     }
 
     private void WrongInsertion()

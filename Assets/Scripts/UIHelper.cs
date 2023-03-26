@@ -27,7 +27,7 @@ public class UIHelper : MonoBehaviour
             child.gameObject.SetActive(setActive);
     }
 
-    public void ShowSurvivorsVictoryScreen()
+    public void ShowVictimsVictoryScreen()
     {
         survivorsVictoryText.gameObject.SetActive(true);
     }
