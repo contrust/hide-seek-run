@@ -35,10 +35,16 @@ public class SymbolManager: NetworkBehaviour
     {
         while (true)
         {
-            currentSymbol = Random.Range(0, possibleSymbols.Count);
+            ChangeSymbolOnce();
             yield return new WaitForSeconds(10f);
         }
     }
+
+    public void ChangeSymbolOnce()
+    {
+        currentSymbol = Random.Range(0, possibleSymbols.Count);
+    }
+    
 
     public void CheckInsertedSymbol(int insertedSymbol)
     {

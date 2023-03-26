@@ -16,4 +16,7 @@ public class MatchSettings : MonoBehaviour
     [Header("Players")]
     public Hunter Hunter;
     public List<Victim> Victims;
+
+    [Header("Match Settings")]
+    public int CountCorrectSymbolsToWin = 3;
 }
