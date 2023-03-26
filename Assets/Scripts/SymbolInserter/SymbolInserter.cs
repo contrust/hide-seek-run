@@ -10,6 +10,8 @@ public class SymbolInserter : NetworkBehaviour
     [SerializeField] private Color wrongColor;
     [SerializeField] private Color correctColor;
 
+    private UIHelper uiHelper;
+
 
     [SyncVar(hook = nameof(SetColor))] private Color currentColor;
     
@@ -18,6 +20,7 @@ public class SymbolInserter : NetworkBehaviour
     private SymbolManager symbolManager;
     private List<Material> possibleSymbols;
     private int chosenSymbol;
+    private int correctInsertions = 2;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
     [SerializeField] private MeshRenderer meshRenderer;
@@ -31,8 +34,8 @@ public class SymbolInserter : NetworkBehaviour
 
     void Start()
     {
-        //Кажется, лучше спаунить Inserter вместе с охотником и спокойно получать SymbolManager здесь
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
+        uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
         currentColor = neutralColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
@@ -65,11 +68,22 @@ public class SymbolInserter : NetworkBehaviour
             CorrectInsertion();
         else
             WrongInsertion();
+        symbolManager.ChangeSymbolOnce();
     }
 
     private void CorrectInsertion()
     {
         currentColor = correctColor;
+        // correctInsertions++;
+        // if (correctInsertions == 3)
+        // {
+        //     CommitSurvivorsVictory();
+        // }
+    }
+
+    private void CommitSurvivorsVictory()
+    {
+        uiHelper.ShowSurvivorsVictoryScreen();
     }
 
     private void WrongInsertion()

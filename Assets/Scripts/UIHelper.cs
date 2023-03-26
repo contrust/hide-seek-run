@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIHelper : MonoBehaviour
 {
     private Slider slider;
+    [SerializeField] private TextMeshProUGUI survivorsVictoryText;
     public bool isPause { get; private set; }
 
     private void Start()
@@ -23,5 +25,10 @@ public class UIHelper : MonoBehaviour
     {
         foreach(Transform child in slider.transform) 
             child.gameObject.SetActive(setActive);
+    }
+
+    public void ShowSurvivorsVictoryScreen()
+    {
+        survivorsVictoryText.gameObject.SetActive(true);
     }
 }
