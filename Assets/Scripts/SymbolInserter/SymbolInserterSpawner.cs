@@ -7,7 +7,7 @@ using UnityEngine;
 public class SymbolInserterSpawner : NetworkBehaviour
 {
 	[SerializeField] private GameObject inserter;
-	[SerializeField] private Transform position;
+	[SerializeField] private Transform[] positions;
 
 
 	public override void OnStartServer()
@@ -19,8 +19,11 @@ public class SymbolInserterSpawner : NetworkBehaviour
 	private void SpawnInserter()
 	{
 		Debug.Log("spawn");
-		var obj = Instantiate(inserter, position.position, Quaternion.identity);
-		NetworkServer.Spawn(obj);
+		foreach (var position in positions)
+		{
+			var obj = Instantiate(inserter, position.position, position.rotation);
+			NetworkServer.Spawn(obj);
+		}
 	}
 
 
