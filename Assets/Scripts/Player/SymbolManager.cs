@@ -13,6 +13,7 @@ public class SymbolManager: NetworkBehaviour
     public Material noneSymbol;
     private GameObject[] symbolInsertersGO;
     private SymbolInserter[] symbolInserters;
+    [SerializeField] private float timeChangeSymbol = 60;
     
     [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
 
@@ -36,7 +37,7 @@ public class SymbolManager: NetworkBehaviour
         while (true)
         {
             ChangeSymbolOnce();
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(timeChangeSymbol);
         }
     }
 
@@ -48,7 +49,12 @@ public class SymbolManager: NetworkBehaviour
 
     public void CheckInsertedSymbol(int insertedSymbol)
     {
+        var result = insertedSymbol == currentSymbol;
         foreach (var symbolInserter in symbolInserters)
-            symbolInserter.InsertionResult(insertedSymbol == currentSymbol);
+        {
+            symbolInserter.InsertionResult(result);
+            symbolInserter.Block();
+        }
+        ChangeSymbolOnce();
     }
 }

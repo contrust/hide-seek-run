@@ -1206,8 +1206,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  MoveSpeed: 4
-  SprintSpeed: 6
+  MoveSpeed: 6
+  SprintSpeed: 4
   RotationSpeed: 1
   SpeedChangeRate: 10
   JumpHeight: 1.2

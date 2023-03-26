@@ -555,8 +555,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  MoveSpeed: 3
-  SprintSpeed: 5
+  MoveSpeed: 5
+  SprintSpeed: 3
   RotationSpeed: 1
   SpeedChangeRate: 10
   JumpHeight: 1.2
@@ -858,4 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c404bab136e844db8bdd5f705e7748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   SymbolInserterRadius: 5

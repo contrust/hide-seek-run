@@ -10,7 +10,7 @@ public class SymbolInsert : NetworkBehaviour
 {
     [SerializeField] private float SymbolInserterRadius = 5f;
     private Camera mainCamera;
-    private SymbolInserter symbolInserter;
+    private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
     
 
     private void Start()
@@ -20,8 +20,12 @@ public class SymbolInsert : NetworkBehaviour
     
     public override void OnStartServer()
     {
-        symbolInserter = FindObjectOfType<SymbolInserter>();
-    }
+        var findInserters = FindObjectsOfType<SymbolInserter>();
+        foreach (SymbolInserter symbolInserter in findInserters)
+        {
+            symbolInserters[symbolInserter.id] = symbolInserter;
+        }
+    } 
     
     private void Update()
     {
@@ -29,28 +33,33 @@ public class SymbolInsert : NetworkBehaviour
         {
             var inserterButton = FindSymbolInserterButton();
             if (inserterButton is null) return;
-            
-            PressButton(inserterButton is ButtonInsert);
+            PressButton(inserterButton.SymbolInserter.id, inserterButton.ButtonType);
         }
     }
 
     [Command]
-    private void PressButton(bool action)
+    private void PressButton(int id, ButtonType buttonType)
     {
-        if (action)
+        var symbolInserter = symbolInserters[id];
+        
+        if (buttonType == ButtonType.Insert)
+        {
             symbolInserter.Insert();
-        else
+        }
+        else if (buttonType == ButtonType.Change)
+        {
             symbolInserter.ChangeSymbol();
+        }
     }
 
-    private IInserterButton FindSymbolInserterButton()
+    private SymbolButton FindSymbolInserterButton()
     {
         var cameraTransform = mainCamera.transform;
         
         if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out var hitInfo,
             SymbolInserterRadius))
             return null;
-        var button = hitInfo.collider.GetComponent<IInserterButton>();
+        var button = hitInfo.collider.GetComponent<SymbolButton>();
         return button;
     }
 }

@@ -14,14 +14,16 @@ public class SymbolInserterSpawner : NetworkBehaviour
 	{
 		SpawnInserter();
 	}
-	
+
 	[Server]
 	private void SpawnInserter()
 	{
 		Debug.Log("spawn");
+		var i = 0;
 		foreach (var position in positions)
 		{
 			var obj = Instantiate(inserter, position.position, position.rotation);
+			obj.GetComponent<SymbolInserter>().id = i++;
 			NetworkServer.Spawn(obj);
 		}
 	}

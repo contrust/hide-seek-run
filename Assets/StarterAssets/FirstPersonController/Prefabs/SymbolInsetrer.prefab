@@ -69,8 +69,9 @@ MonoBehaviour:
   neutralColor: {r: 1, g: 0.84337664, b: 0, a: 0}
   wrongColor: {r: 1, g: 0, b: 0, a: 0}
   correctColor: {r: 0, g: 1, b: 0.16947174, a: 0}
+  id: 0
   meshRenderer: {fileID: 7740347927400781284}
-  insertionTimeOut: 10
+  insertionTimeOut: 60
   screen: {fileID: 6499081458025053894}
 --- !u!1 &6499081458025053894
 GameObject:
@@ -134,7 +135,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c8da7fcf0722e047b7a3b4f12be9a89, type: 2}
+  - {fileID: 2100000, guid: 122a7e714417c494fadcdcc35944bc6a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,7 +283,7 @@ GameObject:
   - component: {fileID: 5516850339666559610}
   - component: {fileID: 7740347929046644400}
   - component: {fileID: 1497382940803289367}
-  - component: {fileID: 6499081458533870627}
+  - component: {fileID: 3806480129933631521}
   m_Layer: 7
   m_Name: ChangeButton
   m_TagString: SymbolInserter
@@ -368,7 +369,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.4872339, y: 2.5007026, z: 2.0028448}
   m_Center: {x: 0, y: 0, z: 0.9989877}
---- !u!114 &6499081458533870627
+--- !u!114 &3806480129933631521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,10 +378,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8100780690866362213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e898e985b67da5a428691f721ed832c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 84dc731905ac4425829bdf13977a7279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  symbolInserter: {fileID: 5564963808215664057}
+  SymbolInserter: {fileID: 5564963808215664057}
+  ButtonType: 1
 --- !u!1 &8100780690989662508
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +395,7 @@ GameObject:
   - component: {fileID: 5516850340583380019}
   - component: {fileID: 7740347928688451833}
   - component: {fileID: 1497382940628862814}
-  - component: {fileID: 6499081458389072506}
+  - component: {fileID: 4657050284559405785}
   m_Layer: 7
   m_Name: InsertButton
   m_TagString: SymbolInserter
@@ -479,7 +481,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.4872339, y: 2.5007026, z: 2.0028448}
   m_Center: {x: 0, y: 0, z: 0.9989877}
---- !u!114 &6499081458389072506
+--- !u!114 &4657050284559405785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -488,10 +490,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8100780690989662508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e665ed5c80193a43b776ddc4dfd3e17, type: 3}
+  m_Script: {fileID: 11500000, guid: 84dc731905ac4425829bdf13977a7279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  symbolInserter: {fileID: 5564963808215664057}
+  SymbolInserter: {fileID: 5564963808215664057}
+  ButtonType: 0
 --- !u!1 &8100780691438413705
 GameObject:
   m_ObjectHideFlags: 0

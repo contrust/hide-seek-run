@@ -14,13 +14,14 @@ public class SymbolInserter : NetworkBehaviour
 
 
     [SyncVar(hook = nameof(SetColor))] private Color currentColor;
-    
-    
-    
+    [SyncVar] public int id;
+
+
     private SymbolManager symbolManager;
     private List<Material> possibleSymbols;
     private int chosenSymbol;
-    [SyncVar(hook = nameof(SetCorrectInsertions))] private int correctInsertions;
+    [SyncVar(hook = nameof(SetCorrectInsertions))]
+    private int correctInsertions;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
     [SerializeField] private MeshRenderer meshRenderer;
@@ -56,10 +57,10 @@ public class SymbolInserter : NetworkBehaviour
         Debug.Log("SetDisplay");
         screenMeshRenderer.material = possibleSymbols[newNumber];
     }
-    
+
     private void SetCorrectInsertions(int oldNumber, int newNumber)
     {
-        if (correctInsertions == matchSettings.CountCorrectSymbolsToWin) 
+        if (correctInsertions == matchSettings.CountCorrectSymbolsToWin)
             CommitVictimsVictory();
     }
 
@@ -67,6 +68,10 @@ public class SymbolInserter : NetworkBehaviour
     {
         if (!possibleToInsert) return;
         symbolManager.CheckInsertedSymbol(currentSymbolIndex);
+    }
+
+    public void Block()
+    {
         StartCoroutine(InsertionTimeOutCoroutine());
     }
 
@@ -76,7 +81,6 @@ public class SymbolInserter : NetworkBehaviour
             CorrectInsertion();
         else
             WrongInsertion();
-        symbolManager.ChangeSymbolOnce();
     }
 
     private void CorrectInsertion()
