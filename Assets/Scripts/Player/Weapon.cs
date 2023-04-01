@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class Weapon : NetworkBehaviour
@@ -12,11 +14,13 @@ public class Weapon : NetworkBehaviour
 
     private float lastTimeShot;
     private Camera mainCamera;
+    public UnityEvent onEnemyHit;
 
 
     private void Start()
     {
         mainCamera = Camera.main;
+        onEnemyHit.AddListener(UIController.instance.OnEnemyHitHandler);
     }
 
     private void Update()
@@ -31,7 +35,11 @@ public class Weapon : NetworkBehaviour
             {
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * hitInfo.distance, Color.yellow, 10, false);
                 var victim = hitInfo.collider.GetComponent<Victim>();
-                if (victim) victim.GetDamage(Damage);
+                if (victim)
+                {
+                    victim.GetDamage(Damage);
+                    onEnemyHit.Invoke();
+                }
             }
             lastTimeShot = Time.time;
             Flash.SetActive(true);

@@ -1490,6 +1490,9 @@ MonoBehaviour:
   Flash: {fileID: 2900726560742078344}
   TimeReload: 2
   Damage: 50
+  onEnemyHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6282165276386327336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,3 +1543,4 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1a47fc0cfbbc34f4185eabc0e14b65b0, type: 2}
   - {fileID: 2100000, guid: 1c8da7fcf0722e047b7a3b4f12be9a89, type: 2}
   noneSymbol: {fileID: 2100000, guid: 49a4700fa6b0ebc44b450a9024276270, type: 2}
+  timeChangeSymbol: 60
