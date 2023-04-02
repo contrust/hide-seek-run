@@ -40,7 +40,7 @@ public class Hunter : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkManager").GetComponent<CustomNetworkManager>();
+        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
         matchSettings = networkManager.MatchSettings;
         if (isLocalPlayer) Init();
     }
