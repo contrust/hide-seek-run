@@ -25,6 +25,7 @@ public class UIHelper : MonoBehaviour
     {
         foreach(Transform child in slider.transform) 
             child.gameObject.SetActive(setActive);
+        slider.interactable = setActive;
     }
 
     public void ShowVictimsVictoryScreen()
