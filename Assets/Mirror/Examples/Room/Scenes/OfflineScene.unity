@@ -251,12 +251,13 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  - {fileID: 477707006827837575, guid: 6c7a1b27d9caeb4439a5e354576a985c, type: 3}
   timeInterpolationGui: 0
   showRoomGUI: 1
   minPlayers: 1
   roomPlayerPrefab: {fileID: 114033720796874720, guid: deae2134a1d77704b9c595efe69767dd, type: 3}
   RoomScene: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
-  GameplayScene: Assets/StarterAssets/FirstPersonController/Scenes/Playgr test.unity
+  GameplayScene: Assets/Maps/Map1.unity
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
@@ -469,7 +470,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sensitivity
+  m_text: 'VIctims Victory
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
