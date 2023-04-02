@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using HUD;
 using Mirror;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -53,6 +54,8 @@ public class Hunter : NetworkBehaviour
         blindnessCoroutine = StartCoroutine(BlindnessCoroutine());
         Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
         Camera.main.cullingMask = Render;
+        HUDController.instance.ShowStaticElements();
+        HUDController.instance.SetupEventHandlers();
     }
 
     public void SetLight()

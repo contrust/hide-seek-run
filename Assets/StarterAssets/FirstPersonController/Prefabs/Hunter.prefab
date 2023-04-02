@@ -4434,6 +4434,9 @@ MonoBehaviour:
   Flash: {fileID: 2900726560742078344}
   TimeReload: 2
   Damage: 50
+  onEnemyHit:
+    m_PersistentCalls:
+      m_Calls: []
   ShootingSound: {fileID: 4483856499322475674}
 --- !u!114 &5476336959705800085
 MonoBehaviour:
@@ -4710,3 +4713,4 @@ Transform:
   m_Father: {fileID: 8210238675557524069}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 13.639689, y: 97.913216, z: -3.8574827}
+  timeChangeSymbol: 60
