@@ -10,6 +10,7 @@ public class Weapon : NetworkBehaviour
 
     private float lastTimeShot;
     private Camera mainCamera;
+    public UnityEvent onShot;
     public UnityEvent onEnemyHit;
 
 
@@ -36,6 +37,7 @@ public class Weapon : NetworkBehaviour
                     onEnemyHit.Invoke();
                 }
             }
+            onShot.Invoke();
             lastTimeShot = Time.time;
             Flash.SetActive(true);
         }

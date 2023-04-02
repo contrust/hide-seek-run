@@ -6,9 +6,10 @@ namespace HUD
 {
     public class HUDController : MonoBehaviour
     { 
-        [SerializeReference]private HUDEffect blurEffect;
-        [SerializeReference]private HUDEffect hitMarkerEffect;
-        [SerializeField] private GameObject staticElements;
+        [SerializeField]private HUDEffect blurEffect;
+        [SerializeField]private HUDEffect hitMarkerEffect;
+        [SerializeField]private HUDEffect reloadEffect;
+        [SerializeField]private GameObject staticElements;
         
         public static HUDController instance;
 
@@ -22,7 +23,9 @@ namespace HUD
             var weapon = NetworkClient.localPlayer.GetComponent<Weapon>();
             if (weapon != null)
             {
+                (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
+                weapon.onShot.AddListener(instance.OnShotHandler);
             }
             else
             {
@@ -39,6 +42,11 @@ namespace HUD
         public void ShowStaticElements()
         {
             staticElements.SetActive(true);
+        }
+
+        public void OnShotHandler()
+        {
+            ShowEffect(reloadEffect);
         }
         
         public void OnEnemyHitHandler()
