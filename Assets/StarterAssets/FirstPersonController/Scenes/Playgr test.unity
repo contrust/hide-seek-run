@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &236875113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,15 +335,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1367660047867112910, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1367660047867112910, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1367660047867112910, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1367660048065523953, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -451,11 +451,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1367660048327869076, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1367660048327869076, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7350e52228fa3d949bf76e12ff58c6fb, type: 3}
@@ -1220,6 +1220,14 @@ MonoBehaviour:
   - {fileID: 477707006827837575, guid: 6c7a1b27d9caeb4439a5e354576a985c, type: 3}
   - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   timeInterpolationGui: 0
+  showRoomGUI: 1
+  minPlayers: 1
+  roomPlayerPrefab: {fileID: 0}
+  RoomScene: 
+  GameplayScene: 
+  _allPlayersReady: 0
+  roomSlots: []
+  clientIndex: 0
   MatchSettings: {fileID: 236875113}
 --- !u!1 &912452259 stripped
 GameObject:
@@ -1358,7 +1366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1192526682
 MonoBehaviour:
   m_ObjectHideFlags: 0

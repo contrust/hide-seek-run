@@ -28,6 +28,7 @@ namespace Transport
 
         public void HostLobby()
         {
+            Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
             Destroy(button);
             SensitivitySetActive(false);

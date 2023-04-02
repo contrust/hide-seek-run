@@ -43,6 +43,21 @@ public class CustomNetworkManager : NetworkRoomManager
     //     OnClientConnected = () => { };
     // }
 
+    public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
+    {
+        Transform startPos = GetStartPosition();
+        GameObject player = startPos != null
+            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+            : Instantiate(playerPrefab);
+        
+        var isHunter = player.GetComponent<Hunter>() is not null;
+        if (isHunter) 
+            MatchSettings.Hunter = player.GetComponent<Hunter>();
+        else 
+            MatchSettings.Victims.Add(player.GetComponent<Victim>());
+        return player;
+    }
+
     public override void OnRoomServerSceneChanged(string sceneName)
     {
         if (sceneName == GameplayScene)
