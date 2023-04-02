@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class Victim : NetworkBehaviour
 {
-    [SyncVar] public int Health;
+    [SyncVar(hook = nameof(SetHealth))] public int Health;
     public AudioSource DamageSound;
     [SerializeField] private Material skybox;
     private MatchSettings matchSettings;
@@ -34,6 +34,13 @@ public class Victim : NetworkBehaviour
         }
     }
 
+    private void SetHealth(int oldValue, int newValue)
+    {
+        Health = newValue;
+        if (isLocalPlayer) 
+            onDamageTaken.Invoke();
+    }
+
     public override void OnStartLocalPlayer()
     {
 
@@ -48,7 +55,7 @@ public class Victim : NetworkBehaviour
 
     public void GetDamage(int damage)
     {
-        PlayDamageSound();
+        RpcSendDamageSoundToClients();
         Health -= damage;
         onDamageTaken.Invoke();
         if (Health <= 0)
