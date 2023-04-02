@@ -9,6 +9,7 @@ public class Weapon : NetworkBehaviour
     public GameObject Flash;
     public float TimeReload;
     public int Damage;
+    public AudioSource ShootingSound;
 
     private float lastTimeShot;
     private Camera mainCamera;
@@ -35,9 +36,27 @@ public class Weapon : NetworkBehaviour
             }
             lastTimeShot = Time.time;
             Flash.SetActive(true);
+            PlayShootingSound();
         }
         
         if(Time.time - lastTimeShot > 0.1)
             Flash.SetActive(false);
+    }
+
+    private void PlayShootingSound()
+    {
+        CmdSendServerShootingSound();
+    }
+
+    [Command]
+    private void CmdSendServerShootingSound()
+    {
+        RpcSendShootingSoundToClients();
+    }
+
+    [ClientRpc]
+    private void RpcSendShootingSoundToClients()
+    {
+        ShootingSound.Play();
     }
 }

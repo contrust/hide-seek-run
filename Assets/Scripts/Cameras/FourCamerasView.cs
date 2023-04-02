@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using StarterAssets;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,10 +10,10 @@ using UnityEngine.UI;
 using MouseButton = UnityEngine.UIElements.MouseButton;
 
 public class FourCamerasView : MonoBehaviour
-{
-    private Camera camera;
-
+{ 
+    private new Camera camera;
     private IEnumerable<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>());
+    private StarterAssetsInputs input;
     private bool isEnabled;
 
     private MatchSettings matchSettings;
@@ -30,6 +31,7 @@ public class FourCamerasView : MonoBehaviour
         matchSettings = GameObject.FindObjectOfType<MatchSettings>();
         camera = Camera.main;
         hunter = GetComponent<Hunter>();
+        input = GetComponent<StarterAssetsInputs>();
     }
 
     void Update()
@@ -37,11 +39,20 @@ public class FourCamerasView : MonoBehaviour
         /*
          * Added this method for testing purposes
          */
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (input.GetKeyDown(KeyCode.E))
         {
             if (isEnabled) DisableView();
             else EnableView();
-        }
+        }*/
+        UpdateCameraMode();
+    }
+
+    private void UpdateCameraMode()
+    {
+        if (!input.changeCameraMode) return;
+        if (isEnabled) DisableView();
+        else EnableView();
+        input.changeCameraMode = false;
     }
 
     public void EnableView()
