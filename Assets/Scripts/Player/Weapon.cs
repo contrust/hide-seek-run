@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using Mirror;
-using UI;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class Weapon : NetworkBehaviour
 {
@@ -20,7 +16,6 @@ public class Weapon : NetworkBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        onEnemyHit.AddListener(UIController.instance.OnEnemyHitHandler);
     }
 
     private void Update()

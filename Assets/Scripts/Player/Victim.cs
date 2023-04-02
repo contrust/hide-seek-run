@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using HUD;
 using Mirror;
-using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,8 +19,7 @@ public class Victim : NetworkBehaviour
     private void Start()
     {
         matchSettings = FindObjectOfType<MatchSettings>();
-        onDamageTaken.AddListener(UIController.instance.OnDamageTakenHandler);
-        // if (isLocalPlayer) Init();
+        if (isLocalPlayer) Init();
     }
 
     private void Update()
@@ -34,9 +33,11 @@ public class Victim : NetworkBehaviour
 
     private void Init()
     {
-        RenderSettings.skybox = skybox;
+        /*RenderSettings.skybox = skybox;
         RenderSettings.fogDensity = 0.025f;
-        RenderSettings.fogColor = new Color(124, 177, 207, 255);
+        RenderSettings.fogColor = new Color(124, 177, 207, 255);*/
+        HUDController.instance.ShowStaticElements();
+        HUDController.instance.SetupEventHandlers();
     }
     
     
