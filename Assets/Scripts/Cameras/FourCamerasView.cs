@@ -12,7 +12,7 @@ public class FourCamerasView : MonoBehaviour
 {
     private Camera camera;
 
-    private IEnumerable<Camera> Cameras => matchSettings.Victims.Select(v => v.GetComponentInChildren<Camera>());
+    private IEnumerable<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>());
     private bool isEnabled;
 
     private MatchSettings matchSettings;

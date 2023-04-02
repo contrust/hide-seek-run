@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class CustomNetworkManager : NetworkRoomManager
@@ -8,83 +11,37 @@ public class CustomNetworkManager : NetworkRoomManager
     public event Action<GameObject> OnServerAddedPlayer = delegate { };
     public event Action OnClientConnected = delegate {  };
 
+    private Hunter hunter;
+    private List<Victim> victims;
+
     [FormerlySerializedAs("MatchController")]
     public MatchSettings MatchSettings;
 
-    // public override void OnServerAddPlayer(NetworkConnectionToClient conn)
-    // {
-    //     Transform startPos = GetStartPosition();
-    //     GameObject player = startPos != null
-    //         ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-    //         : Instantiate(playerPrefab);
-    //     player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
-    //     NetworkServer.AddPlayerForConnection(conn, player);
-    //     
-    //     Debug.Log("Connected");
-    //     
-    //     var isHunter = player.GetComponent<Hunter>() is not null;
-    //     if (isHunter) 
-    //         MatchSettings.Hunter = player.GetComponent<Hunter>();
-    //     else 
-    //         MatchSettings.Victims.Add(player.GetComponent<Victim>());
-    //
-    //     OnServerAddedPlayer.Invoke(player);
-    // }
-
-    // public override void OnClientSceneChanged()
-    // {
-    //     base.OnClientSceneChanged();
-    //     OnClientConnected.Invoke();
-    // }
-    //
-    // public override void OnStartServer()
-    // {
-    //     base.OnStartServer();
-    //     OnClientConnected = () => { };
-    // }
-
     public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
     {
+        // var player = base.OnRoomServerCreateGamePlayer(conn, roomPlayer);
         Transform startPos = GetStartPosition();
         GameObject player = startPos != null
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            : Instantiate(playerPrefab);
+            : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         
         var isHunter = player.GetComponent<Hunter>() is not null;
-        if (isHunter) 
-            MatchSettings.Hunter = player.GetComponent<Hunter>();
-        else 
-            MatchSettings.Victims.Add(player.GetComponent<Victim>());
+        // if (isHunter) 
+        //     hunter = player.GetComponent<Hunter>();
+        // else 
+        //     victims.Add(player.GetComponent<Victim>());
         return player;
     }
 
-    public override void OnRoomServerSceneChanged(string sceneName)
-    {
-        if (sceneName == GameplayScene)
-            Debug.Log("start");
-            // InitialSpawn();
-    }
-
-    private void InitialSpawn()
-    {
-        Transform startPos = GetStartPosition();
-        GameObject player = startPos != null
-            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            : Instantiate(playerPrefab);
-        
-        var isHunter = player.GetComponent<Hunter>() is not null;
-        if (isHunter) 
-            MatchSettings.Hunter = player.GetComponent<Hunter>();
-        else 
-            MatchSettings.Victims.Add(player.GetComponent<Victim>());
-
-        OnServerAddedPlayer.Invoke(player);
-    }
+    // public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
+    // {
+    //     var hunter = FindObjectOfType<Hunter>();
+    //     var victims = FindObjectsOfType<Victim>();
+    //     MatchSettings.Hunter = hunter;
+    //     MatchSettings.Victims = victims.ToList();
+    //     return true;
+    // }
     
-    public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
-    {
-        return true;
-    }
     
     public override void OnRoomStopClient()
     {
