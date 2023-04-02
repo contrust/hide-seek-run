@@ -8,19 +8,20 @@ public class Victim : NetworkBehaviour
     [SyncVar] public int Health;
     [SerializeField] private Material skybox;
     private MatchSettings matchSettings;
+    [SerializeField] private GameObject view;
+    [SerializeField] private int ignoreCameraLayer = 8;
 
     private void Start()
     {
         matchSettings = FindObjectOfType<MatchSettings>();
-        // if (isLocalPlayer) Init();
     }
 
-    private void Init()
+    public override void OnStartLocalPlayer()
     {
-        RenderSettings.skybox = skybox;
-        RenderSettings.fogDensity = 0.025f;
-        RenderSettings.fogColor = new Color(124, 177, 207, 255);
+        if (isLocalPlayer) 
+            view.layer = ignoreCameraLayer;
     }
+    
 
     public void GetDamage(int damage)
     {
