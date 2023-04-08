@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8835804624597965041}
   m_Layer: 8
-  m_Name: MainRayDireciton
+  m_Name: CenterRayDireciton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,12 +340,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateDistance: 2
-  blindZone: 0
-  rotateStep: 1
-  mainRayDirection: {fileID: 8835804624597965041}
+  rotationStep: 1
   leftRayDirection: {fileID: 5403877837276741890}
+  centerRayDirection: {fileID: 8835804624597965041}
   rightRayDirection: {fileID: 9091285048916575305}
   yAngle: 0
+  showRays: 0
 --- !u!1 &421990567969974019
 GameObject:
   m_ObjectHideFlags: 0

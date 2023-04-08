@@ -5,27 +5,30 @@ namespace Player
     public class SymbolRotation : MonoBehaviour
     {
         [SerializeField] private double rotateDistance = 2;
-        [SerializeField]private double blindZone;
-        [SerializeField] private int rotateStep = 1;
-        [SerializeField] private Transform mainRayDirection;
+        [SerializeField] private int rotationStep = 1;
         [SerializeField] private Transform leftRayDirection;
+        [SerializeField] private Transform centerRayDirection;
         [SerializeField] private Transform rightRayDirection;
         [SerializeField] private float yAngle;
         private Vector3 transformPosition;
         public bool showRays;
-
-        void Start()
+        
+        void Update()
         {
-            blindZone = rotateDistance / 2;
+            UpdatePosition();
+            if (showRays)
+            {
+                DrawRays();
+            }
         }
 
-        void Update()
+        private void UpdatePosition()
         {
             transformPosition = transform.position;
             var mainRay = new Ray(transformPosition, transform.parent.transform.forward * -1);
             var isMainHit = Physics.Raycast(mainRay, out var mainHit);
             
-            var centerRay = new Ray(transformPosition, mainRayDirection.forward);
+            var centerRay = new Ray(transformPosition, centerRayDirection.forward);
             var isCenterHit = Physics.Raycast(centerRay, out var centerHit);
             
             var leftRay = new Ray(transformPosition, leftRayDirection.forward);
@@ -33,51 +36,56 @@ namespace Player
             
             var rightRay = new Ray(transformPosition, rightRayDirection.forward);
             var isRightHit = Physics.Raycast(rightRay, out var rightHit);
-            if (showRays)
+
+            if (isMainHit && mainHit.distance > rotateDistance)
             {
-                Debug.DrawRay(transformPosition, transform.parent.transform.forward * -1, Color.blue);
-                Debug.DrawRay(transformPosition, mainRayDirection.forward, Color.yellow);
-                Debug.DrawRay(transformPosition, leftRayDirection.forward, Color.red);
-                Debug.DrawRay(transformPosition, rightRayDirection.forward, Color.green);
+                RotateToDefaultPosition();
             }
-            if (mainHit.distance > rotateDistance)
+            else if (isCenterHit && centerHit.distance < rotateDistance)
+            {
+                RotateFromWall();
+            }
+            else if(isRightHit && rightHit.distance > rotateDistance && 
+                    isLeftHit && leftHit.distance > rotateDistance)
+            {
+                RotateToDefaultPosition();
+            }
+            
+            #region RotationMethods
+            void RotateToDefaultPosition()
             {
                 yAngle = transform.localEulerAngles.y;
                 switch (yAngle % 360)
                 {
                     case < 180 when yAngle > 2:
-                        transform.RotateAround(transformPosition, Vector3.up, -rotateStep);
+                        transform.RotateAround(transformPosition, Vector3.up, -rotationStep);
                         break;
                     case > 180 when yAngle < 358:
-                        transform.RotateAround(transformPosition, Vector3.up, rotateStep);
+                        transform.RotateAround(transformPosition, Vector3.up, rotationStep);
                         break;
                 }
             }
-            
-            else if (centerHit.distance<rotateDistance)
+
+            void RotateFromWall()
             {
-                if (isLeftHit && leftHit.distance < rotateDistance && rightHit.distance > rotateDistance)
+                if (leftHit.distance < rotateDistance && rightHit.distance > leftHit.distance)
                 {
-                    transform.RotateAround(transformPosition, Vector3.up, -rotateStep);
+                    transform.RotateAround(transformPosition, Vector3.up, -rotationStep);
                 }
                 else
                 {
-                    transform.RotateAround(transformPosition, Vector3.up, rotateStep);
+                    transform.RotateAround(transformPosition, Vector3.up, rotationStep);
                 }
             }
-            else
-            {
-                yAngle = transform.localEulerAngles.y;
-                switch (yAngle % 360)
-                {
-                    case < 180 when yAngle > 2 && leftHit.distance-rotateDistance> blindZone:
-                        transform.RotateAround(transformPosition, Vector3.up, -rotateStep);
-                        break;
-                    case > 180 when yAngle < 358 && rightHit.distance - rotateDistance > blindZone:
-                        transform.RotateAround(transformPosition, Vector3.up, rotateStep);
-                        break;
-                }
-            }
+            #endregion
+        }
+
+        private void DrawRays()
+        { 
+            Debug.DrawRay(transformPosition, transform.parent.transform.forward * -1, Color.blue);
+            Debug.DrawRay(transformPosition, centerRayDirection.forward, Color.yellow);
+            Debug.DrawRay(transformPosition, leftRayDirection.forward, Color.red);
+            Debug.DrawRay(transformPosition, rightRayDirection.forward, Color.green);
         }
     }
 }
