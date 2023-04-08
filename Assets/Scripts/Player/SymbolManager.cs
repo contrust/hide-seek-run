@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using HUD;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class SymbolManager: NetworkBehaviour
 {
     public List<Material> possibleSymbols;
+    public static readonly UnityEvent onSymbolInserted = new UnityEvent();
+    
     private MeshRenderer symbolMeshRenderer;
     public Material noneSymbol;
     private GameObject[] symbolInsertersGO;
@@ -21,7 +25,6 @@ public class SymbolManager: NetworkBehaviour
     void Start()
     {
         symbolInserters = FindObjectsByType<SymbolInserter>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-
         if (isLocalPlayer)
             StartCoroutine(ChangeSymbol());
     }
@@ -50,6 +53,10 @@ public class SymbolManager: NetworkBehaviour
     public void CheckInsertedSymbol(int insertedSymbol)
     {
         var result = insertedSymbol == currentSymbol;
+        if (result)
+        {
+            onSymbolInserted.Invoke();
+        }
         foreach (var symbolInserter in symbolInserters)
         {
             symbolInserter.InsertionResult(result);
