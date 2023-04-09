@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Mirror;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -11,9 +12,9 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 4.0f;
+		public float MoveSpeed = 6.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 6.0f;
+		public float SprintSpeed = 2.0f;
 		[Tooltip("Rotation speed of the character")]
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
@@ -48,6 +49,17 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
+
+		public UnityEvent onJump;
+		public UnityEvent onGround;
+		public AudioSource JumpingSound;
+		public AudioSource GroundingSound;
+		
+		private enum Sound
+		{
+			Jumping,
+			Grounding
+		}
 
 		// cinemachine
 		private float cinemachineTargetPitch;
@@ -101,6 +113,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			jumpTimeoutDelta = JumpTimeout;
 			fallTimeoutDelta = FallTimeout;
+			onJump.AddListener(PlayJumpingSound);
+			onGround.AddListener(PlayGroundingSound);
 		}
 
 		private void Update()
@@ -128,7 +142,12 @@ namespace StarterAssets
 		{
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+			var GroundedBefore = Grounded;
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+			if (Grounded && !GroundedBefore)
+			{
+				onGround.Invoke();
+			}
 		}
 
 		private void CameraRotation()
@@ -218,6 +237,7 @@ namespace StarterAssets
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+					onJump.Invoke();
 				}
 
 				// jump timeout
@@ -265,6 +285,42 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+
+		private void PlayJumpingSound()
+		{
+			if (!input.sprint)
+			{
+				CmdSendServerSound(Sound.Jumping);
+			}
+		}
+
+		private void PlayGroundingSound()
+		{
+			if (!input.sprint)
+			{
+				CmdSendServerSound(Sound.Grounding);
+			}
+		}
+
+		[Command]
+		private void CmdSendServerSound(Sound sound)
+		{
+			RpcSendJumpingSoundToClients(sound);
+		}
+
+		[ClientRpc]
+		private void RpcSendJumpingSoundToClients(Sound sound)
+		{
+			switch (sound)
+			{
+				case Sound.Jumping:
+					JumpingSound.Play();
+					break;
+				case Sound.Grounding:
+					GroundingSound.Play();
+					break;
+			}
 		}
 	}
 }

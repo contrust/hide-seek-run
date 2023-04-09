@@ -23,6 +23,7 @@ public class Victim : NetworkBehaviour
     private void Start()
     {
         matchSettings = FindObjectOfType<MatchSettings>();
+        onDamageTaken.AddListener(PlayDamageSound);
     }
 
     private void Update()
@@ -55,7 +56,6 @@ public class Victim : NetworkBehaviour
 
     public void GetDamage(int damage)
     {
-        RpcSendDamageSoundToClients();
         Health -= damage;
         onDamageTaken.Invoke();
         if (Health <= 0)
