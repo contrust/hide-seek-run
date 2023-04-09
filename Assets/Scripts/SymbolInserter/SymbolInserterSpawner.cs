@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SymbolInserterSpawner : NetworkBehaviour
 {
-	[SerializeField] private GameObject inserter;
+	[SerializeField] private SymbolInserter inserter;
 	[SerializeField] private Transform[] positions;
 
 
@@ -22,9 +22,9 @@ public class SymbolInserterSpawner : NetworkBehaviour
 		var i = 0;
 		foreach (var position in positions)
 		{
-			var obj = Instantiate(inserter, position.position, position.rotation);
-			obj.GetComponent<SymbolInserter>().id = i++;
-			NetworkServer.Spawn(obj);
+			var symbolInserter = Instantiate(inserter, position.position, position.rotation);
+			symbolInserter.id = i++;
+			NetworkServer.Spawn(symbolInserter.gameObject);
 		}
 	}
 
