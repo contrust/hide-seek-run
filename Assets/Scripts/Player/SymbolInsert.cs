@@ -18,7 +18,6 @@ public class SymbolInsert : NetworkBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        parentIsVictim = transform.parent.gameObject.GetComponent<Victim>() != null;
         UIHelper = FindObjectOfType<UIHelper>(true);
     }
     
