@@ -28,6 +28,11 @@ public class SymbolManager: NetworkBehaviour
             StartCoroutine(ChangeSymbol());
     }
 
+    public float GetTimeChangeSymbol()
+    {
+        return timeChangeSymbol;
+    }
+    
     private void SetMaterial(int oldNumber, int newNumber)
     {
         hunter.SymbolMeshRenderer.material = possibleSymbols[newNumber];
@@ -65,7 +70,6 @@ public class SymbolManager: NetworkBehaviour
             symbolInserter.InsertionResult(result);
             symbolInserter.Block();
         }
-        ChangeSymbolOnce();
     }
 
     private void OnSymbolInsertedHook(bool oldValue, bool newValue) //костыль чтобы работало по сети, хочется переписать все что с коробками и символами связано

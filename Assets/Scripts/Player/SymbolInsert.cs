@@ -8,14 +8,17 @@ using UnityEngine;
 
 public class SymbolInsert : NetworkBehaviour
 {
-    [SerializeField] private float SymbolInserterRadius = 5f;
+    [SerializeField] private float SymbolInserterRadius = 2f;
+    private UIHelper UIHelper;
     private Camera mainCamera;
     private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
+    private bool parentIsVictim;
     
 
     private void Start()
     {
         mainCamera = Camera.main;
+        UIHelper = FindObjectOfType<UIHelper>(true);
     }
     
     public override void OnStartServer()
@@ -29,10 +32,16 @@ public class SymbolInsert : NetworkBehaviour
     
     private void Update()
     {
+        var inserterButton = FindSymbolInserterButton();
+        if (inserterButton is null)
+        {
+            UIHelper.ButtonHelpSetActive(false);
+            return;   
+        }
+        if (isLocalPlayer)
+            UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
-            var inserterButton = FindSymbolInserterButton();
-            if (inserterButton is null) return;
             PressButton(inserterButton.SymbolInserter.id, inserterButton.ButtonType);
         }
     }

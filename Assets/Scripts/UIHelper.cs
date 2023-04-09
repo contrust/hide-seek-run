@@ -8,6 +8,7 @@ public class UIHelper : MonoBehaviour
 {
     private Slider slider;
     [SerializeField] private TextMeshProUGUI survivorsVictoryText;
+    [SerializeField] private TextMeshProUGUI buttonHelp;
     public bool isPause { get; private set; }
 
     private void Start()
@@ -31,5 +32,10 @@ public class UIHelper : MonoBehaviour
     public void ShowVictimsVictoryScreen()
     {
         survivorsVictoryText.gameObject.SetActive(true);
+    }
+
+    public void ButtonHelpSetActive(bool setActive)
+    {
+        buttonHelp.gameObject.SetActive(setActive);
     }
 }
