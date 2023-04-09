@@ -13,6 +13,7 @@ public class SymbolManager: NetworkBehaviour
     public Material noneSymbol;
     private GameObject[] symbolInsertersGO;
     private SymbolInserter[] symbolInserters;
+    private Hunter hunter;
     [SerializeField] private float timeChangeSymbol = 60;
     
     [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
@@ -21,7 +22,7 @@ public class SymbolManager: NetworkBehaviour
     void Start()
     {
         symbolInserters = FindObjectsByType<SymbolInserter>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-
+        hunter = GetComponent<Hunter>();
         if (isLocalPlayer)
             StartCoroutine(ChangeSymbol());
     }
@@ -29,7 +30,7 @@ public class SymbolManager: NetworkBehaviour
     
     private void SetMaterial(int oldNumber, int newNumber)
     {
-        GetComponent<Hunter>().SymbolMeshRenderer.material = possibleSymbols[newNumber];
+        hunter.SymbolMeshRenderer.material = possibleSymbols[newNumber];
     }
 
     private IEnumerator ChangeSymbol()
