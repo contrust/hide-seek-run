@@ -19,7 +19,7 @@ public class SymbolInsert : NetworkBehaviour
     {
         mainCamera = Camera.main;
         parentIsVictim = transform.parent.gameObject.GetComponent<Victim>() != null;
-        UIHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
+        
     }
     
     public override void OnStartServer()
@@ -29,6 +29,7 @@ public class SymbolInsert : NetworkBehaviour
         {
             symbolInserters[symbolInserter.id] = symbolInserter;
         }
+        UIHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
     } 
     
     private void Update()
