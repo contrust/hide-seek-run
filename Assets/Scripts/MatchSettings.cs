@@ -11,4 +11,5 @@ public class MatchSettings : MonoBehaviour
 
     [Header("Match Settings")]
     public int CountCorrectSymbolsToWin = 3;
+    public float timeChangeSymbol = 60f;
 }

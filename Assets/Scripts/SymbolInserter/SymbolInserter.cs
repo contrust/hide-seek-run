@@ -62,6 +62,8 @@ public class SymbolInserter : NetworkBehaviour
     public override void OnStartServer()
     {
         StartCoroutine(TryGetSymbolManager());
+        changeExpirationSignalTime = matchSettings.timeChangeSymbol / 3;
+        StartCoroutine(ChangeExpirationSignalColors());
     }
 
 
@@ -175,7 +177,5 @@ public class SymbolInserter : NetworkBehaviour
                 break;
         }
         possibleSymbols = symbolManager.possibleSymbols;
-        changeExpirationSignalTime = symbolManager.GetTimeChangeSymbol() / 3;
-        StartCoroutine(ChangeExpirationSignalColors());
     }
 }

@@ -16,13 +16,14 @@ public class SymbolManager: NetworkBehaviour
     private GameObject[] symbolInsertersGO;
     private SymbolInserter[] symbolInserters;
     private Hunter hunter;
-    [SerializeField] private float timeChangeSymbol = 60;
+    private float timeChangeSymbol;
     
     [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
     
     void Start()
     {
         symbolInserters = FindObjectsByType<SymbolInserter>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        timeChangeSymbol = FindObjectOfType<MatchSettings>().timeChangeSymbol;
         hunter = GetComponent<Hunter>();
         if (isLocalPlayer)
             StartCoroutine(ChangeSymbol());
