@@ -10,13 +10,13 @@ public class SymbolInsert : NetworkBehaviour
 {
     [SerializeField] private float SymbolInserterRadius = 2f;
     private UIHelper UIHelper;
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
     
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        // mainCamera = Camera.main;
         UIHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
     }
     

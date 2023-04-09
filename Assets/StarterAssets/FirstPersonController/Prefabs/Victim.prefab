@@ -3676,6 +3676,10 @@ MonoBehaviour:
   skybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   view: {fileID: 9201314639952327051}
   ignoreCameraLayer: 8
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  GetHit: 0
 --- !u!136 &194772003508196257
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3706,6 +3710,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   SymbolInserterRadius: 5
+  mainCamera: {fileID: 5372278936354443758}
 --- !u!95 &4427808423836787838
 Animator:
   serializedVersion: 5
