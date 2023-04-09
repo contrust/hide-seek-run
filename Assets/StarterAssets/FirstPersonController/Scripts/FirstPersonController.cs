@@ -296,42 +296,66 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 
-		[ClientRpc]
+		[Command]
 		private void PlayJumpingSound()
 		{
 			if (!input.sprint && !JumpingSound.isPlaying)
 			{
-				JumpingSound.Play();
+				PlayJumpingSoundRpc();
 			}
 		}
 
 		[ClientRpc]
+		private void PlayJumpingSoundRpc()
+		{
+			JumpingSound.Play();
+		}
+
+		[Command]
 		private void PlayGroundingSound()
 		{
 			if (!input.sprint && !GroundingSound.isPlaying)
 			{
-				GroundingSound.Play();
+				PlayGroundingSoundRpc();
 			}
 		}
 
 		[ClientRpc]
+		private void PlayGroundingSoundRpc()
+		{
+			GroundingSound.Play();
+		}
+
+		[Command]
 		private void PlayFootstepsSound()
 		{
 			if (!input.sprint && Grounded)
 			{
 				if (!FootstepsSound.isPlaying)
 				{
-					FootstepsSound.Play();	
+					PlayFootstepsSoundRpc();	
 				}
 			}
 			else
 			{
-				FootstepsSound.Stop();
+				StopPlayingFootstepsSoundRpc();
 			}
 		}
 
 		[ClientRpc]
+		private void PlayFootstepsSoundRpc()
+		{
+			FootstepsSound.Play();
+		}
+
+		[Command]
 		private void StopPlayingFootstepsSound()
+		{
+			StopPlayingFootstepsSoundRpc();
+		}
+
+		[ClientRpc]
+		private void StopPlayingFootstepsSoundRpc()
 		{
 			FootstepsSound.Stop();
 		}

@@ -15,6 +15,7 @@ public class Victim : NetworkBehaviour
     [SerializeField] private int ignoreCameraLayer = 8;
 
     public UnityEvent onDamageTaken;
+    public UnityEvent onDeath;
     
     //For test only
     public bool GetHit;
@@ -58,12 +59,19 @@ public class Victim : NetworkBehaviour
         onDamageTaken.Invoke();
         if (Health <= 0)
         {
+            onDeath.Invoke();
             Destroy(gameObject);
         }
     }
 
-    [ClientRpc]
+    [Command]
     private void PlayDamageSound()
+    {
+        RpcPlayDamageSound();
+    }
+
+    [ClientRpc]
+    private void RpcPlayDamageSound()
     {
         DamageSound.Play();
     }
