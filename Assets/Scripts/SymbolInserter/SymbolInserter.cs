@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SymbolInserter : NetworkBehaviour
@@ -30,7 +31,7 @@ public class SymbolInserter : NetworkBehaviour
     private SymbolManager symbolManager;
     private List<Material> possibleSymbols;
     private int chosenSymbol;
-    [SyncVar(hook = nameof(SetCorrectInsertions))]
+    // [SyncVar(hook = nameof(SetCorrectInsertions))]
     private int correctInsertions;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
@@ -56,6 +57,11 @@ public class SymbolInserter : NetworkBehaviour
         currentExpirationColor = expireNotSoonColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
+        
+    }
+
+    public override void OnStartServer()
+    {
         StartCoroutine(TryGetSymbolManager());
     }
 
