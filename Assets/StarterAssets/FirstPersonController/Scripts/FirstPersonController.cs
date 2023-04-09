@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Mirror;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -11,9 +12,9 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 4.0f;
+		public float MoveSpeed = 6.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 6.0f;
+		public float SprintSpeed = 2.0f;
 		[Tooltip("Rotation speed of the character")]
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
@@ -34,6 +35,8 @@ namespace StarterAssets
 		[Header("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
 		public bool Grounded = true;
+
+		private bool GroundedBefore = true;
 		[Tooltip("Useful for rough ground")]
 		public float GroundedOffset = -0.14f;
 		[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
@@ -48,6 +51,14 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
+
+		public UnityEvent onJump;
+		public UnityEvent onGround;
+		public UnityEvent onMoving;
+		public UnityEvent onStopMoving;
+		public AudioSource JumpingSound;
+		public AudioSource GroundingSound;
+		public AudioSource FootstepsSound;
 
 		// cinemachine
 		private float cinemachineTargetPitch;
@@ -101,6 +112,10 @@ namespace StarterAssets
 			// reset our timeouts on start
 			jumpTimeoutDelta = JumpTimeout;
 			fallTimeoutDelta = FallTimeout;
+			onJump.AddListener(PlayJumpingSound);
+			onGround.AddListener(PlayGroundingSound);
+			onMoving.AddListener(PlayFootstepsSound);
+			onStopMoving.AddListener(StopPlayingFootstepsSound);
 		}
 
 		private void Update()
@@ -128,7 +143,12 @@ namespace StarterAssets
 		{
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+			GroundedBefore = Grounded;
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+			if (Grounded && !GroundedBefore)
+			{
+				onGround.Invoke();
+			}
 		}
 
 		private void CameraRotation()
@@ -162,7 +182,15 @@ namespace StarterAssets
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
-			if (input.move == Vector2.zero) targetSpeed = 0.0f;
+			if (input.move == Vector2.zero)
+			{
+				targetSpeed = 0.0f;
+				onStopMoving.Invoke();
+			}
+			else
+			{
+				onMoving.Invoke();
+			}
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
@@ -218,6 +246,7 @@ namespace StarterAssets
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+					onJump.Invoke();
 				}
 
 				// jump timeout
@@ -265,6 +294,46 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+
+		[ClientRpc]
+		private void PlayJumpingSound()
+		{
+			if (!input.sprint && !JumpingSound.isPlaying)
+			{
+				JumpingSound.Play();
+			}
+		}
+
+		[ClientRpc]
+		private void PlayGroundingSound()
+		{
+			if (!input.sprint && !GroundingSound.isPlaying)
+			{
+				GroundingSound.Play();
+			}
+		}
+
+		[ClientRpc]
+		private void PlayFootstepsSound()
+		{
+			if (!input.sprint && Grounded)
+			{
+				if (!FootstepsSound.isPlaying)
+				{
+					FootstepsSound.Play();	
+				}
+			}
+			else
+			{
+				FootstepsSound.Stop();
+			}
+		}
+
+		[ClientRpc]
+		private void StopPlayingFootstepsSound()
+		{
+			FootstepsSound.Stop();
 		}
 	}
 }
