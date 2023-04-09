@@ -52,16 +52,15 @@ public class SymbolInserter : NetworkBehaviour
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
         expirationSignalMR = expirationSignal.GetComponent<MeshRenderer>();
         uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
-        matchSettings = FindObjectOfType<MatchSettings>();
         currentColor = neutralColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
-        
+        StartCoroutine(TryGetSymbolManager());
     }
 
     public override void OnStartServer()
     {
-        StartCoroutine(TryGetSymbolManager());
+        matchSettings = FindObjectOfType<MatchSettings>();
         changeExpirationSignalTime = matchSettings.timeChangeSymbol / 3;
         StartCoroutine(ChangeExpirationSignalColors());
     }
