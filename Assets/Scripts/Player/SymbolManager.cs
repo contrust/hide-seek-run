@@ -26,7 +26,11 @@ public class SymbolManager: NetworkBehaviour
         if (isLocalPlayer)
             StartCoroutine(ChangeSymbol());
     }
-    
+
+    public float GetTimeChangeSymbol()
+    {
+        return timeChangeSymbol;
+    }
     
     private void SetMaterial(int oldNumber, int newNumber)
     {
@@ -56,6 +60,5 @@ public class SymbolManager: NetworkBehaviour
             symbolInserter.InsertionResult(result);
             symbolInserter.Block();
         }
-        ChangeSymbolOnce();
     }
 }

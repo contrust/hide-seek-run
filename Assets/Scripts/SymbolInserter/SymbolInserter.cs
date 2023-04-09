@@ -10,10 +10,18 @@ public class SymbolInserter : NetworkBehaviour
     [SerializeField] private Color wrongColor;
     [SerializeField] private Color correctColor;
 
+    [SerializeField] private Color expireSoonColor;
+    [SerializeField] private Color expireAfterSomeTimeColor;
+    [SerializeField] private Color expireNotSoonColor;
+    [SerializeField] private float changeExpirationSignalTime = -1;
+
     private UIHelper uiHelper;
 
 
     [SyncVar(hook = nameof(SetColor))] private Color currentColor;
+
+    [SyncVar(hook = nameof(SetExpirationColor))]
+    private Color currentExpirationColor;
     [SyncVar] public int id;
 
 
@@ -30,16 +38,20 @@ public class SymbolInserter : NetworkBehaviour
     [SerializeField] private float insertionTimeOut = 10f;
 
     [SerializeField] private GameObject screen;
+    [SerializeField] private GameObject expirationSignal;
     private MeshRenderer screenMeshRenderer;
+    private MeshRenderer expirationSignalMR;
     private MatchSettings matchSettings;
 
 
     void Start()
     {
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
+        expirationSignalMR = expirationSignal.GetComponent<MeshRenderer>();
         uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
         matchSettings = FindObjectOfType<MatchSettings>();
         currentColor = neutralColor;
+        currentExpirationColor = expireNotSoonColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
         StartCoroutine(TryGetSymbolManager());
@@ -50,6 +62,11 @@ public class SymbolInserter : NetworkBehaviour
     {
         Debug.Log("SetColor");
         meshRenderer.material.color = newColor;
+    }
+
+    private void SetExpirationColor(Color oldColor, Color newColor)
+    {
+        expirationSignalMR.material.color = newColor;
     }
 
     private void SetDisplay(int oldNumber, int newNumber)
@@ -73,6 +90,21 @@ public class SymbolInserter : NetworkBehaviour
     public void Block()
     {
         StartCoroutine(InsertionTimeOutCoroutine());
+    }
+
+    private IEnumerator ChangeExpirationSignalColors()
+    {
+        while (true)
+        {
+
+            currentExpirationColor = expireNotSoonColor;
+            yield return new WaitForSeconds(changeExpirationSignalTime);
+            Debug.Log("ChangedExpirationSignal");
+            currentExpirationColor = expireAfterSomeTimeColor;
+            yield return new WaitForSeconds(changeExpirationSignalTime);
+            currentExpirationColor = expireSoonColor;
+            yield return new WaitForSeconds(changeExpirationSignalTime);
+        }
     }
 
     public void InsertionResult(bool result)
@@ -128,5 +160,7 @@ public class SymbolInserter : NetworkBehaviour
                 break;
         }
         possibleSymbols = symbolManager.possibleSymbols;
+        changeExpirationSignalTime = symbolManager.GetTimeChangeSymbol() / 3;
+        StartCoroutine(ChangeExpirationSignalColors());
     }
 }
