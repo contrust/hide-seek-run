@@ -29,7 +29,7 @@ public class SymbolInsert : NetworkBehaviour
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             var inserterButton = FindSymbolInserterButton();
             if (inserterButton is null) return;

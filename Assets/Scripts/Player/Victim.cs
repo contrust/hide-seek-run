@@ -21,6 +21,7 @@ public class Victim : NetworkBehaviour
 
     private void Start()
     {
+        onDamageTaken.AddListener(PlayDamageSound);
     }
 
     private void Update()
@@ -53,7 +54,6 @@ public class Victim : NetworkBehaviour
 
     public void GetDamage(int damage)
     {
-        RpcSendDamageSoundToClients();
         Health -= damage;
         onDamageTaken.Invoke();
         if (Health <= 0)
@@ -62,19 +62,8 @@ public class Victim : NetworkBehaviour
         }
     }
 
-    private void PlayDamageSound()
-    {
-        CmdSendServerDamageSound();
-    }
-    
-    [Command]
-    private void CmdSendServerDamageSound()
-    {
-        RpcSendDamageSoundToClients();
-    }
-
     [ClientRpc]
-    private void RpcSendDamageSoundToClients()
+    private void PlayDamageSound()
     {
         DamageSound.Play();
     }
