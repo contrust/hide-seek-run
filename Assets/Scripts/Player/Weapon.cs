@@ -18,6 +18,7 @@ public class Weapon : NetworkBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        onShot.AddListener(PlayShootingSound);
     }
 
     private void Update()
@@ -41,7 +42,6 @@ public class Weapon : NetworkBehaviour
             onShot.Invoke();
             lastTimeShot = Time.time;
             Flash.SetActive(true);
-            PlayShootingSound();
         }
         
         if(Time.time - lastTimeShot > 0.1)
