@@ -29,7 +29,7 @@ public class SymbolInsert : NetworkBehaviour
         {
             symbolInserters[symbolInserter.id] = symbolInserter;
         }
-        UIHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
+        UIHelper = FindObjectOfType<UIHelper>(true);
     } 
     
     private void Update()
