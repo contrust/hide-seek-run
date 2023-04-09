@@ -35,6 +35,8 @@ namespace StarterAssets
 		[Header("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
 		public bool Grounded = true;
+
+		private bool GroundedBefore = true;
 		[Tooltip("Useful for rough ground")]
 		public float GroundedOffset = -0.14f;
 		[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
@@ -52,14 +54,11 @@ namespace StarterAssets
 
 		public UnityEvent onJump;
 		public UnityEvent onGround;
+		public UnityEvent onMoving;
+		public UnityEvent onStopMoving;
 		public AudioSource JumpingSound;
 		public AudioSource GroundingSound;
-		
-		private enum Sound
-		{
-			Jumping,
-			Grounding
-		}
+		public AudioSource FootstepsSound;
 
 		// cinemachine
 		private float cinemachineTargetPitch;
@@ -115,6 +114,8 @@ namespace StarterAssets
 			fallTimeoutDelta = FallTimeout;
 			onJump.AddListener(PlayJumpingSound);
 			onGround.AddListener(PlayGroundingSound);
+			onMoving.AddListener(PlayFootstepsSound);
+			onStopMoving.AddListener(StopPlayingFootstepsSound);
 		}
 
 		private void Update()
@@ -142,7 +143,7 @@ namespace StarterAssets
 		{
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
-			var GroundedBefore = Grounded;
+			GroundedBefore = Grounded;
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 			if (Grounded && !GroundedBefore)
 			{
@@ -181,7 +182,15 @@ namespace StarterAssets
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
-			if (input.move == Vector2.zero) targetSpeed = 0.0f;
+			if (input.move == Vector2.zero)
+			{
+				targetSpeed = 0.0f;
+				onStopMoving.Invoke();
+			}
+			else
+			{
+				onMoving.Invoke();
+			}
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(controller.velocity.x, 0.0f, controller.velocity.z).magnitude;
@@ -287,40 +296,44 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 
+		[ClientRpc]
 		private void PlayJumpingSound()
 		{
-			if (!input.sprint)
+			if (!input.sprint && !JumpingSound.isPlaying)
 			{
-				CmdSendServerSound(Sound.Jumping);
+				JumpingSound.Play();
 			}
-		}
-
-		private void PlayGroundingSound()
-		{
-			if (!input.sprint)
-			{
-				CmdSendServerSound(Sound.Grounding);
-			}
-		}
-
-		[Command]
-		private void CmdSendServerSound(Sound sound)
-		{
-			RpcSendJumpingSoundToClients(sound);
 		}
 
 		[ClientRpc]
-		private void RpcSendJumpingSoundToClients(Sound sound)
+		private void PlayGroundingSound()
 		{
-			switch (sound)
+			if (!input.sprint && !GroundingSound.isPlaying)
 			{
-				case Sound.Jumping:
-					JumpingSound.Play();
-					break;
-				case Sound.Grounding:
-					GroundingSound.Play();
-					break;
+				GroundingSound.Play();
 			}
+		}
+
+		[ClientRpc]
+		private void PlayFootstepsSound()
+		{
+			if (!input.sprint && Grounded)
+			{
+				if (!FootstepsSound.isPlaying)
+				{
+					FootstepsSound.Play();	
+				}
+			}
+			else
+			{
+				FootstepsSound.Stop();
+			}
+		}
+
+		[ClientRpc]
+		private void StopPlayingFootstepsSound()
+		{
+			FootstepsSound.Stop();
 		}
 	}
 }
