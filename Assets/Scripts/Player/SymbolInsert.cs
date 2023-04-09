@@ -10,14 +10,15 @@ public class SymbolInsert : NetworkBehaviour
 {
     [SerializeField] private float SymbolInserterRadius = 2f;
     private UIHelper UIHelper;
-    [SerializeField] private Camera mainCamera;
-    private Camera superMainCamera;
+    private Camera mainCamera;
     private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
+    private bool parentIsVictim;
     
 
     private void Start()
     {
-        superMainCamera = Camera.main;
+        mainCamera = Camera.main;
+        parentIsVictim = transform.parent.gameObject.GetComponent<Victim>() != null;
         UIHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
     }
     
@@ -38,7 +39,7 @@ public class SymbolInsert : NetworkBehaviour
             UIHelper.ButtonHelpSetActive(false);
             return;   
         }
-        if (mainCamera == superMainCamera)
+        if (parentIsVictim)
             UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
