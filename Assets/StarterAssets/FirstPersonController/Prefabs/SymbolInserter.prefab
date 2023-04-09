@@ -72,7 +72,8 @@ MonoBehaviour:
   expireSoonColor: {r: 0.4811321, g: 0, b: 0, a: 0}
   expireAfterSomeTimeColor: {r: 0.5660378, g: 0.27151403, b: 0, a: 0}
   expireNotSoonColor: {r: 0.12363365, g: 0.4528302, b: 0, a: 0}
-  changeExpirationSignalTime: -1
+  expireBlack: {r: 0, g: 0, b: 0, a: 0}
+  blinkingTime: 5
   id: 0
   meshRenderer: {fileID: 7740347927400781284}
   insertionTimeOut: 60
@@ -105,8 +106,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243056615100272675}
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 1.75, y: 0, z: 1}
-  m_LocalScale: {x: 1.9564667, y: 2.4820247, z: 0.14989652}
+  m_LocalPosition: {x: 1.75, y: -0.035, z: 1.001}
+  m_LocalScale: {x: 1.9966205, y: 1.99356, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8872110726340680598}
@@ -171,7 +172,7 @@ MeshCollider:
   m_GameObject: {fileID: 1243056615100272675}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -204,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 1511835159325920175}
   m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 1.75, y: 0, z: 1}
-  m_LocalScale: {x: 1.9564803, y: 2.482004, z: 0.15}
+  m_LocalScale: {x: 2, y: 2.5, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8872110725357538783}
@@ -269,7 +270,7 @@ MeshCollider:
   m_GameObject: {fileID: 1511835159325920175}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -291,7 +292,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7054289846764509204
 Transform:
@@ -564,7 +565,7 @@ MeshCollider:
   m_GameObject: {fileID: 6499081458025053894}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -688,7 +689,7 @@ GameObject:
   m_TagString: SymbolInserter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 73
+  m_StaticEditorFlags: 72
   m_IsActive: 1
 --- !u!4 &8872110725357538783
 Transform:
@@ -801,7 +802,7 @@ GameObject:
   m_TagString: SymbolInserter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 73
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8872110726340680598
 Transform:
@@ -913,7 +914,7 @@ GameObject:
   m_TagString: SymbolInserter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 73
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8872110725984156979
 Transform:
