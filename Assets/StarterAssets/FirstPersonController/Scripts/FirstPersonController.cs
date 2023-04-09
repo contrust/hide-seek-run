@@ -299,53 +299,53 @@ namespace StarterAssets
 		[Command]
 		private void PlayJumpingSound()
 		{
-			PlayJumpingSoundRpc();
+			if (!input.sprint && !JumpingSound.isPlaying)
+			{
+				PlayJumpingSoundRpc();
+			}
 		}
 
 		[ClientRpc]
 		private void PlayJumpingSoundRpc()
 		{
-			if (!input.sprint && !JumpingSound.isPlaying)
-			{
-				JumpingSound.Play();
-			}
+			JumpingSound.Play();
 		}
 
 		[Command]
 		private void PlayGroundingSound()
 		{
-			PlayGroundingSoundRpc();
+			if (!input.sprint && !GroundingSound.isPlaying)
+			{
+				PlayGroundingSoundRpc();
+			}
 		}
 
 		[ClientRpc]
 		private void PlayGroundingSoundRpc()
 		{
-			if (!input.sprint && !GroundingSound.isPlaying)
-			{
-				GroundingSound.Play();
-			}
+			GroundingSound.Play();
 		}
 
 		[Command]
 		private void PlayFootstepsSound()
 		{
-			PlayFootstepsSoundRpc();
+			if (!input.sprint && Grounded)
+			{
+				if (!FootstepsSound.isPlaying)
+				{
+					PlayFootstepsSoundRpc();	
+				}
+			}
+			else
+			{
+				StopPlayingFootstepsSoundRpc();
+			}
 		}
 
 		[ClientRpc]
 		private void PlayFootstepsSoundRpc()
 		{
-			if (!input.sprint && Grounded)
-			{
-				if (!FootstepsSound.isPlaying)
-				{
-					FootstepsSound.Play();	
-				}
-			}
-			else
-			{
-				FootstepsSound.Stop();
-			}
+			FootstepsSound.Play();
 		}
 
 		[Command]
