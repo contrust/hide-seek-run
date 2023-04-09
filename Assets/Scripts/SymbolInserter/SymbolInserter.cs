@@ -13,7 +13,9 @@ public class SymbolInserter : NetworkBehaviour
     [SerializeField] private Color expireSoonColor;
     [SerializeField] private Color expireAfterSomeTimeColor;
     [SerializeField] private Color expireNotSoonColor;
-    [SerializeField] private float changeExpirationSignalTime = -1;
+    [SerializeField] private Color expireBlack;
+    private float changeExpirationSignalTime = -1;
+    [SerializeField] private float blinkingTime = 5;
 
     private UIHelper uiHelper;
 
@@ -103,9 +105,17 @@ public class SymbolInserter : NetworkBehaviour
             currentExpirationColor = expireAfterSomeTimeColor;
             yield return new WaitForSeconds(changeExpirationSignalTime);
             currentExpirationColor = expireSoonColor;
-            yield return new WaitForSeconds(changeExpirationSignalTime);
+            yield return new WaitForSeconds(changeExpirationSignalTime - blinkingTime);
+            for (var i = 0; i < blinkingTime; i++)
+            {
+                currentExpirationColor = expireBlack;
+                yield return new WaitForSeconds(0.5f);
+                currentExpirationColor = expireSoonColor;
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
+    
 
     public void InsertionResult(bool result)
     {
