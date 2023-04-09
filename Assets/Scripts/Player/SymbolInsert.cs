@@ -12,12 +12,13 @@ public class SymbolInsert : NetworkBehaviour
     private UIHelper UIHelper;
     private Camera mainCamera;
     private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
+    private bool parentIsVictim;
     
 
     private void Start()
     {
         mainCamera = Camera.main;
-        UIHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
+        UIHelper = FindObjectOfType<UIHelper>(true);
     }
     
     public override void OnStartServer()
@@ -37,8 +38,8 @@ public class SymbolInsert : NetworkBehaviour
             UIHelper.ButtonHelpSetActive(false);
             return;   
         }
-        
-        UIHelper.ButtonHelpSetActive(true);
+        if (isLocalPlayer)
+            UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
             PressButton(inserterButton.SymbolInserter.id, inserterButton.ButtonType);

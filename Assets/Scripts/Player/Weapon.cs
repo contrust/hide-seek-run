@@ -48,19 +48,14 @@ public class Weapon : NetworkBehaviour
             Flash.SetActive(false);
     }
 
+    [Command]
     private void PlayShootingSound()
     {
-        CmdSendServerShootingSound();
-    }
-
-    [Command]
-    private void CmdSendServerShootingSound()
-    {
-        RpcSendShootingSoundToClients();
+        RpcPlayShootingSound();
     }
 
     [ClientRpc]
-    private void RpcSendShootingSoundToClients()
+    private void RpcPlayShootingSound()
     {
         ShootingSound.Play();
     }

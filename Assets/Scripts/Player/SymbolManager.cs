@@ -1,14 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class SymbolManager: NetworkBehaviour
 {
     public List<Material> possibleSymbols;
+    public static readonly UnityEvent onSymbolInserted = new UnityEvent();
+    [SyncVar(hook=nameof(OnSymbolInsertedHook))]public bool correctSymbolInserted; //переделать
+
     private MeshRenderer symbolMeshRenderer;
     public Material noneSymbol;
     private GameObject[] symbolInsertersGO;
@@ -17,8 +19,7 @@ public class SymbolManager: NetworkBehaviour
     [SerializeField] private float timeChangeSymbol = 60;
     
     [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
-
-
+    
     void Start()
     {
         symbolInserters = FindObjectsByType<SymbolInserter>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
@@ -43,6 +44,7 @@ public class SymbolManager: NetworkBehaviour
         {
             ChangeSymbolOnce();
             yield return new WaitForSeconds(timeChangeSymbol);
+            correctSymbolInserted = false; //переделать
         }
     }
 
@@ -55,10 +57,27 @@ public class SymbolManager: NetworkBehaviour
     public void CheckInsertedSymbol(int insertedSymbol)
     {
         var result = insertedSymbol == currentSymbol;
+        if (result)
+        {
+            correctSymbolInserted = true; //переделать
+        }
+        else
+        {
+            correctSymbolInserted = false;
+        }
         foreach (var symbolInserter in symbolInserters)
         {
             symbolInserter.InsertionResult(result);
             symbolInserter.Block();
         }
+    }
+
+    private void OnSymbolInsertedHook(bool oldValue, bool newValue) //костыль чтобы работало по сети, хочется переписать все что с коробками и символами связано
+    {
+        if (newValue)
+        {
+            onSymbolInserted.Invoke();
+        }
+        correctSymbolInserted = newValue;
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SymbolInserter : NetworkBehaviour
@@ -53,9 +54,13 @@ public class SymbolInserter : NetworkBehaviour
         uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
         matchSettings = FindObjectOfType<MatchSettings>();
         currentColor = neutralColor;
-        currentExpirationColor = expireNotSoonColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
+        
+    }
+
+    public override void OnStartServer()
+    {
         StartCoroutine(TryGetSymbolManager());
     }
 

@@ -3984,6 +3984,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   SymbolInserterRadius: 5
+  mainCamera: {fileID: 5372278936354443758}
 --- !u!95 &4427808423836787838
 Animator:
   serializedVersion: 5
