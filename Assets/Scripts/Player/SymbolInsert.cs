@@ -19,7 +19,7 @@ public class SymbolInsert : NetworkBehaviour
     {
         mainCamera = Camera.main;
         parentIsVictim = transform.parent.gameObject.GetComponent<Victim>() != null;
-        
+        UIHelper = FindObjectOfType<UIHelper>(true);
     }
     
     public override void OnStartServer()
@@ -29,7 +29,6 @@ public class SymbolInsert : NetworkBehaviour
         {
             symbolInserters[symbolInserter.id] = symbolInserter;
         }
-        UIHelper = FindObjectOfType<UIHelper>(true);
     } 
     
     private void Update()
@@ -40,7 +39,7 @@ public class SymbolInsert : NetworkBehaviour
             UIHelper.ButtonHelpSetActive(false);
             return;   
         }
-        if (parentIsVictim)
+        if (isLocalPlayer)
             UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
