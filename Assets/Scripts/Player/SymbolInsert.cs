@@ -8,11 +8,10 @@ using UnityEngine;
 
 public class SymbolInsert : NetworkBehaviour
 {
-    [SerializeField] private float SymbolInserterRadius = 5f;
+    [SerializeField] private float SymbolInserterRadius = 2f;
     private UIHelper UIHelper;
     private Camera mainCamera;
     private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
-    private SymbolButton lastSeenButton;
     
 
     private void Start()
@@ -36,12 +35,9 @@ public class SymbolInsert : NetworkBehaviour
         if (inserterButton is null)
         {
             UIHelper.ButtonHelpSetActive(false);
-            // lastSeenButton?.OutlineSetActive(false);
             return;   
         }
-
-        lastSeenButton = inserterButton;
-        inserterButton.OutlineSetActive(true);
+        
         UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
