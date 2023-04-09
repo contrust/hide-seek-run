@@ -248,7 +248,7 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 8616685848737228372, guid: 2462fcacb9517f24aa2f55e57fa38008, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   - {fileID: 477707006827837575, guid: 6c7a1b27d9caeb4439a5e354576a985c, type: 3}
@@ -261,7 +261,6 @@ MonoBehaviour:
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
-  MatchSettings: {fileID: 1420152241}
 --- !u!114 &123815731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,8 +1182,6 @@ MonoBehaviour:
   StartHunterBlindness: 1
   EndHunterBlindness: 0.05
   DurationHunterBlindnessSeconds: 90
-  Hunter: {fileID: 0}
-  Victims: []
   CountCorrectSymbolsToWin: 3
 --- !u!4 &1420152242
 Transform:
