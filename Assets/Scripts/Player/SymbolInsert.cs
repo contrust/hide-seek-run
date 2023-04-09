@@ -40,7 +40,7 @@ public class SymbolInsert : NetworkBehaviour
             UIHelper.ButtonHelpSetActive(false);
             return;   
         }
-        if (isLocalPlayer)
+        if (parentIsVictim)
             UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
