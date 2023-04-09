@@ -31,7 +31,7 @@ public class SymbolInserter : NetworkBehaviour
     private SymbolManager symbolManager;
     private List<Material> possibleSymbols;
     private int chosenSymbol;
-    // [SyncVar(hook = nameof(SetCorrectInsertions))]
+    [SyncVar(hook = nameof(SetCorrectInsertions))]
     private int correctInsertions;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
 
@@ -54,7 +54,6 @@ public class SymbolInserter : NetworkBehaviour
         uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
         matchSettings = FindObjectOfType<MatchSettings>();
         currentColor = neutralColor;
-        currentExpirationColor = expireNotSoonColor;
         currentSymbolIndex = 0;
         possibleToInsert = true;
         
