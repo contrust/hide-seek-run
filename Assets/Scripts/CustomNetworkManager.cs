@@ -14,9 +14,6 @@ public class CustomNetworkManager : NetworkRoomManager
     private Hunter hunter;
     private List<Victim> victims;
 
-    [FormerlySerializedAs("MatchController")]
-    public MatchSettings MatchSettings;
-
     public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
     {
         // var player = base.OnRoomServerCreateGamePlayer(conn, roomPlayer);

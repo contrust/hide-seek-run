@@ -5949,23 +5949,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8554133317885847585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8554133317885847586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 618563139
-  _assetId: 0
-  serverOnly: 0
-  visible: 2
-  hasSpawned: 0
 --- !u!1 &8554133317885847586
 GameObject:
   m_ObjectHideFlags: 0
@@ -5976,14 +5959,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8554133317885847584}
   - component: {fileID: 8554133317885847587}
-  - component: {fileID: 8554133317885847585}
   m_Layer: 0
   m_Name: MatchSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8554133317885847587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5999,8 +5981,6 @@ MonoBehaviour:
   StartHunterBlindness: 1
   EndHunterBlindness: 0.05
   DurationHunterBlindnessSeconds: 180
-  Hunter: {fileID: 0}
-  Victims: []
   CountCorrectSymbolsToWin: 3
 --- !u!1 &8554133318019370661
 GameObject:
@@ -6350,7 +6330,7 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 8616685848737228372, guid: 2462fcacb9517f24aa2f55e57fa38008, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 477707006827837575, guid: 6c7a1b27d9caeb4439a5e354576a985c, type: 3}
   - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -6363,7 +6343,6 @@ MonoBehaviour:
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
-  MatchSettings: {fileID: 8554133317885847587}
 --- !u!4 &8554133318588773812
 Transform:
   m_ObjectHideFlags: 0

@@ -16,7 +16,6 @@ public class FourCamerasView : MonoBehaviour
     private StarterAssetsInputs input;
     private bool isEnabled;
 
-    private MatchSettings matchSettings;
     private Rect[] rects = {
         new Rect(0, 0, 0.5f, 0.5f),
         new Rect(0.5f, 0, 0.5f, 0.5f),
@@ -28,7 +27,6 @@ public class FourCamerasView : MonoBehaviour
 
     private void Start()
     {
-        matchSettings = GameObject.FindObjectOfType<MatchSettings>();
         camera = Camera.main;
         hunter = GetComponent<Hunter>();
         input = GetComponent<StarterAssetsInputs>();

@@ -3428,7 +3428,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   CinemachineCameraTarget: {fileID: 4135013735270702863}
-  TopClamp: 89
+  TopClamp: 60
   BottomClamp: -89
   uihelper: {fileID: 0}
 --- !u!114 &1978471637655604388
@@ -3676,6 +3676,10 @@ MonoBehaviour:
   skybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   view: {fileID: 9201314639952327051}
   ignoreCameraLayer: 8
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  GetHit: 0
 --- !u!136 &194772003508196257
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ public class Victim : NetworkBehaviour
     [SyncVar(hook = nameof(SetHealth))] public int Health;
     public AudioSource DamageSound;
     [SerializeField] private Material skybox;
-    private MatchSettings matchSettings;
     [SerializeField] private GameObject view;
     [SerializeField] private int ignoreCameraLayer = 8;
 
@@ -22,7 +21,6 @@ public class Victim : NetworkBehaviour
 
     private void Start()
     {
-        matchSettings = FindObjectOfType<MatchSettings>();
     }
 
     private void Update()
@@ -60,7 +58,6 @@ public class Victim : NetworkBehaviour
         onDamageTaken.Invoke();
         if (Health <= 0)
         {
-            matchSettings.Victims.Remove(this);
             Destroy(gameObject);
         }
     }
