@@ -41,8 +41,8 @@ public class Hunter : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>(); 
-        //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();      //Для локальных тестов
+        //networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>(); 
+        networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();      //Для локальных тестов
         matchSettings = FindObjectOfType<MatchSettings>();
         if (isLocalPlayer) Init();
     }

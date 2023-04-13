@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   survivorsVictoryText: {fileID: 1537979197}
-  buttonHelp: {fileID: 0}
+  buttonHelp: {fileID: 2050714019}
 --- !u!1 &822767141 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3243122896203537799, guid: a2a185d4824d4f94cba7b07b389b8df9, type: 3}
@@ -3314,8 +3314,8 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   - {fileID: 477707006827837575, guid: 6c7a1b27d9caeb4439a5e354576a985c, type: 3}
+  - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   timeInterpolationGui: 0
 --- !u!4 &1582569174
 Transform:
