@@ -8,17 +8,27 @@ using Random = UnityEngine.Random;
 public class SymbolManager: NetworkBehaviour
 {
     public List<Material> possibleSymbols;
-    public static readonly UnityEvent onSymbolInserted = new UnityEvent();
-    [SyncVar(hook=nameof(OnSymbolInsertedHook))]public bool correctSymbolInserted; //переделать
-
     private MeshRenderer symbolMeshRenderer;
-    public Material noneSymbol;
-    private GameObject[] symbolInsertersGO;
     private SymbolInserter[] symbolInserters;
     private Hunter hunter;
     private float timeChangeSymbol;
     
     [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
+
+    #region onSymbolInsertedEvent
+    public static readonly UnityEvent onSymbolInserted = new();
+    [Command]
+    private void CmdInvokeOnSymbolInserted()
+    {
+        RpcInvokeOnSymbolInserted();
+    }
+    [ClientRpc]
+    void RpcInvokeOnSymbolInserted()
+    {
+        onSymbolInserted.Invoke();
+    }
+    #endregion
+    
     
     void Start()
     {
@@ -45,7 +55,6 @@ public class SymbolManager: NetworkBehaviour
         {
             ChangeSymbolOnce();
             yield return new WaitForSeconds(timeChangeSymbol);
-            correctSymbolInserted = false; //переделать
         }
     }
 
@@ -60,11 +69,7 @@ public class SymbolManager: NetworkBehaviour
         var result = insertedSymbol == currentSymbol;
         if (result)
         {
-            correctSymbolInserted = true; //переделать
-        }
-        else
-        {
-            correctSymbolInserted = false;
+            CmdInvokeOnSymbolInserted();
         }
         foreach (var symbolInserter in symbolInserters)
         {
@@ -73,12 +78,5 @@ public class SymbolManager: NetworkBehaviour
         }
     }
 
-    private void OnSymbolInsertedHook(bool oldValue, bool newValue) //костыль чтобы работало по сети, хочется переписать все что с коробками и символами связано
-    {
-        if (newValue)
-        {
-            onSymbolInserted.Invoke();
-        }
-        correctSymbolInserted = newValue;
-    }
+    
 }
