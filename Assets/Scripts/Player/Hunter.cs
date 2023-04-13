@@ -27,7 +27,7 @@ public class Hunter : NetworkBehaviour
 
     private float blindness;
     private Coroutine blindnessCoroutine;
-    private CustomNetworkManager networkManager;
+    private NetworkManager networkManager;
     private MatchSettings matchSettings;
     private bool paused;
     
@@ -41,13 +41,18 @@ public class Hunter : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
+        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>(); 
+        //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();      //Для локальных тестов
         matchSettings = FindObjectOfType<MatchSettings>();
         if (isLocalPlayer) Init();
     }
 
     private void Init()
     {
+        if (networkManager is null)
+        {
+            Debug.Log("networkManager is null");
+        }
         networkManager.playerPrefab = victim;
         blindness = 1;
         SetDark();
