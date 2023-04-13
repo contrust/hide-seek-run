@@ -50,7 +50,15 @@ public class SymbolInserter : NetworkBehaviour
     void Start()
     {
         screenMeshRenderer = screen.GetComponent<MeshRenderer>();
+        if (expirationSignal is null)
+        {
+            Debug.Log("expirationSignal is null");
+        }
         expirationSignalMR = expirationSignal.GetComponent<MeshRenderer>();
+        if (expirationSignalMR is null)
+        {
+            Debug.Log("expirationSignalMR is null");
+        }
         uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
         currentColor = neutralColor;
         currentSymbolIndex = 0;
@@ -74,7 +82,11 @@ public class SymbolInserter : NetworkBehaviour
 
     private void SetExpirationColor(Color oldColor, Color newColor)
     {
-        expirationSignalMR.material.color = newColor;
+        /*if (expirationSignalMR.material is null)
+        {
+            Debug.Log("expirationSignalMR.material is null");
+        }
+        expirationSignalMR.material.color = newColor;*/
     }
 
     private void SetDisplay(int oldNumber, int newNumber)
