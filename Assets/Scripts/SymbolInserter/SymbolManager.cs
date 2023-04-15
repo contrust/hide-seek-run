@@ -23,6 +23,7 @@ public class SymbolManager: RequireInstance<Hunter>
     {
         hunter = instance;
         matchSettings = FindObjectOfType<MatchSettings>();
+        CustomNetworkManager.OnSceneLoadedForPlayer += SetDirty;
     }
 
     protected override void CallbackServer()

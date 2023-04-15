@@ -8,47 +8,26 @@ using UnityEngine.Serialization;
 
 public class CustomNetworkManager : NetworkRoomManager
 {
-    public event Action<GameObject> OnServerAddedPlayer = delegate { };
-    public event Action OnClientConnected = delegate {  };
+    public static event Action OnSceneLoadedForPlayer = delegate {  };
 
     private Hunter hunter;
     private List<Victim> victims;
 
     public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
     {
-        // var player = base.OnRoomServerCreateGamePlayer(conn, roomPlayer);
         Transform startPos = GetStartPosition();
         GameObject player = startPos != null
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        
-        var isHunter = player.GetComponent<Hunter>() is not null;
-        // if (isHunter) 
-        //     hunter = player.GetComponent<Hunter>();
-        // else 
-        //     victims.Add(player.GetComponent<Victim>());
         return player;
     }
 
-    // public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
-    // {
-    //     var hunter = FindObjectOfType<Hunter>();
-    //     var victims = FindObjectsOfType<Victim>();
-    //     MatchSettings.Hunter = hunter;
-    //     MatchSettings.Victims = victims.ToList();
-    //     return true;
-    // }
-    
-    
-    public override void OnRoomStopClient()
+    public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {
-        base.OnRoomStopClient();
+        OnSceneLoadedForPlayer?.Invoke();
+        return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);
     }
-
-    public override void OnRoomStopServer()
-    {
-        base.OnRoomStopServer();
-    }
+    
     
     bool showStartButton;
 
