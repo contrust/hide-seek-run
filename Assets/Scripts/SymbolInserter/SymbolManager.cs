@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -19,11 +20,15 @@ public class SymbolManager: RequireInstance<Hunter>
     public static readonly UnityEvent<int> OnSymbolChanged = new UnityEvent<int>();
     public static readonly UnityEvent OnVictimsVictory = new UnityEvent();
 
+    private void Awake()
+    {
+        CustomNetworkManager.OnSceneLoadedForPlayer += SetDirty;
+    }
+
     protected override void CallbackAll(Hunter instance)
     {
         hunter = instance;
         matchSettings = FindObjectOfType<MatchSettings>();
-        CustomNetworkManager.OnSceneLoadedForPlayer += SetDirty;
     }
 
     protected override void CallbackServer()
@@ -52,7 +57,12 @@ public class SymbolManager: RequireInstance<Hunter>
     
     private void ChangeSymbolOnce()
     {
-        currentSymbol = Random.Range(0, PossibleSymbols.Count);
+        var newSymbol = currentSymbol;
+        while (currentSymbol == newSymbol)
+        {
+            newSymbol = Random.Range(0, PossibleSymbols.Count);
+        }
+        currentSymbol = newSymbol;
         OnSymbolChanged?.Invoke(currentSymbol);
     }
 
