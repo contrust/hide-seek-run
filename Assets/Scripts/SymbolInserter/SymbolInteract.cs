@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SymbolInsert : NetworkBehaviour
+public class SymbolInteract : NetworkBehaviour
 {
     [SerializeField] private float SymbolInserterRadius = 2f;
     private UIHelper UIHelper;
