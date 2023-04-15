@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Mirror;
+﻿using Mirror;
 using UnityEngine;
 
 public class SymbolInserterSpawner : NetworkBehaviour
@@ -23,18 +20,8 @@ public class SymbolInserterSpawner : NetworkBehaviour
 		foreach (var position in positions)
 		{
 			var symbolInserter = Instantiate(inserter, position.position, position.rotation);
-			symbolInserter.id = i++;
+			symbolInserter.ID = i++;
 			NetworkServer.Spawn(symbolInserter.gameObject);
 		}
-	}
-
-
-	private IEnumerator WaitNetworkServerActive(Action callback)
-	{
-		while (!NetworkServer.active)
-		{
-			yield return null;
-		}
-		callback();
 	}
 }

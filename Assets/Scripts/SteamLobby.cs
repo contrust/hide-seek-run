@@ -31,7 +31,7 @@ namespace Transport
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
             Destroy(button);
-            SensitivitySetActive(false);
+            // SensitivitySetActive(false);
         }
 
 
@@ -59,13 +59,13 @@ namespace Transport
             networkManager.StartClient();
             if (button) 
                 Destroy(button);
-            SensitivitySetActive(false);
+            // SensitivitySetActive(false);
         }
 
-        private void SensitivitySetActive(bool setActive)
-        {
-            foreach(Transform child in slider.transform) 
-                child.gameObject.SetActive(setActive);
-        }
+        // private void SensitivitySetActive(bool setActive)
+        // {
+        //     foreach(Transform child in slider.transform) 
+        //         child.gameObject.SetActive(setActive);
+        // }
     }
 }

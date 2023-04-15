@@ -5,6 +5,7 @@ using System.Linq;
 using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SymbolInsert : NetworkBehaviour
 {
@@ -26,12 +27,14 @@ public class SymbolInsert : NetworkBehaviour
         var findInserters = FindObjectsOfType<SymbolInserter>();
         foreach (SymbolInserter symbolInserter in findInserters)
         {
-            symbolInserters[symbolInserter.id] = symbolInserter;
+            symbolInserters[symbolInserter.ID] = symbolInserter;
         }
     } 
     
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
         var inserterButton = FindSymbolInserterButton();
         if (inserterButton is null)
         {
@@ -42,33 +45,24 @@ public class SymbolInsert : NetworkBehaviour
             UIHelper.ButtonHelpSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
-            PressButton(inserterButton.SymbolInserter.id, inserterButton.ButtonType);
+            PressButton(inserterButton);
         }
     }
 
     [Command]
-    private void PressButton(int id, ButtonType buttonType)
+    private void PressButton(SymbolButton button)
     {
-        var symbolInserter = symbolInserters[id];
-        
-        if (buttonType == ButtonType.Insert)
-        {
-            symbolInserter.Insert();
-        }
-        else if (buttonType == ButtonType.Change)
-        {
-            symbolInserter.ChangeSymbol();
-        }
+        button.Pressed?.Invoke();
     }
 
     private SymbolButton FindSymbolInserterButton()
     {
         var cameraTransform = mainCamera.transform;
         
-        if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out var hitInfo,
-            SymbolInserterRadius))
-            return null;
-        var button = hitInfo.collider.GetComponent<SymbolButton>();
+        SymbolButton button = null;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out var hitInfo, SymbolInserterRadius))
+            button = hitInfo.collider.GetComponent<SymbolButton>();
+        
         return button;
     }
 }

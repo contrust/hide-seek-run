@@ -14,6 +14,7 @@ public class UIHelper : MonoBehaviour
     private void Start()
     {
         slider = GameObject.FindWithTag("SensSlider").GetComponent<Slider>();
+        SymbolManager.OnVictimsVictory.AddListener(ShowVictimsVictoryScreen);
     }
 
     public void Pause()

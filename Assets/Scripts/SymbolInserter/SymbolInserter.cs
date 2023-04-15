@@ -1,12 +1,15 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Mirror;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SymbolInserter : NetworkBehaviour
+public class SymbolInserter : RequireInstance<SymbolManager>
 {
+    [SyncVar] public int ID;
+    
+    [SyncVar(hook = nameof(SetColor))] private Color currentColor;
+    [SyncVar(hook = nameof(SetExpirationColor))] private Color currentExpirationColor;
+    [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
+    
     [SerializeField] private Color neutralColor;
     [SerializeField] private Color wrongColor;
     [SerializeField] private Color correctColor;
@@ -15,103 +18,73 @@ public class SymbolInserter : NetworkBehaviour
     [SerializeField] private Color expireAfterSomeTimeColor;
     [SerializeField] private Color expireNotSoonColor;
     [SerializeField] private Color expireBlack;
-    private float changeExpirationSignalTime = -1;
     [SerializeField] private float blinkingTime = 5;
-
-    private UIHelper uiHelper;
-
-
-    [SyncVar(hook = nameof(SetColor))] private Color currentColor;
-
-    [SyncVar(hook = nameof(SetExpirationColor))]
-    private Color currentExpirationColor;
-    [SyncVar] public int id;
-
-
-    private SymbolManager symbolManager;
-    private List<Material> possibleSymbols;
-    private int chosenSymbol;
-    [SyncVar(hook = nameof(SetCorrectInsertions))]
-    private int correctInsertions;
-    [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
-
-    [SerializeField] private MeshRenderer meshRenderer;
-
-    private bool possibleToInsert;
     [SerializeField] private float insertionTimeOut = 10f;
-
-    [SerializeField] private GameObject screen;
-    [SerializeField] private GameObject expirationSignal;
-    private MeshRenderer screenMeshRenderer;
-    private MeshRenderer expirationSignalMR;
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private MeshRenderer screen;
+    [SerializeField] private MeshRenderer expirationSignal;
+    
+    private int chosenSymbol;
+    private float changeExpirationSignalTime = -1;
+    private bool possibleToInsert = true;
+    
+    private SymbolManager symbolManager;
     private MatchSettings matchSettings;
+    
 
-
-    void Start()
+    protected override void CallbackAll(SymbolManager instance)
     {
-        screenMeshRenderer = screen.GetComponent<MeshRenderer>();
-        expirationSignalMR = expirationSignal.GetComponent<MeshRenderer>();
-        uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
-        currentColor = neutralColor;
-        currentSymbolIndex = 0;
-        possibleToInsert = true;
-        StartCoroutine(TryGetSymbolManager());
-    }
-
-    public override void OnStartServer()
-    {
+        symbolManager = instance;
         matchSettings = FindObjectOfType<MatchSettings>();
+    }
+    protected override void CallbackServer()
+    {
+        SymbolManager.OnSymbolInserted.AddListener(InsertionResult);
+        
         changeExpirationSignalTime = matchSettings.timeChangeSymbol / 3;
         StartCoroutine(ChangeExpirationSignalColors());
-    }
+    } 
 
-
-    private void SetColor(Color oldColor, Color newColor)
-    {
-        Debug.Log("SetColor");
-        meshRenderer.material.color = newColor;
-    }
-
-    private void SetExpirationColor(Color oldColor, Color newColor)
-    {
-        expirationSignalMR.material.color = newColor;
-    }
-
-    private void SetDisplay(int oldNumber, int newNumber)
-    {
-        Debug.Log("SetDisplay");
-        screenMeshRenderer.material = possibleSymbols[newNumber];
-    }
-
-    private void SetCorrectInsertions(int oldNumber, int newNumber)
-    {
-        if (correctInsertions == matchSettings.CountCorrectSymbolsToWin)
-            CommitVictimsVictory();
-    }
-
-    public void Insert()
+    public void InsertSymbol()
     {
         if (!possibleToInsert) return;
-        symbolManager.CheckInsertedSymbol(currentSymbolIndex);
+        symbolManager.InsertSymbol(currentSymbolIndex);
     }
-
-    public void Block()
+    
+    public void ChangeSymbol()
     {
-        StartCoroutine(InsertionTimeOutCoroutine());
+        currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, symbolManager.PossibleSymbols.Count);
     }
 
+    private void SetColor(Color _, Color newColor) => meshRenderer.material.color = newColor;
+    private void SetExpirationColor(Color _, Color newColor) => expirationSignal.material.color = newColor;
+    private void SetDisplay(int _, int newNumber) => screen.material = symbolManager.PossibleSymbols[newNumber];
+    
+    private void InsertionResult(bool result)
+    {
+        currentColor = result ? correctColor : wrongColor;
+        StartCoroutine(BlockInsertionCoroutine());
+    }
+    
+    private IEnumerator BlockInsertionCoroutine()
+    {
+        possibleToInsert = false;
+        yield return new WaitForSeconds(insertionTimeOut);
+        currentColor = neutralColor;
+        possibleToInsert = true;
+    }
+    
     private IEnumerator ChangeExpirationSignalColors()
     {
         while (true)
         {
-
             currentExpirationColor = expireNotSoonColor;
             yield return new WaitForSeconds(changeExpirationSignalTime);
-            Debug.Log("ChangedExpirationSignal");
             currentExpirationColor = expireAfterSomeTimeColor;
             yield return new WaitForSeconds(changeExpirationSignalTime);
             currentExpirationColor = expireSoonColor;
             yield return new WaitForSeconds(changeExpirationSignalTime - blinkingTime);
+            
             for (var i = 0; i < blinkingTime; i++)
             {
                 currentExpirationColor = expireBlack;
@@ -120,61 +93,5 @@ public class SymbolInserter : NetworkBehaviour
                 yield return new WaitForSeconds(0.5f);
             }
         }
-    }
-    
-
-    public void InsertionResult(bool result)
-    {
-        if (result)
-            CorrectInsertion();
-        else
-            WrongInsertion();
-    }
-
-    private void CorrectInsertion()
-    {
-        currentColor = correctColor;
-        correctInsertions++;
-    }
-
-    private void CommitVictimsVictory()
-    {
-        uiHelper.ShowVictimsVictoryScreen();
-    }
-
-    private void WrongInsertion()
-    {
-        currentColor = wrongColor;
-    }
-
-    public void ChangeSymbol()
-    {
-        currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, possibleSymbols.Count);
-    }
-    
-    private IEnumerator InsertionTimeOutCoroutine()
-    {
-        possibleToInsert = false;
-        yield return new WaitForSeconds(insertionTimeOut);
-        currentColor = neutralColor;
-        possibleToInsert = true;
-    }
-    
-    private IEnumerator TryGetSymbolManager()
-    {
-        var players = GameObject.FindGameObjectsWithTag("Player");
-        while (players.Length == 0)
-        {
-            yield return new WaitForSeconds(1f);
-            players = GameObject.FindGameObjectsWithTag("Player");
-        }
-
-        foreach (var player in players)
-        {
-            symbolManager = player.GetComponent<SymbolManager>();
-            if (symbolManager != null)
-                break;
-        }
-        possibleSymbols = symbolManager.possibleSymbols;
     }
 }
