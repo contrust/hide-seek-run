@@ -20,11 +20,6 @@ public class SymbolManager: RequireInstance<Hunter>
     public static readonly UnityEvent<int> OnSymbolChanged = new UnityEvent<int>();
     public static readonly UnityEvent OnVictimsVictory = new UnityEvent();
 
-    private void Awake()
-    {
-        CustomNetworkManager.OnSceneLoadedForPlayer += SetDirty;
-    }
-
     protected override void CallbackAll(Hunter instance)
     {
         hunter = instance;
@@ -52,7 +47,7 @@ public class SymbolManager: RequireInstance<Hunter>
     
     private void SetMaterial(int _, int newSymbol)
     {
-        hunter.SymbolMeshRenderer.material = PossibleSymbols[newSymbol];
+        StartCoroutine(SetMaterialCoroutine(newSymbol));
     }
     
     private void ChangeSymbolOnce()
@@ -73,5 +68,12 @@ public class SymbolManager: RequireInstance<Hunter>
             ChangeSymbolOnce();
             yield return new WaitForSeconds(matchSettings.timeChangeSymbol);
         }
+    }
+
+    private IEnumerator SetMaterialCoroutine(int newSymbol)
+    {
+        while (hunter is null)
+            yield return null;
+        hunter.SymbolMeshRenderer.material = PossibleSymbols[newSymbol];
     }
 }
