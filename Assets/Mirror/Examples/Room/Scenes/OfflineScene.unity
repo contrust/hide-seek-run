@@ -199,7 +199,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &123815729
 GameObject:
@@ -291,7 +291,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &123815734
 MonoBehaviour:
@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 463000307}
   - component: {fileID: 463000306}
   - component: {fileID: 463000310}
+  - component: {fileID: 463000311}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -623,7 +624,7 @@ RectTransform:
   - {fileID: 1984971768}
   - {fileID: 1581816815}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -640,6 +641,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60347a2c276efc14c92244e5c3700783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &463000311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463000305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e637eec894fdd0458b720fb2cb075bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &601589238
@@ -1377,136 +1390,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984971767}
   m_CullTransparentMesh: 1
---- !u!1 &2008127829
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2008127832}
-  - component: {fileID: 2008127833}
-  - component: {fileID: 2008127831}
-  - component: {fileID: 2008127830}
-  - component: {fileID: 2008127834}
-  m_Layer: 0
-  m_Name: NetworkRoomManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2008127830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008127829}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Port: 7777
-  DualMode: 1
-  NoDelay: 1
-  Interval: 10
-  Timeout: 10000
-  FastResend: 2
-  SendWindowSize: 4096
-  ReceiveWindowSize: 4096
-  MaxRetransmit: 40
-  MaximizeSocketBuffers: 1
-  ReliableMaxMessageSize: 298449
-  UnreliableMaxMessageSize: 1199
-  debugLog: 0
-  statisticsGUI: 0
-  statisticsLog: 0
---- !u!114 &2008127831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008127829}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d8650c751710349bb9546d1697b9cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  runInBackground: 1
-  autoStartServerBuild: 1
-  autoConnectClientBuild: 0
-  sendRate: 30
-  offlineScene: Assets/Mirror/Examples/Room/Scenes/OfflineScene.unity
-  onlineScene: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
-  transport: {fileID: 2008127834}
-  networkAddress: localhost
-  maxConnections: 5
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1480027675339556, guid: 21daf89214c6ee443ad6875b73083c60, type: 3}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 1
-  spawnPrefabs:
-  - {fileID: 1139254171913846, guid: 52f1c9ea06cfd154cb68ff9d1b66fc13, type: 3}
-  timeInterpolationGui: 0
-  showRoomGUI: 1
-  minPlayers: 1
-  roomPlayerPrefab: {fileID: 114033720796874720, guid: deae2134a1d77704b9c595efe69767dd, type: 3}
-  RoomScene: Assets/Mirror/Examples/Room/Scenes/RoomScene.unity
-  GameplayScene: Assets/StarterAssets/FirstPersonController/Scenes/Playgr test.unity
-  _allPlayersReady: 0
-  roomSlots: []
-  clientIndex: 0
-  rewardPrefab: {fileID: 1139254171913846, guid: 52f1c9ea06cfd154cb68ff9d1b66fc13, type: 3}
---- !u!4 &2008127832
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008127829}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2008127833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008127829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetX: 0
-  offsetY: 0
---- !u!114 &2008127834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008127829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Channels: 0200000001000000
-  Timeout: 25
-  AllowSteamRelay: 1
-  UseNextGenSteamNetworking: 1
 --- !u!1 &2058806429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,7 +1461,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HOST LOBBY
+  m_Text: Leave Lobby
 --- !u!222 &2058806432
 CanvasRenderer:
   m_ObjectHideFlags: 0

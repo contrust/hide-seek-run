@@ -25,11 +25,8 @@ public class CustomNetworkManager : NetworkRoomManager
             : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         return player;
     }
-
-    public override void OnRoomStartServer()
-    {
-        base.OnRoomStartServer();
-    }
+    
+    
 
     public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {

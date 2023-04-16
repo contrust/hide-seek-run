@@ -39,11 +39,12 @@ namespace Transport
 
         public void LeaveLobby()
         {
+            SteamMatchmaking.LeaveLobby(LobbyId);
             if (NetworkClient.activeHost)
                 NetworkServer.Shutdown();
             NetworkClient.Shutdown();
-            SteamMatchmaking.LeaveLobby(LobbyId);
             button.SetActive(true);
+            networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
 
@@ -74,7 +75,7 @@ namespace Transport
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
             networkManager.StartClient();
             if (button) 
-                Destroy(button);
+                button.SetActive(false);
             // SensitivitySetActive(false);
         }
 
