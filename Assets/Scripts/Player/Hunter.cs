@@ -29,7 +29,6 @@ public class Hunter : NetworkBehaviour
     private Coroutine blindnessCoroutine;
     [SerializeField] private float victimsProgress = 0;
     private const float VictimsProgressStep = 0.2f;
-    private CustomNetworkManager networkManager;
     private NetworkManager networkManager;
     private MatchSettings matchSettings;
     private bool paused;
