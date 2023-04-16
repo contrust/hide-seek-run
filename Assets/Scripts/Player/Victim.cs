@@ -64,8 +64,13 @@ public class Victim : NetworkBehaviour
         }
     }
 
-    [Command]
     private void PlayDamageSound()
+    {
+        PlayDamageSoundCommand();
+    }
+
+    [Command]
+    private void PlayDamageSoundCommand()
     {
         RpcPlayDamageSound();
     }
