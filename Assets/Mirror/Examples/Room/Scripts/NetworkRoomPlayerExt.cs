@@ -74,10 +74,14 @@ namespace Mirror.Examples.NetworkRoom
         
         void DrawPlayerInfo()
         {
-            GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 90f, 130f));
-            
+            GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 100f, 50f));
+
             GUILayout.Label(steamName);
             
+            GUILayout.EndArea();
+            
+            GUILayout.BeginArea(new Rect(20f + (index * 100), 250f, 100f, 50f));
+
             if (readyToBegin)
                 GUILayout.Label("Ready");
             else
