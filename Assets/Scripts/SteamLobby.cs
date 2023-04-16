@@ -14,6 +14,7 @@ namespace Transport
         
         private CustomNetworkManager networkManager;
         private const string HostAddressKey = "HostAddress";
+        private string pchValue;
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
 
@@ -32,8 +33,17 @@ namespace Transport
         {
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
-            Destroy(button);
+            button.SetActive(false);
             // SensitivitySetActive(false);
+        }
+
+        public void LeaveLobby()
+        {
+            if (NetworkClient.activeHost)
+                NetworkServer.Shutdown();
+            NetworkClient.Shutdown();
+            SteamMatchmaking.LeaveLobby(LobbyId);
+            button.SetActive(true);
         }
 
 
@@ -46,8 +56,9 @@ namespace Transport
 
             LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
             networkManager.StartHost();
+            pchValue = SteamUser.GetSteamID().ToString();
             SteamMatchmaking.SetLobbyData(LobbyId, HostAddressKey,
-                SteamUser.GetSteamID().ToString());
+                pchValue);
             networkManager.lobbyID = LobbyId;
         }
 
