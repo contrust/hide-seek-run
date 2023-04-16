@@ -210,10 +210,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 123815733}
-  - component: {fileID: 123815731}
   - component: {fileID: 123815730}
   - component: {fileID: 123815734}
-  - component: {fileID: 123815736}
   - component: {fileID: 123815737}
   m_Layer: 0
   m_Name: NetworkRoomManager (1)
@@ -262,22 +260,7 @@ MonoBehaviour:
   clientIndex: 0
   lobbyID:
     m_SteamID: 0
---- !u!114 &123815731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123815729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Channels: 0200000001000000
-  Timeout: 25
-  AllowSteamRelay: 1
-  UseNextGenSteamNetworking: 1
+  TODELETE: 0
 --- !u!4 &123815733
 Transform:
   m_ObjectHideFlags: 0
@@ -309,18 +292,6 @@ MonoBehaviour:
   Timeout: 25
   AllowSteamRelay: 1
   UseNextGenSteamNetworking: 1
---- !u!114 &123815736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123815729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e48ac2b2df3cb46a7e5d3642abe95b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &123815737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,6 +938,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806120018}
   m_CullTransparentMesh: 1
+--- !u!1 &1062601480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1062601482}
+  - component: {fileID: 1062601481}
+  m_Layer: 0
+  m_Name: SteamManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1062601481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062601480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e48ac2b2df3cb46a7e5d3642abe95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1062601482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062601480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 507.2379, y: 251.12665, z: -7.2359924}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1074053259
 PrefabInstance:
   m_ObjectHideFlags: 0
