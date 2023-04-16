@@ -91,4 +91,9 @@ public class CustomNetworkManager : NetworkRoomManager
         uiHelper.LobbyEnterUISetActive(false);
     }
 
+    public override void OnRoomClientSceneChanged()
+    {
+        base.OnRoomClientSceneChanged();
+        uiHelper.ButtonLeaveLobbySetActive(false);
+    }
 }
