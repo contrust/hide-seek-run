@@ -32,7 +32,27 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     private MatchSettings matchSettings;
     
 
-    protected override void CallbackAll(SymbolManager instance)
+
+    void Start()
+    {
+        screenMeshRenderer = screen.GetComponent<MeshRenderer>();
+        if (expirationSignal is null)
+        {
+            Debug.Log("expirationSignal is null");
+        }
+        expirationSignalMR = expirationSignal.GetComponent<MeshRenderer>();
+        if (expirationSignalMR is null)
+        {
+            Debug.Log("expirationSignalMR is null");
+        }
+        uiHelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
+        currentColor = neutralColor;
+        currentSymbolIndex = 0;
+        possibleToInsert = true;
+        StartCoroutine(TryGetSymbolManager());
+    }
+
+    public override void OnStartServer()
     {
         symbolManager = instance;
         matchSettings = FindObjectOfType<MatchSettings>();
@@ -45,7 +65,35 @@ public class SymbolInserter : RequireInstance<SymbolManager>
         StartCoroutine(ChangeExpirationSignalColors());
     } 
 
-    public void InsertSymbol()
+
+    private void SetColor(Color oldColor, Color newColor)
+    {
+        Debug.Log("SetColor");
+        meshRenderer.material.color = newColor;
+    }
+
+    private void SetExpirationColor(Color oldColor, Color newColor)
+    {
+        /*if (expirationSignalMR.material is null)
+        {
+            Debug.Log("expirationSignalMR.material is null");
+        }
+        expirationSignalMR.material.color = newColor;*/
+    }
+
+    private void SetDisplay(int oldNumber, int newNumber)
+    {
+        Debug.Log("SetDisplay");
+        screenMeshRenderer.material = possibleSymbols[newNumber];
+    }
+
+    private void SetCorrectInsertions(int oldNumber, int newNumber)
+    {
+        if (correctInsertions == matchSettings.CountCorrectSymbolsToWin)
+            CommitVictimsVictory();
+    }
+
+    public void Insert()
     {
         if (!possibleToInsert) return;
         symbolManager.InsertSymbol(currentSymbolIndex);

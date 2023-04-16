@@ -30,6 +30,7 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private float victimsProgress = 0;
     private const float VictimsProgressStep = 0.2f;
     private CustomNetworkManager networkManager;
+    private NetworkManager networkManager;
     private MatchSettings matchSettings;
     private bool paused;
     
@@ -43,13 +44,21 @@ public class Hunter : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
+        #if UNITY_EDITOR
+            networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();      //Для локальных тестов
+        #else
+            networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>(); 
+        #endif
         matchSettings = FindObjectOfType<MatchSettings>();
         if (isLocalPlayer) Init();
     }
 
     private void Init()
     {
+        if (networkManager is null)
+        {
+            Debug.Log("networkManager is null");
+        }
         networkManager.playerPrefab = victim;
         blindness = 1;
         SetDark();
