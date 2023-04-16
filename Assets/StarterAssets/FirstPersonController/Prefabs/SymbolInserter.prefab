@@ -66,6 +66,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  ID: 0
   neutralColor: {r: 1, g: 0.84337664, b: 0, a: 0}
   wrongColor: {r: 1, g: 0, b: 0, a: 0}
   correctColor: {r: 0, g: 1, b: 0.16947174, a: 0}
@@ -74,11 +75,10 @@ MonoBehaviour:
   expireNotSoonColor: {r: 0.12363365, g: 0.4528302, b: 0, a: 0}
   expireBlack: {r: 0, g: 0, b: 0, a: 0}
   blinkingTime: 5
-  id: 0
-  meshRenderer: {fileID: 7740347927400781284}
   insertionTimeOut: 60
-  screen: {fileID: 6499081458025053894}
-  expirationSignal: {fileID: 2065611931457666504}
+  meshRenderer: {fileID: 7740347927400781284}
+  screen: {fileID: 6499081458025053893}
+  expirationSignal: {fileID: 4254967060432734514}
 --- !u!1 &1243056615100272675
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +784,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SymbolInserter: {fileID: 5564963808215664057}
   ButtonType: 1
+  Pressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5564963808215664057}
+        m_TargetAssemblyTypeName: SymbolInserter, Assembly-CSharp
+        m_MethodName: ChangeSymbol
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8100780690989662508
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +912,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SymbolInserter: {fileID: 5564963808215664057}
   ButtonType: 0
+  Pressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5564963808215664057}
+        m_TargetAssemblyTypeName: SymbolInserter, Assembly-CSharp
+        m_MethodName: InsertSymbol
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8100780691438413705
 GameObject:
   m_ObjectHideFlags: 0

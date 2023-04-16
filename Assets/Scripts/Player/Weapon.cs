@@ -48,8 +48,13 @@ public class Weapon : NetworkBehaviour
             Flash.SetActive(false);
     }
 
-    [Command]
     private void PlayShootingSound()
+    {
+        PlayShootingSoundCommand();
+    }
+
+    [Command]
+    private void PlayShootingSoundCommand()
     {
         RpcPlayShootingSound();
     }

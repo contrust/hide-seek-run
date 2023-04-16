@@ -2,54 +2,55 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
+using Mirror.Examples.NetworkRoom;
+using Steamworks;
+using Transport;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class CustomNetworkManager : NetworkRoomManager
 {
-    public event Action<GameObject> OnServerAddedPlayer = delegate { };
-    public event Action OnClientConnected = delegate {  };
+    public static event Action OnSceneLoadedForPlayer = delegate {  };
 
     private Hunter hunter;
     private List<Victim> victims;
+    public CSteamID lobbyID;
+    private UIHelper uiHelper;
+    public int TODELETE = 0;
+
+    public override void OnRoomStartServer()
+    {
+        TODELETE++;
+        base.OnRoomStartServer();
+        uiHelper = FindObjectOfType<UIHelper>();
+    }
+
+    public override void OnRoomClientEnter()
+    {
+        base.OnRoomClientEnter();
+        uiHelper = FindObjectOfType<UIHelper>();
+    }
 
     public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
     {
-        // var player = base.OnRoomServerCreateGamePlayer(conn, roomPlayer);
         Transform startPos = GetStartPosition();
         GameObject player = startPos != null
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        
-        var isHunter = player.GetComponent<Hunter>() is not null;
-        // if (isHunter) 
-        //     hunter = player.GetComponent<Hunter>();
-        // else 
-        //     victims.Add(player.GetComponent<Victim>());
         return player;
     }
+    
+    
 
-    // public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
-    // {
-    //     var hunter = FindObjectOfType<Hunter>();
-    //     var victims = FindObjectsOfType<Victim>();
-    //     MatchSettings.Hunter = hunter;
-    //     MatchSettings.Victims = victims.ToList();
-    //     return true;
-    // }
-    
-    
-    public override void OnRoomStopClient()
+    public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {
-        base.OnRoomStopClient();
+        OnSceneLoadedForPlayer?.Invoke();
+        uiHelper.ButtonLeaveLobbySetActive(false);
+        return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);
     }
 
-    public override void OnRoomStopServer()
-    {
-        base.OnRoomStopServer();
-    }
-    
     bool showStartButton;
 
     public override void OnRoomServerPlayersReady()
@@ -74,4 +75,20 @@ public class CustomNetworkManager : NetworkRoomManager
             ServerChangeScene(GameplayScene);
         }
     }
+
+    public override GameObject OnRoomServerCreateRoomPlayer(NetworkConnectionToClient conn)
+    {
+        var newRoomGameObject = Instantiate(roomPlayerPrefab.gameObject, Vector3.zero, Quaternion.identity);
+        var networkRoomPlayer = newRoomGameObject.GetComponent<NetworkRoomPlayerExt>();
+        var playerSteamId = SteamMatchmaking.GetLobbyMemberByIndex(lobbyID, numPlayers);
+        networkRoomPlayer.steamName = SteamFriends.GetFriendPersonaName(playerSteamId);
+        return newRoomGameObject;
+    }
+
+    public override void OnRoomClientDisconnect()
+    {
+        base.OnRoomClientDisconnect();
+        uiHelper.LobbyEnterUISetActive(false);
+    }
+
 }

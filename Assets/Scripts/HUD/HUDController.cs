@@ -28,7 +28,7 @@ namespace HUD
                 (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
                 weapon.onShot.AddListener(instance.OnShotHandler);
-                SymbolManager.onSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
+                SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
             }
             else
             {
@@ -67,7 +67,7 @@ namespace HUD
             ShowEffect(blurEffect);
         }
 
-        public void OnSymbolInsertedEffect()
+        public void OnSymbolInsertedEffect(bool _)
         {
             ShowEffect(symbolInsertedEffect);
         }

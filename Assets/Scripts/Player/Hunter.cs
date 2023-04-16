@@ -25,9 +25,12 @@ public class Hunter : NetworkBehaviour
 
     public LayerMask Render;
 
-    private float blindness;
+    [SerializeField] private float blindness;
     private Coroutine blindnessCoroutine;
+    [SerializeField] private float victimsProgress = 0;
+    private const float VictimsProgressStep = 0.2f;
     private CustomNetworkManager networkManager;
+    private NetworkManager networkManager;
     private MatchSettings matchSettings;
     private bool paused;
     
@@ -41,13 +44,21 @@ public class Hunter : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
+        #if UNITY_EDITOR
+            networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();      //Для локальных тестов
+        #else
+            networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>(); 
+        #endif
         matchSettings = FindObjectOfType<MatchSettings>();
         if (isLocalPlayer) Init();
     }
 
     private void Init()
     {
+        if (networkManager is null)
+        {
+            Debug.Log("networkManager is null");
+        }
         networkManager.playerPrefab = victim;
         blindness = 1;
         SetDark();
@@ -56,6 +67,7 @@ public class Hunter : NetworkBehaviour
         Camera.main.cullingMask = Render;
         HUDController.instance.ShowStaticElements();
         HUDController.instance.SetupEventHandlers();
+        SymbolManager.OnSymbolInserted.AddListener(OnSymbolInsertedHandler);
     }
 
     public void SetLight()
@@ -85,8 +97,16 @@ public class Hunter : NetworkBehaviour
                 continue;
             }
             var time = (Time.time - startTime) / matchSettings.DurationHunterBlindnessSeconds;
-            Blindness = Mathf.Lerp(matchSettings.StartHunterBlindness, matchSettings.EndHunterBlindness, time);
+            Blindness = Mathf.Lerp(matchSettings.StartHunterBlindness, matchSettings.EndHunterBlindness, Math.Min(1, time+victimsProgress));
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private void OnSymbolInsertedHandler(bool isCorrect)
+    {
+        if (isCorrect)
+        {
+            victimsProgress += VictimsProgressStep;
         }
     }
 }

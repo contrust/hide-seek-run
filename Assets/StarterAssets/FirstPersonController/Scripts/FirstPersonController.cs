@@ -296,13 +296,18 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 
-		[Command]
 		private void PlayJumpingSound()
 		{
 			if (!input.sprint && !JumpingSound.isPlaying)
 			{
-				PlayJumpingSoundRpc();
+				PlayJumpingSoundCommand();
 			}
+		}
+
+		[Command]
+		private void PlayJumpingSoundCommand()
+		{
+			PlayJumpingSoundRpc();
 		}
 
 		[ClientRpc]
@@ -311,13 +316,18 @@ namespace StarterAssets
 			JumpingSound.Play();
 		}
 
-		[Command]
 		private void PlayGroundingSound()
 		{
 			if (!input.sprint && !GroundingSound.isPlaying)
 			{
-				PlayGroundingSoundRpc();
+				PlayGroundingSoundCommand();
 			}
+		}
+
+		[Command]
+		private void PlayGroundingSoundCommand()
+		{
+			PlayGroundingSoundRpc();
 		}
 
 		[ClientRpc]
@@ -326,20 +336,25 @@ namespace StarterAssets
 			GroundingSound.Play();
 		}
 
-		[Command]
 		private void PlayFootstepsSound()
 		{
 			if (!input.sprint && Grounded)
 			{
 				if (!FootstepsSound.isPlaying)
 				{
-					PlayFootstepsSoundRpc();	
+					PlayFootstepsSoundCommand();	
 				}
 			}
 			else
 			{
-				StopPlayingFootstepsSoundRpc();
+				StopPlayingFootstepsSoundCommand();
 			}
+		}
+
+		[Command]
+		private void PlayFootstepsSoundCommand()
+		{
+			PlayFootstepsSoundRpc();
 		}
 
 		[ClientRpc]
@@ -348,8 +363,13 @@ namespace StarterAssets
 			FootstepsSound.Play();
 		}
 
-		[Command]
 		private void StopPlayingFootstepsSound()
+		{
+			StopPlayingFootstepsSoundCommand();
+		}
+
+		[Command]
+		private void StopPlayingFootstepsSoundCommand()
 		{
 			StopPlayingFootstepsSoundRpc();
 		}
