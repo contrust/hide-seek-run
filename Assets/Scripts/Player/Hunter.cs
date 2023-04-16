@@ -27,7 +27,7 @@ public class Hunter : NetworkBehaviour
 
     [SerializeField] private float blindness;
     private Coroutine blindnessCoroutine;
-    [SerializeField] private float victimsProgressCoefficient = 1f;
+    [SerializeField] private float victimsProgress = 0;
     private const float VictimsProgressStep = 0.2f;
     private CustomNetworkManager networkManager;
     private MatchSettings matchSettings;
@@ -88,7 +88,7 @@ public class Hunter : NetworkBehaviour
                 continue;
             }
             var time = (Time.time - startTime) / matchSettings.DurationHunterBlindnessSeconds;
-            Blindness = Mathf.Lerp(matchSettings.StartHunterBlindness, matchSettings.EndHunterBlindness, Math.Min(1, time*victimsProgressCoefficient));
+            Blindness = Mathf.Lerp(matchSettings.StartHunterBlindness, matchSettings.EndHunterBlindness, Math.Min(1, time+victimsProgress));
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -97,7 +97,7 @@ public class Hunter : NetworkBehaviour
     {
         if (isCorrect)
         {
-            victimsProgressCoefficient += VictimsProgressStep;
+            victimsProgress += VictimsProgressStep;
         }
     }
 }
