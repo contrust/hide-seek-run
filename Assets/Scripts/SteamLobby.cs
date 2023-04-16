@@ -17,11 +17,13 @@ namespace Transport
         private string pchValue;
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
+        private UIHelper uiHelper;
 
         public CSteamID LobbyId { get; private set; }
         
         private void Start()
         {
+            uiHelper = FindObjectOfType<UIHelper>();
             networkManager = GetComponent<CustomNetworkManager>();
             if (!SteamManager.Initialized) return;
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
@@ -33,8 +35,7 @@ namespace Transport
         {
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
-            button.SetActive(false);
-            // SensitivitySetActive(false);
+            uiHelper.LobbyEnterUISetActive(true);
         }
 
         public void LeaveLobby()
@@ -43,7 +44,7 @@ namespace Transport
             if (NetworkClient.activeHost)
                 NetworkServer.Shutdown();
             NetworkClient.Shutdown();
-            button.SetActive(true);
+            uiHelper.LobbyEnterUISetActive(false);
             networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
@@ -74,15 +75,7 @@ namespace Transport
             networkManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
             networkManager.StartClient();
-            if (button) 
-                button.SetActive(false);
-            // SensitivitySetActive(false);
+            uiHelper.LobbyEnterUISetActive(true);
         }
-
-        // private void SensitivitySetActive(bool setActive)
-        // {
-        //     foreach(Transform child in slider.transform) 
-        //         child.gameObject.SetActive(setActive);
-        // }
     }
 }

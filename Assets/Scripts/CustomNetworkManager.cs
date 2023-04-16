@@ -16,6 +16,7 @@ public class CustomNetworkManager : NetworkRoomManager
     private Hunter hunter;
     private List<Victim> victims;
     public CSteamID lobbyID;
+    private UIHelper uiHelper;
 
     public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
     {
@@ -31,6 +32,8 @@ public class CustomNetworkManager : NetworkRoomManager
     public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {
         OnSceneLoadedForPlayer?.Invoke();
+        uiHelper = FindObjectOfType<UIHelper>();
+        uiHelper.ButtonLeaveLobbySetActive(false);
         return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);
     }
     
