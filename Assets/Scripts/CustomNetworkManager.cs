@@ -18,11 +18,9 @@ public class CustomNetworkManager : NetworkRoomManager
     private List<Victim> victims;
     public CSteamID lobbyID;
     private UIHelper uiHelper;
-    public int TODELETE = 0;
 
     public override void OnRoomStartServer()
     {
-        TODELETE++;
         base.OnRoomStartServer();
         uiHelper = FindObjectOfType<UIHelper>();
     }
@@ -94,6 +92,7 @@ public class CustomNetworkManager : NetworkRoomManager
     public override void OnRoomClientSceneChanged()
     {
         base.OnRoomClientSceneChanged();
-        uiHelper.ButtonLeaveLobbySetActive(false);
+        if (networkSceneName == GameplayScene)
+            uiHelper.ButtonLeaveLobbySetActive(false);
     }
 }
