@@ -12,14 +12,16 @@ namespace Transport
         protected Callback<LobbyEnter_t> LobbyEntered;
         
         
-        private NetworkManager networkManager;
+        private CustomNetworkManager networkManager;
         private const string HostAddressKey = "HostAddress";
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
+
+        public CSteamID LobbyId { get; private set; }
         
         private void Start()
         {
-            networkManager = GetComponent<NetworkManager>();
+            networkManager = GetComponent<CustomNetworkManager>();
             if (!SteamManager.Initialized) return;
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
             JoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
@@ -41,9 +43,12 @@ namespace Transport
             {
                 return;
             }
+
+            LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
             networkManager.StartHost();
-            SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey,
+            SteamMatchmaking.SetLobbyData(LobbyId, HostAddressKey,
                 SteamUser.GetSteamID().ToString());
+            networkManager.lobbyID = LobbyId;
         }
 
         private void OnJoinRequest(GameLobbyJoinRequested_t callback)
