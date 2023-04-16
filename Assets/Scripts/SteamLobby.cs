@@ -12,14 +12,19 @@ namespace Transport
         protected Callback<LobbyEnter_t> LobbyEntered;
         
         
-        private NetworkManager networkManager;
+        private CustomNetworkManager networkManager;
         private const string HostAddressKey = "HostAddress";
+        private string pchValue;
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
+        private UIHelper uiHelper;
+
+        public CSteamID LobbyId { get; private set; }
         
         private void Start()
         {
-            networkManager = GetComponent<NetworkManager>();
+            uiHelper = FindObjectOfType<UIHelper>();
+            networkManager = GetComponent<CustomNetworkManager>();
             if (!SteamManager.Initialized) return;
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
             JoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
@@ -30,8 +35,17 @@ namespace Transport
         {
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
-            Destroy(button);
-            // SensitivitySetActive(false);
+            uiHelper.LobbyEnterUISetActive(true);
+        }
+
+        public void LeaveLobby()
+        {
+            SteamMatchmaking.LeaveLobby(LobbyId);
+            if (NetworkClient.activeHost)
+                NetworkServer.Shutdown();
+            NetworkClient.Shutdown();
+            uiHelper.LobbyEnterUISetActive(false);
+            networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
 
@@ -41,9 +55,13 @@ namespace Transport
             {
                 return;
             }
+
+            LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
             networkManager.StartHost();
-            SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey,
-                SteamUser.GetSteamID().ToString());
+            pchValue = SteamUser.GetSteamID().ToString();
+            SteamMatchmaking.SetLobbyData(LobbyId, HostAddressKey,
+                pchValue);
+            networkManager.lobbyID = LobbyId;
         }
 
         private void OnJoinRequest(GameLobbyJoinRequested_t callback)
@@ -57,15 +75,7 @@ namespace Transport
             networkManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
             networkManager.StartClient();
-            if (button) 
-                Destroy(button);
-            // SensitivitySetActive(false);
+            uiHelper.LobbyEnterUISetActive(true);
         }
-
-        // private void SensitivitySetActive(bool setActive)
-        // {
-        //     foreach(Transform child in slider.transform) 
-        //         child.gameObject.SetActive(setActive);
-        // }
     }
 }
