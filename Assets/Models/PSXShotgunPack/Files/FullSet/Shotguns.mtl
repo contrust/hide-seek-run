@@ -1,0 +1,342 @@
+# Blender 3.3.1 MTL File: 'None'
+# www.blender.org
+
+newmtl Material.281
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/DoubleBarrelShotgun/Textures/DBShotgunText.png
+
+newmtl Material.282
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/DoubleBarrelShotgun/Textures/DBShotgunText.png
+
+newmtl Material.283
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.284
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.285
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/DoubleBarrelShotgun/Textures/DBShotgunText.png
+
+newmtl Material.286
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/DoubleBarrelShotgun/Textures/DBShotgunText.png
+
+newmtl Material.287
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/DoubleBarrelShotgun/Textures/DBShotgunText.png
+
+newmtl Material.288
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.289
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.290
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/DoubleBarrelShotgun/Textures/DBShotgunText.png
+
+newmtl Material.291
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/oneBarrelShotGun/Textures/OneBarrelShotGunText.jpg
+
+newmtl Material.292
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/oneBarrelShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.293
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/oneBarrelShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.294
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/oneBarrelShotGun/Textures/OneBarrelShotGunText.jpg
+
+newmtl Material.295
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/oneBarrelShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.296
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/oneBarrelShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.297
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/overUnderRef.png
+
+newmtl Material.298
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.299
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.300
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/overUnderRef.png
+
+newmtl Material.301
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/overUnderRef.png
+
+newmtl Material.302
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.303
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/shotgunShellTexture.jpg
+
+newmtl Material.304
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/overUnderShotGun/Textures/overUnderRef.png
+
+newmtl Material.305
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/pumpActionShotgun/Textures/PAShotgunText.png
+
+newmtl Material.306
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/pumpActionShotgun/Textures/PAShotgunText.png
+
+newmtl Material.307
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.308
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.309
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/pumpActionShotgun/Textures/PAShotgunText.png
+
+newmtl Material.310
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/pumpActionShotgun/Textures/PAShotgunText.png
+
+newmtl Material.311
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/pumpActionShotgun/Textures/PAShotgunText.png
+
+newmtl Material.312
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.313
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/Guns/Shotguns/overUnderShotGun/shotgunShellTexture.jpg
+
+newmtl Material.314
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd D:/Blender assets/PSXShotgunPack/Files/pumpActionShotgun/Textures/PAShotgunText.png
