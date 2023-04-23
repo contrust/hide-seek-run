@@ -80,6 +80,10 @@ namespace StarterAssets
 		private GameObject mainCamera;
 
 		private const float Threshold = 0.01f;
+		
+		//key bindings
+		[SerializeField] private KeyCode showPauseKey = KeyCode.Escape;
+		[SerializeField] private KeyCode showCursorKey = KeyCode.LeftAlt;
 
 		[SerializeField] private UIHelper uihelper;
 
@@ -120,6 +124,8 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			
+			UpdateCursor();
 			if(!controller.enabled) return;
 			JumpAndGravity();
 			GroundedCheck();
@@ -135,8 +141,26 @@ namespace StarterAssets
 
 		private void PauseMenu()
 		{
-			if (!Input.GetKeyDown(KeyCode.Escape)) return;
+			if (!Input.GetKeyDown(showPauseKey)) return;
 			uihelper.Pause();
+		}
+
+		private void UpdateCursor()
+		{
+			
+			if (Input.GetKeyDown(showCursorKey))
+			{
+				Cursor.visible = true;
+				Cursor.lockState = CursorLockMode.None;
+				controller.enabled = false;
+			}
+
+			if (Input.GetKeyUp(showCursorKey))
+			{
+				Cursor.visible = false;
+				Cursor.lockState = CursorLockMode.Locked;
+				controller.enabled = true;
+			}
 		}
 
 		private void GroundedCheck()
