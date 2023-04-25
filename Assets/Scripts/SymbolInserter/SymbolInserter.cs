@@ -5,6 +5,7 @@ using UnityEngine;
 public class SymbolInserter : RequireInstance<SymbolManager>
 {
     [SyncVar] public int ID;
+    [SyncVar] private bool isSender;
     
     [SyncVar(hook = nameof(SetColor))] private Color currentColor;
     [SyncVar(hook = nameof(SetExpirationColor))] private Color currentExpirationColor;
@@ -26,8 +27,6 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     [SerializeField] private MeshRenderer screen;
     [SerializeField] private MeshRenderer expirationSignal;
 
-    private bool isSender;
-    
     private int chosenSymbol;
     private float changeExpirationSignalTime = -1;
     private bool possibleToInsert = true;
@@ -58,6 +57,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     
     public void ChangeSymbol()
     {
+        if (isSender)
+            return;
         currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, symbolManager.PossibleSymbols.Count);
     }
 
