@@ -67,8 +67,6 @@ public class SymbolInserter : RequireInstance<SymbolManager>
 
     private void SetDisplay(int _, int newNumber)
     {
-        if (isSender)
-            return;
         screen.material = newNumber == - 1 ? outOfOrder : symbolManager.PossibleSymbols[newNumber];
     }
 
