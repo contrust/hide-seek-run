@@ -58,10 +58,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     
     public void ChangeSymbol()
     {
-        if (isSender)
-            currentSymbolIndex = -1;
-        else
-            currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, symbolManager.PossibleSymbols.Count);
+        currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, symbolManager.PossibleSymbols.Count);
     }
 
     private void SetColor(Color _, Color newColor) => meshRenderer.material.color = newColor;
@@ -84,7 +81,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     private void BlockAfterCorrectInsertion()
     {
         possibleToInsert = false;
-        ChangeSymbol();
+        currentSymbolIndex = -1;
     }
 
     private IEnumerator BlockInsertionCoroutine()
