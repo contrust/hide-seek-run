@@ -9,6 +9,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     [SyncVar(hook = nameof(SetColor))] private Color currentColor;
     [SyncVar(hook = nameof(SetExpirationColor))] private Color currentExpirationColor;
     [SyncVar(hook = nameof(SetDisplay))] private int currentSymbolIndex;
+
+    [SerializeField] private Material outOfOrder;
     
     [SerializeField] private Color neutralColor;
     [SerializeField] private Color wrongColor;
@@ -56,13 +58,20 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     
     public void ChangeSymbol()
     {
-        currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, symbolManager.PossibleSymbols.Count);
+        if (isSender)
+            currentSymbolIndex = -1;
+        else
+            currentSymbolIndex = (int)Mathf.Repeat(currentSymbolIndex + 1, symbolManager.PossibleSymbols.Count);
     }
 
     private void SetColor(Color _, Color newColor) => meshRenderer.material.color = newColor;
     private void SetExpirationColor(Color _, Color newColor) => expirationSignal.material.color = newColor;
-    private void SetDisplay(int _, int newNumber) => screen.material = symbolManager.PossibleSymbols[newNumber];
-    
+
+    private void SetDisplay(int _, int newNumber)
+    {
+        screen.material = newNumber == - 1 ? outOfOrder : symbolManager.PossibleSymbols[newNumber];
+    }
+
     private void InsertionResult(bool result)
     {
         currentColor = result ? correctColor : wrongColor;
@@ -70,6 +79,11 @@ public class SymbolInserter : RequireInstance<SymbolManager>
             possibleToInsert = false;
         else
             StartCoroutine(BlockInsertionCoroutine());
+    }
+
+    private void BlockAfterCorrectInsertion()
+    {
+        possibleToInsert = false;
     }
 
     private IEnumerator BlockInsertionCoroutine()
