@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class MatchSettings : MonoBehaviour
+[CreateAssetMenu (fileName = "New Match Settings", menuName = "Match Settings")]
+public class MatchSettingsObj : ScriptableObject
 {
     [Header("Hunter Settings")]
     [Range(0, 1)]
