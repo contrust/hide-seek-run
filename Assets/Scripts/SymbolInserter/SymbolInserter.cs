@@ -23,6 +23,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshRenderer screen;
     [SerializeField] private MeshRenderer expirationSignal;
+
+    private bool isSender;
     
     private int chosenSymbol;
     private float changeExpirationSignalTime = -1;
@@ -48,6 +50,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     public void InsertSymbol()
     {
         if (!possibleToInsert) return;
+        isSender = true;
         symbolManager.InsertSymbol(currentSymbolIndex);
     }
     
@@ -63,12 +66,16 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     private void InsertionResult(bool result)
     {
         currentColor = result ? correctColor : wrongColor;
-        StartCoroutine(BlockInsertionCoroutine());
+        if (result && isSender)
+            possibleToInsert = false;
+        else
+            StartCoroutine(BlockInsertionCoroutine());
     }
-    
+
     private IEnumerator BlockInsertionCoroutine()
     {
         possibleToInsert = false;
+        isSender = false;
         yield return new WaitForSeconds(insertionTimeOut);
         currentColor = neutralColor;
         possibleToInsert = true;
