@@ -76,7 +76,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     {
         currentColor = result ? correctColor : wrongColor;
         if (result && isSender)
-            possibleToInsert = false;
+            BlockAfterCorrectInsertion();
         else
             StartCoroutine(BlockInsertionCoroutine());
     }
@@ -84,6 +84,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     private void BlockAfterCorrectInsertion()
     {
         possibleToInsert = false;
+        ChangeSymbol();
     }
 
     private IEnumerator BlockInsertionCoroutine()
