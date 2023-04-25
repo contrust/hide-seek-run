@@ -3918,7 +3918,7 @@ MonoBehaviour:
   GroundingSound: {fileID: 2703914149432308956}
   FootstepsSound: {fileID: 5706337881170596081}
   showPauseKey: 27
-  showCursorKey: 308
+  showCursorKey: 99
   uihelper: {fileID: 0}
 --- !u!114 &1978471637655604388
 MonoBehaviour:

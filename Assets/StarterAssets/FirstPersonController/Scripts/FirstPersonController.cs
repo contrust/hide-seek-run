@@ -83,7 +83,7 @@ namespace StarterAssets
 		
 		//key bindings
 		[SerializeField] private KeyCode showPauseKey = KeyCode.Escape;
-		[SerializeField] private KeyCode showCursorKey = KeyCode.LeftAlt;
+		[SerializeField] private KeyCode showCursorKey = KeyCode.C;
 
 		[SerializeField] private UIHelper uihelper;
 
@@ -135,7 +135,7 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
-			if(!controller.enabled) return;
+			if(!controller.enabled || Cursor.visible) return;
 			CameraRotation();
 		}
 
@@ -152,14 +152,12 @@ namespace StarterAssets
 			{
 				Cursor.visible = true;
 				Cursor.lockState = CursorLockMode.None;
-				controller.enabled = false;
 			}
 
 			if (Input.GetKeyUp(showCursorKey))
 			{
 				Cursor.visible = false;
 				Cursor.lockState = CursorLockMode.Locked;
-				controller.enabled = true;
 			}
 		}
 
