@@ -4788,6 +4788,8 @@ MonoBehaviour:
   JumpingSound: {fileID: 1555238269203382961}
   GroundingSound: {fileID: 4390904744145848914}
   FootstepsSound: {fileID: 8119318806303477447}
+  showPauseKey: 27
+  showCursorKey: 308
   uihelper: {fileID: 0}
 --- !u!114 &1978471637655604388
 MonoBehaviour:
@@ -5369,6 +5371,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -906792153579950570, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
       propertyPath: m_Name

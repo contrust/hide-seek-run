@@ -14,6 +14,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool changeCameraMode;
+		public bool shot;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -63,6 +64,12 @@ namespace StarterAssets
 		{
 			ChangeCameraModeInput(value.isPressed);
 		}
+
+		public void OnShoot(InputValue value)
+		{
+			ShootInput(value.isPressed);
+		}
+		
 #endif
 
 
@@ -89,6 +96,11 @@ namespace StarterAssets
 		public void ChangeCameraModeInput(bool newChangeCameraModeState)
 		{
 			changeCameraMode = newChangeCameraModeState;
+		}
+
+		public void ShootInput(bool shot)
+		{
+			this.shot = shot;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

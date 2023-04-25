@@ -1,4 +1,5 @@
 using Mirror;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,7 @@ public class Weapon : NetworkBehaviour
     public int Damage;
     public AudioSource ShootingSound;
 
+    private StarterAssetsInputs input;
     private float lastTimeShot;
     private Camera mainCamera;
     public UnityEvent onShot;
@@ -19,13 +21,14 @@ public class Weapon : NetworkBehaviour
     {
         mainCamera = Camera.main;
         onShot.AddListener(PlayShootingSound);
+        input = GetComponent<StarterAssetsInputs>();
     }
 
     private void Update()
     {
         if (!isLocalPlayer) return;
 
-        if (Time.time - lastTimeShot > TimeReload && Input.GetKey(KeyCode.Mouse0))
+        if (Time.time - lastTimeShot > TimeReload && input.shot)
         {
             Transform cameraTransform = mainCamera.transform;
 
@@ -43,6 +46,8 @@ public class Weapon : NetworkBehaviour
             lastTimeShot = Time.time;
             Flash.SetActive(true);
         }
+
+        input.shot = false;
         
         if(Time.time - lastTimeShot > 0.1)
             Flash.SetActive(false);
