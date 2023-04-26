@@ -3726,6 +3726,7 @@ GameObject:
   - component: {fileID: 4912733348794072812}
   - component: {fileID: 1755683656676298019}
   - component: {fileID: 7889196859589516518}
+  - component: {fileID: 2615503748861540179}
   m_Layer: 9
   m_Name: Victim
   m_TagString: Player
@@ -4256,6 +4257,19 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   SymbolInserterRadius: 2
+--- !u!114 &2615503748861540179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8baa1f24eb04db7a5e1e6698d2b17a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 5372278936354443758}
 --- !u!1 &8881882931641187938
 GameObject:
   m_ObjectHideFlags: 0
