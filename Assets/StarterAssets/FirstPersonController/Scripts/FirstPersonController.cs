@@ -76,7 +76,7 @@ namespace StarterAssets
 		
 		private PlayerInput playerInput;
 		private CharacterController controller;
-		private StarterAssetsInputs input;
+		[SerializeField] private StarterAssetsInputs input;
 		private GameObject mainCamera;
 
 		private const float Threshold = 0.01f;
@@ -147,14 +147,13 @@ namespace StarterAssets
 
 		private void UpdateCursor()
 		{
-			
-			if (Input.GetKeyDown(showCursorKey))
+			if (input.showCursor && !Cursor.visible)
 			{
 				Cursor.visible = true;
 				Cursor.lockState = CursorLockMode.None;
 			}
 
-			if (Input.GetKeyUp(showCursorKey))
+			if (!input.showCursor && Cursor.visible)
 			{
 				Cursor.visible = false;
 				Cursor.lockState = CursorLockMode.Locked;

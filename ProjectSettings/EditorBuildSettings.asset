@@ -26,4 +26,5 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Maps/Map1ForLocalTests/LocalMap1.unity
     guid: fb7c27e2de4b61047b47c70afab645af
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

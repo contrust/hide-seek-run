@@ -1,6 +1,8 @@
 ﻿using System;
 using Mirror;
+using StarterAssets;
 using UnityEngine;
+using UnityEngine.XR;
 
 namespace Phone
 {
@@ -9,15 +11,26 @@ namespace Phone
         [SerializeField] private Transform phoneDefaultPosition;
         [SerializeField] private Transform phoneActivePosition;
         [SerializeField] private GameObject phone;
-        [SerializeField] private KeyCode showPhoneKey = KeyCode.Q;
         [SerializeField] private bool isPhoneActive;
 
         [SerializeField] private NetworkIdentity playerNetworkIdentity;
 
+        [SerializeField] private StarterAssetsInputs input;
+
+        private void Start()
+        {
+            input = GetComponentInParent<StarterAssetsInputs>();
+        }
+
         private void Update()
         {
             if(playerNetworkIdentity is null || !playerNetworkIdentity.isLocalPlayer) return;
-            if (Input.GetKeyDown(showPhoneKey))
+            HandleInput();
+        }
+
+        private void HandleInput()
+        {
+            if (input.showPhone)
             {
                 if (isPhoneActive)
                 {
@@ -28,6 +41,7 @@ namespace Phone
                     ShowPhone();
                 }
             }
+            input.showPhone = false;
         }
 
         private void ShowPhone()
