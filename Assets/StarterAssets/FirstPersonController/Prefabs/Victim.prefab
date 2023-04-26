@@ -1623,7 +1623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2958659265423664169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1646,7 +1646,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1655,7 +1655,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4657,6 +4657,30 @@ PrefabInstance:
     - target: {fileID: 2583786889580208851, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
       propertyPath: m_Name
       value: Phone
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931980264290592236, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931980264290592236, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
+      propertyPath: m_Size.z
+      value: 8.18846
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931980264290592236, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
+      propertyPath: m_Center.x
+      value: -0.000000001342416
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931980264290592236, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
+      propertyPath: m_Center.y
+      value: -0.000000031467188
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931980264290592236, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
+      propertyPath: m_Center.z
+      value: -3.5942273
+      objectReference: {fileID: 0}
+    - target: {fileID: 6503625243851865930, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7265927612892227447, guid: 19a594fb494628f4fa998cbcbd827abb, type: 3}
       propertyPath: m_RootOrder
