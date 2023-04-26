@@ -52,12 +52,7 @@ namespace Phone
         private void Update()
         {
             UpdateDistance();
-            time += Time.deltaTime;
-            if (time > signalDelay)
-            {
-                MakeSignal();
-                time = 0;
-            }
+            UpdateDelay();
         }
 
         private void UpdateDistance()
@@ -68,6 +63,16 @@ namespace Phone
                 return;
             }
             currentDistance = Vector3.Distance(this.transform.position, hunter.transform.position);
+        }
+
+        private void UpdateDelay()
+        {
+            time += Time.deltaTime;
+            if (time > signalDelay)
+            {
+                MakeSignal();
+                time = 0;
+            }
         }
 
         private IEnumerator ChangeColor()
