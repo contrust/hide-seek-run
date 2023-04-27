@@ -3682,7 +3682,7 @@ MonoBehaviour:
   FallTimeout: 0.15
   Grounded: 1
   GroundedOffset: -0.14
-  GroundedRadius: 0.5
+  GroundedRadius: 0.3
   GroundLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -3741,6 +3741,7 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   changeCameraMode: 0
+  shot: 0
   analogMovement: 0
   mouseSensitivity: 1
   cursorLocked: 1
