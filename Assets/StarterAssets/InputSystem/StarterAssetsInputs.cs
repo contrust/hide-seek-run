@@ -112,6 +112,8 @@ namespace StarterAssets
 		public void ShootInput(bool shot)
 		{
 			this.shot = shot;
+		}
+		
 		public void ShowPhoneInput(bool newShowPhoneState)
 		{
 			showPhone = newShowPhoneState;
@@ -127,7 +129,6 @@ namespace StarterAssets
 			SetCursorState(cursorLocked);
 		}
 		
-
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
