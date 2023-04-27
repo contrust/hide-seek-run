@@ -17,19 +17,19 @@ namespace Phone.Chat
         }
 
         [Command(requiresAuthority = false)]
-        public void CmdSendMessage(int senderId, int symbolId)
+        public void CmdSendMessage(string username, int symbolId)
         {
             Debug.Log("CMDSendMessage");
-            RpcSendMessage(senderId, symbolId);
+            RpcSendMessage(username, symbolId);
         }
         
         [ClientRpc]
-        private void RpcSendMessage(int senderId, int symbolId)
+        private void RpcSendMessage(string username, int symbolId)
         {
             Debug.Log("RPCSendMessage");
             foreach (var client in connectedClients)
             {
-                client.ReceiveMessage(senderId, symbolId);
+                client.ReceiveMessage(username, symbolId);
             }
         }
         
