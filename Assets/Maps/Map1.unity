@@ -2811,6 +2811,67 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4904088366416539685, guid: a2a185d4824d4f94cba7b07b389b8df9, type: 3}
+--- !u!1001 &1404486151
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01447773
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.451928
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.234626
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425944, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425947, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: sceneId
+      value: 2113962458
+      objectReference: {fileID: 0}
+    - target: {fileID: 845638048790425949, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
+      propertyPath: m_Name
+      value: ChatServer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 43cda014438829f4a907b4bc1a4f53d6, type: 3}
 --- !u!1 &1429434770 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7415168153931951138, guid: a2a185d4824d4f94cba7b07b389b8df9, type: 3}

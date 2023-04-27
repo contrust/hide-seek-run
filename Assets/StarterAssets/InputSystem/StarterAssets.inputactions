@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shoot",
+                    "name": "ShowPhone",
                     "type": "Button",
-                    "id": "eab4f26d-682e-439d-9081-ceaa6bf70b71",
+                    "id": "2efc2355-b8b4-4404-b3b6-92fe60bcabd0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowCursor",
+                    "type": "PassThrough",
+                    "id": "9a44690b-1328-4342-8fb3-3154a9af428c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -270,12 +279,23 @@
                 },
                 {
                     "name": "",
-                    "id": "0bf50d29-a532-4161-b591-b844d72272b5",
-                    "path": "<Mouse>/leftButton",
+                    "id": "6f5cff63-f8f7-4b58-adce-a20bc440dde2",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Shoot",
+                    "action": "ShowPhone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eaf13d1b-13fb-4ebe-930d-32e05e34964d",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ShowCursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -76,14 +76,14 @@ namespace StarterAssets
 		
 		private PlayerInput playerInput;
 		private CharacterController controller;
-		private StarterAssetsInputs input;
+		[SerializeField] private StarterAssetsInputs input;
 		private GameObject mainCamera;
 
 		private const float Threshold = 0.01f;
 		
 		//key bindings
 		[SerializeField] private KeyCode showPauseKey = KeyCode.Escape;
-		[SerializeField] private KeyCode showCursorKey = KeyCode.LeftAlt;
+		[SerializeField] private KeyCode showCursorKey = KeyCode.C;
 
 		[SerializeField] private UIHelper uihelper;
 
@@ -135,7 +135,7 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
-			if(!controller.enabled) return;
+			if(!controller.enabled || Cursor.visible) return;
 			CameraRotation();
 		}
 
@@ -147,19 +147,16 @@ namespace StarterAssets
 
 		private void UpdateCursor()
 		{
-			
-			if (Input.GetKeyDown(showCursorKey))
+			if (input.showCursor && !Cursor.visible)
 			{
 				Cursor.visible = true;
 				Cursor.lockState = CursorLockMode.None;
-				controller.enabled = false;
 			}
 
-			if (Input.GetKeyUp(showCursorKey))
+			if (!input.showCursor && Cursor.visible)
 			{
 				Cursor.visible = false;
 				Cursor.lockState = CursorLockMode.Locked;
-				controller.enabled = true;
 			}
 		}
 

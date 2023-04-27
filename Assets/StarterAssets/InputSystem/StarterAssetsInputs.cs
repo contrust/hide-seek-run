@@ -15,6 +15,8 @@ namespace StarterAssets
 		public bool sprint;
 		public bool changeCameraMode;
 		public bool shot;
+		public bool showPhone;
+		public bool showCursor;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -70,6 +72,15 @@ namespace StarterAssets
 			ShootInput(value.isPressed);
 		}
 		
+		public void OnShowPhone(InputValue value)
+		{
+			ShowPhoneInput(value.isPressed);
+		}
+
+		public void OnShowCursor(InputValue value)
+		{
+			ShowCursorInput(value.isPressed);
+		}
 #endif
 
 
@@ -101,6 +112,14 @@ namespace StarterAssets
 		public void ShootInput(bool shot)
 		{
 			this.shot = shot;
+		public void ShowPhoneInput(bool newShowPhoneState)
+		{
+			showPhone = newShowPhoneState;
+		}
+
+		public void ShowCursorInput(bool newShowCursorState)
+		{
+			showCursor = newShowCursorState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)
