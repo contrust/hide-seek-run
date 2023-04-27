@@ -37,6 +37,9 @@ public class CustomNetworkManager : NetworkRoomManager
         GameObject player = startPos != null
             ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
             : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        var victim = player.GetComponent<Victim>();
+        if (victim)
+            victim.steamName = roomPlayer.GetComponent<NetworkRoomPlayerExt>().steamName;
         return player;
     }
     
