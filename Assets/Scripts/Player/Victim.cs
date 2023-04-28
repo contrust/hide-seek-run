@@ -14,6 +14,7 @@ public class Victim : NetworkBehaviour
     [SerializeField] private GameObject view;
     [SerializeField] private int ignoreCameraLayer = 8;
 
+    [SyncVar]
     public string steamName;
 
     public UnityEvent onDamageTaken;
