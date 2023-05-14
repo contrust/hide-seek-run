@@ -24,7 +24,7 @@ namespace Phone
                 switch (currentDistance)
                 {
                     case > VeryFar:
-                        return 3;
+                        return float.PositiveInfinity;
                     case < VeryFar and > Far:
                         return 2;
                     case < Far and > Midrange:
