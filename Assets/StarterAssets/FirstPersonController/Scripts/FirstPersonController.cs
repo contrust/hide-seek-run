@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Mirror;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -399,6 +400,12 @@ namespace StarterAssets
 		private void StopPlayingFootstepsSoundRpc()
 		{
 			FootstepsSound.Stop();
+		}
+
+		private void OnDisable()
+		{
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
 		}
 	}
 }
