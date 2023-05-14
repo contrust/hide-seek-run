@@ -32,7 +32,7 @@ public class Weapon : NetworkBehaviour
         {
             Transform cameraTransform = mainCamera.transform;
 
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, 100.0f))
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, 100.0f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             {
                 Debug.DrawRay(cameraTransform.position, cameraTransform.forward * hitInfo.distance, Color.yellow, 10, false);
                 var victim = hitInfo.collider.GetComponent<Victim>();
