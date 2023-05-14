@@ -9,6 +9,7 @@ namespace Phone
         [SerializeField] private Transform phoneDefaultPosition;
         [SerializeField] private Transform phoneActivePosition;
         [SerializeField] private GameObject phone;
+        [SerializeField] private GameObject thirdPersonPhoneView;
         [SerializeField] private bool isPhoneActive;
         [SerializeField] private HunterDetector hunterDetector;
         [SerializeField] private PhoneExpirationIndicator expirationIndicator;
@@ -23,6 +24,7 @@ namespace Phone
             if (IsLocalPlayer())
             {
                 phone.SetActive(true);
+                thirdPersonPhoneView.SetActive(false);
                 hunterDetector.TurnOn();
             }
         }

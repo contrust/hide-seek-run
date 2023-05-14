@@ -7273,7 +7273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3501357066454092839, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3650586141903715224, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
       propertyPath: m_Layer
@@ -7347,6 +7347,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 7622589821261028447, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
+      propertyPath: thirdPersonPhoneView
+      value: 
+      objectReference: {fileID: 8103250973178181911}
     - target: {fileID: 7622589821261028447, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
       propertyPath: playerNetworkIdentity
       value: 

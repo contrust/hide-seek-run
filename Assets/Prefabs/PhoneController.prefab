@@ -1017,7 +1017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8618173783923296643
 Transform:
   m_ObjectHideFlags: 0
@@ -1128,6 +1128,9 @@ MonoBehaviour:
   isTurnedOn: 0
   scanStartPoint: {fileID: 5564983470767370272}
   scanDirection: {x: 0, y: 0, z: 0}
+  scanAngle: 30
+  angleToHunter: 0
+  directionMultiplier: 1
 --- !u!1 &3564357526819393180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,6 +2879,7 @@ MonoBehaviour:
   phoneDefaultPosition: {fileID: 3590708528123051481}
   phoneActivePosition: {fileID: 1265522037185661727}
   phone: {fileID: 3501357066454092839}
+  thirdPersonPhoneView: {fileID: 0}
   isPhoneActive: 0
   hunterDetector: {fileID: 1754161986294829955}
   expirationIndicator: {fileID: 278768680850597467}

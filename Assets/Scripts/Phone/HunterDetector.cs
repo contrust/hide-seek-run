@@ -86,6 +86,12 @@ namespace Phone
 
         private void UpdateDirection()
         {
+            if (hunter is null)
+            {
+                angleToHunter = 180;
+                directionMultiplier = 1;
+                return;
+            }
             scanDirection = scanStartPoint.forward;
             var hunterDirection = hunter.transform.position - scanStartPoint.transform.position;
             angleToHunter = Vector3.Angle(scanDirection, hunterDirection);
