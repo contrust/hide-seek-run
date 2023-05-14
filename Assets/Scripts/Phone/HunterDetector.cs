@@ -16,6 +16,10 @@ namespace Phone
         [SerializeField] private Color defaultColor;
         [SerializeField] private Color activeColor;
         [SerializeField] private bool isTurnedOn;
+        [SerializeField] private Transform scanStartPoint;
+        [SerializeField] private Vector3 scanDirection;
+        [SerializeField] private int scanAngle = 30;
+        [SerializeField] private float angleToHunter;
 
         private float signalDelay
         {
@@ -38,6 +42,8 @@ namespace Phone
                 }
             }
         }
+        
+        [SerializeField] private float directionMultiplier = 1;
 
         //distance to hunter constants
         private const float VeryFar = 20;
@@ -63,6 +69,7 @@ namespace Phone
         private void Update()
         {
             if(!isTurnedOn) return;
+            UpdateDirection();
             UpdateDistance();
             UpdateDelay();
         }
@@ -77,10 +84,25 @@ namespace Phone
             currentDistance = Vector3.Distance(this.transform.position, hunter.transform.position);
         }
 
+        private void UpdateDirection()
+        {
+            scanDirection = scanStartPoint.forward;
+            var hunterDirection = hunter.transform.position - scanStartPoint.transform.position;
+            angleToHunter = Vector3.Angle(scanDirection, hunterDirection);
+            if (angleToHunter < scanAngle)
+            {
+                directionMultiplier = 0.5f;
+            }
+            else
+            {
+                directionMultiplier = 1;
+            }
+        }
+
         private void UpdateDelay()
         {
             time += Time.deltaTime;
-            if (time > signalDelay)
+            if (time > signalDelay*directionMultiplier)
             {
                 MakeSignal();
                 time = 0;

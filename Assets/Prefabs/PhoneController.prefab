@@ -1017,7 +1017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8618173783923296643
 Transform:
   m_ObjectHideFlags: 0
@@ -1034,6 +1034,7 @@ Transform:
   - {fileID: 5680201843204583049}
   - {fileID: 2986626705574185599}
   - {fileID: 6940650317217270482}
+  - {fileID: 5564983470767370272}
   m_Father: {fileID: 1167640942647788305}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 21.405, y: -30.215, z: -1.558}
@@ -1125,6 +1126,39 @@ MonoBehaviour:
   defaultColor: {r: 0, g: 1, b: 0.012454033, a: 1}
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   isTurnedOn: 0
+  scanStartPoint: {fileID: 5564983470767370272}
+  scanDirection: {x: 0, y: 0, z: 0}
+--- !u!1 &3564357526819393180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5564983470767370272}
+  m_Layer: 9
+  m_Name: HunterScanStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5564983470767370272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564357526819393180}
+  m_LocalRotation: {x: -0.18789707, y: -0.076132275, z: -0.078369, w: 0.97609264}
+  m_LocalPosition: {x: -0.443, y: -0.352, z: -10.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8618173783923296643}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -22.256, y: -7.398, z: -7.724}
 --- !u!1 &3600654027812632914
 GameObject:
   m_ObjectHideFlags: 0
