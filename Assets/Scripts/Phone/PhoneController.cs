@@ -1,8 +1,6 @@
-﻿using System;
-using Mirror;
+﻿using Mirror;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace Phone
 {
@@ -55,6 +53,7 @@ namespace Phone
             phone.transform.position = phoneActivePosition.position;
             phone.transform.rotation = phoneActivePosition.rotation;
             isPhoneActive = true;
+            hunterDetector.TurnOn();
         }
         
         private void HidePhone()
@@ -62,6 +61,7 @@ namespace Phone
             phone.transform.position = phoneDefaultPosition.position;
             phone.transform.rotation = phoneDefaultPosition.rotation;
             isPhoneActive = false;
+            hunterDetector.TurnOff();
         }
 
         private bool IsLocalPlayer()
