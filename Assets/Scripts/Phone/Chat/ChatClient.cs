@@ -22,8 +22,6 @@ namespace Phone.Chat
             StartCoroutine(ConnectToChatServer());
         }
 
-        
-
         private IEnumerator ConnectToChatServer()
         {
             while (true)

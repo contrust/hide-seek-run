@@ -6,12 +6,14 @@ using UnityEngine.XR;
 
 namespace Phone
 {
-    public class PhoneContainer: MonoBehaviour
+    public class PhoneController: MonoBehaviour
     {
         [SerializeField] private Transform phoneDefaultPosition;
         [SerializeField] private Transform phoneActivePosition;
         [SerializeField] private GameObject phone;
         [SerializeField] private bool isPhoneActive;
+        [SerializeField] private HunterDetector hunterDetector;
+        [SerializeField] private PhoneExpirationIndicator expirationIndicator;
 
         [SerializeField] private NetworkIdentity playerNetworkIdentity;
 
@@ -20,11 +22,15 @@ namespace Phone
         private void Start()
         {
             input = GetComponentInParent<StarterAssetsInputs>();
+            if (IsLocalPlayer())
+            {
+                hunterDetector.TurnOn();
+            }
         }
 
         private void Update()
         {
-            if(playerNetworkIdentity is null || !playerNetworkIdentity.isLocalPlayer) return;
+            if(!IsLocalPlayer()) return;
             HandleInput();
         }
 
@@ -56,6 +62,11 @@ namespace Phone
             phone.transform.position = phoneDefaultPosition.position;
             phone.transform.rotation = phoneDefaultPosition.rotation;
             isPhoneActive = false;
+        }
+
+        private bool IsLocalPlayer()
+        {
+            return !(playerNetworkIdentity is null || !playerNetworkIdentity.isLocalPlayer);
         }
     }
 }

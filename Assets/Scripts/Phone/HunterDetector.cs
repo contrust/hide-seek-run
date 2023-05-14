@@ -15,6 +15,7 @@ namespace Phone
         [SerializeField] private MeshRenderer detector;
         [SerializeField] private Color defaultColor;
         [SerializeField] private Color activeColor;
+        [SerializeField] private bool isTurnedOn;
 
         private float signalDelay
         {
@@ -44,6 +45,16 @@ namespace Phone
         private const float Midrange = 10;
         private const float Close = 6;
 
+        public void TurnOn()
+        {
+            isTurnedOn = true;
+        }
+
+        public void TurnOff()
+        {
+            isTurnedOn = false;
+        }
+
         private void Start()
         {
             hunter = FindObjectOfType<Hunter>();
@@ -51,6 +62,7 @@ namespace Phone
 
         private void Update()
         {
+            if(!isTurnedOn) return;
             UpdateDistance();
             UpdateDelay();
         }
