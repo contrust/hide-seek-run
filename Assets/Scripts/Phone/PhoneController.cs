@@ -22,6 +22,7 @@ namespace Phone
             input = GetComponentInParent<StarterAssetsInputs>();
             if (IsLocalPlayer())
             {
+                phone.SetActive(true);
                 hunterDetector.TurnOn();
             }
         }
