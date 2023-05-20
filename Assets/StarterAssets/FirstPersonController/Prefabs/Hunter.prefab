@@ -4788,6 +4788,7 @@ MonoBehaviour:
   JumpingSound: {fileID: 1555238269203382961}
   GroundingSound: {fileID: 4390904744145848914}
   FootstepsSound: {fileID: 8119318806303477447}
+  input: {fileID: 0}
   showPauseKey: 27
   showCursorKey: 308
   uihelper: {fileID: 0}
@@ -4825,6 +4826,9 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   changeCameraMode: 0
+  shot: 0
+  showPhone: 0
+  showCursor: 0
   analogMovement: 0
   mouseSensitivity: 1
   cursorLocked: 1
@@ -5041,6 +5045,12 @@ MonoBehaviour:
   lightSkybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   overlayCamera: {fileID: 360427262}
   fogColor: {r: 0.4862745, g: 0.69411767, b: 0.8117647, a: 0}
+  rotationX: {fileID: 8997996947095583982}
+  rotationY: {fileID: 4135013735270702856}
+  minSlapRotationX: 30
+  maxSlapRotationX: 330
+  minSlapRotationY: 15
+  maxSlapRotationY: 90
   SymbolMeshRenderer: {fileID: 2985642854870127890}
 --- !u!114 &6469024593486652518
 MonoBehaviour:

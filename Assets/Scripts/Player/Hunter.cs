@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Hunter : NetworkBehaviour
 {
@@ -38,6 +39,12 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private Material lightSkybox;
     [SerializeField] private Camera overlayCamera;
     [SerializeField] private Color fogColor;
+    [SerializeField] private Transform rotationX;
+    [SerializeField] private Transform rotationY;
+    [SerializeField] private float minSlapRotationX;
+    [SerializeField] private float maxSlapRotationX;
+    [SerializeField] private float minSlapRotationY;
+    [SerializeField] private float maxSlapRotationY;
     
     public MeshRenderer SymbolMeshRenderer;
 
@@ -108,6 +115,20 @@ public class Hunter : NetworkBehaviour
 
     public void Slapped()
     {
-        
+        var currentRotationY = rotationY.rotation.x;
+        if (currentRotationY > 90)
+            currentRotationY -= 360;
+        var randomRotationX = Random.Range(minSlapRotationX, maxSlapRotationX);
+        var randomRotationY = Random.Range(minSlapRotationY, maxSlapRotationY);
+        var yRotationDirection = Random.Range(0, 1);
+        if (yRotationDirection > 0.5)
+            randomRotationY *= -1;
+        var newYRotation = currentRotationY + randomRotationY;
+        if (newYRotation > 90)
+            newYRotation -= 180;
+        if (newYRotation < -90)
+            newYRotation += 180;
+        rotationX.Rotate(new Vector3(0, 1), randomRotationX);
+        rotationY.Rotate(new Vector3(1, 0), newYRotation);
     }
 }
