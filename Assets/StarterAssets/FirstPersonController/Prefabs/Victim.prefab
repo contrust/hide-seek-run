@@ -6715,6 +6715,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8029ec6c7171b448b0e4a59186c944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  slapCooldown: 1
+  slapRadius: 2
 --- !u!1 &8881882931641187938
 GameObject:
   m_ObjectHideFlags: 0
