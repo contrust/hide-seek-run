@@ -31,7 +31,7 @@ public class Slap : NetworkBehaviour
         var hunter = FindHunter();
         if (hunter is null)
         {
-            Debug.Log("Hunter not found");
+            // Debug.Log("Hunter not found");
             return;
         }
 
@@ -54,8 +54,13 @@ public class Slap : NetworkBehaviour
         var cameraTransform = mainCamera.transform;
         Hunter hunter = null;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out var hitInfo, slapRadius))
+        {
+            Debug.Log(hitInfo);
+            Debug.Log(hitInfo.transform.gameObject);
+            Debug.Log(hitInfo.distance);
             hunter = hitInfo.collider.GetComponent<Hunter>();
-        
+        }
+
         return hunter;
     }
 }
