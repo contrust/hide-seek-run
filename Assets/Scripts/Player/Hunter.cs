@@ -139,7 +139,7 @@ public class Hunter : NetworkBehaviour
         //     newYRotation += 180;
         // rotationX.Rotate(new Vector3(0, 1), randomRotationX);
         // rotationY.Rotate(new Vector3(1, 0), newYRotation);
-        rotationX.rotation = new Quaternion(0, 1, 0, newRotationX);
-        rotationY.rotation = new Quaternion(1, 0, 0, newRotationY);
+        rotationX.rotation = Quaternion.Euler(0, newRotationX, 0);
+        rotationY.rotation = Quaternion.Euler(newRotationY, 0, 0);
     }
 }
