@@ -12,7 +12,6 @@ public class SymbolInteract : NetworkBehaviour
     [SerializeField] private float SymbolInserterRadius = 2f;
     private UIHelper UIHelper;
     private Camera mainCamera;
-    private Dictionary<int, SymbolInserter> symbolInserters = new Dictionary<int, SymbolInserter>();
     private bool parentIsVictim;
     
 
@@ -21,16 +20,7 @@ public class SymbolInteract : NetworkBehaviour
         mainCamera = Camera.main;
         UIHelper = FindObjectOfType<UIHelper>(true);
     }
-    
-    public override void OnStartServer()
-    {
-        var findInserters = FindObjectsOfType<SymbolInserter>();
-        foreach (SymbolInserter symbolInserter in findInserters)
-        {
-            symbolInserters[symbolInserter.ID] = symbolInserter;
-        }
-    } 
-    
+
     private void Update()
     {
         if (!isLocalPlayer)
