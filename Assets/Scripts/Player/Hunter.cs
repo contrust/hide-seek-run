@@ -124,7 +124,7 @@ public class Hunter : NetworkBehaviour
         var currentRotationX = rotationX.rotation.y;
         var newRotationX = currentRotationX;
         while (Mathf.Abs(currentRotationX - newRotationX) < minSlapRotationX)
-            newRotationX = Random.Range(0, 360);
+            newRotationX = Random.Range(-179, 179);
             // if (currentRotationY > 90)
         //     currentRotationY -= 360;
         // var randomRotationX = Random.Range(minSlapRotationX, maxSlapRotationX);
