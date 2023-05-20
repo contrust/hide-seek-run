@@ -105,4 +105,9 @@ public class Hunter : NetworkBehaviour
             victimsProgress += VictimsProgressStep;
         }
     }
+
+    public void Slapped()
+    {
+        
+    }
 }
