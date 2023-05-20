@@ -125,20 +125,6 @@ public class Hunter : NetworkBehaviour
         var newRotationX = currentRotationX;
         while (Mathf.Abs(currentRotationX - newRotationX) < minSlapRotationX)
             newRotationX = Random.Range(-179, 179);
-            // if (currentRotationY > 90)
-        //     currentRotationY -= 360;
-        // var randomRotationX = Random.Range(minSlapRotationX, maxSlapRotationX);
-        // var randomRotationY = Random.Range(minSlapRotationY, maxSlapRotationY);
-        // var yRotationDirection = Random.Range(0, 1);
-        // if (yRotationDirection > 0.5)
-        //     randomRotationY *= -1;
-        // var newYRotation = currentRotationY + randomRotationY;
-        // if (newYRotation > 90)
-        //     newYRotation -= 180;
-        // if (newYRotation < -90)
-        //     newYRotation += 180;
-        // rotationX.Rotate(new Vector3(0, 1), randomRotationX);
-        // rotationY.Rotate(new Vector3(1, 0), newYRotation);
         rotationX.rotation = Quaternion.Euler(0, newRotationX, 0);
         rotationY.rotation = Quaternion.Euler(newRotationY, 0, 0);
     }
