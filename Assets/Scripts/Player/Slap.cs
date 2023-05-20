@@ -23,18 +23,10 @@ public class Slap : NetworkBehaviour
         if (!isLocalPlayer)
             return;
         if (slapReload > 0)
-        {
-            Debug.Log(slapReload);
             slapReload -= Time.deltaTime;
-        }
-
         var hunter = FindHunter();
         if (hunter is null)
-        {
-            Debug.Log("Hunter not found");
             return;
-        }
-
         if (Input.GetKeyDown(KeyCode.Mouse0) && slapReload <= 0)
         {
             Debug.Log("Slapped");
@@ -54,8 +46,11 @@ public class Slap : NetworkBehaviour
         var cameraTransform = mainCamera.transform;
         Hunter hunter = null;
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out var hitInfo, slapRadius))
-            hunter = hitInfo.transform.parent.GetComponent<Hunter>();
-        
+        {
+            if (hitInfo.transform.parent != null)
+                hunter = hitInfo.transform.parent.GetComponent<Hunter>();
+        }
+
 
         return hunter;
     }
