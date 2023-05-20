@@ -29,6 +29,7 @@ public class Slap : NetworkBehaviour
             return;
         if (Input.GetKeyDown(KeyCode.Mouse0) && slapReload <= 0)
         {
+            Debug.Log("Slapped");
             slapReload = slapCooldown;
             SlapHunter(hunter);
         }
