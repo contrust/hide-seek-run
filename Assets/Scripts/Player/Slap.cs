@@ -23,10 +23,18 @@ public class Slap : NetworkBehaviour
         if (!isLocalPlayer)
             return;
         if (slapReload > 0)
+        {
+            Debug.Log(slapReload);
             slapReload -= Time.deltaTime;
+        }
+
         var hunter = FindHunter();
         if (hunter is null)
+        {
+            Debug.Log("Hunter not found");
             return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && slapReload <= 0)
         {
             Debug.Log("Slapped");
