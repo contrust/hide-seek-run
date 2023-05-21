@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using HUD;
 using Mirror;
+using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -32,6 +34,7 @@ public class Hunter : NetworkBehaviour
     private const float VictimsProgressStep = 0.2f;
     private NetworkManager networkManager;
     private MatchSettings matchSettings;
+    private StarterAssetsInputs input;
     private bool paused;
     
     [SerializeField] private GameObject victim;
@@ -41,11 +44,7 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private Color fogColor;
     [SerializeField] private Transform rotationX;
     [SerializeField] private Transform rotationY;
-    [SerializeField] private float minSlapRotationX;
-    [SerializeField] private float maxSlapRotationX;
-    [SerializeField] private float minSlapRotationY;
-    [SerializeField] private float maxSlapRotationY;
-    
+
     public MeshRenderer SymbolMeshRenderer;
 
     private void Start()
@@ -53,6 +52,7 @@ public class Hunter : NetworkBehaviour
         networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
         //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();
         matchSettings = FindObjectOfType<MatchSettings>();
+        input = GetComponent<StarterAssetsInputs>();
         if (isLocalPlayer) Init();
     }
 
@@ -115,17 +115,14 @@ public class Hunter : NetworkBehaviour
 
     public void Slapped()
     {
-        var currentRotationY = rotationY.rotation.x;
-        if (currentRotationY > 90)
-            currentRotationY -= 360;
-        var newRotationY = currentRotationY;
-        while (Mathf.Abs(currentRotationY - newRotationY) < minSlapRotationY)
-            newRotationY = Random.Range(-89, 89);
-        var currentRotationX = rotationX.rotation.y;
-        var newRotationX = currentRotationX;
-        while (Mathf.Abs(currentRotationX - newRotationX) < minSlapRotationX)
-            newRotationX = Random.Range(-179, 179);
-        rotationX.rotation = Quaternion.Euler(0, newRotationX, 0);
-        rotationY.rotation = Quaternion.Euler(newRotationY, 0, 0);
+        var currentRotation = new Vector3(rotationX.rotation.x, rotationY.rotation.y, 0);
+        var newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
+
+        while (Vector3.Angle(currentRotation, newRotation) < 60) 
+            newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
+
+        rotationX.eulerAngles = new Vector3(newRotation.x, 0, 0);
+        rotationY.eulerAngles = new Vector3(0, newRotation.y, 0);
+        input.look.y = newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
     }
 }

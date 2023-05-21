@@ -5045,8 +5045,8 @@ MonoBehaviour:
   lightSkybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   overlayCamera: {fileID: 360427262}
   fogColor: {r: 0.4862745, g: 0.69411767, b: 0.8117647, a: 0}
-  rotationX: {fileID: 8997996947095583982}
-  rotationY: {fileID: 4135013735270702856}
+  rotationX: {fileID: 4135013735270702856}
+  rotationY: {fileID: 8997996947095583982}
   minSlapRotationX: 30
   maxSlapRotationX: 330
   minSlapRotationY: 15
