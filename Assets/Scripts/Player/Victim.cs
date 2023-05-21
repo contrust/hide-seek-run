@@ -35,6 +35,16 @@ public class Victim : NetworkBehaviour
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
             Camera.main.cullingMask = Render;
             phone.layer = LayerMask.NameToLayer("FirstPersonVictim");
+            SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
+        }
+    }
+    
+    private void SetLayerAllChildren(Transform root, int layer)
+    {
+        var children = root.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (var child in children)
+        {
+            child.gameObject.layer = layer;
         }
     }
 
