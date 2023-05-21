@@ -32,6 +32,7 @@ public class Victim : NetworkBehaviour
         onDamageTaken.AddListener(PlayDamageSound);
         if (isLocalPlayer)
         {
+            overlayCamera.depth = 1000;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
             Camera.main.cullingMask = Render;
             phone.layer = LayerMask.NameToLayer("FirstPersonVictim");
