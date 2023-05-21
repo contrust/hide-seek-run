@@ -10,7 +10,7 @@ namespace HUD
         [SerializeField] private HUDEffect hitMarkerEffect;
         [SerializeField] private HUDEffect reloadEffect;
         [SerializeField] private HUDEffect symbolInsertedEffect;
-        
+        [SerializeField] private HUDEffect slapEffect;
         [SerializeField]private GameObject staticElements;
         
         public static HUDController instance;
@@ -34,6 +34,8 @@ namespace HUD
             {
                 var victim = NetworkClient.localPlayer.GetComponent<Victim>();
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
+                var slap = NetworkClient.localPlayer.GetComponent<Slap>();
+                slap.onSlap.AddListener(instance.OnSlapHandler);
             }
         }
 
@@ -70,6 +72,11 @@ namespace HUD
         public void OnSymbolInsertedEffect(bool _)
         {
             ShowEffect(symbolInsertedEffect);
+        }
+
+        public void OnSlapHandler()
+        {
+            ShowEffect(slapEffect);
         }
     }
 }
