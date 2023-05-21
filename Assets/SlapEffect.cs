@@ -27,7 +27,7 @@ public class SlapEffect : HUDEffect
         var firstPart = duration * firstPartCoef;
         var secondPart = duration * secondPartCoef;
         var time = 0f;
-        slap.enabled = true;
+        slap.gameObject.SetActive(true);
         while (time < firstPart)
         {
             slap.rectTransform.sizeDelta += sizeStep;
@@ -38,11 +38,11 @@ public class SlapEffect : HUDEffect
         time = 0;
         while (time < secondPart)
         {
-            slap.rectTransform.sizeDelta -= 2 * sizeStep;
+            slap.rectTransform.sizeDelta -= 3 * sizeStep;
             time += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        slap.enabled = false;
+        slap.gameObject.SetActive(false);
     }
 }
