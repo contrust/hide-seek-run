@@ -38,11 +38,11 @@ public class SlapEffect : HUDEffect
         time = 0;
         while (time < secondPart)
         {
-            slap.rectTransform.sizeDelta -= 3 * sizeStep;
+            slap.rectTransform.sizeDelta -= 2 * sizeStep;
             time += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-
+        slap.rectTransform.sizeDelta = defaultSize;
         slap.gameObject.SetActive(false);
     }
 }
