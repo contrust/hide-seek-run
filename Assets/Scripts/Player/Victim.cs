@@ -5,6 +5,7 @@ using HUD;
 using Mirror;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 public class Victim : NetworkBehaviour
 {
@@ -13,19 +14,28 @@ public class Victim : NetworkBehaviour
     [SerializeField] private Material skybox;
     [SerializeField] private GameObject view;
     [SerializeField] private int ignoreCameraLayer = 8;
+    [SerializeField] private Camera overlayCamera;
+    [SerializeField] private GameObject phone;
 
     [SyncVar]
     public string steamName;
 
     public UnityEvent onDamageTaken;
     public UnityEvent onDeath;
-    
+    public LayerMask Render;
+
     //For test only
     public bool GetHit;
 
     private void Start()
     {
         onDamageTaken.AddListener(PlayDamageSound);
+        if (isLocalPlayer)
+        {
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
+            Camera.main.cullingMask = Render;
+            phone.layer = LayerMask.NameToLayer("FirstPersonVictim");
+        }
     }
 
     private void Update()
