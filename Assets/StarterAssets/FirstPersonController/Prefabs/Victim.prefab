@@ -6269,6 +6269,7 @@ GameObject:
   - component: {fileID: 7889196859589516518}
   - component: {fileID: 2615503748861540179}
   - component: {fileID: -5743945102786554695}
+  - component: {fileID: 3254481706111232179}
   m_Layer: 9
   m_Name: Victim
   m_TagString: Player
@@ -6836,6 +6837,19 @@ MonoBehaviour:
   syncInterval: 0.1
   slapCooldown: 1
   slapRadius: 2
+--- !u!114 &3254481706111232179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829bc083c43a45d5bf6d1873d1259ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8616685848737228371}
 --- !u!1 &8881882931641187938
 GameObject:
   m_ObjectHideFlags: 0

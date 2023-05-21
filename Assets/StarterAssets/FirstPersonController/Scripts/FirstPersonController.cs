@@ -148,7 +148,7 @@ namespace StarterAssets
 
 		private void UpdateCursor()
 		{
-			if (input.showCursor && !Cursor.visible)
+			/*if (input.showCursor && !Cursor.visible)
 			{
 				Cursor.visible = true;
 				Cursor.lockState = CursorLockMode.None;
@@ -158,7 +158,7 @@ namespace StarterAssets
 			{
 				Cursor.visible = false;
 				Cursor.lockState = CursorLockMode.Locked;
-			}
+			}*/
 		}
 
 		private void GroundedCheck()
