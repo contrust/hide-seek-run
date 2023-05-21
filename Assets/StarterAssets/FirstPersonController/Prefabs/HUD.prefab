@@ -630,7 +630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c102cb77d8d07bd4ab47bab87fe644f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slap: {fileID: 1845888929879605072}
+  slap: {fileID: 8564659052128253198}
+  duration: 1
+  firstPartCoef: 0.75
+  scale: 0.01
 --- !u!1 &6258337978115045594
 GameObject:
   m_ObjectHideFlags: 0
