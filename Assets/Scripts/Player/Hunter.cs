@@ -34,7 +34,7 @@ public class Hunter : NetworkBehaviour
     private const float VictimsProgressStep = 0.2f;
     private NetworkManager networkManager;
     private MatchSettings matchSettings;
-    private StarterAssetsInputs input;
+    private FirstPersonController firstPersonController;
     private bool paused;
     
     [SerializeField] private GameObject victim;
@@ -52,7 +52,7 @@ public class Hunter : NetworkBehaviour
         networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
         //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();
         matchSettings = FindObjectOfType<MatchSettings>();
-        input = GetComponent<StarterAssetsInputs>();
+        firstPersonController = GetComponent<FirstPersonController>();
         if (isLocalPlayer) Init();
     }
 
@@ -121,8 +121,9 @@ public class Hunter : NetworkBehaviour
         while (Vector3.Angle(currentRotation, newRotation) < 60) 
             newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
 
-        rotationX.eulerAngles = new Vector3(newRotation.x, 0, 0);
         rotationY.eulerAngles = new Vector3(0, newRotation.y, 0);
-        input.look.y = newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
+        rotationX.localEulerAngles = new Vector3(newRotation.x, 0, 0);
+        firstPersonController.cinemachineTargetPitch = newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
+        
     }
 }

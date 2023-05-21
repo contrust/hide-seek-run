@@ -62,7 +62,7 @@ namespace StarterAssets
 		public AudioSource FootstepsSound;
 
 		// cinemachine
-		private float cinemachineTargetPitch;
+		public float cinemachineTargetPitch;
 
 		// player
 		private float speed;
