@@ -42,6 +42,8 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private Material lightSkybox;
     [SerializeField] private Camera overlayCamera;
     [SerializeField] private Color fogColor;
+    [SerializeField] private float slapCoolDown;
+    private float slapCoolDownTimeLeft;
     [SerializeField] private Transform rotationX;
     [SerializeField] private Transform rotationY;
 
@@ -54,6 +56,12 @@ public class Hunter : NetworkBehaviour
         matchSettings = FindObjectOfType<MatchSettings>();
         firstPersonController = GetComponent<FirstPersonController>();
         if (isLocalPlayer) Init();
+    }
+
+    private void Update()
+    {
+        if (slapCoolDownTimeLeft > 0)
+            slapCoolDownTimeLeft -= Time.deltaTime;
     }
 
     private void Init()
@@ -115,15 +123,19 @@ public class Hunter : NetworkBehaviour
 
     public void Slapped()
     {
-        var currentRotation = new Vector3(rotationX.rotation.x, rotationY.rotation.y, 0);
-        var newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
+        if (slapCoolDownTimeLeft <= 0)
+        {
+            slapCoolDownTimeLeft = slapCoolDown;
+            var currentRotation = new Vector3(rotationX.rotation.x, rotationY.rotation.y, 0);
+            var newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
 
-        while (Vector3.Angle(currentRotation, newRotation) < 60) 
-            newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
+            while (Vector3.Angle(currentRotation, newRotation) < 60)
+                newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
 
-        rotationY.eulerAngles = new Vector3(0, newRotation.y, 0);
-        rotationX.localEulerAngles = new Vector3(newRotation.x, 0, 0);
-        firstPersonController.cinemachineTargetPitch = newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
-        
+            rotationY.eulerAngles = new Vector3(0, newRotation.y, 0);
+            rotationX.localEulerAngles = new Vector3(newRotation.x, 0, 0);
+            firstPersonController.cinemachineTargetPitch =
+                newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
+        }
     }
 }
