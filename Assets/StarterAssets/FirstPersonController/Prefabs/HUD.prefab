@@ -631,9 +631,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slap: {fileID: 8564659052128253198}
-  duration: 0.5
+  duration: 0.25
   firstPartCoef: 0.75
-  scale: 0.01
+  scale: 0.04
 --- !u!1 &6258337978115045594
 GameObject:
   m_ObjectHideFlags: 0
