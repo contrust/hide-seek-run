@@ -4693,6 +4693,7 @@ GameObject:
   - component: {fileID: 1964522027246775005}
   - component: {fileID: 8337531545504324796}
   - component: {fileID: 6476505991067748567}
+  - component: {fileID: 1922166454472477426}
   m_Layer: 8
   m_Name: Hunter
   m_TagString: Player
@@ -4788,6 +4789,8 @@ MonoBehaviour:
   JumpingSound: {fileID: 1555238269203382961}
   GroundingSound: {fileID: 4390904744145848914}
   FootstepsSound: {fileID: 8119318806303477447}
+  cinemachineTargetPitch: 0
+  input: {fileID: 0}
   showPauseKey: 27
   showCursorKey: 308
   uihelper: {fileID: 0}
@@ -4825,6 +4828,9 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   changeCameraMode: 0
+  shot: 0
+  showPhone: 0
+  showCursor: 0
   analogMovement: 0
   mouseSensitivity: 1
   cursorLocked: 1
@@ -5041,6 +5047,9 @@ MonoBehaviour:
   lightSkybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   overlayCamera: {fileID: 360427262}
   fogColor: {r: 0.4862745, g: 0.69411767, b: 0.8117647, a: 0}
+  slapCoolDown: 10
+  rotationX: {fileID: 4135013735270702856}
+  rotationY: {fileID: 8997996947095583982}
   SymbolMeshRenderer: {fileID: 2985642854870127890}
 --- !u!114 &6469024593486652518
 MonoBehaviour:
@@ -5131,6 +5140,19 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 1964522027246775005}
+--- !u!114 &1922166454472477426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829bc083c43a45d5bf6d1873d1259ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8616685848737228371}
 --- !u!1 &8765882948318624600
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,6 +5394,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2620150641047833552, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -906792153579950570, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -5379,6 +5405,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
       propertyPath: m_Name
       value: blasterG
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e622873c259acec4ba46c840d338aa5b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e622873c259acec4ba46c840d338aa5b, type: 3}

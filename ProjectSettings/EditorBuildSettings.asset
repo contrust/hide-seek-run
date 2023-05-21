@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/StarterAssets/FirstPersonController/Scenes/Playground.unity
     guid: 707acc8dffb72b144bb1ffbe1c965f3d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Maps/Map1.unity
     guid: e13725ad199fd23499c67e265556dc05
   - enabled: 0

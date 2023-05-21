@@ -62,7 +62,7 @@ namespace StarterAssets
 		public AudioSource FootstepsSound;
 
 		// cinemachine
-		private float cinemachineTargetPitch;
+		public float cinemachineTargetPitch;
 
 		// player
 		private float speed;
@@ -84,7 +84,6 @@ namespace StarterAssets
 		
 		//key bindings
 		[SerializeField] private KeyCode showPauseKey = KeyCode.Escape;
-		[SerializeField] private KeyCode showCursorKey = KeyCode.C;
 
 		[SerializeField] private UIHelper uihelper;
 
@@ -125,8 +124,6 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			
-			UpdateCursor();
 			if(!controller.enabled) return;
 			JumpAndGravity();
 			GroundedCheck();
@@ -145,22 +142,7 @@ namespace StarterAssets
 			if (!Input.GetKeyDown(showPauseKey)) return;
 			uihelper.Pause();
 		}
-
-		private void UpdateCursor()
-		{
-			if (input.showCursor && !Cursor.visible)
-			{
-				Cursor.visible = true;
-				Cursor.lockState = CursorLockMode.None;
-			}
-
-			if (!input.showCursor && Cursor.visible)
-			{
-				Cursor.visible = false;
-				Cursor.lockState = CursorLockMode.Locked;
-			}
-		}
-
+		
 		private void GroundedCheck()
 		{
 			// set sphere position, with offset
@@ -400,12 +382,6 @@ namespace StarterAssets
 		private void StopPlayingFootstepsSoundRpc()
 		{
 			FootstepsSound.Stop();
-		}
-
-		private void OnDisable()
-		{
-			Cursor.visible = true;
-			Cursor.lockState = CursorLockMode.None;
 		}
 	}
 }

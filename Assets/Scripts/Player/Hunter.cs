@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using HUD;
 using Mirror;
+using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Hunter : NetworkBehaviour
 {
@@ -31,6 +34,7 @@ public class Hunter : NetworkBehaviour
     private const float VictimsProgressStep = 0.2f;
     private NetworkManager networkManager;
     private MatchSettings matchSettings;
+    private FirstPersonController firstPersonController;
     private bool paused;
     
     [SerializeField] private GameObject victim;
@@ -38,7 +42,11 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private Material lightSkybox;
     [SerializeField] private Camera overlayCamera;
     [SerializeField] private Color fogColor;
-    
+    [SerializeField] private float slapCoolDown;
+    private float slapCoolDownTimeLeft;
+    [SerializeField] private Transform rotationX;
+    [SerializeField] private Transform rotationY;
+
     public MeshRenderer SymbolMeshRenderer;
 
     private void Start()
@@ -46,7 +54,14 @@ public class Hunter : NetworkBehaviour
         networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
         //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();
         matchSettings = FindObjectOfType<MatchSettings>();
+        firstPersonController = GetComponent<FirstPersonController>();
         if (isLocalPlayer) Init();
+    }
+
+    private void Update()
+    {
+        if (slapCoolDownTimeLeft > 0)
+            slapCoolDownTimeLeft -= Time.deltaTime;
     }
 
     private void Init()
@@ -103,6 +118,24 @@ public class Hunter : NetworkBehaviour
         if (isCorrect)
         {
             victimsProgress += VictimsProgressStep;
+        }
+    }
+
+    public void Slapped()
+    {
+        if (slapCoolDownTimeLeft <= 0)
+        {
+            slapCoolDownTimeLeft = slapCoolDown;
+            var currentRotation = new Vector3(rotationX.rotation.x, rotationY.rotation.y, 0);
+            var newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
+
+            while (Vector3.Angle(currentRotation, newRotation) < 60)
+                newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
+
+            rotationY.eulerAngles = new Vector3(0, newRotation.y, 0);
+            rotationX.localEulerAngles = new Vector3(newRotation.x, 0, 0);
+            firstPersonController.cinemachineTargetPitch =
+                newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
         }
     }
 }

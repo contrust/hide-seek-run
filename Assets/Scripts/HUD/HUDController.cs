@@ -10,7 +10,7 @@ namespace HUD
         [SerializeField] private HUDEffect hitMarkerEffect;
         [SerializeField] private HUDEffect reloadEffect;
         [SerializeField] private HUDEffect symbolInsertedEffect;
-        
+        [SerializeField] private HUDEffect slapEffect;
         [SerializeField]private GameObject staticElements;
         
         public static HUDController instance;
@@ -28,12 +28,15 @@ namespace HUD
                 (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
                 weapon.onShot.AddListener(instance.OnShotHandler);
+                weapon.onShot.AddListener(instance.OnSlapHandler); //TO DELETE 
                 SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
             }
             else
             {
                 var victim = NetworkClient.localPlayer.GetComponent<Victim>();
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
+                var slap = NetworkClient.localPlayer.GetComponent<Slap>();
+                slap.onSlap.AddListener(instance.OnSlapHandler);
             }
         }
 
@@ -70,6 +73,11 @@ namespace HUD
         public void OnSymbolInsertedEffect(bool _)
         {
             ShowEffect(symbolInsertedEffect);
+        }
+
+        public void OnSlapHandler()
+        {
+            ShowEffect(slapEffect);
         }
     }
 }
