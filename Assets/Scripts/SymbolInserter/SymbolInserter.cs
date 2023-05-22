@@ -72,6 +72,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
 
     private void InsertionResult(bool result)
     {
+        if (!possibleToInsert)
+            return;
         currentColor = result ? correctColor : wrongColor;
         if (result && isSender)
             BlockAfterCorrectInsertion();
