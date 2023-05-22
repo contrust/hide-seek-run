@@ -65,6 +65,7 @@ public class Hunter : NetworkBehaviour
     {
         if (slapCoolDownTimeLeft > 0)
             slapCoolDownTimeLeft -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.G)) Slapped();//TO DELETE
     }
 
     private void Init()
