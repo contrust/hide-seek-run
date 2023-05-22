@@ -25,7 +25,6 @@ namespace Phone
             {
                 phone.SetActive(true);
                 thirdPersonPhoneView.SetActive(false);
-                hunterDetector.TurnOn();
             }
         }
 
