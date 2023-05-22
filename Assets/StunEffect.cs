@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class StunEffect : MonoBehaviour
+public class StunEffect : NetworkBehaviour
 {
     [SerializeField] private Hunter hunter;
     [SerializeField] private GameObject stunEffect;
@@ -16,7 +17,7 @@ public class StunEffect : MonoBehaviour
 
     private void EnableStunEffect(float stunCoolDownDuration)
     {
-        StartCoroutine(StunEffectCoroutine(stunCoolDownDuration));
+        EnableStunEffectCommand(stunCoolDownDuration);
     }
 
     private IEnumerator StunEffectCoroutine(float duration)
@@ -24,5 +25,17 @@ public class StunEffect : MonoBehaviour
         stunEffect.SetActive(true);
         yield return new WaitForSeconds(duration);
         stunEffect.SetActive(false);
+    }
+    
+    [Command]
+    private void EnableStunEffectCommand(float stunCoolDownDuration)
+    {
+        RpcEnableStunEffect(stunCoolDownDuration);
+    }
+
+    [ClientRpc]
+    private void RpcEnableStunEffect(float stunCoolDownDuration)
+    {
+        StartCoroutine(StunEffectCoroutine(stunCoolDownDuration));
     }
 }
