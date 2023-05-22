@@ -5,6 +5,7 @@ using HUD;
 using Mirror;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
@@ -46,6 +47,8 @@ public class Hunter : NetworkBehaviour
     private float slapCoolDownTimeLeft;
     [SerializeField] private Transform rotationX;
     [SerializeField] private Transform rotationY;
+    
+    public UnityEvent<float> onStunned;
 
     public MeshRenderer SymbolMeshRenderer;
 
@@ -125,6 +128,7 @@ public class Hunter : NetworkBehaviour
     {
         if (slapCoolDownTimeLeft <= 0)
         {
+            onStunned.Invoke(slapCoolDown);
             slapCoolDownTimeLeft = slapCoolDown;
             var currentRotation = new Vector3(rotationX.rotation.x, rotationY.rotation.y, 0);
             var newRotation = new Vector3(Random.Range(-89, 89), Random.Range(0, 360), 0);
