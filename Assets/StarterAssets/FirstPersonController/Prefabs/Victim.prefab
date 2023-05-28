@@ -6367,7 +6367,6 @@ MonoBehaviour:
   cinemachineTargetPitch: 0
   input: {fileID: 0}
   showPauseKey: 27
-  showCursorKey: 99
   uihelper: {fileID: 0}
 --- !u!114 &1978471637655604388
 MonoBehaviour:
@@ -6628,7 +6627,7 @@ MonoBehaviour:
       m_Calls: []
   Render:
     serializedVersion: 2
-    m_Bits: 1783
+    m_Bits: 1719
   GetHit: 0
 --- !u!136 &194772003508196257
 CapsuleCollider:
@@ -6837,6 +6836,9 @@ MonoBehaviour:
   syncInterval: 0.1
   slapCooldown: 1
   slapRadius: 2
+  onSlap:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3254481706111232179
 MonoBehaviour:
   m_ObjectHideFlags: 0

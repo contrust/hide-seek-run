@@ -27,7 +27,7 @@ public class AnimationHelper : NetworkBehaviour
         if (input.jump) TriggerJump();
         SetRunning(input.move != Vector2.zero);
         SetVelocity(controller.velocity.y);
-    }
+    } 
     
     [Command]
     private void TriggerJump()
