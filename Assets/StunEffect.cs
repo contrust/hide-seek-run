@@ -8,7 +8,7 @@ using UnityEngine;
 public class StunEffect : NetworkBehaviour
 {
     [SerializeField] private Hunter hunter;
-    [SerializeField] private GameObject stunEffect;
+    [SerializeField] private ParticleSystem stunEffect;
 
     private void Start()
     {
@@ -20,13 +20,6 @@ public class StunEffect : NetworkBehaviour
         EnableStunEffectCommand(stunCoolDownDuration);
     }
 
-    private IEnumerator StunEffectCoroutine(float duration)
-    {
-        stunEffect.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        stunEffect.SetActive(false);
-    }
-    
     [Command]
     private void EnableStunEffectCommand(float stunCoolDownDuration)
     {
@@ -36,6 +29,10 @@ public class StunEffect : NetworkBehaviour
     [ClientRpc]
     private void RpcEnableStunEffect(float stunCoolDownDuration)
     {
-        StartCoroutine(StunEffectCoroutine(stunCoolDownDuration));
+        stunEffect.Stop();
+        var effectMain = stunEffect.main;
+        effectMain.duration = stunCoolDownDuration/2;
+        effectMain.startLifetime = stunCoolDownDuration / 2;
+        stunEffect.Play();
     }
 }
