@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +21,12 @@ namespace Settings
         private void UpdateSensitivity(float value)
         {
             UserSettings.mouseSensitivity = value;
+        }
+
+        private void OnEnable()
+        {
+            slider.value = UserSettings.mouseSensitivity;
+            sliderValue.text = UserSettings.mouseSensitivity.ToString("0.00");
         }
     }
 }
