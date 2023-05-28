@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mirror;
 using Mirror.Examples.NetworkRoom;
 using Steamworks;
-using Transport;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class CustomNetworkManager : NetworkRoomManager
 {
@@ -49,7 +44,7 @@ public class CustomNetworkManager : NetworkRoomManager
     public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {
         OnSceneLoadedForPlayer?.Invoke();
-        uiController.LobbyUISetActive(false);
+        uiController.HideUIScreen(uiController.lobbyUI);
         return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);
     }
 
@@ -90,13 +85,13 @@ public class CustomNetworkManager : NetworkRoomManager
     public override void OnRoomClientDisconnect()
     {
         base.OnRoomClientDisconnect();
-        uiController.LobbyEnterUISetActive(false);
+        uiController.ShowUIScreen(uiController.mainMenuUI);
     }
 
     public override void OnRoomClientSceneChanged()
     {
         base.OnRoomClientSceneChanged();
         if (networkSceneName == GameplayScene)
-            uiController.LobbyUISetActive(false);
+            uiController.HideUIScreen(uiController.lobbyUI);
     }
 }

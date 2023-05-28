@@ -7,27 +7,40 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI survivorsVictoryText;
         [SerializeField] private TextMeshProUGUI tooltip;
-        [SerializeField] private UIScreen mainMenuUI;
-        [SerializeField] private UIScreen lobbyUI;
-        [SerializeField] private UIScreen settingsUI;
-        [SerializeField] private UIScreen victoryUI;
-        [SerializeField] private UIScreen activeScreen;
+        public UIScreen mainMenuUI;
+        public UIScreen lobbyUI;
+        public UIScreen settingsUI;
+        public UIScreen victoryUI;
+        public UIScreen activeScreen;
+        public UIScreen pauseUI;
+        public static UIController instance;
+        
         public bool isPause { get; private set; }
 
         private void Start()
         {
             SymbolManager.OnVictimsVictory.AddListener(ShowVictimsVictoryScreen);
+            if (instance is null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
 
         public void Pause()
         {
+            if (isPause)
+            {
+                HideUIScreen(pauseUI);
+            }
+            else
+            {
+                ShowUIScreen(pauseUI);
+            }
             isPause = !isPause;
-            SettingsUISetActive(isPause);
-        }
-
-        private void SettingsUISetActive(bool setActive)
-        {
-            settingsUI.SetActive(setActive);
         }
 
         private void ShowVictimsVictoryScreen()
@@ -40,27 +53,20 @@ namespace UI
             tooltip.gameObject.SetActive(setActive);
         }
 
-        private void MainMenuUISetActive(bool setActive)
-        {
-            mainMenuUI.SetActive(setActive);
-        }
-
-        public void LobbyUISetActive(bool setActive)
-        {
-            lobbyUI.SetActive(setActive);
-        }
-
-        public void LobbyEnterUISetActive(bool setActive)
-        {
-            MainMenuUISetActive(!setActive);
-            LobbyUISetActive(setActive);
-        }
-
         public void ShowUIScreen(UIScreen screen)
         {
             activeScreen?.SetActive(false);
             screen.SetActive(true);
             activeScreen = screen;
+        }
+
+        public void HideUIScreen(UIScreen screen)
+        {
+            screen.SetActive(false);
+            if (screen == activeScreen)
+            {
+                activeScreen = null;
+            }
         }
     }
 }

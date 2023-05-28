@@ -36,7 +36,7 @@ namespace Transport
         {
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
-            uiController.LobbyEnterUISetActive(true);
+            uiController.ShowUIScreen(uiController.lobbyUI);
         }
 
         public void LeaveLobby()
@@ -45,7 +45,7 @@ namespace Transport
             if (NetworkClient.activeHost)
                 NetworkServer.Shutdown();
             NetworkClient.Shutdown();
-            uiController.LobbyEnterUISetActive(false);
+            uiController.ShowUIScreen(uiController.mainMenuUI);
             networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
@@ -76,7 +76,7 @@ namespace Transport
             networkManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
             networkManager.StartClient();
-            uiController.LobbyEnterUISetActive(true);
+            uiController.ShowUIScreen(uiController.lobbyUI);
         }
     }
 }
