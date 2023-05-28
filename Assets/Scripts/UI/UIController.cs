@@ -6,12 +6,12 @@ namespace UI
     public class UIController : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI tooltip;
-        public UIScreen mainMenuUI;
-        public UIScreen lobbyUI;
-        public UIScreen settingsUI;
-        public UIScreen victoryUI;
-        public UIScreen activeScreen;
-        public UIScreen pauseUI;
+        [SerializeField] private UIScreen mainMenuUI;
+        [SerializeField] private UIScreen lobbyUI;
+        [SerializeField] private UIScreen settingsUI;
+        [SerializeField] private UIScreen victoryUI;
+        [SerializeField] private UIScreen activeScreen;
+        [SerializeField] private UIScreen pauseUI;
         public static UIController instance;
         
         public bool isPause { get; private set; }
@@ -66,6 +66,36 @@ namespace UI
             {
                 activeScreen = null;
             }
+        }
+
+        public void OnLeaveLobbyHandler()
+        {
+            ShowUIScreen(mainMenuUI);
+        }
+
+        public void OnHostLobbyHandler()
+        {
+            ShowUIScreen(lobbyUI);
+        }
+
+        public void OnEnterLobbyHandler()
+        {
+            ShowUIScreen(lobbyUI);
+        }
+
+        public void OnRoomClientDisconnectEventHandler()
+        {
+            ShowUIScreen(mainMenuUI);
+        }
+
+        public void OnRoomClientSceneChangedToGameplaySceneHandler()
+        {
+            HideUIScreen(lobbyUI);
+        }
+
+        public void OnRoomServerSceneLoadedForPlayerHandler()
+        {
+            HideUIScreen(lobbyUI);
         }
     }
 }

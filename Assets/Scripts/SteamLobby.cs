@@ -2,6 +2,7 @@ using Mirror;
 using Steamworks;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Transport
 {
@@ -19,6 +20,9 @@ namespace Transport
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
         private UIController uiController;
+        private readonly UnityEvent onHostLobby = new ();
+        private readonly UnityEvent onLeaveLobby = new ();
+        private readonly UnityEvent onEnterLobby = new ();
 
         public CSteamID LobbyId { get; private set; }
         
@@ -30,13 +34,21 @@ namespace Transport
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
             JoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
             LobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+            AddListeners();
+        }
+
+        private void AddListeners()
+        {
+            onLeaveLobby.AddListener(uiController.OnLeaveLobbyHandler);
+            onHostLobby.AddListener(uiController.OnHostLobbyHandler);
+            onEnterLobby.AddListener(uiController.OnEnterLobbyHandler);
         }
 
         public void HostLobby()
         {
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
-            uiController.ShowUIScreen(uiController.lobbyUI);
+            onHostLobby.Invoke();
         }
 
         public void LeaveLobby()
@@ -45,7 +57,7 @@ namespace Transport
             if (NetworkClient.activeHost)
                 NetworkServer.Shutdown();
             NetworkClient.Shutdown();
-            uiController.ShowUIScreen(uiController.mainMenuUI);
+            onLeaveLobby.Invoke();
             networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
@@ -76,7 +88,7 @@ namespace Transport
             networkManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
             networkManager.StartClient();
-            uiController.ShowUIScreen(uiController.lobbyUI);
+            onEnterLobby.Invoke();
         }
     }
 }

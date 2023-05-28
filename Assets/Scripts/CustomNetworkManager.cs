@@ -5,6 +5,7 @@ using Mirror.Examples.NetworkRoom;
 using Steamworks;
 using UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CustomNetworkManager : NetworkRoomManager
 {
@@ -14,13 +15,24 @@ public class CustomNetworkManager : NetworkRoomManager
     private List<Victim> victims;
     public CSteamID lobbyID;
     private UIController uiController;
+    private readonly UnityEvent onRoomClientDisconnectEvent = new ();
+    private readonly UnityEvent onRoomClientSceneChangedGameplayScene = new ();
+    private readonly UnityEvent onRoomServerSceneLoadedForPlayerEvent = new ();
 
     public override void OnRoomStartServer()
     {
         base.OnRoomStartServer();
         uiController = FindObjectOfType<UIController>();
-    }
+        AddListeners();
+       }
 
+    private void AddListeners()
+    {
+        onRoomClientDisconnectEvent.AddListener(uiController.OnRoomClientDisconnectEventHandler);
+        onRoomClientSceneChangedGameplayScene.AddListener(uiController.OnRoomClientSceneChangedToGameplaySceneHandler);
+        onRoomServerSceneLoadedForPlayerEvent.AddListener(uiController.OnRoomServerSceneLoadedForPlayerHandler);
+    }
+    
     public override void OnRoomClientEnter()
     {
         base.OnRoomClientEnter();
@@ -44,7 +56,7 @@ public class CustomNetworkManager : NetworkRoomManager
     public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {
         OnSceneLoadedForPlayer?.Invoke();
-        uiController.HideUIScreen(uiController.lobbyUI);
+        onRoomServerSceneLoadedForPlayerEvent.Invoke();
         return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);
     }
 
@@ -85,13 +97,13 @@ public class CustomNetworkManager : NetworkRoomManager
     public override void OnRoomClientDisconnect()
     {
         base.OnRoomClientDisconnect();
-        uiController.ShowUIScreen(uiController.mainMenuUI);
+        onRoomClientDisconnectEvent.Invoke();
     }
 
     public override void OnRoomClientSceneChanged()
     {
         base.OnRoomClientSceneChanged();
         if (networkSceneName == GameplayScene)
-            uiController.HideUIScreen(uiController.lobbyUI);
+            onRoomClientSceneChangedGameplayScene.Invoke();
     }
 }
