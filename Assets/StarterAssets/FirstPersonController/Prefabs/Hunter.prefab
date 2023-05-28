@@ -197,18 +197,18 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 331792722040135845}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.847, z: -0}
-  m_LocalScale: {x: 1, y: 0.34929922, z: 1}
+  m_LocalRotation: {x: 0.68076247, y: -0.7103076, z: 0.15742065, w: -0.08511376}
+  m_LocalPosition: {x: -0.0018153994, y: 0.000113943235, z: -0.00034532367}
+  m_LocalScale: {x: 0.009999998, y: 0.0034929912, z: 0.009999996}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6237971530991670713}
   - {fileID: 8835804624597965041}
   - {fileID: 5403877837276741890}
   - {fileID: 9091285048916575305}
-  m_Father: {fileID: 8997996947095583982}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 240635985684987835}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -186.186, y: -19.707, z: 91.358}
 --- !u!33 &5685536715011277557
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1012,7 +1012,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8997996947095583982}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1555238269203382961
 AudioSource:
@@ -1973,7 +1973,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8997996947095583982}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8119318806303477447
 AudioSource:
@@ -2670,7 +2670,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8997996947095583982}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &4390904744145848914
 AudioSource:
@@ -3023,6 +3023,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4800224819063445464}
+  - {fileID: 2662812499173350048}
   m_Father: {fileID: 2052156006147924630}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -0.261, y: 4, z: 2.013}
@@ -3215,7 +3216,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8997996947095583982}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!198 &1160560522008627058
 ParticleSystem:
@@ -8409,7 +8410,7 @@ Transform:
   m_Children:
   - {fileID: 7370083747049789839}
   m_Father: {fileID: 8997996947095583982}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3698570230068339038
 MonoBehaviour:
@@ -8849,7 +8850,6 @@ Transform:
   - {fileID: 4042630990664575785}
   - {fileID: 4135013735270702856}
   - {fileID: 5393215578589016641}
-  - {fileID: 2662812499173350048}
   - {fileID: 5304717650632386220}
   - {fileID: 5694421664511513471}
   - {fileID: 3871051810479076337}
