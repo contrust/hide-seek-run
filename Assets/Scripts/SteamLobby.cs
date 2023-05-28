@@ -1,5 +1,6 @@
 using Mirror;
 using Steamworks;
+using UI;
 using UnityEngine;
 
 namespace Transport
@@ -17,13 +18,13 @@ namespace Transport
         private string pchValue;
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
-        private UIHelper uiHelper;
+        private UIController uiController;
 
         public CSteamID LobbyId { get; private set; }
         
         private void Start()
         {
-            uiHelper = FindObjectOfType<UIHelper>();
+            uiController = FindObjectOfType<UIController>();
             networkManager = GetComponent<CustomNetworkManager>();
             if (!SteamManager.Initialized) return;
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
@@ -35,7 +36,7 @@ namespace Transport
         {
             Debug.Log("hosted");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
-            uiHelper.LobbyEnterUISetActive(true);
+            uiController.LobbyEnterUISetActive(true);
         }
 
         public void LeaveLobby()
@@ -44,7 +45,7 @@ namespace Transport
             if (NetworkClient.activeHost)
                 NetworkServer.Shutdown();
             NetworkClient.Shutdown();
-            uiHelper.LobbyEnterUISetActive(false);
+            uiController.LobbyEnterUISetActive(false);
             networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
@@ -75,7 +76,7 @@ namespace Transport
             networkManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
             networkManager.StartClient();
-            uiHelper.LobbyEnterUISetActive(true);
+            uiController.LobbyEnterUISetActive(true);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Mirror;
+using UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -85,7 +86,7 @@ namespace StarterAssets
 		//key bindings
 		[SerializeField] private KeyCode showPauseKey = KeyCode.Escape;
 
-		[SerializeField] private UIHelper uihelper;
+		[SerializeField] private UIController uiController;
 
 
 
@@ -111,7 +112,7 @@ namespace StarterAssets
 			controller = GetComponent<CharacterController>();
 			input = GetComponent<StarterAssetsInputs>();
 			playerInput = GetComponent<PlayerInput>();
-			uihelper = GameObject.FindWithTag("UIHelper").GetComponent<UIHelper>();
+			uiController = GameObject.FindWithTag("UIHelper").GetComponent<UIController>();
 
 			// reset our timeouts on start
 			jumpTimeoutDelta = JumpTimeout;
@@ -140,7 +141,7 @@ namespace StarterAssets
 		private void PauseMenu()
 		{
 			if (!Input.GetKeyDown(showPauseKey)) return;
-			uihelper.Pause();
+			uiController.Pause();
 		}
 		
 		private void GroundedCheck()

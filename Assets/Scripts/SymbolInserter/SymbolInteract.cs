@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,7 @@ using UnityEngine.Events;
 public class SymbolInteract : NetworkBehaviour
 {
     [SerializeField] private float SymbolInserterRadius = 2f;
-    private UIHelper UIHelper;
+    private UIController uiController;
     private Camera mainCamera;
     private bool parentIsVictim;
     
@@ -18,7 +19,7 @@ public class SymbolInteract : NetworkBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        UIHelper = FindObjectOfType<UIHelper>(true);
+        uiController = FindObjectOfType<UIController>(true);
     }
 
     private void Update()
@@ -28,11 +29,11 @@ public class SymbolInteract : NetworkBehaviour
         var inserterButton = FindSymbolInserterButton();
         if (inserterButton is null)
         {
-            UIHelper.ButtonHelpSetActive(false);
+            uiController.TooltipSetActive(false);
             return;   
         }
         if (isLocalPlayer)
-            UIHelper.ButtonHelpSetActive(true);
+            uiController.TooltipSetActive(true);
         if (Input.GetKeyDown(KeyCode.E))
         {
             PressButton(inserterButton);

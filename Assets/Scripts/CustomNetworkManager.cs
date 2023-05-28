@@ -5,6 +5,7 @@ using Mirror;
 using Mirror.Examples.NetworkRoom;
 using Steamworks;
 using Transport;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,18 +18,18 @@ public class CustomNetworkManager : NetworkRoomManager
     private Hunter hunter;
     private List<Victim> victims;
     public CSteamID lobbyID;
-    private UIHelper uiHelper;
+    private UIController uiController;
 
     public override void OnRoomStartServer()
     {
         base.OnRoomStartServer();
-        uiHelper = FindObjectOfType<UIHelper>();
+        uiController = FindObjectOfType<UIController>();
     }
 
     public override void OnRoomClientEnter()
     {
         base.OnRoomClientEnter();
-        uiHelper = FindObjectOfType<UIHelper>();
+        uiController = FindObjectOfType<UIController>();
     }
 
     public override GameObject OnRoomServerCreateGamePlayer(NetworkConnectionToClient conn, GameObject roomPlayer)
@@ -48,7 +49,7 @@ public class CustomNetworkManager : NetworkRoomManager
     public override bool OnRoomServerSceneLoadedForPlayer(NetworkConnectionToClient conn, GameObject roomPlayer, GameObject gamePlayer)
     {
         OnSceneLoadedForPlayer?.Invoke();
-        uiHelper.ButtonLeaveLobbySetActive(false);
+        uiController.LobbyUISetActive(false);
         return base.OnRoomServerSceneLoadedForPlayer(conn, roomPlayer, gamePlayer);
     }
 
@@ -89,13 +90,13 @@ public class CustomNetworkManager : NetworkRoomManager
     public override void OnRoomClientDisconnect()
     {
         base.OnRoomClientDisconnect();
-        uiHelper.LobbyEnterUISetActive(false);
+        uiController.LobbyEnterUISetActive(false);
     }
 
     public override void OnRoomClientSceneChanged()
     {
         base.OnRoomClientSceneChanged();
         if (networkSceneName == GameplayScene)
-            uiHelper.ButtonLeaveLobbySetActive(false);
+            uiController.LobbyUISetActive(false);
     }
 }
