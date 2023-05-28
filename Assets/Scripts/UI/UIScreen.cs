@@ -4,7 +4,7 @@ namespace UI
 {
     public class UIScreen: MonoBehaviour
     {
-        public void SetActive(bool value)
+        public virtual void SetActive(bool value)
         {
             gameObject.SetActive(value);
         }

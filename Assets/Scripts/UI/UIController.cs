@@ -5,7 +5,6 @@ namespace UI
 {
     public class UIController : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI survivorsVictoryText;
         [SerializeField] private TextMeshProUGUI tooltip;
         public UIScreen mainMenuUI;
         public UIScreen lobbyUI;
@@ -45,7 +44,7 @@ namespace UI
 
         private void ShowVictimsVictoryScreen()
         {
-            survivorsVictoryText.gameObject.SetActive(true);
+            victoryUI.SetActive(true);
         }
 
         public void TooltipSetActive(bool setActive)
