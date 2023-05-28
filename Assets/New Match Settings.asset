@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f13356ee474c1aa79d0e1c2b628acc, type: 3}
   m_Name: New Match Settings
   m_EditorClassIdentifier: 
-  StartHunterBlindness: 0
+  StartHunterBlindness: 1
   EndHunterBlindness: 0.1
   DurationHunterBlindnessSeconds: 100
   CountCorrectSymbolsToWin: 3
