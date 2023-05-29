@@ -33,13 +33,13 @@ public class Slap : NetworkBehaviour
             slapReload -= Time.deltaTime;
         if (input.slap && slapReload <= 0 && !player.IsPhoneActive)
         {
-            input.slap = false;
             onSlap.Invoke();
             slapReload = slapCooldown;
             var hunter = FindHunter();
             if (hunter is null)
                 return;
             SlapHunter(hunter);
+            input.slap = false;
         }
     }
 
