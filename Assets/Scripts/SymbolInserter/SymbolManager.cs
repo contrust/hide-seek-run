@@ -74,6 +74,6 @@ public class SymbolManager: RequireInstance<Hunter>
     {
         while (hunter is null)
             yield return null;
-        hunter.SymbolMeshRenderer.material = PossibleSymbols[newSymbol];
+        hunter.SetSymbol(PossibleSymbols[newSymbol]);
     }
 }

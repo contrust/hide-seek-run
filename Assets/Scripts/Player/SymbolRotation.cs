@@ -4,12 +4,13 @@ namespace Player
 {
     public class SymbolRotation : MonoBehaviour
     {
-        [SerializeField] private double rotateDistance = 2;
+        [SerializeField] private float rotateDistance = 2;
         [SerializeField] private int rotationStep = 1;
         [SerializeField] private Transform leftRayDirection;
         [SerializeField] private Transform centerRayDirection;
         [SerializeField] private Transform rightRayDirection;
-        [SerializeField] private float yAngle;
+        [SerializeField] private float angle;
+        [SerializeField] private LayerMask ignoreLayers; 
         private Vector3 transformPosition;
         public bool showRays;
         
@@ -25,28 +26,27 @@ namespace Player
         private void UpdatePosition()
         {
             transformPosition = transform.position;
-            var mainRay = new Ray(transformPosition, transform.parent.transform.forward * -1);
-            var isMainHit = Physics.Raycast(mainRay, out var mainHit);
+            var mainRay = new Ray(transformPosition, transform.parent.transform.forward);
+            var isMainHit = Physics.Raycast(mainRay, out var mainHit, rotateDistance, ~ignoreLayers);
             
             var centerRay = new Ray(transformPosition, centerRayDirection.forward);
-            var isCenterHit = Physics.Raycast(centerRay, out var centerHit);
+            var isCenterHit = Physics.Raycast(centerRay, out var centerHit, rotateDistance, ~ignoreLayers);
             
             var leftRay = new Ray(transformPosition, leftRayDirection.forward);
-            var isLeftHit = Physics.Raycast(leftRay, out var leftHit);
+            var isLeftHit = Physics.Raycast(leftRay, out var leftHit, rotateDistance, ~ignoreLayers);
             
             var rightRay = new Ray(transformPosition, rightRayDirection.forward);
-            var isRightHit = Physics.Raycast(rightRay, out var rightHit);
+            var isRightHit = Physics.Raycast(rightRay, out var rightHit, rotateDistance, ~ignoreLayers);
 
-            if (isMainHit && mainHit.distance > rotateDistance)
+            if (!isMainHit)
             {
                 RotateToDefaultPosition();
             }
-            else if (isCenterHit && centerHit.distance < rotateDistance)
+            else if (isCenterHit)
             {
                 RotateFromWall();
             }
-            else if(isRightHit && rightHit.distance > rotateDistance && 
-                    isLeftHit && leftHit.distance > rotateDistance)
+            else if(!isRightHit && !isLeftHit)
             {
                 RotateToDefaultPosition();
             }
@@ -54,27 +54,27 @@ namespace Player
             #region RotationMethods
             void RotateToDefaultPosition()
             {
-                yAngle = transform.localEulerAngles.y;
-                switch (yAngle % 360)
+                angle = Vector3.Angle(mainRay.direction, centerRay.direction);
+                switch (angle % 360)
                 {
-                    case < 180 when yAngle > 2:
-                        transform.RotateAround(transformPosition, Vector3.up, -rotationStep);
+                    case < 180 when angle > 2:
+                        transform.RotateAround(transformPosition, transform.up, -rotationStep);
                         break;
-                    case > 180 when yAngle < 358:
-                        transform.RotateAround(transformPosition, Vector3.up, rotationStep);
+                    case > 180 when angle < 358:
+                        transform.RotateAround(transformPosition, transform.up, rotationStep);
                         break;
                 }
             }
 
             void RotateFromWall()
             {
-                if (leftHit.distance < rotateDistance && rightHit.distance > leftHit.distance)
+                if (leftHit.distance < rotateDistance && !isRightHit)
                 {
-                    transform.RotateAround(transformPosition, Vector3.up, -rotationStep);
+                    transform.RotateAround(transformPosition, transform.up, -rotationStep);
                 }
                 else
                 {
-                    transform.RotateAround(transformPosition, Vector3.up, rotationStep);
+                    transform.RotateAround(transformPosition, transform.up, rotationStep);
                 }
             }
             #endregion
@@ -82,10 +82,11 @@ namespace Player
 
         private void DrawRays()
         { 
-            Debug.DrawRay(transformPosition, transform.parent.transform.forward * -1, Color.blue);
-            Debug.DrawRay(transformPosition, centerRayDirection.forward, Color.yellow);
-            Debug.DrawRay(transformPosition, leftRayDirection.forward, Color.red);
-            Debug.DrawRay(transformPosition, rightRayDirection.forward, Color.green);
+            Debug.DrawRay(transformPosition, transform.parent.transform.forward, Color.blue); //default position
+            Debug.DrawRay(transformPosition, centerRayDirection.forward, Color.yellow);       //center ray
+            Debug.DrawRay(transformPosition, leftRayDirection.forward, Color.red);            //left ray
+            Debug.DrawRay(transformPosition, rightRayDirection.forward, Color.green);         //right ray
+            Debug.DrawRay(transformPosition, transform.up, Color.magenta);                    //rotation axis
         }
     }
 }
