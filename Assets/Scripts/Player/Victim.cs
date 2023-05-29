@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HUD;
 using Mirror;
+using Phone;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
@@ -15,7 +16,8 @@ public class Victim : NetworkBehaviour
     [SerializeField] private GameObject view;
     [SerializeField] private int ignoreCameraLayer = 8;
     [SerializeField] private Camera overlayCamera;
-    [SerializeField] private GameObject phone;
+    [SerializeField] private PhoneController phone;
+    public bool IsPhoneActive => phone.isPhoneActive;
 
     [SyncVar]
     public string steamName;
@@ -35,7 +37,7 @@ public class Victim : NetworkBehaviour
             overlayCamera.depth = 1000;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
             Camera.main.cullingMask = Render;
-            phone.layer = LayerMask.NameToLayer("FirstPersonVictim");
+            phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
             SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
         }
     }
@@ -67,7 +69,6 @@ public class Victim : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-
         if (isLocalPlayer)
         {
             view.layer = ignoreCameraLayer;
@@ -104,4 +105,5 @@ public class Victim : NetworkBehaviour
     {
         DamageSound.Play();
     }
+
 }

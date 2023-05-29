@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -13,11 +14,15 @@ public class Slap : NetworkBehaviour
     private Camera mainCamera;
     private bool parentIsVictim;
     public UnityEvent onSlap;
+    private StarterAssetsInputs input;
+    private Victim player;
     
 
     private void Start()
     {
+        input = GetComponent<StarterAssetsInputs>();
         mainCamera = Camera.main;
+        player = gameObject.GetComponent<Victim>();
     }
 
     private void Update()
@@ -26,7 +31,7 @@ public class Slap : NetworkBehaviour
             return;
         if (slapReload > 0)
             slapReload -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0) && slapReload <= 0)
+        if (input.slap && slapReload <= 0 && !player.IsPhoneActive)
         {
             onSlap.Invoke();
             slapReload = slapCooldown;
@@ -34,6 +39,7 @@ public class Slap : NetworkBehaviour
             if (hunter is null)
                 return;
             SlapHunter(hunter);
+            input.slap = false;
         }
     }
 
