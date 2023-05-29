@@ -33,14 +33,13 @@ public class Slap : NetworkBehaviour
             slapReload -= Time.deltaTime;
         if (input.slap && slapReload <= 0 && !player.isPhoneActive)
         {
-            input.slap = false;
             onSlap.Invoke();
             slapReload = slapCooldown;
-            var hunter = FindHunter();
-            if (hunter is null)
-                return;
-            SlapHunter(hunter);
+            var hunter = TryFindHunter();
+            if (hunter is not null)
+                SlapHunter(hunter);
         }
+        input.slap = false;
     }
 
     [Command]
@@ -49,7 +48,7 @@ public class Slap : NetworkBehaviour
         hunter.Slapped();
     }
 
-    private Hunter FindHunter()
+    private Hunter TryFindHunter()
     {
         var cameraTransform = mainCamera.transform;
         Hunter hunter = null;
