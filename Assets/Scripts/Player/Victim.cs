@@ -91,7 +91,7 @@ public class Victim : NetworkBehaviour
             
             transform.LookAt(hunterCamera);
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
-            
+            view.layer = LayerMask.NameToLayer("Victim");
             animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
         }
