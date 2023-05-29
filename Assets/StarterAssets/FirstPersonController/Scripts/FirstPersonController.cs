@@ -383,5 +383,10 @@ namespace StarterAssets
 		{
 			FootstepsSound.Stop();
 		}
+
+		public void AddForce(float force)
+		{
+			verticalVelocity += force;
+		}
 	}
 }

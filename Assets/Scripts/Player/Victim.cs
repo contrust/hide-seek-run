@@ -23,12 +23,14 @@ public class Victim : NetworkBehaviour
     public UnityEvent onDamageTaken;
     public UnityEvent onDeath;
     public LayerMask Render;
+    private AnimationHelper animationHelper;
 
     //For test only
     public bool GetHit;
 
     private void Start()
     {
+        animationHelper = GetComponent<AnimationHelper>();
         onDamageTaken.AddListener(PlayDamageSound);
         if (isLocalPlayer)
         {
@@ -77,14 +79,19 @@ public class Victim : NetworkBehaviour
     }
 
 
-    public void GetDamage(int damage)
+    public void GetDamage(int damage, Transform hunterCamera)
     {
         Health -= damage;
         onDamageTaken.Invoke();
         if (Health <= 0)
         {
+            var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
+            
+            transform.LookAt(hunterCamera);
+            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
+            
+            animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
-            Destroy(gameObject);
         }
     }
 

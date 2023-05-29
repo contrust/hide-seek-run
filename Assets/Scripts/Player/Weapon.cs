@@ -38,7 +38,7 @@ public class Weapon : NetworkBehaviour
                 var victim = hitInfo.collider.GetComponent<Victim>();
                 if (victim)
                 {
-                    victim.GetDamage(Damage);
+                    victim.GetDamage(Damage, cameraTransform);
                     onEnemyHit.Invoke();
                 }
             }
