@@ -6405,7 +6405,6 @@ MonoBehaviour:
   shot: 0
   showPhone: 0
   showCursor: 0
-  slap: 0
   analogMovement: 0
   mouseSensitivity: 1
   cursorLocked: 1
@@ -6618,7 +6617,7 @@ MonoBehaviour:
   view: {fileID: 9201314639952327051}
   ignoreCameraLayer: 8
   overlayCamera: {fileID: 424342002749871896}
-  phone: {fileID: 4832553494243204017}
+  phone: {fileID: 6001306477982198467}
   steamName: 
   onDamageTaken:
     m_PersistentCalls:
@@ -7525,14 +7524,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1167640942647788305, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
   m_PrefabInstance: {fileID: 3087301944607623150}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4832553494243204017 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7622589821261028447, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
+--- !u!1 &6001306477982198467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8759677956815908141, guid: 29425ee8fc1015148bdb9e1dfd5dc2dc, type: 3}
   m_PrefabInstance: {fileID: 3087301944607623150}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e35475af4ee4955a88554e2f52836ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -17,7 +17,6 @@ namespace StarterAssets
 		public bool shot;
 		public bool showPhone;
 		public bool showCursor;
-		public bool slap;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -82,11 +81,6 @@ namespace StarterAssets
 		{
 			ShowCursorInput(value.isPressed);
 		}
-
-		public void OnSlap(InputValue value)
-		{
-			OnSlap(value.isPressed);
-		}
 #endif
 
 
@@ -138,11 +132,6 @@ namespace StarterAssets
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-		}
-
-		private void OnSlap(bool slapped)
-		{
-			slap = slapped;
 		}
 	}
 	
