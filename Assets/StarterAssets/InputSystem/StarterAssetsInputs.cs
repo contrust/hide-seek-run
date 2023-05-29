@@ -15,6 +15,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool changeCameraMode;
 		public bool shot;
+		public bool slap;
 		public bool showPhone;
 		public bool showCursor;
 
@@ -81,6 +82,11 @@ namespace StarterAssets
 		{
 			ShowCursorInput(value.isPressed);
 		}
+		
+		public void OnSlap(InputValue value)
+		{
+			SlapInput(value.isPressed);
+		}
 #endif
 
 
@@ -132,6 +138,11 @@ namespace StarterAssets
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+
+		private void SlapInput(bool slapped)
+		{
+			slap = slapped;
 		}
 	}
 	
