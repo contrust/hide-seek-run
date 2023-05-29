@@ -10,7 +10,7 @@ namespace Phone
         [SerializeField] private Transform phoneActivePosition;
         [SerializeField] private GameObject phone;
         [SerializeField] private GameObject thirdPersonPhoneView;
-        [SerializeField] private bool isPhoneActive;
+        public bool isPhoneActive { get; private set; }
         [SerializeField] private HunterDetector hunterDetector;
         [SerializeField] private PhoneExpirationIndicator expirationIndicator;
 
