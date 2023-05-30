@@ -38,13 +38,13 @@ namespace Player
 
 		private void NextCamera()
 		{
-			currentCameraIndex = Math.Clamp(currentCameraIndex + 1, 0, Cameras.Count);
+			currentCameraIndex = Math.Clamp(currentCameraIndex + 1, 0, Cameras.Count - 1);
 			EnableCamera(Cameras[currentCameraIndex]);
 		}
 
 		private void PreviousCamera()
 		{
-			currentCameraIndex = Math.Clamp(currentCameraIndex - 1, 0, Cameras.Count);
+			currentCameraIndex = Math.Clamp(currentCameraIndex - 1, 0, Cameras.Count - 1);
 			EnableCamera(Cameras[currentCameraIndex]);
 		}
 
