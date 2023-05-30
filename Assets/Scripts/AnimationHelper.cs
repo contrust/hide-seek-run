@@ -1,5 +1,6 @@
 using System.Collections;
 using Mirror;
+using Player;
 using StarterAssets;
 using UnityEngine;
 
@@ -73,7 +74,10 @@ public class AnimationHelper : NetworkBehaviour
         }
         yield return new WaitForSeconds(2);
         if (isLocalPlayer)
+        {
             Camera.main.transform.SetParent(null);
+            Camera.main.GetComponent<Spectator>().enabled = true;
+        }
         Destroy(gameObject);
     }
 }
