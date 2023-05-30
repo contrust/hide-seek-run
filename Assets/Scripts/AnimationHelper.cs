@@ -53,8 +53,7 @@ public class AnimationHelper : NetworkBehaviour
     {
         animator.SetFloat(VelocityYHash, velocityY);
     }
-
-    [ClientRpc]
+    
     public void TriggerDead(float angle)
     {
         animator.SetBool(Dead, true);
@@ -73,7 +72,8 @@ public class AnimationHelper : NetworkBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(2);
-        Camera.main.transform.SetParent(null);
+        if (isLocalPlayer)
+            Camera.main.transform.SetParent(null);
         Destroy(gameObject);
     }
 }

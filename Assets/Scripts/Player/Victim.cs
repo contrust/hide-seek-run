@@ -26,6 +26,7 @@ public class Victim : NetworkBehaviour
     public UnityEvent onDeath;
     public LayerMask Render;
     private AnimationHelper animationHelper;
+    private PlayerCamera playerCamera;
 
     //For test only
     public bool GetHit;
@@ -34,11 +35,13 @@ public class Victim : NetworkBehaviour
     {
         animationHelper = GetComponent<AnimationHelper>();
         onDamageTaken.AddListener(PlayDamageSound);
+        playerCamera = GetComponent<PlayerCamera>();
         if (isLocalPlayer)
         {
             overlayCamera.depth = 1000;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
             Camera.main.cullingMask = Render;
+            Camera.main.nearClipPlane = 0.15f;
             phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
             SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
         }
@@ -71,7 +74,6 @@ public class Victim : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-
         if (isLocalPlayer)
         {
             view.layer = ignoreCameraLayer;
@@ -88,12 +90,23 @@ public class Victim : NetworkBehaviour
         if (Health <= 0)
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
-            
-            transform.LookAt(hunterCamera);
+            Dead(hunterCamera.position, hitAngle);
+            animationHelper.TriggerDead(hitAngle);
+            onDeath.Invoke();
+        }
+    }
+
+    [ClientRpc]
+    private void Dead(Vector3 lookAt, float hitAngle)
+    {
+        if (isLocalPlayer)
+        {
+            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Remove(overlayCamera);
+            playerCamera.SetControl(false);
+            transform.LookAt(lookAt, Vector3.up);
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
             view.layer = LayerMask.NameToLayer("Victim");
             animationHelper.TriggerDead(hitAngle);
-            onDeath.Invoke();
         }
     }
 
