@@ -79,7 +79,7 @@ public class AnimationHelper : NetworkBehaviour
             Debug.Log("Found spectator");
             spectator.enabled = true;
         }
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

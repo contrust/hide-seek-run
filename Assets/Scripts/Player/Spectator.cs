@@ -13,7 +13,7 @@ namespace Player
 		private List<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>()).ToList();
 		private int currentCameraIndex = -1;
 
-		private void Start()
+		private void Awake()
 		{
 			var mainCamera = GetComponent<Camera>();
 			mainCamera.transform.SetParent(null);
