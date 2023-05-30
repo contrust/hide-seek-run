@@ -91,7 +91,8 @@ public class Victim : NetworkBehaviour
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
             Dead(hunterCamera.position, hitAngle);
-            animationHelper.TriggerDead(hitAngle);
+            view.layer = LayerMask.NameToLayer("Default");
+            animationHelper.TriggerDead(hitAngle, false);
             onDeath.Invoke();
         }
     }
@@ -106,7 +107,7 @@ public class Victim : NetworkBehaviour
             transform.LookAt(lookAt, Vector3.up);
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
             view.layer = LayerMask.NameToLayer("Default");
-            animationHelper.TriggerDead(hitAngle);
+            animationHelper.TriggerDead(hitAngle, true);
         }
     }
 

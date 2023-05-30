@@ -15,6 +15,7 @@ namespace Player
 
 		private void Start()
 		{
+			Camera.main.enabled = false;
 			input = GetComponent<StarterAssetsInputs>();
 			input.enabled = true;
 			GetComponent<PlayerInput>().enabled = true;
