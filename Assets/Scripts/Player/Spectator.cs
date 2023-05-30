@@ -40,13 +40,17 @@ namespace Player
 
 		private void NextCamera()
 		{
-			currentCameraIndex = Math.Clamp(currentCameraIndex + 1, 0, Cameras.Count - 1);
+			if (Cameras.Count == 0)
+				return;
+			currentCameraIndex = (int)Mathf.Repeat(currentCameraIndex + 1, Cameras.Count);
 			EnableCamera(Cameras[currentCameraIndex]);
 		}
 
 		private void PreviousCamera()
 		{
-			currentCameraIndex = Math.Clamp(currentCameraIndex - 1, 0, Cameras.Count - 1);
+			if (Cameras.Count == 0)
+				return;
+			currentCameraIndex = (int)Mathf.Repeat(currentCameraIndex - 1, Cameras.Count);
 			EnableCamera(Cameras[currentCameraIndex]);
 		}
 

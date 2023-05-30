@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HUD;
 using Mirror;
 using Phone;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
@@ -108,7 +109,7 @@ public class Victim : NetworkBehaviour
             transform.LookAt(lookAt, Vector3.up);
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
             view.layer = LayerMask.NameToLayer("Default");
-            animationHelper.TriggerDead(hitAngle, cam);
+            animationHelper.TriggerDead(hitAngle, cam.GetComponent<Spectator>());
         }
     }
 

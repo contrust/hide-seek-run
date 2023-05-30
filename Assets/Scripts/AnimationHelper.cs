@@ -55,14 +55,14 @@ public class AnimationHelper : NetworkBehaviour
         animator.SetFloat(VelocityYHash, velocityY);
     }
     
-    public void TriggerDead(float angle, Camera cam = null)
+    public void TriggerDead(float angle, Spectator spectator = null)
     {
         animator.SetBool(Dead, true);
         animator.SetFloat(HitAngle, angle);
-        StartCoroutine(DeadCoroutine(cam));
+        StartCoroutine(DeadCoroutine(spectator));
     }
 
-    private IEnumerator DeadCoroutine(Camera cam)
+    private IEnumerator DeadCoroutine(Spectator spectator)
     {
         var t = 0f;
         while (t <= 1)
@@ -73,9 +73,11 @@ public class AnimationHelper : NetworkBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(2);
-        if (cam)
+        Debug.Log(spectator);
+        if (spectator)
         {
-            cam.GetComponent<Spectator>().enabled = true;
+            Debug.Log("Found spectator");
+            spectator.enabled = true;
         }
         yield return null;
         Destroy(gameObject);
