@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HUD;
 using Mirror;
 using Phone;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
@@ -91,6 +92,7 @@ public class Victim : NetworkBehaviour
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
             Dead(hunterCamera.position, hitAngle);
+            view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
         }
@@ -101,12 +103,13 @@ public class Victim : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Remove(overlayCamera);
+            Camera cam = Camera.main;
+            cam.GetUniversalAdditionalCameraData().cameraStack.Remove(overlayCamera);
             playerCamera.SetControl(false);
             transform.LookAt(lookAt, Vector3.up);
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
-            view.layer = LayerMask.NameToLayer("Victim");
-            animationHelper.TriggerDead(hitAngle);
+            view.layer = LayerMask.NameToLayer("Default");
+            animationHelper.TriggerDead(hitAngle, cam.GetComponent<Spectator>());
         }
     }
 

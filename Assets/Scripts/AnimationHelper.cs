@@ -1,5 +1,6 @@
 using System.Collections;
 using Mirror;
+using Player;
 using StarterAssets;
 using UnityEngine;
 
@@ -54,14 +55,14 @@ public class AnimationHelper : NetworkBehaviour
         animator.SetFloat(VelocityYHash, velocityY);
     }
     
-    public void TriggerDead(float angle)
+    public void TriggerDead(float angle, Spectator spectator = null)
     {
         animator.SetBool(Dead, true);
         animator.SetFloat(HitAngle, angle);
-        StartCoroutine(DeadCoroutine());
+        StartCoroutine(DeadCoroutine(spectator));
     }
 
-    private IEnumerator DeadCoroutine()
+    private IEnumerator DeadCoroutine(Spectator spectator)
     {
         var t = 0f;
         while (t <= 1)
@@ -72,8 +73,13 @@ public class AnimationHelper : NetworkBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(2);
-        if (isLocalPlayer)
-            Camera.main.transform.SetParent(null);
+        Debug.Log(spectator);
+        if (spectator)
+        {
+            Debug.Log("Found spectator");
+            spectator.enabled = true;
+        }
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

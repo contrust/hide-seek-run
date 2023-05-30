@@ -18,6 +18,8 @@ namespace StarterAssets
 		public bool slap;
 		public bool showPhone;
 		public bool showCursor;
+		public bool nextCamera;
+		public bool previousCamera;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -87,6 +89,16 @@ namespace StarterAssets
 		{
 			SlapInput(value.isPressed);
 		}
+
+		public void OnNextCamera(InputValue value)
+		{
+			NextCameraInput(value.isPressed);
+		}
+		
+		public void OnPreviousCamera(InputValue value)
+		{
+			PreviousCameraInput(value.isPressed);
+		}
 #endif
 
 
@@ -143,6 +155,16 @@ namespace StarterAssets
 		private void SlapInput(bool slapped)
 		{
 			slap = slapped;
+		}
+		
+		private void NextCameraInput(bool next)
+		{
+			nextCamera = next;
+		}
+		
+		private void PreviousCameraInput(bool previous)
+		{
+			previousCamera = previous;
 		}
 	}
 	
