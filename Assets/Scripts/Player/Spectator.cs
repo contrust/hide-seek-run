@@ -12,6 +12,7 @@ namespace Player
 		private StarterAssetsInputs input;
 		private List<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>()).ToList();
 		private int currentCameraIndex = -1;
+		private Vector3 target = Vector3.zero;
 
 		private void Start()
 		{
@@ -36,6 +37,7 @@ namespace Player
 				PreviousCamera();
 				input.previousCamera = false;
 			}
+			transform.position = target;
 		}
 
 		private void NextCamera()
@@ -59,7 +61,7 @@ namespace Player
 			foreach (Camera cam in Cameras) 
 				cam.enabled = false;
 			curCamera.enabled = true;
-			transform.SetParent(curCamera.transform);
+			target = curCamera.transform.position;
 		}
 	}
 }
