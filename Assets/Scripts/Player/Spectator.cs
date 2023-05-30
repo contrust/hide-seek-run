@@ -15,7 +15,9 @@ namespace Player
 
 		private void Start()
 		{
-			Camera.main.enabled = false;
+			var mainCamera = GetComponent<Camera>();
+			mainCamera.transform.SetParent(null);
+			mainCamera.enabled = false;
 			input = GetComponent<StarterAssetsInputs>();
 			input.enabled = true;
 			GetComponent<PlayerInput>().enabled = true;
@@ -53,7 +55,7 @@ namespace Player
 			foreach (Camera cam in Cameras) 
 				cam.enabled = false;
 			curCamera.enabled = true;
-			Camera.main.transform.SetParent(curCamera.transform);
+			transform.SetParent(curCamera.transform);
 		}
 	}
 }
