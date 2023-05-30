@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -16,6 +17,7 @@ namespace Player
 		{
 			input = GetComponent<StarterAssetsInputs>();
 			input.enabled = true;
+			GetComponent<PlayerInput>().enabled = true;
 			NextCamera();
 		}
 
