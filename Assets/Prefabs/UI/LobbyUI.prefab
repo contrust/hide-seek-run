@@ -224,7 +224,6 @@ GameObject:
   m_Component:
   - component: {fileID: 545252671667723625}
   - component: {fileID: 6309466156060647907}
-  - component: {fileID: 1715857572672142611}
   m_Layer: 5
   m_Name: LobbyUI
   m_TagString: Untagged
@@ -265,17 +264,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1bbe53563094ae4bf8fea0bd5377a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1715857572672142611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545252671667723624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdebf0a5bd9549dfab4b94f09afd6389, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scenes:
-  - RoomScene

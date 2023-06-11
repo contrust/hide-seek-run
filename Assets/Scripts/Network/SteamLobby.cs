@@ -1,8 +1,10 @@
 using Mirror;
+using Network;
 using Steamworks;
 using UI;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Transport
 {
@@ -14,7 +16,7 @@ namespace Transport
         protected Callback<LobbyEnter_t> LobbyEntered;
         
         
-        private CustomNetworkManager networkManager;
+        private CustomNetworkRoomManager networkRoomManager;
         private const string HostAddressKey = "HostAddress";
         private string pchValue;
         [SerializeField] private GameObject button;
@@ -29,7 +31,7 @@ namespace Transport
         private void Start()
         {
             uiController = FindObjectOfType<UIController>();
-            networkManager = GetComponent<CustomNetworkManager>();
+            networkRoomManager = GetComponent<CustomNetworkRoomManager>();
             if (!SteamManager.Initialized) return;
             LobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
             JoinRequested = Callback<GameLobbyJoinRequested_t>.Create(OnJoinRequest);
@@ -40,6 +42,10 @@ namespace Transport
         private void AddListeners()
         {
             onLeaveLobby.AddListener(uiController.OnLeaveLobbyHandler);
+            onLeaveLobby.AddListener(() =>
+            {
+                SceneManager.LoadScene("OfflineScene");
+            });
             onHostLobby.AddListener(uiController.OnHostLobbyHandler);
             onEnterLobby.AddListener(uiController.OnEnterLobbyHandler);
         }
@@ -47,7 +53,7 @@ namespace Transport
         public void HostLobby()
         {
             Debug.Log("hosted");
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkManager.maxConnections);
+            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkRoomManager.maxConnections);
             onHostLobby.Invoke();
         }
 
@@ -58,7 +64,6 @@ namespace Transport
                 NetworkServer.Shutdown();
             NetworkClient.Shutdown();
             onLeaveLobby.Invoke();
-            networkManager.ServerChangeScene(networkManager.offlineScene);
         }
 
 
@@ -70,11 +75,11 @@ namespace Transport
             }
 
             LobbyId = new CSteamID(callback.m_ulSteamIDLobby);
-            networkManager.StartHost();
+            networkRoomManager.StartHost();
             pchValue = SteamUser.GetSteamID().ToString();
             SteamMatchmaking.SetLobbyData(LobbyId, HostAddressKey,
                 pchValue);
-            networkManager.lobbyID = LobbyId;
+            networkRoomManager.lobbyID = LobbyId;
         }
 
         private void OnJoinRequest(GameLobbyJoinRequested_t callback)
@@ -85,9 +90,9 @@ namespace Transport
         private void OnLobbyEntered(LobbyEnter_t callback)
         {
             if (NetworkServer.active) return;
-            networkManager.networkAddress =
+            networkRoomManager.networkAddress =
                 SteamMatchmaking.GetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), HostAddressKey);
-            networkManager.StartClient();
+            networkRoomManager.StartClient();
             onEnterLobby.Invoke();
         }
     }

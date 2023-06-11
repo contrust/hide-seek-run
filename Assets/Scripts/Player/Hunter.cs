@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HUD;
 using Mirror;
+using Network;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
@@ -55,7 +56,7 @@ public class Hunter : NetworkBehaviour
 
     private void Start()
     {
-        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkManager>();
+        networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkRoomManager>();
         //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();
         matchSettings = FindObjectOfType<MatchSettings>();
         firstPersonController = GetComponent<FirstPersonController>();
