@@ -310,17 +310,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8162083652798599953, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
   m_PrefabInstance: {fileID: 8162083653034883023}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &249705405 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7707831351799507069, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
-  m_PrefabInstance: {fileID: 7707831352028224448}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &463000305
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ed07437f897174cb2ad1db9cd5f605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  survivorsVictoryText: {fileID: 249705405}
   tooltip: {fileID: 1984971769}
   mainMenuUI: {fileID: 4325353766860369231}
   lobbyUI: {fileID: 545252670261143167}
@@ -731,7 +719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190cb68cf1272c24db2a3a6c4778d817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameplayScene: Map2
+  scenes:
+  - Map2
 --- !u!114 &961966451
 MonoBehaviour:
   m_ObjectHideFlags: 0

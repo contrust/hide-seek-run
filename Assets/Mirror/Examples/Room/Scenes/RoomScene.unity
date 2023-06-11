@@ -362,7 +362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190cb68cf1272c24db2a3a6c4778d817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameplayScene: Map1
+  scenes:
+  - Map2
 --- !u!82 &1964622296
 AudioSource:
   m_ObjectHideFlags: 0
