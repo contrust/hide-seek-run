@@ -82,6 +82,10 @@ namespace Network
         {
             base.OnGUI();
 
+            if (!NetworkServer.active)
+            {
+                showStartButton = false;
+            }
             if (allPlayersReady && showStartButton && GUI.Button(new Rect(150, 300, 120, 20), "START GAME"))
             {
                 // set to false to hide it in the game scene
@@ -121,6 +125,11 @@ namespace Network
                 playerPrefab = hunterPrefab;
             }
             onRoomServerSceneChangedRoomScene.Invoke();
+        }
+
+        public override void OnRoomClientExit()
+        {
+            base.OnRoomClientExit();
         }
     }
 }
