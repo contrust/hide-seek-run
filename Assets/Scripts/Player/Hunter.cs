@@ -50,7 +50,8 @@ public class Hunter : NetworkBehaviour
     
     public UnityEvent<float> onStunned;
 
-    public MeshRenderer SymbolMeshRenderer;
+    [SerializeField] private MeshRenderer symbolMeshRendererFront;
+    [SerializeField] private MeshRenderer symbolMeshRendererBack;
 
     private void Start()
     {
@@ -141,5 +142,11 @@ public class Hunter : NetworkBehaviour
             firstPersonController.cinemachineTargetPitch =
                 newRotation.x; // Без этого любое движение мыши возвращает вертикальное положение камеры в исходное
         }
+    }
+
+    public void SetSymbol(Material material)
+    {
+        symbolMeshRendererFront.material = material;
+        symbolMeshRendererBack.material = material;
     }
 }

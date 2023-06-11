@@ -26,8 +26,7 @@ public class PlayerCamera : NetworkBehaviour
             // configure and make camera a child of player with 3rd person offset
             mainCam.orthographic = false;
             mainCam.transform.SetParent(Parent);
-            controller.enabled = true;
-            playerInput.enabled = true;
+            SetControl(true);
             mainCam.transform.localPosition = new Vector3(0f, 0f, -0f);
             mainCam.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
             
@@ -43,9 +42,15 @@ public class PlayerCamera : NetworkBehaviour
             mainCam.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(mainCam.gameObject, SceneManager.GetActiveScene());
             mainCam.orthographic = true;
-            mainCam.orthographicSize = 15f;
+            mainCam.orthographicSize = 25f;
             mainCam.transform.localPosition = new Vector3(0f, 70f, 0f);
             mainCam.transform.localEulerAngles = new Vector3(90f, 0f, 0f);
         }
+    }
+
+    public void SetControl(bool isEnabled)
+    {
+        controller.enabled = isEnabled;
+        playerInput.enabled = isEnabled;
     }
 }

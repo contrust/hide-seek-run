@@ -16,8 +16,11 @@ namespace StarterAssets
 		public bool sprint;
 		public bool changeCameraMode;
 		public bool shot;
+		public bool slap;
 		public bool showPhone;
 		public bool showCursor;
+		public bool nextCamera;
+		public bool previousCamera;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -71,6 +74,21 @@ namespace StarterAssets
 		{
 			ShowCursorInput(value.isPressed);
 		}
+		
+		public void OnSlap(InputValue value)
+		{
+			SlapInput(value.isPressed);
+		}
+
+		public void OnNextCamera(InputValue value)
+		{
+			NextCameraInput(value.isPressed);
+		}
+		
+		public void OnPreviousCamera(InputValue value)
+		{
+			PreviousCameraInput(value.isPressed);
+		}
 #endif
 
 
@@ -122,6 +140,21 @@ namespace StarterAssets
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+
+		private void SlapInput(bool slapped)
+		{
+			slap = slapped;
+		}
+		
+		private void NextCameraInput(bool next)
+		{
+			nextCamera = next;
+		}
+		
+		private void PreviousCameraInput(bool previous)
+		{
+			previousCamera = previous;
 		}
 	}
 	

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using HUD;
 using Mirror;
+using Phone;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
@@ -15,7 +17,8 @@ public class Victim : NetworkBehaviour
     [SerializeField] private GameObject view;
     [SerializeField] private int ignoreCameraLayer = 8;
     [SerializeField] private Camera overlayCamera;
-    [SerializeField] private GameObject phone;
+    [SerializeField] private PhoneController phone;
+    public bool isPhoneActive => phone.isPhoneActive;
 
     [SyncVar]
     public string steamName;
@@ -23,19 +26,24 @@ public class Victim : NetworkBehaviour
     public UnityEvent onDamageTaken;
     public UnityEvent onDeath;
     public LayerMask Render;
+    private AnimationHelper animationHelper;
+    private PlayerCamera playerCamera;
 
     //For test only
     public bool GetHit;
 
     private void Start()
     {
+        animationHelper = GetComponent<AnimationHelper>();
         onDamageTaken.AddListener(PlayDamageSound);
+        playerCamera = GetComponent<PlayerCamera>();
         if (isLocalPlayer)
         {
             overlayCamera.depth = 1000;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
             Camera.main.cullingMask = Render;
-            phone.layer = LayerMask.NameToLayer("FirstPersonVictim");
+            Camera.main.nearClipPlane = 0.15f;
+            phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
             SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
         }
     }
@@ -67,7 +75,6 @@ public class Victim : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-
         if (isLocalPlayer)
         {
             view.layer = ignoreCameraLayer;
@@ -77,14 +84,32 @@ public class Victim : NetworkBehaviour
     }
 
 
-    public void GetDamage(int damage)
+    public void GetDamage(int damage, Transform hunterCamera)
     {
         Health -= damage;
         onDamageTaken.Invoke();
         if (Health <= 0)
         {
+            var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
+            Dead(hunterCamera.position, hitAngle);
+            view.layer = LayerMask.NameToLayer("Default");
+            animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
-            Destroy(gameObject);
+        }
+    }
+
+    [ClientRpc]
+    private void Dead(Vector3 lookAt, float hitAngle)
+    {
+        if (isLocalPlayer)
+        {
+            Camera cam = Camera.main;
+            cam.GetUniversalAdditionalCameraData().cameraStack.Remove(overlayCamera);
+            playerCamera.SetControl(false);
+            transform.LookAt(lookAt, Vector3.up);
+            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + (hitAngle < 90 ? 0 : 180), 0);
+            view.layer = LayerMask.NameToLayer("Default");
+            animationHelper.TriggerDead(hitAngle, cam.GetComponent<Spectator>());
         }
     }
 
