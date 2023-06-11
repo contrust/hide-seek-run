@@ -83,6 +83,11 @@ namespace UI
             ShowUIScreen(lobbyUI);
         }
 
+        public void OnRoomServerSceneChangedRoomSceneHandler()
+        {
+            ShowUIScreen(lobbyUI);
+        }
+
         public void OnRoomClientDisconnectEventHandler()
         {
             ShowUIScreen(mainMenuUI);

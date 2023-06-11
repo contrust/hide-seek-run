@@ -20,6 +20,7 @@ namespace Network
         private readonly UnityEvent onRoomClientDisconnectEvent = new ();
         private readonly UnityEvent onRoomClientSceneChangedGameplayScene = new ();
         private readonly UnityEvent onRoomServerSceneLoadedForPlayerEvent = new ();
+        private readonly UnityEvent onRoomServerSceneChangedRoomScene = new ();
         [SerializeField] private GameObject hunterPrefab;
         [SerializeField] private GameObject victimPrefab;
 
@@ -35,6 +36,7 @@ namespace Network
             onRoomClientDisconnectEvent.AddListener(uiController.OnRoomClientDisconnectEventHandler);
             onRoomClientSceneChangedGameplayScene.AddListener(uiController.OnRoomClientSceneChangedToGameplaySceneHandler);
             onRoomServerSceneLoadedForPlayerEvent.AddListener(uiController.OnRoomServerSceneLoadedForPlayerHandler);
+            onRoomServerSceneChangedRoomScene.AddListener(uiController.OnRoomServerSceneChangedRoomSceneHandler);
         }
     
         public override void OnRoomClientEnter()
@@ -118,6 +120,7 @@ namespace Network
             {
                 playerPrefab = hunterPrefab;
             }
+            onRoomServerSceneChangedRoomScene.Invoke();
         }
     }
 }
