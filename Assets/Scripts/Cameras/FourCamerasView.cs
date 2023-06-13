@@ -58,7 +58,6 @@ public class FourCamerasView : MonoBehaviour
                 DisableView();
             else
                 EnableView();
-            onFourCamModeChange.Invoke();
             input.changeCameraMode = false;
         }
 
@@ -98,6 +97,7 @@ public class FourCamerasView : MonoBehaviour
 
     private void EnableView()
     {
+        onFourCamModeChange.Invoke();
         for (var i = 0; i < Cameras.Count; i++)
         {
             Cameras[i].enabled = true;
@@ -110,6 +110,7 @@ public class FourCamerasView : MonoBehaviour
 
     private void DisableView()
     {
+        onFourCamModeChange.Invoke();
         foreach (var cam in Cameras)
         {
             cam.enabled = false;
