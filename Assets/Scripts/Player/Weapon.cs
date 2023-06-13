@@ -52,6 +52,16 @@ public class Weapon : NetworkBehaviour
                     victim.GetDamage(Damage, cameraTransform);
                     onEnemyHit.Invoke();
                 }
+                else if (Physics.Raycast(bulletPos.position, hitInfo.point - bulletPos.position, out RaycastHit hitInfo2, 100.0f,
+                             Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+                {
+                    victim = hitInfo2.collider.GetComponent<Victim>();
+                    if (victim)
+                    {
+                        victim.GetDamage(Damage, cameraTransform);
+                        onEnemyHit.Invoke();
+                    }
+                }
                 var trail = Instantiate(POVtrail, POVbulletPos.position, Quaternion.identity);
                 trail.AddPosition(POVbulletPos.position);
                 trail.transform.position = hitInfo.point;
