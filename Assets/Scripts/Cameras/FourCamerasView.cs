@@ -5,6 +5,7 @@ using System.Linq;
 using StarterAssets;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using MouseButton = UnityEngine.UIElements.MouseButton;
@@ -16,6 +17,7 @@ public class FourCamerasView : MonoBehaviour
     private StarterAssetsInputs input;
     private FixedCameraView fixedCamView;
     private bool isEnabled;
+    public UnityEvent onFourCamModeChange;
 
     private Rect[] rects = {
         new Rect(0, 0, 0.5f, 0.5f),
@@ -56,6 +58,7 @@ public class FourCamerasView : MonoBehaviour
                 DisableView();
             else
                 EnableView();
+            onFourCamModeChange.Invoke();
             input.changeCameraMode = false;
         }
 
@@ -120,7 +123,6 @@ public class FourCamerasView : MonoBehaviour
     {
         if (Cameras.Count < camNumber + 1)
             return;
-        Debug.Log("Got it");
         DisableView();
         fixedCamView.DisableFixedCam();
         fixedCamView.SetFixedCam(Cameras[camNumber]);

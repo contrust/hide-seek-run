@@ -11,6 +11,7 @@ namespace HUD
         [SerializeField] private HUDEffect reloadEffect;
         [SerializeField] private HUDEffect symbolInsertedEffect;
         [SerializeField] private HUDEffect slapEffect;
+        [SerializeField] private HUDEffect camNumbers;
         [SerializeField]private GameObject staticElements;
         
         public static HUDController instance;
@@ -23,12 +24,14 @@ namespace HUD
         public void SetupEventHandlers()
         {
             var weapon = NetworkClient.localPlayer.GetComponent<Weapon>();
-            if (weapon != null)
+            var fourCams = NetworkClient.localPlayer.GetComponent<FourCamerasView>();
+            if (weapon != null && fourCams)
             {
                 (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
                 weapon.onShot.AddListener(instance.OnShotHandler);
                 SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
+                fourCams.onFourCamModeChange.AddListener(instance.OnFourCamerasHandler);
             }
             else
             {
@@ -77,6 +80,11 @@ namespace HUD
         public void OnSlapHandler()
         {
             ShowEffect(slapEffect);
+        }
+
+        public void OnFourCamerasHandler()
+        {
+            ShowEffect(camNumbers);
         }
     }
 }
