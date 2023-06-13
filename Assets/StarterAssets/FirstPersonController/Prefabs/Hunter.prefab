@@ -601,6 +601,7 @@ Transform:
   - {fileID: 1142830925094851469}
   - {fileID: 5034115674606661431}
   - {fileID: 6880153937832222467}
+  - {fileID: 4620964096520538666}
   m_Father: {fileID: 4135013735270702856}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8225,6 +8226,37 @@ Transform:
   m_Father: {fileID: 4274504606203724488}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.00003905799, y: 12.560951, z: -0.00016768248}
+--- !u!1 &6946368115423658720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4620964096520538666}
+  m_Layer: 6
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4620964096520538666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6946368115423658720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.316, y: 0.689, z: 2.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8462959575180489796}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7068411426843096761
 GameObject:
   m_ObjectHideFlags: 0
@@ -9090,6 +9122,7 @@ MonoBehaviour:
   showCursor: 0
   nextCamera: 0
   previousCamera: 0
+  fixedCamNum: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -9338,6 +9371,10 @@ MonoBehaviour:
   onEnemyHit:
     m_PersistentCalls:
       m_Calls: []
+  bulletPos: {fileID: 4620964096520538666}
+  bulletTrail: {fileID: 2008762343611410957, guid: 8b9eae53795494d40a766ffbae738e45, type: 3}
+  impactParticles: {fileID: 1409977398061271753, guid: 4cb825d385bc85d49b3fce4230f913c7, type: 3}
+  shootingSystem: {fileID: 198234346748616026, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
 --- !u!114 &5476336959705800085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9350,6 +9387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a81f56ff0e073bfadf6678e44a1d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onFourCamModeChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &1964522027246775005
 Animator:
   serializedVersion: 5
