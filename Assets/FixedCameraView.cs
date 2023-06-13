@@ -7,18 +7,20 @@ using UnityEngine;
 public class FixedCameraView : MonoBehaviour
 {
     private Camera fixedCam;
-    private Rect defaultPos = new Rect(0, 0.5f, 0.25f, 0.25f);
+    private Rect defaultPos = new Rect(0.1f, 0.1f, 0.35f, 0.35f);
 
     public void SetFixedCam(Camera cam)
     {
         fixedCam = cam;
         fixedCam.enabled = true;
         fixedCam.rect = defaultPos;
+        fixedCam.depth = 150;
     }
 
     public void DisableFixedCam()
     {
-        fixedCam.enabled = false;
+        if (fixedCam is not null)
+            fixedCam.enabled = false;
     }
 
 }

@@ -30,6 +30,7 @@ public class FourCamerasView : MonoBehaviour
     {
         camera = Camera.main;
         hunter = GetComponent<Hunter>();
+        fixedCamView = hunter.GetComponent<FixedCameraView>();
         input = GetComponent<StarterAssetsInputs>();
     }
 
@@ -65,22 +66,27 @@ public class FourCamerasView : MonoBehaviour
                 SetFixedCam(0);
                 input.fixedCamNum = 0;
             }
+
             if (input.fixedCamNum == 2)
             {
                 SetFixedCam(1);
                 input.fixedCamNum = 0;
             }
+
             if (input.fixedCamNum == 3)
             {
                 SetFixedCam(2);
                 input.fixedCamNum = 0;
             }
+
             if (input.fixedCamNum == 4)
             {
                 SetFixedCam(3);
                 input.fixedCamNum = 0;
             }
         }
+        else
+            input.fixedCamNum = 0;
         // if (!input.changeCameraMode) return;
         // if (isEnabled) DisableView();
         // else EnableView();
@@ -114,6 +120,7 @@ public class FourCamerasView : MonoBehaviour
     {
         if (Cameras.Count < camNumber + 1)
             return;
+        Debug.Log("Got it");
         DisableView();
         fixedCamView.DisableFixedCam();
         fixedCamView.SetFixedCam(Cameras[camNumber]);
