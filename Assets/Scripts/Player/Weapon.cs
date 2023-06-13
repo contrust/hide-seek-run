@@ -20,7 +20,7 @@ public class Weapon : NetworkBehaviour
     [SerializeField] private Transform bulletPos;
     [SerializeField] private TrailRenderer bulletTrail;
     [SerializeField] private ParticleSystem shootingSystem;
-    private float bulletSpeed = 50;
+    [SerializeField] private ParticleSystem victimShooting;
 
 
     private void Start()
@@ -37,7 +37,8 @@ public class Weapon : NetworkBehaviour
         if (Time.time - lastTimeShot > TimeReload && input.shot)
         {
             Transform cameraTransform = mainCamera.transform;
-            shootingSystem.Play();
+            shootingSystem.Emit(1);
+            victimShooting.Emit(1);
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, 100.0f,
                     Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             {
