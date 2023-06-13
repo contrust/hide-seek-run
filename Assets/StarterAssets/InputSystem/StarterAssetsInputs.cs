@@ -1,5 +1,6 @@
 using Settings;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -21,6 +22,11 @@ namespace StarterAssets
 		public bool showCursor;
 		public bool nextCamera;
 		public bool previousCamera;
+		public int fixedCamNum;
+		// public bool setFixedCamera1;
+		// public bool setFixedCamera2;
+		// public bool setFixedCamera3;
+		// public bool setFixedCamera4;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -89,6 +95,23 @@ namespace StarterAssets
 		{
 			PreviousCameraInput(value.isPressed);
 		}
+
+		public void OnFixedCamera1(InputValue value)
+		{
+			FixedCamera1Input(value.isPressed, 1);
+		}
+		public void OnFixedCamera2(InputValue value)
+		{
+			FixedCamera1Input(value.isPressed, 2);
+		}
+		public void OnFixedCamera3(InputValue value)
+		{
+			FixedCamera1Input(value.isPressed, 3);
+		}
+		public void OnFixedCamera4(InputValue value)
+		{
+			FixedCamera1Input(value.isPressed, 4);
+		}
 #endif
 
 
@@ -155,6 +178,12 @@ namespace StarterAssets
 		private void PreviousCameraInput(bool previous)
 		{
 			previousCamera = previous;
+		}
+		
+		private void FixedCamera1Input(bool fixedCam, int num)
+		{
+			if (fixedCam)
+				fixedCamNum = num;
 		}
 	}
 	

@@ -112,6 +112,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FixedCamera1",
+                    "type": "Button",
+                    "id": "9ebd3050-ffe9-4601-827c-799daa914383",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FixedCamera2",
+                    "type": "Button",
+                    "id": "45325dc6-6b84-4f07-9f1f-1fd19066ae69",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FixedCamera3",
+                    "type": "Button",
+                    "id": "c889a192-c543-4c13-a7e0-789e678f3d7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FixedCamera4",
+                    "type": "Button",
+                    "id": "9c48bbc1-7d63-480f-b440-6d1470c6bc78",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -376,6 +412,50 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "PreviousCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2326c30d-e3d3-41d4-b58c-4bbf4d18164d",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "FixedCamera1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06126396-b0e2-41d2-8a6e-3cdcd9045c83",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "FixedCamera2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af5ffac0-f0c7-4cc2-aee6-470973aca82f",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "FixedCamera3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d0fabd4-4fb3-44e3-8b6d-fc97ee6cf20a",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "FixedCamera4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

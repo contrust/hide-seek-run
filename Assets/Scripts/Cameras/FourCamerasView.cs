@@ -12,8 +12,9 @@ using MouseButton = UnityEngine.UIElements.MouseButton;
 public class FourCamerasView : MonoBehaviour
 { 
     private new Camera camera;
-    private IEnumerable<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>());
+    private List<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>()).ToList();
     private StarterAssetsInputs input;
+    private FixedCameraView fixedCamView;
     private bool isEnabled;
 
     private Rect[] rects = {
@@ -46,28 +47,59 @@ public class FourCamerasView : MonoBehaviour
     }
 
     private void UpdateCameraMode()
+
     {
-        if (!input.changeCameraMode) return;
-        if (isEnabled) DisableView();
-        else EnableView();
-        input.changeCameraMode = false;
+        if (input.changeCameraMode)
+        {
+            if (isEnabled) 
+                DisableView();
+            else
+                EnableView();
+            input.changeCameraMode = false;
+        }
+
+        if (isEnabled)
+        {
+            if (input.fixedCamNum == 1)
+            {
+                SetFixedCam(0);
+                input.fixedCamNum = 0;
+            }
+            if (input.fixedCamNum == 2)
+            {
+                SetFixedCam(1);
+                input.fixedCamNum = 0;
+            }
+            if (input.fixedCamNum == 3)
+            {
+                SetFixedCam(2);
+                input.fixedCamNum = 0;
+            }
+            if (input.fixedCamNum == 4)
+            {
+                SetFixedCam(3);
+                input.fixedCamNum = 0;
+            }
+        }
+        // if (!input.changeCameraMode) return;
+        // if (isEnabled) DisableView();
+        // else EnableView();
+        // input.changeCameraMode = false;
     }
 
-    public void EnableView()
+    private void EnableView()
     {
-        var i = 0;
-        foreach (Camera cam in Cameras)
+        for (var i = 0; i < Cameras.Count; i++)
         {
-            cam.enabled = true;
-            cam.rect = rects[i];
-            i++;
+            Cameras[i].enabled = true;
+            Cameras[i].rect = rects[i];
         }
         camera.enabled = false;
         isEnabled = true;
         hunter.SetLight();
     }
 
-    public void DisableView()
+    private void DisableView()
     {
         foreach (var cam in Cameras)
         {
@@ -76,5 +108,14 @@ public class FourCamerasView : MonoBehaviour
         isEnabled = false;
         camera.enabled = true;
         hunter.SetDark();
+    }
+
+    private void SetFixedCam(int camNumber)
+    {
+        if (Cameras.Count < camNumber + 1)
+            return;
+        DisableView();
+        fixedCamView.DisableFixedCam();
+        fixedCamView.SetFixedCam(Cameras[camNumber]);
     }
 }
