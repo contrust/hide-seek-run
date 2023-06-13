@@ -18,7 +18,9 @@ public class Weapon : NetworkBehaviour
     public UnityEvent onEnemyHit;
 
     [SerializeField] private Transform bulletPos;
+    [SerializeField] private Transform POVbulletPos;
     [SerializeField] private TrailRenderer bulletTrail;
+    [SerializeField] private TrailRenderer POVtrail;
     [SerializeField] private ParticleSystem shootingSystem;
     [SerializeField] private ParticleSystem victimShooting;
 
@@ -50,10 +52,19 @@ public class Weapon : NetworkBehaviour
                     victim.GetDamage(Damage, cameraTransform);
                     onEnemyHit.Invoke();
                 }
+                var trail = Instantiate(POVtrail, POVbulletPos.position, Quaternion.identity);
+                trail.AddPosition(POVbulletPos.position);
+                trail.transform.position = hitInfo.point;
                 ShootLaserHit(hitInfo.point);
             }
-            else 
+            else
+            {
+                var trail = Instantiate(POVtrail, POVbulletPos.position, Quaternion.identity);
+                trail.AddPosition(POVbulletPos.position);
+                trail.transform.position = mainCamera.transform.position + mainCamera.transform.forward * 100f;
                 ShootLaserNotHit(mainCamera.transform.position + mainCamera.transform.forward * 100f);
+            }
+
             onShot.Invoke();
             lastTimeShot = Time.time;
             Flash.SetActive(true);
