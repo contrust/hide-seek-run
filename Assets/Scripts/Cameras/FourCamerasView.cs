@@ -63,7 +63,7 @@ public class FourCamerasView : MonoBehaviour
     {
         if (input.changeCameraMode)
         {
-            if(!GameState.instance.isVictory)
+            if(!GameState.instance.isVictory && !UIController.instance.isPause)
             {
                 if (isEnabled) 
                     DisableView();
