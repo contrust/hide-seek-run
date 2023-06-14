@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class SymbolManager: RequireInstance<Hunter>
 {
-    [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol;
+    [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol = -1;
     [SyncVar(hook = nameof(SetCorrectInsertions))] private int currentCorrectInsertions;
     
     public List<Material> PossibleSymbols;

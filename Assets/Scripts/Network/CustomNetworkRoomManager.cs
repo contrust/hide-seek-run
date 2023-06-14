@@ -123,5 +123,10 @@ namespace Network
         {
             base.OnRoomClientExit();
         }
+
+        public void PlayAsVictim()
+        {
+            playerPrefab = victimPrefab;
+        }
     }
 }
