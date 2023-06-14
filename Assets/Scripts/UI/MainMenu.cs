@@ -23,5 +23,11 @@ namespace UI
                 activeScreen = null;
             }
         }
+        
+        public void QuitGame()
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
     }
 }
