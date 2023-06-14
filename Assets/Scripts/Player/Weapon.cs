@@ -36,7 +36,7 @@ public class Weapon : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if (Time.time - lastTimeShot > TimeReload && input.shot)
+        if (Time.time - lastTimeShot > TimeReload && input.shot && !Cursor.visible)
         {
             Transform cameraTransform = mainCamera.transform;
             shootingSystem.Emit(1);

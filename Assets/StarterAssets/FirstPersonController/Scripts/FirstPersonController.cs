@@ -135,13 +135,16 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			if(!controller.enabled || Cursor.visible) return;
+			Debug.Log("Cursor !visible");
 			CameraRotation();
 		}
 
 		private void PauseMenu()
 		{
-			if (!Input.GetKeyDown(showPauseKey)) return;
-			uiController.Pause();
+			if (Input.GetKeyDown(showPauseKey))
+			{
+				uiController.Pause();
+			}
 		}
 		
 		private void GroundedCheck()

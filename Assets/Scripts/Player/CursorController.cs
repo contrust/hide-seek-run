@@ -9,6 +9,32 @@ namespace Player
     {
         private StarterAssetsInputs input;
         [SerializeField] private NetworkBehaviour player;
+        [SerializeField] public static bool forced;
+
+        public static void ForcedShowCursor()
+        {
+            forced = true;
+            ShowCursor();
+        }
+        
+        public static void ForcedHideCursor()
+        {
+            forced = false;
+            HideCursor();
+        }
+        
+        public static void ShowCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        public static void HideCursor()
+        {
+            if(forced) return;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
         private void Start()
         {
@@ -25,21 +51,18 @@ namespace Player
         {
             if (input.showCursor && !Cursor.visible)
             {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                ShowCursor();
             }
 
             if (!input.showCursor && Cursor.visible)
             {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
+                HideCursor();
             }
         }
         
         private void OnDisable()
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            ShowCursor();
         }
     }
 }

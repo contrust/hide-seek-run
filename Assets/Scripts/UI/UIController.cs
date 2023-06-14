@@ -1,3 +1,4 @@
+using Player;
 using TMPro;
 using UnityEngine;
 
@@ -28,16 +29,19 @@ namespace UI
                 Destroy(this);
             }
         }
+        
 
         public void Pause()
         {
             if (isPause)
             {
                 HideUIScreen(pauseUI);
+                CursorController.ForcedHideCursor();
             }
             else
             {
                 ShowUIScreen(pauseUI);
+                CursorController.ForcedShowCursor();
             }
             isPause = !isPause;
         }
