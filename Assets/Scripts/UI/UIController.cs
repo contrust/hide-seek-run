@@ -41,6 +41,7 @@ namespace UI
             }
             else
             {
+                FourCamerasView.instance.DisableView();
                 ShowUIScreen(pauseUI);
                 CursorController.ForcedShowCursor();
             }
