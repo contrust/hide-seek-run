@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FixedCameraView : MonoBehaviour
@@ -20,15 +21,9 @@ public class FixedCameraView : MonoBehaviour
 
     public void DisableFixedCam()
     {
-        try
-        {
-            if (fixedCam is not null)
-                fixedCam.enabled = false;
-        }
-        catch (MissingReferenceException)
-        {
-            Debug.LogWarning("Missing reference: fixedCam");
-        }
+        if(fixedCam.IsUnityNull()) return;
+        if (fixedCam is not null)
+            fixedCam.enabled = false;
     }
 
 }

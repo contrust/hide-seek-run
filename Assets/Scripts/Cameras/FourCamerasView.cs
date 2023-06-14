@@ -26,10 +26,10 @@ public class FourCamerasView : MonoBehaviour
     public static FourCamerasView instance;
 
     private Rect[] rects = {
-        new Rect(0, 0, 0.5f, 0.5f),
-        new Rect(0.5f, 0, 0.5f, 0.5f),
         new Rect(0, 0.5f, 0.5f, 0.5f),
         new Rect(0.5f, 0.5f, 0.5f, 0.5f),
+        new Rect(0, 0, 0.5f, 0.5f),
+        new Rect(0.5f, 0, 0.5f, 0.5f),
     };
 
     private Hunter hunter;
@@ -73,8 +73,8 @@ public class FourCamerasView : MonoBehaviour
             input.changeCameraMode = false;
         }
 
-        if (isEnabled)
-        {
+        // if (isEnabled)
+        // {
             if (input.fixedCamNum == 1)
             {
                 SetFixedCam(0);
@@ -98,9 +98,9 @@ public class FourCamerasView : MonoBehaviour
                 SetFixedCam(3);
                 input.fixedCamNum = 0;
             }
-        }
-        else
-            input.fixedCamNum = 0;
+        // }
+        // else
+        //     input.fixedCamNum = 0;
         // if (!input.changeCameraMode) return;
         // if (isEnabled) DisableView();
         // else EnableView();
@@ -125,6 +125,8 @@ public class FourCamerasView : MonoBehaviour
 
     public void DisableView()
     {
+        if (!isEnabled)
+            return;
         onFourCamModeChange.Invoke();
         foreach (var cam in Cameras)
         {
