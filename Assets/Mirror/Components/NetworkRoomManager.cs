@@ -660,18 +660,33 @@ namespace Mirror
         {
             if (!showRoomGUI)
                 return;
-
-            if (NetworkServer.active && Utils.IsSceneActive(GameplayScene))
-            {
-                /*GUILayout.BeginArea(new Rect(Screen.width - 150f, 10f, 140f, 30f));
-                if (GUILayout.Button("Return to Room"))
-                    ServerChangeScene(RoomScene);
-                GUILayout.EndArea();*/
-            }
-
             if (Utils.IsSceneActive(RoomScene))
+            {
+                // var currentStyle=InitStyles();
+                // GUI.Box( new Rect( 10f, 180f, 520f, 150f ), "PLAYERS", currentStyle );
                 GUI.Box(new Rect(10f, 180f, 520f, 150f), "PLAYERS");
+            }
         }
+
+        // private GUIStyle InitStyles()
+        // {
+        //     var currentStyle = new GUIStyle( GUI.skin.box );
+        //     currentStyle.normal.background = MakeTex( 2, 2, new Color( 0f, 0f, 0f, 0.5f ) );
+        //     return currentStyle;
+        // }
+        //
+        // private Texture2D MakeTex( int width, int height, Color col )
+        // {
+        //     Color[] pix = new Color[width * height];
+        //     for( int i = 0; i < pix.Length; ++i )
+        //     {
+        //         pix[ i ] = col;
+        //     }
+        //     Texture2D result = new Texture2D( width, height );
+        //     result.SetPixels( pix );
+        //     result.Apply();
+        //     return result;
+        // }
 
         #endregion
     }

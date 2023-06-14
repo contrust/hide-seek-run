@@ -52,12 +52,32 @@ namespace Mirror.Examples.NetworkRoom
 
         }
         
+        private GUIStyle InitStyles()
+        {
+            var currentStyle = new GUIStyle( GUI.skin.box );
+            currentStyle.normal.background = MakeTex( 2, 2, new Color( 0f, 0f, 0f, 0.5f ) );
+            currentStyle.normal.textColor = new Color(1f, 1f, 1f);
+            return currentStyle;
+        }
+        
+        private Texture2D MakeTex( int width, int height, Color col )
+        {
+            Color[] pix = new Color[width * height];
+            for( int i = 0; i < pix.Length; ++i )
+            {
+                pix[ i ] = col;
+            }
+            Texture2D result = new Texture2D( width, height );
+            result.SetPixels( pix );
+            result.Apply();
+            return result;
+        }
+        
         
         private void DrawPlayerReadyButton()
         {
             if (!NetworkClient.active || !isLocalPlayer) return;
             GUILayout.BeginArea(new Rect(20f, 300f, 120f, 20f));
-
             if (readyToBegin)
             {
                 if (GUILayout.Button("Cancel"))
@@ -74,20 +94,21 @@ namespace Mirror.Examples.NetworkRoom
         
         void DrawPlayerInfo()
         {
+            var currentStyle=InitStyles();
             GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 100f, 50f));
 
-            GUILayout.Label(steamName);
+            GUILayout.Label(steamName, currentStyle);
             
             GUILayout.EndArea();
             
             GUILayout.BeginArea(new Rect(20f + (index * 100), 250f, 100f, 50f));
 
             if (readyToBegin)
-                GUILayout.Label("Ready");
+                GUILayout.Label("Ready", currentStyle);
             else
-                GUILayout.Label("Not Ready");
+                GUILayout.Label("Not Ready", currentStyle);
 
-            if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE"))
+            if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE", currentStyle))
             {
                 GetComponent<NetworkIdentity>().connectionToClient.Disconnect();
             }
