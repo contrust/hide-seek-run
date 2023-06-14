@@ -42,14 +42,7 @@ public class FourCamerasView : MonoBehaviour
         input = GetComponent<StarterAssetsInputs>();
         placeholder = GameObject.FindGameObjectWithTag("CameraPlaceholder").GetComponent<Placeholder>();
         weaponCamera = GameObject.FindGameObjectWithTag("WeaponCamera").GetComponent<Camera>();
-        if (instance is null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        instance = this;
     }
 
     void Update()
@@ -70,11 +63,14 @@ public class FourCamerasView : MonoBehaviour
     {
         if (input.changeCameraMode)
         {
+            if(!GameState.instance.isVictory)
+            {
                 if (isEnabled) 
                     DisableView();
                 else 
-                    StartCoroutine(EnableView()); 
-                input.changeCameraMode = false;
+                    StartCoroutine(EnableView());
+            } 
+            input.changeCameraMode = false;
         }
 
         if (isEnabled)
