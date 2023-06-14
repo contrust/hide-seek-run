@@ -7,11 +7,8 @@ namespace UI
     public class UIController : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI tooltip;
-        [SerializeField] private UIScreen mainMenuUI;
-        [SerializeField] private UIScreen lobbyUI;
-        [SerializeField] private UIScreen settingsUI;
         [SerializeField] private UIScreen victoryUI;
-        [SerializeField] private UIScreen activeScreen;
+        [SerializeField] private UIScreen activeScreen = null;
         [SerializeField] private UIScreen pauseUI;
         public static UIController instance;
         
@@ -70,41 +67,6 @@ namespace UI
             {
                 activeScreen = null;
             }
-        }
-
-        public void OnLeaveLobbyHandler()
-        {
-            ShowUIScreen(mainMenuUI);
-        }
-
-        public void OnHostLobbyHandler()
-        {
-            ShowUIScreen(lobbyUI);
-        }
-
-        public void OnEnterLobbyHandler()
-        {
-            ShowUIScreen(lobbyUI);
-        }
-
-        public void OnRoomServerSceneChangedRoomSceneHandler()
-        {
-            ShowUIScreen(lobbyUI);
-        }
-
-        public void OnRoomClientDisconnectEventHandler()
-        {
-            ShowUIScreen(mainMenuUI);
-        }
-
-        public void OnRoomClientSceneChangedToGameplaySceneHandler()
-        {
-            HideUIScreen(lobbyUI);
-        }
-
-        public void OnRoomServerSceneLoadedForPlayerHandler()
-        {
-            HideUIScreen(lobbyUI);
         }
     }
 }

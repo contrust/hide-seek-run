@@ -41,13 +41,10 @@ namespace Transport
 
         private void AddListeners()
         {
-            onLeaveLobby.AddListener(uiController.OnLeaveLobbyHandler);
             onLeaveLobby.AddListener(() =>
             {
                 SceneManager.LoadScene("OfflineScene");
             });
-            onHostLobby.AddListener(uiController.OnHostLobbyHandler);
-            onEnterLobby.AddListener(uiController.OnEnterLobbyHandler);
         }
 
         public void HostLobby()

@@ -28,16 +28,8 @@ namespace Network
         {
             base.OnRoomStartServer();
             uiController = FindObjectOfType<UIController>();
-            AddListeners();
         }
-
-        private void AddListeners()
-        {
-            onRoomClientDisconnectEvent.AddListener(uiController.OnRoomClientDisconnectEventHandler);
-            onRoomClientSceneChangedGameplayScene.AddListener(uiController.OnRoomClientSceneChangedToGameplaySceneHandler);
-            onRoomServerSceneLoadedForPlayerEvent.AddListener(uiController.OnRoomServerSceneLoadedForPlayerHandler);
-            onRoomServerSceneChangedRoomScene.AddListener(uiController.OnRoomServerSceneChangedRoomSceneHandler);
-        }
+        
     
         public override void OnRoomClientEnter()
         {
