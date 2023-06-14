@@ -1,14 +1,14 @@
 ﻿using Transport;
 using UnityEngine;
 
-namespace Network
+namespace UI
 {
-    public class LeaveLobbyButton: MonoBehaviour
+    public class HostLobbyButton: MonoBehaviour
     {
         public void OnClick()
         {
             var lobby = FindObjectOfType<SteamLobby>();
-            lobby.LeaveLobby();
+            lobby.HostLobby();
         }
     }
 }
