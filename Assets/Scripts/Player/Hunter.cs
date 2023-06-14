@@ -88,7 +88,7 @@ public class Hunter : NetworkBehaviour
 
     public void SetLight()
     {
-        RenderSettings.fogDensity = 0.025f;
+        RenderSettings.fogDensity = 0.015f;
         RenderSettings.fogColor = fogColor;
         RenderSettings.skybox = lightSkybox;
         paused = true;
