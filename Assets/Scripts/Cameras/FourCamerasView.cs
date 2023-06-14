@@ -109,6 +109,7 @@ public class FourCamerasView : MonoBehaviour
 
     private IEnumerator EnableView()
     {
+        Debug.Log("EnableView");
         placeholder.Show();
         weaponCamera.enabled = false;
         yield return 0; //ждем один кадр, чтобы отрисовалась заглушка

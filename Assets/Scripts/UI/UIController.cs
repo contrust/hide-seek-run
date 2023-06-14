@@ -13,7 +13,7 @@ namespace UI
         [SerializeField] private UIScreen pauseUI;
         public static UIController instance;
 
-        public bool isPause { get; private set; }
+        public bool isPause { get; set; }
 
         private void Start()
         {
