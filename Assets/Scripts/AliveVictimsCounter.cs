@@ -13,14 +13,7 @@ namespace DefaultNamespace
 
         private void Awake()
         {
-            if (instance is null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
+            instance = this;
         }
 
         private void Start()
