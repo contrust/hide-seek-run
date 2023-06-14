@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FixedCameraView : MonoBehaviour
@@ -19,6 +20,7 @@ public class FixedCameraView : MonoBehaviour
 
     public void DisableFixedCam()
     {
+        if(fixedCam.IsUnityNull()) return;
         if (fixedCam is not null)
             fixedCam.enabled = false;
     }
