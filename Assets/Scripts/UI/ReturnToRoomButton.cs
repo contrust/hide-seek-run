@@ -18,6 +18,7 @@ namespace UI
             }
             uiController.HideUIScreen(uiController.activeScreen);
             uiController.TooltipSetActive(false);
+            uiController.isPause = false;
         }
     }
 }
