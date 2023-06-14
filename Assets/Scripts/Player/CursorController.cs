@@ -62,6 +62,8 @@ namespace Player
         
         private void OnDisable()
         {
+            if(!player.isLocalPlayer) return;
+            forced = false;
             ShowCursor();
         }
     }

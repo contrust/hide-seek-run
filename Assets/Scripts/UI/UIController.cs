@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using Player;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace UI
     public class UIController : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI tooltip;
-        [SerializeField] private UIScreen victoryUI;
+        [SerializeField] private VictoryUIScreen victoryUI;
         [SerializeField] public UIScreen activeScreen = null;
         [SerializeField] private UIScreen pauseUI;
         public static UIController instance;
@@ -17,6 +18,7 @@ namespace UI
         private void Start()
         {
             SymbolManager.OnVictimsVictory.AddListener(ShowVictimsVictoryScreen);
+            AliveVictimsCounter.onHunterVictory.AddListener(ShowHunterVictoryScreen);
             if (instance is null)
             {
                 instance = this;
@@ -30,6 +32,7 @@ namespace UI
 
         public void Pause()
         {
+            if(activeScreen == victoryUI) return;
             if (isPause)
             {
                 HideUIScreen(pauseUI);
@@ -45,7 +48,16 @@ namespace UI
 
         private void ShowVictimsVictoryScreen()
         {
-            victoryUI.SetActive(true);
+            ShowUIScreen(victoryUI);
+            victoryUI.SetWinner(Winner.Victims);
+            CursorController.ForcedShowCursor();
+        }
+
+        private void ShowHunterVictoryScreen()
+        {
+            ShowUIScreen(victoryUI);
+            victoryUI.SetWinner(Winner.Hunter);
+            CursorController.ForcedShowCursor();
         }
 
         public void TooltipSetActive(bool setActive)
@@ -62,6 +74,7 @@ namespace UI
 
         public void HideUIScreen(UIScreen screen)
         {
+            if(screen is null) return;
             screen.SetActive(false);
             if (screen == activeScreen)
             {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using HUD;
 using Mirror;
 using Phone;
@@ -46,6 +47,7 @@ public class Victim : NetworkBehaviour
             phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
             SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
         }
+        onDeath.AddListener(AliveVictimsCounter.instance.OnVictimDeathHandler);
     }
     
     private void SetLayerAllChildren(Transform root, int layer)

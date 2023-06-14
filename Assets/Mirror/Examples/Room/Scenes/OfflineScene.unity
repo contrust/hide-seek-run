@@ -1398,27 +1398,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136781, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1468,17 +1468,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
 --- !u!114 &7707831352028224449 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6340193746571184691, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7841198089114171559, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
   m_PrefabInstance: {fileID: 7707831352028224448}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1bbe53563094ae4bf8fea0bd5377a53, type: 3}
+  m_Script: {fileID: 11500000, guid: 112301978d4848e68558b5ed863a8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8162083653034883023

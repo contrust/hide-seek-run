@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace;
 using UnityEngine;
 using Mirror;
 using UI;
@@ -121,6 +122,14 @@ namespace StarterAssets
 			onGround.AddListener(PlayGroundingSound);
 			onMoving.AddListener(PlayFootstepsSound);
 			onStopMoving.AddListener(StopPlayingFootstepsSound);
+			AliveVictimsCounter.onHunterVictory.AddListener(() =>
+			{
+				if(isLocalPlayer) controller.enabled = false;
+			});
+			SymbolManager.OnVictimsVictory.AddListener(() =>
+			{
+				if(isLocalPlayer) controller.enabled = false;
+			});
 		}
 
 		private void Update()
