@@ -16,6 +16,7 @@ namespace UI
                 uiController = UIController.instance;
             }
             uiController.HideUIScreen(uiController.activeScreen);
+            uiController.TooltipSetActive(false);
         }
     }
 }
