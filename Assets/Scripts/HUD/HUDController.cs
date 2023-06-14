@@ -29,7 +29,7 @@ namespace HUD
             {
                 (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
-                weapon.onShot.AddListener(instance.OnShotHandler);
+                //weapon.onShot.AddListener(instance.OnShotHandler);
                 SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
                 fourCams.onFourCamModeChange.AddListener(instance.OnFourCamerasHandler);
             }
