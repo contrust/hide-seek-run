@@ -20,10 +20,10 @@ public class FourCamerasView : MonoBehaviour
     public UnityEvent onFourCamModeChange;
 
     private Rect[] rects = {
-        new Rect(0, 0, 0.5f, 0.5f),
-        new Rect(0.5f, 0, 0.5f, 0.5f),
         new Rect(0, 0.5f, 0.5f, 0.5f),
         new Rect(0.5f, 0.5f, 0.5f, 0.5f),
+        new Rect(0, 0, 0.5f, 0.5f),
+        new Rect(0.5f, 0, 0.5f, 0.5f),
     };
 
     private Hunter hunter;
