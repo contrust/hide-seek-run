@@ -663,10 +663,10 @@ namespace Mirror
 
             if (NetworkServer.active && Utils.IsSceneActive(GameplayScene))
             {
-                GUILayout.BeginArea(new Rect(Screen.width - 150f, 10f, 140f, 30f));
+                /*GUILayout.BeginArea(new Rect(Screen.width - 150f, 10f, 140f, 30f));
                 if (GUILayout.Button("Return to Room"))
                     ServerChangeScene(RoomScene);
-                GUILayout.EndArea();
+                GUILayout.EndArea();*/
             }
 
             if (Utils.IsSceneActive(RoomScene))

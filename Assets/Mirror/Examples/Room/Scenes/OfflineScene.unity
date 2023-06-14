@@ -1488,6 +1488,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 463000309}
     m_Modifications:
+    - target: {fileID: 7187582582994609364, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187582582994609364, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187582582994609364, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187582584545790862, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187582584545790862, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8162083652798599953, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1575,6 +1595,10 @@ PrefabInstance:
     - target: {fileID: 8162083652798599954, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
       propertyPath: m_Name
       value: PauseUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162083652798599954, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d78d054dc958ab49a44736f49778066, type: 3}

@@ -8,7 +8,7 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI tooltip;
         [SerializeField] private UIScreen victoryUI;
-        [SerializeField] private UIScreen activeScreen = null;
+        [SerializeField] public UIScreen activeScreen = null;
         [SerializeField] private UIScreen pauseUI;
         public static UIController instance;
         
