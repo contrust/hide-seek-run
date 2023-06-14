@@ -12,7 +12,7 @@ namespace UI
         [SerializeField] public UIScreen activeScreen = null;
         [SerializeField] private UIScreen pauseUI;
         public static UIController instance;
-        
+
         public bool isPause { get; private set; }
 
         private void Start()
@@ -50,6 +50,8 @@ namespace UI
         private void ShowVictimsVictoryScreen()
         {
             if(activeScreen == victoryUI) return;
+            GameState.instance.isVictory = true;
+            FourCamerasView.instance.DisableView();
             ShowUIScreen(victoryUI);
             victoryUI.SetWinner(Winner.Victims);
             CursorController.ForcedShowCursor();
@@ -58,6 +60,8 @@ namespace UI
         private void ShowHunterVictoryScreen()
         {
             if(activeScreen == victoryUI) return;
+            GameState.instance.isVictory = true;
+            FourCamerasView.instance.DisableView();
             ShowUIScreen(victoryUI);
             victoryUI.SetWinner(Winner.Hunter);
             CursorController.ForcedShowCursor();

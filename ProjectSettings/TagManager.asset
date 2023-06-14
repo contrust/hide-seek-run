@@ -11,6 +11,8 @@ TagManager:
   - UIHelper
   - SymbolInserter
   - Hunter
+  - CameraPlaceholder
+  - WeaponCamera
   layers:
   - Default
   - TransparentFX

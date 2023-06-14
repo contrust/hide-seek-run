@@ -2215,7 +2215,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 695
+    m_Bits: 663
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6431,7 +6431,7 @@ MonoBehaviour:
   cinemachineTargetPitch: 0
   input: {fileID: 0}
   showPauseKey: 27
-  uihelper: {fileID: 0}
+  uiController: {fileID: 0}
 --- !u!114 &1978471637655604388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6470,8 +6470,10 @@ MonoBehaviour:
   slap: 0
   showPhone: 0
   showCursor: 0
+  nextCamera: 0
+  previousCamera: 0
+  fixedCamNum: 0
   analogMovement: 0
-  mouseSensitivity: 1
   cursorLocked: 1
   cursorInputForLook: 1
 --- !u!114 &8616685848737228376

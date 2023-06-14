@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cameras;
+using DefaultNamespace;
 using StarterAssets;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +21,9 @@ public class FourCamerasView : MonoBehaviour
     private FixedCameraView fixedCamView;
     private bool isEnabled;
     public UnityEvent onFourCamModeChange;
+    [SerializeField] private Placeholder placeholder;
+    private Camera weaponCamera;
+    public static FourCamerasView instance;
 
     private Rect[] rects = {
         new Rect(0, 0, 0.5f, 0.5f),
@@ -34,6 +40,16 @@ public class FourCamerasView : MonoBehaviour
         hunter = GetComponent<Hunter>();
         fixedCamView = hunter.GetComponent<FixedCameraView>();
         input = GetComponent<StarterAssetsInputs>();
+        placeholder = GameObject.FindGameObjectWithTag("CameraPlaceholder").GetComponent<Placeholder>();
+        weaponCamera = GameObject.FindGameObjectWithTag("WeaponCamera").GetComponent<Camera>();
+        if (instance is null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     void Update()
@@ -54,11 +70,11 @@ public class FourCamerasView : MonoBehaviour
     {
         if (input.changeCameraMode)
         {
-            if (isEnabled) 
-                DisableView();
-            else
-                EnableView();
-            input.changeCameraMode = false;
+                if (isEnabled) 
+                    DisableView();
+                else 
+                    StartCoroutine(EnableView()); 
+                input.changeCameraMode = false;
         }
 
         if (isEnabled)
@@ -95,20 +111,23 @@ public class FourCamerasView : MonoBehaviour
         // input.changeCameraMode = false;
     }
 
-    private void EnableView()
+    private IEnumerator EnableView()
     {
+        placeholder.Show();
+        weaponCamera.enabled = false;
+        yield return 0; //ждем один кадр, чтобы отрисовалась заглушка
         onFourCamModeChange.Invoke();
+        camera.enabled = false;
         for (var i = 0; i < Cameras.Count; i++)
         {
             Cameras[i].enabled = true;
             Cameras[i].rect = rects[i];
         }
-        camera.enabled = false;
         isEnabled = true;
         hunter.SetLight();
     }
 
-    private void DisableView()
+    public void DisableView()
     {
         onFourCamModeChange.Invoke();
         foreach (var cam in Cameras)
@@ -116,8 +135,10 @@ public class FourCamerasView : MonoBehaviour
             cam.enabled = false;
         }
         isEnabled = false;
+        weaponCamera.enabled = true;
         camera.enabled = true;
         hunter.SetDark();
+        placeholder.Hide();
     }
 
     private void SetFixedCam(int camNumber)
