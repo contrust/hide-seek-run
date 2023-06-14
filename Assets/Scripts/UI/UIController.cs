@@ -19,6 +19,7 @@ namespace UI
         {
             SymbolManager.OnVictimsVictory.AddListener(ShowVictimsVictoryScreen);
             AliveVictimsCounter.onHunterVictory.AddListener(ShowHunterVictoryScreen);
+            GameTimer.OnTimeIsOver.AddListener(ShowVictimsVictoryScreen);
             if (instance is null)
             {
                 instance = this;
@@ -48,6 +49,7 @@ namespace UI
 
         private void ShowVictimsVictoryScreen()
         {
+            if(activeScreen == victoryUI) return;
             ShowUIScreen(victoryUI);
             victoryUI.SetWinner(Winner.Victims);
             CursorController.ForcedShowCursor();
@@ -55,6 +57,7 @@ namespace UI
 
         private void ShowHunterVictoryScreen()
         {
+            if(activeScreen == victoryUI) return;
             ShowUIScreen(victoryUI);
             victoryUI.SetWinner(Winner.Hunter);
             CursorController.ForcedShowCursor();

@@ -38,6 +38,7 @@ namespace Player
 
         private void Start()
         {
+            forced = false;
             input = GetComponent<StarterAssetsInputs>();
         }
 
@@ -59,7 +60,7 @@ namespace Player
                 HideCursor();
             }
         }
-        
+
         private void OnDisable()
         {
             if(!player.isLocalPlayer) return;

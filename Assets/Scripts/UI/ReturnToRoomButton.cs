@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using Player;
 using UnityEngine;
 
 namespace UI
