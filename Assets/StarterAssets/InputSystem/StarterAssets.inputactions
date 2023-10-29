@@ -352,7 +352,7 @@
                 {
                     "name": "",
                     "id": "6f5cff63-f8f7-4b58-adce-a20bc440dde2",
-                    "path": "<Keyboard>/q",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
