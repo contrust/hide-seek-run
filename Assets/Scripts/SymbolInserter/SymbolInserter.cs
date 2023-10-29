@@ -1,6 +1,7 @@
 using System.Collections;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SymbolInserter : RequireInstance<SymbolManager>
 {
@@ -26,6 +27,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshRenderer screen;
     [SerializeField] private MeshRenderer expirationSignal;
+    public readonly UnityEvent onCorrectSymbol = new ();
+    public readonly UnityEvent onWrongSymbol = new ();
 
     private int chosenSymbol;
     private float changeExpirationSignalTime = -1;
@@ -43,7 +46,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     protected override void CallbackServer()
     {
         SymbolManager.OnSymbolInserted.AddListener(InsertionResult);
-        
+        onCorrectSymbol.AddListener(BlockAfterCorrectInsertion);
         changeExpirationSignalTime = matchSettings.timeChangeSymbol / 3;
         StartCoroutine(ChangeExpirationSignalColors());
     } 
@@ -75,10 +78,16 @@ public class SymbolInserter : RequireInstance<SymbolManager>
         if (!possibleToInsert)
             return;
         currentColor = result ? correctColor : wrongColor;
-        if (result && isSender)
-            BlockAfterCorrectInsertion();
-        else
-            StartCoroutine(BlockInsertionCoroutine());
+        if (isSender)
+        {
+            if (result)
+            {
+                onCorrectSymbol.Invoke();
+                return;
+            }
+            onWrongSymbol.Invoke();
+        }
+        StartCoroutine(BlockInsertionCoroutine());
     }
 
     private void BlockAfterCorrectInsertion()
