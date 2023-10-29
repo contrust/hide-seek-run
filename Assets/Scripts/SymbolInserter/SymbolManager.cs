@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -9,8 +8,11 @@ using Random = UnityEngine.Random;
 public class SymbolManager: RequireInstance<Hunter>
 {
     [SyncVar(hook = nameof(SetMaterial))] private int currentSymbol = -1;
-    [SyncVar(hook = nameof(SetCorrectInsertions))] private int currentCorrectInsertions;
-    
+
+    [field: SerializeField]
+    [field: SyncVar(hook = nameof(SetCorrectInsertions))]
+    public int CurrentCorrectInsertions { get; private set; }
+
     public List<Material> PossibleSymbols;
     
     private Hunter hunter;
@@ -34,14 +36,14 @@ public class SymbolManager: RequireInstance<Hunter>
     public void InsertSymbol(int insertedSymbol)
     {
         if (insertedSymbol == currentSymbol)
-            currentCorrectInsertions++;
+            CurrentCorrectInsertions++;
         OnSymbolInserted?.Invoke(insertedSymbol == currentSymbol);
     }
 
     private void SetCorrectInsertions(int _, int newCorrectInsertions)
     {
-        currentCorrectInsertions = newCorrectInsertions;
-        if (currentCorrectInsertions == matchSettings.CountCorrectSymbolsToWin)
+        CurrentCorrectInsertions = newCorrectInsertions;
+        if (CurrentCorrectInsertions == matchSettings.CountCorrectSymbolsToWin)
             OnVictimsVictory?.Invoke();
     }
     
