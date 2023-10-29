@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using HUD;
 using Mirror;
@@ -14,12 +11,18 @@ public class Victim : NetworkBehaviour
 {
     [SyncVar(hook = nameof(SetHealth))] public int Health;
     public AudioSource DamageSound;
+
     [SerializeField] private Material skybox;
     [SerializeField] private GameObject view;
+
     [SerializeField] private int ignoreCameraLayer = 8;
     [SerializeField] private Camera overlayCamera;
+    private const float ClippingPlaneDistance = 0.15f;
+    private const int OverlayCameraDepth = 1000;
+    private PlayerCamera playerCamera;
+    
     [SerializeField] private PhoneController phone;
-    public bool isPhoneActive => phone.isPhoneActive;
+    public bool IsPhoneActive => phone.isPhoneActive;
 
     [SyncVar]
     public string steamName;
@@ -28,7 +31,6 @@ public class Victim : NetworkBehaviour
     public UnityEvent onDeath;
     public LayerMask Render;
     private AnimationHelper animationHelper;
-    private PlayerCamera playerCamera;
 
     //For test only
     public bool GetHit;
@@ -40,10 +42,10 @@ public class Victim : NetworkBehaviour
         playerCamera = GetComponent<PlayerCamera>();
         if (isLocalPlayer)
         {
-            overlayCamera.depth = 1000;
+            overlayCamera.depth = OverlayCameraDepth;
             Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
             Camera.main.cullingMask = Render;
-            Camera.main.nearClipPlane = 0.15f;
+            Camera.main.nearClipPlane = ClippingPlaneDistance;
             phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
             SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
         }
@@ -93,7 +95,7 @@ public class Victim : NetworkBehaviour
         if (Health <= 0)
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
-            Dead(hunterCamera.position, hitAngle);
+            Die(hunterCamera.position, hitAngle);
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
@@ -101,7 +103,7 @@ public class Victim : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void Dead(Vector3 lookAt, float hitAngle)
+    private void Die(Vector3 lookAt, float hitAngle)
     {
         if (isLocalPlayer)
         {

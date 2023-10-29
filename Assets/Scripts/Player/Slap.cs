@@ -31,7 +31,7 @@ public class Slap : NetworkBehaviour
             return;
         if (slapReload > 0)
             slapReload -= Time.deltaTime;
-        if (input.slap && slapReload <= 0 && !player.isPhoneActive)
+        if (input.slap && slapReload <= 0 && !player.IsPhoneActive)
         {
             onSlap.Invoke();
             slapReload = slapCooldown;
