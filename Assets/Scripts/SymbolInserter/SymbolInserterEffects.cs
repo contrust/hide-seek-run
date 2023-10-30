@@ -6,6 +6,7 @@ public class SymbolInserterEffects : NetworkBehaviour
 {
     [SerializeField] private SymbolInserter symbolInserter;
     [SerializeField] private GameObject correctAnswerEffect;
+    [SerializeField] private transform correctAnswerEffectTransform;
     [SerializeField] private float correctAnswerEffectDestroyDelayInSeconds;
 
     private void Start()
@@ -15,7 +16,7 @@ public class SymbolInserterEffects : NetworkBehaviour
 
     private void InstantiateCorrectAnswerEffect()
     {
-        var effect = Instantiate(correctAnswerEffect, transform);
+        var effect = Instantiate(correctAnswerEffect, correctAnswerEffectTransform);
         effect.SetActive(true);
         Destroy(effect, correctAnswerEffectDestroyDelayInSeconds);
     }
