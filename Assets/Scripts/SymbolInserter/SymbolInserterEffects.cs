@@ -6,7 +6,7 @@ public class SymbolInserterEffects : NetworkBehaviour
 {
     [SerializeField] private SymbolInserter symbolInserter;
     [SerializeField] private GameObject correctAnswerEffect;
-    [SerializeField] private transform correctAnswerEffectTransform;
+    [SerializeField] private Transform correctAnswerEffectTransform;
     [SerializeField] private float correctAnswerEffectDestroyDelayInSeconds;
 
     private void Start()
