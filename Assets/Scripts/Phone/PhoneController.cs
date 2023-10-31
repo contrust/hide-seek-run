@@ -1,6 +1,7 @@
 ﻿using Mirror;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Phone
 {
@@ -18,6 +19,9 @@ namespace Phone
 
         [SerializeField] private StarterAssetsInputs input;
 
+        public UnityEvent onShowPhone = new();
+        public UnityEvent onHidePhone = new();
+
         private void Start()
         {
             input = GetComponentInParent<StarterAssetsInputs>();
@@ -26,6 +30,12 @@ namespace Phone
                 phone.SetActive(true);
                 thirdPersonPhoneView.SetActive(false);
             }
+            onShowPhone.AddListener(PutPhoneInActivePosition);
+            onShowPhone.AddListener(hunterDetector.TurnOn);
+            onShowPhone.AddListener(ActivatePhone);
+            onHidePhone.AddListener(PutPhoneInDefaultPosition);
+            onHidePhone.AddListener(hunterDetector.TurnOff);
+            onHidePhone.AddListener(DisablePhone);
         }
 
         private void Update()
@@ -40,30 +50,36 @@ namespace Phone
             {
                 if (isPhoneActive)
                 {
-                    HidePhone();
+                    onHidePhone.Invoke();
                 }
                 else
                 {
-                    ShowPhone();
+                    onShowPhone.Invoke();
                 }
             }
             input.showPhone = false;
         }
 
-        private void ShowPhone()
+        private void PutPhoneInActivePosition()
         {
             phone.transform.position = phoneActivePosition.position;
             phone.transform.rotation = phoneActivePosition.rotation;
+        }
+
+        private void ActivatePhone()
+        {
             isPhoneActive = true;
-            hunterDetector.TurnOn();
         }
         
-        private void HidePhone()
+        private void PutPhoneInDefaultPosition()
         {
             phone.transform.position = phoneDefaultPosition.position;
             phone.transform.rotation = phoneDefaultPosition.rotation;
+        }
+
+        private void DisablePhone()
+        {
             isPhoneActive = false;
-            hunterDetector.TurnOff();
         }
 
         private bool IsLocalPlayer()
