@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Mirror;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Phone.Chat
 {
@@ -16,9 +17,11 @@ namespace Phone.Chat
         [SerializeField] private Message message2;
         [SerializeField] private Message message3;
         [SerializeField] private string username;
+        public UnityEvent<string, int> onReceiveMessage = new();
 
         private void Start()
         {
+            onReceiveMessage.AddListener(UpdateMessageQueue);
             StartCoroutine(ConnectToChatServer());
         }
 
@@ -59,7 +62,7 @@ namespace Phone.Chat
             server.CmdSendMessage(username, symbolId);
         }
 
-        public void ReceiveMessage(string senderName, int symbolId)
+        public void UpdateMessageQueue(string senderName, int symbolId)
         {
             CopyMessage(message2, message1);
             CopyMessage(message3, message2);
