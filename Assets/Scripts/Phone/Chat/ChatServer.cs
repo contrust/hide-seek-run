@@ -29,7 +29,7 @@ namespace Phone.Chat
             Debug.Log("RPCSendMessage");
             foreach (var client in connectedClients)
             {
-                client.ReceiveMessage(username, symbolId);
+                client.onReceiveMessage.Invoke(username, symbolId);
             }
         }
         
