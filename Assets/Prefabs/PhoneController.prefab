@@ -447,12 +447,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 5262695649147782740}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &2638288269020536269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,12 +1709,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7597430491768348182}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &5538359466277201342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,12 +1883,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4221021971842397671}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &5623341788436997916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,12 +2055,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3239488188734170781}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &5757300236847488907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,12 +2792,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1663719863963460320}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &8738520093404451397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,11 +2880,16 @@ MonoBehaviour:
   phoneActivePosition: {fileID: 1265522037185661727}
   phone: {fileID: 3501357066454092839}
   thirdPersonPhoneView: {fileID: 0}
-  isPhoneActive: 0
   hunterDetector: {fileID: 1754161986294829955}
   expirationIndicator: {fileID: 278768680850597467}
   playerNetworkIdentity: {fileID: 0}
   input: {fileID: 0}
+  onShowPhone:
+    m_PersistentCalls:
+      m_Calls: []
+  onHidePhone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8813833300872937833
 GameObject:
   m_ObjectHideFlags: 0
