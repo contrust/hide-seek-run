@@ -6,13 +6,13 @@ namespace Phone.Chat
 {
     public class ChatServer: NetworkBehaviour
     {
-        [SerializeField]private List<ChatClient> connectedClients = new List<ChatClient>();
-        [SerializeField]private List<Material> symbols = new List<Material>();
+        [SerializeField] private List<ChatClient> connectedClients = new();
+        [SerializeField] private List<Material> symbols = new();
 
         public void Connect(ChatClient chatClient)
         {
             connectedClients.Add(chatClient);
-            chatClient.symbols = symbols;
+            chatClient.symbolsContainer.symbols = symbols;
             chatClient.id = connectedClients.Count-1;
         }
 

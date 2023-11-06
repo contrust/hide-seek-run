@@ -447,12 +447,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 5262695649147782740}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 5262695649147782740}
+  m_maskType: 0
 --- !u!1 &2638288269020536269
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbol: {fileID: 4647760469740605101}
   sender: {fileID: 1614747106957842237}
+  symbolsContainer: {fileID: 0}
 --- !u!1 &2685086888058890902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8618173783923296643
 Transform:
   m_ObjectHideFlags: 0
@@ -1709,12 +1710,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 7597430491768348182}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 7597430491768348182}
+  m_maskType: 0
 --- !u!1 &5538359466277201342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,12 +1884,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 4221021971842397671}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 4221021971842397671}
+  m_maskType: 0
 --- !u!1 &5623341788436997916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,12 +2056,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 3239488188734170781}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 3239488188734170781}
+  m_maskType: 0
 --- !u!1 &5757300236847488907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbol: {fileID: 4089745066000782177}
   sender: {fileID: 7205639886304062067}
+  symbolsContainer: {fileID: 0}
 --- !u!1 &5847907128354316149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,15 +2158,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c901ffd67a984880a2f3c2e8a08d9a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  symbols:
-  - {fileID: 2100000, guid: 1c8da7fcf0722e047b7a3b4f12be9a89, type: 2}
-  - {fileID: 2100000, guid: 122a7e714417c494fadcdcc35944bc6a, type: 2}
-  - {fileID: 2100000, guid: 1a47fc0cfbbc34f4185eabc0e14b65b0, type: 2}
   id: 0
-  message1: {fileID: 4142626876439499045}
-  message2: {fileID: 964562655696596978}
-  message3: {fileID: 33415370929446360}
+  symbolsContainer: {fileID: 0}
+  messages:
+  - {fileID: 4142626876439499045}
+  - {fileID: 964562655696596978}
+  - {fileID: 33415370929446360}
   username: 
+  onReceiveMessage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6906523288517870910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbol: {fileID: 6720987052665442066}
   sender: {fileID: 3456279629846662691}
+  symbolsContainer: {fileID: 0}
 --- !u!1 &7380329887820405638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2792,12 +2796,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1663719863963460320}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1663719863963460320}
+  m_maskType: 0
 --- !u!1 &8738520093404451397
 GameObject:
   m_ObjectHideFlags: 0
