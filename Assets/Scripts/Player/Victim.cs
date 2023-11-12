@@ -90,6 +90,8 @@ public class Victim : NetworkBehaviour
 
     public void GetDamage(int damage, Transform hunterCamera)
     {
+        if(Health <=0)
+            return;
         Health -= damage;
         onDamageTaken.Invoke();
         if (Health <= 0)
