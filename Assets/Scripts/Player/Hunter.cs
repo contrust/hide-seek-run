@@ -82,7 +82,7 @@ public class Hunter : NetworkBehaviour
         Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
         Camera.main.cullingMask = Render;
         HUDController.instance.ShowStaticElements();
-        HUDController.instance.SetupEventHandlers();
+        HUDController.instance.SetupHUD();
         SymbolManager.OnSymbolInserted.AddListener(OnSymbolInsertedHandler);
     }
 

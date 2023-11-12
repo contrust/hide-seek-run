@@ -12,7 +12,8 @@ namespace HUD
         [SerializeField] private HUDEffect symbolInsertedEffect;
         [SerializeField] private HUDEffect slapEffect;
         [SerializeField] private HUDEffect camNumbers;
-        [SerializeField]private GameObject staticElements;
+        [SerializeField] private GameObject staticElements;
+        [SerializeField] private HealthBar healthBar;
         
         public static HUDController instance;
 
@@ -21,11 +22,12 @@ namespace HUD
             instance = this;
         }
 
-        public void SetupEventHandlers()
+        public void SetupHUD()
         {
             var weapon = NetworkClient.localPlayer.GetComponent<Weapon>();
             var fourCams = NetworkClient.localPlayer.GetComponent<FourCamerasView>();
-            if (weapon != null && fourCams)
+            var isHunter = weapon != null && fourCams;
+            if (isHunter)
             {
                 (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
@@ -39,6 +41,7 @@ namespace HUD
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
                 var slap = NetworkClient.localPlayer.GetComponent<Slap>();
                 slap.onSlap.AddListener(instance.OnSlapHandler);
+                healthBar.gameObject.SetActive(true);
             }
         }
 
