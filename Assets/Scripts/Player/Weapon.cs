@@ -55,7 +55,7 @@ public class Weapon : NetworkBehaviour
         shootingSystem.Emit(1);
         victimShooting.Emit(1);
 
-        var isHitSomethingFromCamera = TryHitWithRaycast(cameraTransform.position, cameraTransform.forward, out var cameraHitInfo);
+        var isHitSomethingFromCamera = TryHitWithRaycast(cameraTransform.position, cameraTransform.forward, out var cameraHitInfo); //выстрел из камеры
         
         var hitPoint = isHitSomethingFromCamera
             ? cameraHitInfo.point
@@ -70,16 +70,17 @@ public class Weapon : NetworkBehaviour
                 10,
                 false);
 
-            DoDamage(cameraHitInfo, cameraTransform);
+            if (!TryDoDamage(cameraHitInfo, cameraTransform))
+            {
+                var isHitSomethingFromBulletPos = TryHitWithRaycast(bulletPos.position, hitPoint - bulletPos.position, out var bulletHitInfo); //выстрел из дула, если не попали из камеры
+
+                if (isHitSomethingFromBulletPos)
+                {
+                    TryDoDamage(bulletHitInfo, cameraTransform);
+                }
+            }
         }
 
-        var isHitSomethingFromBulletPos = TryHitWithRaycast(bulletPos.position, hitPoint - bulletPos.position, out var bulletHitInfo);
-
-        if (isHitSomethingFromBulletPos)
-        {
-            DoDamage(bulletHitInfo, cameraTransform);
-        }
-        
         DrawTrail(hitPoint);
         ShootLaserHit(hitPoint);
 
@@ -100,12 +101,13 @@ public class Weapon : NetworkBehaviour
     }
 
     //TODO сделать интерфейс IDamageable и получать его в GetComponent вместо Victim
-    private void DoDamage(RaycastHit hitInfo, Transform cameraTransform)
+    private bool TryDoDamage(RaycastHit hitInfo, Transform cameraTransform)
     {
         var victim = hitInfo.collider.GetComponent<Victim>();
-        if (!victim) return;
+        if (!victim) return false;
         victim.GetDamage(Damage, cameraTransform); //Почему GetDamage принимает в параметрах позицию камеры охотника???????????????
         onEnemyHit.Invoke();
+        return true;
     }
 
     private void DrawTrail(Vector3 position)
