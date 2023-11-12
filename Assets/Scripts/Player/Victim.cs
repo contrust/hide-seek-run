@@ -20,6 +20,7 @@ public class Victim : NetworkBehaviour
     private const float ClippingPlaneDistance = 0.15f;
     private const int OverlayCameraDepth = 1000;
     private PlayerCamera playerCamera;
+    private HealthBar healthBar;
     
     [SerializeField] private PhoneController phone;
     public bool IsPhoneActive => phone.isPhoneActive;
@@ -42,30 +43,19 @@ public class Victim : NetworkBehaviour
         playerCamera = GetComponent<PlayerCamera>();
         if (isLocalPlayer)
         {
-            overlayCamera.depth = OverlayCameraDepth;
-            Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
-            Camera.main.cullingMask = Render;
-            Camera.main.nearClipPlane = ClippingPlaneDistance;
-            phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
-            SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
+            InitHealthBar();
+            InitCamera();
+            SetupLayers();
         }
         onDeath.AddListener(AliveVictimsCounter.instance.OnVictimDeathHandler);
     }
     
-    private void SetLayerAllChildren(Transform root, int layer)
-    {
-        var children = root.GetComponentsInChildren<Transform>(includeInactive: true);
-        foreach (var child in children)
-        {
-            child.gameObject.layer = layer;
-        }
-    }
-
     private void Update()
     {
         if (GetHit)
         {
             GetHit = false;
+            GetDamage(1, null);
             onDamageTaken.Invoke();
         }
     }
@@ -73,8 +63,11 @@ public class Victim : NetworkBehaviour
     private void SetHealth(int oldValue, int newValue)
     {
         Health = newValue;
-        if (isLocalPlayer) 
+        if (isLocalPlayer)
+        {
+            healthBar.SetHealth(Health);
             onDamageTaken.Invoke();
+        }
     }
 
     public override void OnStartLocalPlayer()
@@ -83,7 +76,7 @@ public class Victim : NetworkBehaviour
         {
             view.layer = ignoreCameraLayer;
             HUDController.instance.ShowStaticElements();
-            HUDController.instance.SetupEventHandlers();
+            HUDController.instance.SetupHUD();
         }
     }
 
@@ -101,6 +94,35 @@ public class Victim : NetworkBehaviour
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
+        }
+    }
+
+    private void InitHealthBar()
+    {
+        healthBar = FindObjectOfType<HealthBar>();
+        healthBar.SetMaxHealth(Health);
+    }
+
+    private void InitCamera()
+    {
+        overlayCamera.depth = OverlayCameraDepth;
+        Camera.main.GetUniversalAdditionalCameraData().cameraStack.Add(overlayCamera);
+        Camera.main.cullingMask = Render;
+        Camera.main.nearClipPlane = ClippingPlaneDistance;
+    }
+
+    private void SetupLayers()
+    {
+        phone.gameObject.layer = LayerMask.NameToLayer("FirstPersonVictim");
+        SetLayerAllChildren(phone.transform, LayerMask.NameToLayer("FirstPersonVictim"));
+    }
+
+    private void SetLayerAllChildren(Transform root, int layer)
+    {
+        var children = root.GetComponentsInChildren<Transform>(includeInactive: true);
+        foreach (var child in children)
+        {
+            child.gameObject.layer = layer;
         }
     }
 
