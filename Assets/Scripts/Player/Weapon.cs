@@ -45,8 +45,8 @@ public class Weapon : NetworkBehaviour
         if (CanShoot && input.shot)
         {
             Shoot();
-            input.shot = false;
         }
+        input.shot = false;
     }
 
     private void Shoot()
