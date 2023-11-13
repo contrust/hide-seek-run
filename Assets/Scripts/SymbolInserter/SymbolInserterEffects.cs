@@ -11,10 +11,17 @@ public class SymbolInserterEffects : NetworkBehaviour
 
     private void Start()
     {
-        symbolInserter.onCorrectSymbol.AddListener(InstantiateCorrectAnswerEffect);
+        symbolInserter.onCorrectSymbol.AddListener(InstantiateCorrectAnswerEffectCommand);
     }
 
-    private void InstantiateCorrectAnswerEffect()
+    [Command]
+    private void InstantiateCorrectAnswerEffectCommand()
+    {
+        InstantiateCorrectAnswerEffectRpc();
+    }
+
+    [ClientRpc]
+    private void InstantiateCorrectAnswerEffectRpc()
     {
         var effect = Instantiate(correctAnswerEffect, correctAnswerEffectTransform);
         effect.SetActive(true);
