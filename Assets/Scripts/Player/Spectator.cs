@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using StarterAssets;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,9 +11,12 @@ namespace Player
 	public class Spectator : MonoBehaviour
 	{
 		private StarterAssetsInputs input;
-		private List<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>()).ToList();
 		private int currentCameraIndex = -1;
 		private Vector3 target = Vector3.zero;
+		private TextMeshProUGUI spectatorNickname;
+		
+		private List<Victim> victims => FindObjectsOfType<Victim>().ToList();
+		private List<Camera> cameras => victims.Select(v => v.GetComponentInChildren<Camera>()).ToList();
 
 		private void Start()
 		{
@@ -21,6 +25,7 @@ namespace Player
 			mainCamera.enabled = false;
 			input = GetComponent<StarterAssetsInputs>();
 			input.enabled = true;
+			spectatorNickname = GameObject.FindGameObjectWithTag("SpectatorNickname").GetComponent<TextMeshProUGUI>();
 			GetComponent<PlayerInput>().enabled = true;
 			NextCamera();
 		}
@@ -42,26 +47,31 @@ namespace Player
 
 		private void NextCamera()
 		{
-			if (Cameras.Count == 0)
+			var _cameras = cameras;
+			if (_cameras.Count == 0)
 				return;
-			currentCameraIndex = (int)Mathf.Repeat(currentCameraIndex + 1, Cameras.Count);
-			EnableCamera(Cameras[currentCameraIndex]);
+			currentCameraIndex = (int)Mathf.Repeat(currentCameraIndex + 1, _cameras.Count);
+			EnableCamera(_cameras[currentCameraIndex], currentCameraIndex);
 		}
 
 		private void PreviousCamera()
 		{
-			if (Cameras.Count == 0)
+			var _cameras = cameras;
+
+			if (_cameras.Count == 0)
 				return;
-			currentCameraIndex = (int)Mathf.Repeat(currentCameraIndex - 1, Cameras.Count);
-			EnableCamera(Cameras[currentCameraIndex]);
+			currentCameraIndex = (int)Mathf.Repeat(currentCameraIndex - 1, _cameras.Count);
+			EnableCamera(_cameras[currentCameraIndex], currentCameraIndex);
 		}
 
-		private void EnableCamera(Camera curCamera)
+		private void EnableCamera(Camera curCamera, int index)
 		{
-			foreach (Camera cam in Cameras) 
+			var nickname = victims[index].steamName;
+			foreach (Camera cam in cameras) 
 				cam.enabled = false;
 			curCamera.enabled = true;
 			target = curCamera.transform.position;
+			spectatorNickname.text = nickname;
 		}
 	}
 }

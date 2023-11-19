@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using Player.Weapons;
 using UnityEngine;
 
 public class Recharge : MonoBehaviour
