@@ -9463,6 +9463,7 @@ GameObject:
   - component: {fileID: 8584274055967416159}
   - component: {fileID: 2326760244444516364}
   - component: {fileID: 6469024593486652518}
+  - component: {fileID: 6052580650494772511}
   - component: {fileID: 5476336959705800085}
   - component: {fileID: 1964522027246775005}
   - component: {fileID: 8337531545504324796}
@@ -9848,7 +9849,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab9d7b81923b900409acd2592a8c69f8, type: 3}
   m_Name: 
@@ -9866,6 +9867,38 @@ MonoBehaviour:
   onEnemyHit:
     m_PersistentCalls:
       m_Calls: []
+  bulletPos: {fileID: 4620964096520538666}
+  POVbulletPos: {fileID: 6435100716721650627}
+  bulletTrail: {fileID: 2008762343611410957, guid: 8b9eae53795494d40a766ffbae738e45, type: 3}
+  POVtrail: {fileID: 2008762343611410957, guid: ab6fc340b0a5b6e40bb8bd777070b397, type: 3}
+  shootingSystem: {fileID: 7681897510601532198}
+  victimShooting: {fileID: 1996597174720987814}
+--- !u!114 &6052580650494772511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2766803616904b5088144bf81fbd58a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  Flash: {fileID: 2900726560742078344}
+  TimeReload: 2
+  Damage: 10
+  ShootingSound: {fileID: 4483856499322475674}
+  onShot:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnemyHit:
+    m_PersistentCalls:
+      m_Calls: []
+  bulletsCount: 8
   bulletPos: {fileID: 4620964096520538666}
   POVbulletPos: {fileID: 6435100716721650627}
   bulletTrail: {fileID: 2008762343611410957, guid: 8b9eae53795494d40a766ffbae738e45, type: 3}
