@@ -16,6 +16,7 @@ namespace HUD
         [SerializeField] private HUDEffect camNumbers;
         [SerializeField] private GameObject staticElements;
         [SerializeField] private HealthBar healthBar;
+        [SerializeField] private HealthManager healthManager;
         
         public static HUDController instance;
 
@@ -45,7 +46,8 @@ namespace HUD
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
                 var slap = NetworkClient.localPlayer.GetComponent<Slap>();
                 slap.onSlap.AddListener(instance.OnSlapHandler);
-                healthBar.gameObject.SetActive(true);
+                healthManager.gameObject.SetActive(true);
+                healthManager.Setup();
             }
         }
 

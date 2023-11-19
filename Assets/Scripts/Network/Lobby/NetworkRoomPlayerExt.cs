@@ -1,12 +1,21 @@
+using Mirror;
+using Player;
 using UnityEngine;
 
-namespace Mirror.Examples.NetworkRoom
+namespace Network.Lobby
 {
     [AddComponentMenu("")]
     public class NetworkRoomPlayerExt : NetworkRoomPlayer
     {
+        private static int currentColorIndex;
+        private static readonly ColorPlayerEnum[] colors =
+            {ColorPlayerEnum.Violet, ColorPlayerEnum.Green, ColorPlayerEnum.Red, ColorPlayerEnum.Sky};
+        
         [SyncVar(hook = nameof(HandleSteamName))]
         public string steamName;
+        [SyncVar(hook = nameof(HandleColor))]
+        public ColorPlayerEnum PlayerColor;
+        
         public override void OnStartClient()
         {
             //Debug.Log($"OnStartClient {gameObject}");
@@ -33,10 +42,10 @@ namespace Mirror.Examples.NetworkRoom
         }
         
 
-        private void HandleSteamName(string _, string steamName)
-        {
-            this.steamName = steamName;
-        }
+        private void HandleSteamName(string _, string steamName) => this.steamName = steamName;
+        public void HandleColor(ColorPlayerEnum _, ColorPlayerEnum newColor) => PlayerColor = newColor;
+        public void SetNewColor() => PlayerColor = colors[currentColorIndex++];
+
         public override void OnGUI()
         {
             NetworkRoomManager room = NetworkManager.singleton as NetworkRoomManager;
