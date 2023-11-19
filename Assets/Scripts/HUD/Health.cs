@@ -29,9 +29,5 @@ public class Health : MonoBehaviour
     private void SetHealth() => 
         healthBar.fillAmount = Mathf.Lerp(fromValue, toValue, (float)victim.Health / victim.MaxHealth);
 
-    private void Dead()
-    {
-        Debug.Log("Dead inside");
-        playerImage.color = Color.gray;
-    }
+    private void Dead() => playerImage.color = Color.gray;
 }
