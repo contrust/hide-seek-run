@@ -1,11 +1,9 @@
-﻿using System;
-using DefaultNamespace;
+﻿using DefaultNamespace;
 using UnityEngine;
 using Mirror;
 using UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace StarterAssets
 {

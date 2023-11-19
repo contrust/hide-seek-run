@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Mirror;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SymbolInteract : NetworkBehaviour
 {

@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using HUD.Effects;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SlapEffect : HUDEffect

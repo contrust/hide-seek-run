@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +5,8 @@ using Cameras;
 using DefaultNamespace;
 using StarterAssets;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
-using MouseButton = UnityEngine.UIElements.MouseButton;
 
 public class FourCamerasView : MonoBehaviour
 { 

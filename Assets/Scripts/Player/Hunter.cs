@@ -1,16 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using HUD;
 using Mirror;
 using Network;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Hunter : NetworkBehaviour

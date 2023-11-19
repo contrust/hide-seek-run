@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using Mirror;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class Slap : NetworkBehaviour
 {

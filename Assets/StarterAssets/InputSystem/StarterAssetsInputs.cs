@@ -1,6 +1,5 @@
 using Settings;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;

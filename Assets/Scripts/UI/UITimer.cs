@@ -1,5 +1,4 @@
-﻿using DefaultNamespace;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace UI
