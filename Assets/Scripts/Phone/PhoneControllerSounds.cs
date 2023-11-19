@@ -10,8 +10,14 @@ public class PhoneControllerSounds : RequireInstance<Victim>
 
     private void Start()
     {
-        phoneController.onShowPhone.AddListener(PlayShowPhoneSound);
-        phoneController.onHidePhone.AddListener(PlayHidePhoneSound);
+        phoneController.onShowPhone.AddListener(CmdPlayShowPhoneSound);
+        phoneController.onHidePhone.AddListener(CmdPlayHidePhoneSound);
+    }
+
+    [Command]
+    private void CmdPlayShowPhoneSound()
+    {
+        PlayShowPhoneSound();
     }
 
     [ClientRpc]
@@ -19,6 +25,12 @@ public class PhoneControllerSounds : RequireInstance<Victim>
     {
         Debug.Log("SHOw");
         showPhoneSound.Play();
+    }
+    
+    [Command]
+    private void CmdPlayHidePhoneSound()
+    {
+        PlayHidePhoneSound();
     }
     
     [ClientRpc]

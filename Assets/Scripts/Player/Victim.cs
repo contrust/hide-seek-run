@@ -58,7 +58,7 @@ public class Victim : NetworkBehaviour
         {
             GetHit = false;
             GetDamage(1, null);
-            RpcOnDamageTaken();
+            CmdOnDamageTaken();
         }
     }
 
@@ -67,7 +67,7 @@ public class Victim : NetworkBehaviour
         Health = newValue;
         if (isLocalPlayer)
         {
-            RpcOnDamageTaken();
+            CmdOnDamageTaken();
         }
     }
 
@@ -95,11 +95,11 @@ public class Victim : NetworkBehaviour
         if(Health <=0)
             return;
         Health -= damage;
-        RpcOnDamageTaken();
+        CmdOnDamageTaken();
         if (Health <= 0)
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
-            Die(hunterCamera.position, hitAngle);
+            CmdDie(hunterCamera.position, hitAngle);
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
@@ -127,6 +127,12 @@ public class Victim : NetworkBehaviour
         {
             child.gameObject.layer = layer;
         }
+    }
+
+    [Command]
+    private void CmdDie(Vector3 lookAt, float hitAngle)
+    {
+        Die(lookAt, hitAngle);
     }
 
     [ClientRpc]
@@ -159,6 +165,12 @@ public class Victim : NetworkBehaviour
     private void RpcPlayDamageSound()
     {
         DamageSound.Play();
+    }
+
+    [Command]
+    private void CmdOnDamageTaken()
+    {
+        RpcOnDamageTaken();
     }
     
     [ClientRpc]
