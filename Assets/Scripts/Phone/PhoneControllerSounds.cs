@@ -14,17 +14,37 @@ public class PhoneControllerSounds : RequireInstance<Victim>
         phoneController.onHidePhone.AddListener(PlayHidePhoneSound);
     }
 
-    [ClientRpc]
     private void PlayShowPhoneSound()
     {
-        Debug.Log("SHOw");
+        PlayShowPhoneSoundCommand();
+    }
+    
+    private void PlayHidePhoneSound()
+    {
+        PlayHidePhoneSoundCommand();
+    }
+
+    [Command]
+    private void PlayShowPhoneSoundCommand()
+    {
+        PlayShowPhoneSoundRpc();
+    }
+    
+    [Command]
+    private void PlayHidePhoneSoundCommand()
+    {
+        PlayHidePhoneSoundRpc();
+    }
+
+    [ClientRpc]
+    private void PlayShowPhoneSoundRpc()
+    {
         showPhoneSound.Play();
     }
     
     [ClientRpc]
-    private void PlayHidePhoneSound()
+    private void PlayHidePhoneSoundRpc()
     {
-        Debug.Log("HIDe");
         hidePhoneSound.Play();
     }
 }
