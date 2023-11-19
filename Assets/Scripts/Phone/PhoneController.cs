@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Mirror;
+﻿using Mirror;
 using StarterAssets;
 using Symbols;
 using UnityEngine;
@@ -33,16 +31,16 @@ namespace Phone
                 phone.SetActive(true);
                 thirdPersonPhoneView.SetActive(false);
             }
+        }
+
+        public void Init()
+        {
             onShowPhone.AddListener(PutPhoneInActivePosition);
             onShowPhone.AddListener(hunterDetector.TurnOn);
             onShowPhone.AddListener(ActivatePhone);
             onHidePhone.AddListener(PutPhoneInDefaultPosition);
             onHidePhone.AddListener(hunterDetector.TurnOff);
             onHidePhone.AddListener(DisablePhone);
-        }
-
-        public void Init()
-        {
             StartCoroutine(symbolExpirationIndicator.ChangeExpirationSignalColors());
         }
 

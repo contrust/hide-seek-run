@@ -2868,7 +2868,7 @@ MonoBehaviour:
   hunterDetector: {fileID: 1754161986294829955}
   playerNetworkIdentity: {fileID: 0}
   input: {fileID: 0}
-  symbolSymbolExpirationIndicator: {fileID: 1873496003981595036}
+  symbolExpirationIndicator: {fileID: 1873496003981595036}
   onShowPhone:
     m_PersistentCalls:
       m_Calls: []
