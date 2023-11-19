@@ -68,6 +68,8 @@ public class Victim : NetworkBehaviour
         if (isLocalPlayer)
         {
             CmdOnDamageTaken();
+            if (Health <= 0)
+                CmdOnDeath();
         }
     }
 
@@ -147,7 +149,6 @@ public class Victim : NetworkBehaviour
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle, cam.GetComponent<Spectator>());
         }
-        onDeath.Invoke();
     }
 
     private void PlayDamageSound()
@@ -177,5 +178,17 @@ public class Victim : NetworkBehaviour
     private void RpcOnDamageTaken()
     {
         onDamageTaken.Invoke();
+    }
+
+    [Command]
+    private void CmdOnDeath()
+    {
+        RpcOnDeath();
+    }
+
+    [ClientRpc]
+    private void RpcOnDeath()
+    {
+        onDeath.Invoke();
     }
 }
