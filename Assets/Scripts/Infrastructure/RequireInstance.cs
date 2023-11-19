@@ -6,6 +6,7 @@ public abstract class RequireInstance<T>: NetworkBehaviour where T: MonoBehaviou
 {
 	protected virtual void CallbackAll(T instance) {}
 	protected virtual void CallbackServer() {}
+	protected virtual void OnStart(){}
 
 	private bool callbackAllIsFinished;
 

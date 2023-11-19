@@ -1,5 +1,8 @@
-﻿using Mirror;
+﻿using System;
+using System.Collections;
+using Mirror;
 using StarterAssets;
+using Symbols;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,11 +16,11 @@ namespace Phone
         [SerializeField] private GameObject thirdPersonPhoneView;
         public bool isPhoneActive { get; private set; }
         [SerializeField] private HunterDetector hunterDetector;
-        [SerializeField] private PhoneExpirationIndicator expirationIndicator;
 
         [SerializeField] private NetworkIdentity playerNetworkIdentity;
 
         [SerializeField] private StarterAssetsInputs input;
+        [SerializeField] private SymbolExpirationIndicator symbolExpirationIndicator;
 
         public UnityEvent onShowPhone = new();
         public UnityEvent onHidePhone = new();
@@ -36,6 +39,11 @@ namespace Phone
             onHidePhone.AddListener(PutPhoneInDefaultPosition);
             onHidePhone.AddListener(hunterDetector.TurnOff);
             onHidePhone.AddListener(DisablePhone);
+        }
+
+        public void Init()
+        {
+            StartCoroutine(symbolExpirationIndicator.ChangeExpirationSignalColors());
         }
 
         private void Update()

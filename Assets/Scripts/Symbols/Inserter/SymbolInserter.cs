@@ -18,39 +18,30 @@ namespace Symbols.Inserter
     
         [SerializeField] private Color neutralColor;
         [SerializeField] private Color wrongColor;
-        [SerializeField] private Color correctColor;
-
-        [SerializeField] private Color expireSoonColor;
-        [SerializeField] private Color expireAfterSomeTimeColor;
-        [SerializeField] private Color expireNotSoonColor;
-        [SerializeField] private Color expireBlack;
-        [SerializeField] private float blinkingTime = 5;
+        [SerializeField] private Color correctColor; 
         [SerializeField] private float insertionTimeOut = 10f;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private MeshRenderer screen;
         [SerializeField] private MeshRenderer expirationSignal;
+        [SerializeField] private SymbolExpirationIndicator expirationIndicator;
         public readonly UnityEvent onCorrectSymbol = new ();
         public readonly UnityEvent onWrongSymbol = new ();
 
         private int chosenSymbol;
-        private float changeExpirationSignalTime = -1;
         private bool possibleToInsert = true;
     
         private SymbolManager symbolManager;
-        private MatchSettings matchSettings;
-    
 
         protected override void CallbackAll(SymbolManager instance)
         {
             symbolManager = instance;
-            matchSettings = FindObjectOfType<MatchSettings>();
         }
+
         protected override void CallbackServer()
         {
             SymbolManager.OnSymbolInserted.AddListener(InsertionResult);
             onCorrectSymbol.AddListener(BlockAfterCorrectInsertion);
-            changeExpirationSignalTime = matchSettings.timeChangeSymbol / 3;
-            StartCoroutine(ChangeExpirationSignalColors());
+            StartCoroutine(expirationIndicator.ChangeExpirationSignalColors());
         } 
 
         public void InsertSymbol()
@@ -96,6 +87,7 @@ namespace Symbols.Inserter
         {
             possibleToInsert = false;
             currentSymbolIndex = -1;
+            expirationIndicator.isActive = false;
         }
 
         private IEnumerator BlockInsertionCoroutine()
@@ -105,29 +97,6 @@ namespace Symbols.Inserter
             yield return new WaitForSeconds(insertionTimeOut);
             currentColor = neutralColor;
             possibleToInsert = true;
-        }
-    
-        private IEnumerator ChangeExpirationSignalColors()
-        {
-            while (possibleToInsert)
-            {
-                currentExpirationColor = expireNotSoonColor;
-                yield return new WaitForSeconds(changeExpirationSignalTime);
-                currentExpirationColor = expireAfterSomeTimeColor;
-                yield return new WaitForSeconds(changeExpirationSignalTime);
-                currentExpirationColor = expireSoonColor;
-                yield return new WaitForSeconds(changeExpirationSignalTime - blinkingTime);
-            
-                for (var i = 0; i < blinkingTime; i++)
-                {
-                    currentExpirationColor = expireBlack;
-                    yield return new WaitForSeconds(0.5f);
-                    currentExpirationColor = expireSoonColor;
-                    yield return new WaitForSeconds(0.5f);
-                }
-            }
-
-            currentExpirationColor = expireNotSoonColor;
         }
     }
 }

@@ -3,11 +3,12 @@ using HUD;
 using Mirror;
 using Phone;
 using Player;
+using Symbols;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
-public class Victim : NetworkBehaviour
+public class Victim : RequireInstance<SymbolManager>
 {
     [SyncVar(hook = nameof(SetHealth))] public int Health;
     public AudioSource DamageSound;
@@ -36,7 +37,7 @@ public class Victim : NetworkBehaviour
     //For test only
     public bool GetHit;
 
-    private void Start()
+    protected override void OnStart()
     {
         animationHelper = GetComponent<AnimationHelper>();
         onDamageTaken.AddListener(PlayDamageSound);
@@ -59,6 +60,11 @@ public class Victim : NetworkBehaviour
             onDamageTaken.Invoke();
         }
     }
+    
+    protected override void CallbackServer()
+    {
+        phone.Init();
+    } 
 
     private void SetHealth(int oldValue, int newValue)
     {

@@ -143,7 +143,6 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			if(!controller.enabled || Cursor.visible) return;
-			Debug.Log("Cursor !visible");
 			CameraRotation();
 		}
 

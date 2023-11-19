@@ -1010,7 +1010,6 @@ GameObject:
   - component: {fileID: 8618173783923296643}
   - component: {fileID: 704039981300897780}
   - component: {fileID: 6887258772998059590}
-  - component: {fileID: 278768680850597467}
   - component: {fileID: 1754161986294829955}
   m_Layer: 9
   m_Name: Phone
@@ -1089,25 +1088,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &278768680850597467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3501357066454092839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1df6aa8a494449dda2e5e61f569ca369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  expirationSignal: {fileID: 8769367833542506924}
-  expireSoonColor: {r: 0.48235294, g: 0, b: 0, a: 0}
-  expireAfterSomeTimeColor: {r: 0.5647059, g: 0.27058825, b: 0, a: 0}
-  expireNotSoonColor: {r: 0.1254902, g: 0.4509804, b: 0, a: 0}
-  expireBlack: {r: 0, g: 0, b: 0, a: 0}
-  blinkingTime: 5
-  changeExpirationSignalTime: -1
 --- !u!114 &1754161986294829955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2843,6 +2823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1167640942647788305}
   - component: {fileID: 7622589821261028447}
+  - component: {fileID: 1873496003981595036}
   m_Layer: 9
   m_Name: PhoneController
   m_TagString: Untagged
@@ -2885,15 +2866,34 @@ MonoBehaviour:
   phone: {fileID: 3501357066454092839}
   thirdPersonPhoneView: {fileID: 0}
   hunterDetector: {fileID: 1754161986294829955}
-  expirationIndicator: {fileID: 278768680850597467}
   playerNetworkIdentity: {fileID: 0}
   input: {fileID: 0}
+  symbolSymbolExpirationIndicator: {fileID: 1873496003981595036}
   onShowPhone:
     m_PersistentCalls:
       m_Calls: []
   onHidePhone:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1873496003981595036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759677956815908141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd47e9ccb2e4f68aed4226666b0e23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expirationSignal: {fileID: 8769367833542506924}
+  expireSoonColor: {r: 0.48235294, g: 0, b: 0, a: 0}
+  expireAfterSomeTimeColor: {r: 0.5647059, g: 0.27058825, b: 0, a: 0}
+  expireNotSoonColor: {r: 0.1254902, g: 0.4509804, b: 0, a: 0}
+  expireBlack: {r: 0, g: 0, b: 0, a: 0}
+  blinkingTime: 5
+  changeExpirationSignalTime: -1
 --- !u!1 &8813833300872937833
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2165914052972424829}
   - component: {fileID: 6814198904031679907}
   - component: {fileID: 1704024023541947189}
+  - component: {fileID: 8610369687155835549}
   m_Layer: 0
   m_Name: SymbolInserter
   m_TagString: Untagged
@@ -87,6 +88,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 7740347927400781284}
   screen: {fileID: 6499081458025053893}
   expirationSignal: {fileID: 4254967060432734514}
+  expirationIndicator: {fileID: 8610369687155835549}
 --- !u!114 &5619524112309281432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +160,25 @@ MonoBehaviour:
   correctAnswerEffect: {fileID: 6966079317653204121}
   correctAnswerEffectTransform: {fileID: 477707006827837572}
   correctAnswerEffectDestroyDelayInSeconds: 5
+--- !u!114 &8610369687155835549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477707006827837575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd47e9ccb2e4f68aed4226666b0e23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expirationSignal: {fileID: 4254967060432734514}
+  expireSoonColor: {r: 0.48235294, g: 0, b: 0, a: 0}
+  expireAfterSomeTimeColor: {r: 0.5647059, g: 0.27058825, b: 0, a: 0}
+  expireNotSoonColor: {r: 0.1254902, g: 0.4509804, b: 0, a: 0}
+  expireBlack: {r: 0, g: 0, b: 0, a: 0}
+  blinkingTime: 5
+  changeExpirationSignalTime: -1
 --- !u!1 &1239087782914044010
 GameObject:
   m_ObjectHideFlags: 0
