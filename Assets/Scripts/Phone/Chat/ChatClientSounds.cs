@@ -13,8 +13,19 @@ public class ChatClientSounds : NetworkBehaviour
         chatClient.onReceiveMessage.AddListener(PlayReceiveMessageSound);
     }
 
-    [ClientRpc]
     private void PlayReceiveMessageSound(string sender, int symbolId)
+    {
+        PlayReceiveMessageSoundCommand(sender, symbolId);
+    }
+    
+    [Command]
+    private void PlayReceiveMessageSoundCommand(string sender, int symbolId)
+    {
+        PlayReceiveMessageSoundRpc(sender, symbolId);
+    }
+
+    [ClientRpc]
+    private void PlayReceiveMessageSoundRpc(string sender, int symbolId)
     {
         receiveMessageSound.Play();
     }
