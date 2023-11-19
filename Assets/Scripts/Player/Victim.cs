@@ -102,7 +102,6 @@ public class Victim : NetworkBehaviour
             CmdDie(hunterCamera.position, hitAngle);
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
-            CmdOnDeath();
         }
     }
 
@@ -148,6 +147,7 @@ public class Victim : NetworkBehaviour
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle, cam.GetComponent<Spectator>());
         }
+        onDeath.Invoke();
     }
 
     private void PlayDamageSound()
@@ -177,17 +177,5 @@ public class Victim : NetworkBehaviour
     private void RpcOnDamageTaken()
     {
         onDamageTaken.Invoke();
-    }
-
-    [Command]
-    private void CmdOnDeath()
-    {
-        RpcOnDeath();
-    }
-
-    [ClientRpc]
-    private void RpcOnDeath()
-    {
-        onDeath.Invoke();
     }
 }
