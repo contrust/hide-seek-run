@@ -1,5 +1,6 @@
 using DefaultNamespace;
 using Player;
+using Symbols;
 using TMPro;
 using UnityEngine;
 

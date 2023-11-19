@@ -4,6 +4,7 @@ using HUD;
 using Mirror;
 using Network;
 using StarterAssets;
+using Symbols;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;

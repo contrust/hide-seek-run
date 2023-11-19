@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Symbols;
+using TMPro;
 using UnityEngine;
 
 namespace Phone.Chat
