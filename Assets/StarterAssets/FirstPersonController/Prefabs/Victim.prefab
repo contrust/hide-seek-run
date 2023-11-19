@@ -7247,11 +7247,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   Health: 100
-  color: 0
+  color: 3
   hatTextures:
   - {fileID: 2100000, guid: 523edba82f4c45847a656cd64c7d1eeb, type: 2}
-  - {fileID: 2100000, guid: b8710e9ee9efa0e42a417b0276cce501, type: 2}
   - {fileID: 2100000, guid: cc65d995e0f7afb47bd23ff576fc3980, type: 2}
+  - {fileID: 2100000, guid: b8710e9ee9efa0e42a417b0276cce501, type: 2}
   - {fileID: 2100000, guid: c2c125858dada904eb95049db817cc63, type: 2}
   hat: {fileID: 9201314639952327051}
   MaxHealth: 100
