@@ -58,7 +58,7 @@ public class Victim : NetworkBehaviour
         {
             GetHit = false;
             GetDamage(1, null);
-            onDamageTaken.Invoke();
+            RpcOnDamageTaken();
         }
     }
 
@@ -67,7 +67,7 @@ public class Victim : NetworkBehaviour
         Health = newValue;
         if (isLocalPlayer)
         {
-            onDamageTaken.Invoke();
+            RpcOnDamageTaken();
         }
     }
 
@@ -95,7 +95,7 @@ public class Victim : NetworkBehaviour
         if(Health <=0)
             return;
         Health -= damage;
-        onDamageTaken.Invoke();
+        RpcOnDamageTaken();
         if (Health <= 0)
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
@@ -159,5 +159,11 @@ public class Victim : NetworkBehaviour
     private void RpcPlayDamageSound()
     {
         DamageSound.Play();
+    }
+    
+    [ClientRpc]
+    private void RpcOnDamageTaken()
+    {
+        onDamageTaken.Invoke();
     }
 }
