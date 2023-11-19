@@ -9,8 +9,8 @@ public class SymbolInserterSounds : NetworkBehaviour
 
     private void Start()
     {
-        symbolInserter.onCorrectSymbol.AddListener(PlayCorrectAnswerSound);
-        symbolInserter.onWrongSymbol.AddListener(PlayWrongAnswerSound);
+        symbolInserter.onCorrectSymbol.AddListener(PlayCorrectAnswerSoundRpc);
+        symbolInserter.onWrongSymbol.AddListener(PlayWrongAnswerSoundRpc);
     }
 
     private void PlayCorrectAnswerSound()
@@ -19,18 +19,6 @@ public class SymbolInserterSounds : NetworkBehaviour
     }
 
     private void PlayWrongAnswerSound()
-    {
-        PlayWrongAnswerSoundRpc();
-    }
-
-    [Command]
-    private void PlayCorrectAnswerSoundCommand()
-    {
-        PlayCorrectAnswerSoundRpc();
-    }
-    
-    [Command]
-    private void PlayWrongAnswerSoundCommand()
     {
         PlayWrongAnswerSoundRpc();
     }
