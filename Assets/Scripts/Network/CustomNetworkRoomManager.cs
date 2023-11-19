@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
-using Mirror.Examples.NetworkRoom;
+using Network.Lobby;
 using Steamworks;
 using UI;
 using UnityEngine;
@@ -45,7 +45,12 @@ namespace Network
                 : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
             var victim = player.GetComponent<Victim>();
             if (victim)
-                victim.steamName = roomPlayer.GetComponent<NetworkRoomPlayerExt>().steamName;
+            {
+                var roomPlayerExt = roomPlayer.GetComponent<NetworkRoomPlayerExt>();
+                victim.steamName = roomPlayerExt.steamName;
+                roomPlayerExt.SetNewColor();
+                victim.color = roomPlayerExt.PlayerColor;
+            }
             return player;
         }
     

@@ -10,6 +10,10 @@ using UnityEngine.Rendering.Universal;
 public class Victim : NetworkBehaviour
 {
     [SyncVar(hook = nameof(SetHealth))] public int Health;
+    [SyncVar(hook = nameof(SetColor))] public ColorPlayerEnum color;
+    [SerializeField] private Material[] hatTextures;
+    [SerializeField] private GameObject hat;
+    public int MaxHealth = 100;
     public AudioSource DamageSound;
 
     [SerializeField] private Material skybox;
@@ -20,7 +24,6 @@ public class Victim : NetworkBehaviour
     private const float ClippingPlaneDistance = 0.15f;
     private const int OverlayCameraDepth = 1000;
     private PlayerCamera playerCamera;
-    private HealthBar healthBar;
     
     [SerializeField] private PhoneController phone;
     public bool IsPhoneActive => phone.isPhoneActive;
@@ -43,7 +46,6 @@ public class Victim : NetworkBehaviour
         playerCamera = GetComponent<PlayerCamera>();
         if (isLocalPlayer)
         {
-            InitHealthBar();
             InitCamera();
             SetupLayers();
         }
@@ -65,9 +67,16 @@ public class Victim : NetworkBehaviour
         Health = newValue;
         if (isLocalPlayer)
         {
-            healthBar.SetHealth(Health);
             onDamageTaken.Invoke();
         }
+    }
+
+    private void SetColor(ColorPlayerEnum _, ColorPlayerEnum newValue)
+    {
+        color = newValue;
+        var newMaterials = hat.GetComponent<SkinnedMeshRenderer>().materials;
+        newMaterials[3] = hatTextures[(int)newValue];
+        hat.GetComponent<SkinnedMeshRenderer>().materials = newMaterials;
     }
 
     public override void OnStartLocalPlayer()
@@ -95,12 +104,6 @@ public class Victim : NetworkBehaviour
             animationHelper.TriggerDead(hitAngle);
             onDeath.Invoke();
         }
-    }
-
-    private void InitHealthBar()
-    {
-        healthBar = FindObjectOfType<HealthBar>();
-        healthBar.SetMaxHealth(Health);
     }
 
     private void InitCamera()
