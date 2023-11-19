@@ -15,7 +15,7 @@ public class SymbolButtonSounds : NetworkBehaviour
 
     private void PlayPressedButtonSound()
     {
-        PlayPressedButtonSoundCommand();
+        PlayPressedButtonSoundRpc();
     }
     
     [Command]
