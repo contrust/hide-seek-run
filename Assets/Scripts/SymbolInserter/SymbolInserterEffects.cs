@@ -16,7 +16,7 @@ public class SymbolInserterEffects : NetworkBehaviour
 
     private void InstantiateCorrectAnswerEffect()
     {
-        InstantiateCorrectAnswerEffectCommand();
+        InstantiateCorrectAnswerEffectRpc();
     }
 
     [Command]

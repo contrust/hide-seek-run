@@ -15,12 +15,12 @@ public class SymbolInserterSounds : NetworkBehaviour
 
     private void PlayCorrectAnswerSound()
     {
-        PlayCorrectAnswerSoundCommand();
+        PlayCorrectAnswerSoundRpc();
     }
 
     private void PlayWrongAnswerSound()
     {
-        PlayWrongAnswerSoundCommand();
+        PlayWrongAnswerSoundRpc();
     }
 
     [Command]
