@@ -20,10 +20,31 @@ public class PhoneControllerSounds : RequireInstance<Victim>
         PlayShowPhoneSound();
     }
 
-    [ClientRpc]
     private void PlayShowPhoneSound()
     {
-        Debug.Log("SHOw");
+        PlayShowPhoneSoundCommand();
+    }
+    
+    private void PlayHidePhoneSound()
+    {
+        PlayHidePhoneSoundCommand();
+    }
+
+    [Command]
+    private void PlayShowPhoneSoundCommand()
+    {
+        PlayShowPhoneSoundRpc();
+    }
+    
+    [Command]
+    private void PlayHidePhoneSoundCommand()
+    {
+        PlayHidePhoneSoundRpc();
+    }
+
+    [ClientRpc]
+    private void PlayShowPhoneSoundRpc()
+    {
         showPhoneSound.Play();
     }
     
@@ -34,9 +55,8 @@ public class PhoneControllerSounds : RequireInstance<Victim>
     }
     
     [ClientRpc]
-    private void PlayHidePhoneSound()
+    private void PlayHidePhoneSoundRpc()
     {
-        Debug.Log("HIDe");
         hidePhoneSound.Play();
     }
 }
