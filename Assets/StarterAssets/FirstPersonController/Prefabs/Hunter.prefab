@@ -9873,6 +9873,7 @@ MonoBehaviour:
   POVtrail: {fileID: 2008762343611410957, guid: ab6fc340b0a5b6e40bb8bd777070b397, type: 3}
   shootingSystem: {fileID: 7681897510601532198}
   victimShooting: {fileID: 1996597174720987814}
+  <ShootingDistance>k__BackingField: 100
 --- !u!114 &6052580650494772511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9898,13 +9899,15 @@ MonoBehaviour:
   onEnemyHit:
     m_PersistentCalls:
       m_Calls: []
-  bulletsCount: 8
   bulletPos: {fileID: 4620964096520538666}
   POVbulletPos: {fileID: 6435100716721650627}
   bulletTrail: {fileID: 2008762343611410957, guid: 8b9eae53795494d40a766ffbae738e45, type: 3}
   POVtrail: {fileID: 2008762343611410957, guid: ab6fc340b0a5b6e40bb8bd777070b397, type: 3}
   shootingSystem: {fileID: 7681897510601532198}
   victimShooting: {fileID: 1996597174720987814}
+  bulletsCount: 8
+  spread: 0.13
+  <ShootingDistance>k__BackingField: 17
 --- !u!114 &5476336959705800085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9920,7 +9923,6 @@ MonoBehaviour:
   onFourCamModeChange:
     m_PersistentCalls:
       m_Calls: []
-  placeholder: {fileID: 0}
 --- !u!95 &1964522027246775005
 Animator:
   serializedVersion: 5
