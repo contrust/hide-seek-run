@@ -4,6 +4,9 @@ namespace Player.Weapons
 {
     public class Weapon : WeaponBase
     {
+        [field:SerializeField]
+        protected override float ShootingDistance { get; set; } = 100;
+
         protected override void Shoot()
         {
             var cameraTransform = mainCamera.transform;

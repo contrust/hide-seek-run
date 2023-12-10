@@ -8,7 +8,7 @@ namespace Player.Weapons
 {
     public abstract class WeaponBase : NetworkBehaviour
     {
-        protected const float ShootingDistance = 100;
+        protected abstract float ShootingDistance { get; set; }
         protected const float FlashTime = 0.1f;
         public GameObject Flash;
         public float TimeReload;

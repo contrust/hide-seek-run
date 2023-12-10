@@ -5,7 +5,10 @@ namespace Player.Weapons
     public class Shotgun : WeaponBase
     {
         [SerializeField] private int bulletsCount = 8;
-        [SerializeField] private float spread = 0.2f;
+        [SerializeField] private float spread = 0.13f;
+
+        [field:SerializeField]
+        protected override float ShootingDistance { get; set; } = 17;
 
         protected override void Shoot()
         {
