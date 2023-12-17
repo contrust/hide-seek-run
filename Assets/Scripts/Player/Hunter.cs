@@ -1,16 +1,15 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Lobby.WeaponSelection;
 using HUD;
 using Mirror;
 using Network;
+using Player.Weapons;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Random = UnityEngine.Random;
 
 public class Hunter : NetworkBehaviour
@@ -29,6 +28,11 @@ public class Hunter : NetworkBehaviour
     }
 
     public LayerMask Render;
+
+    //TODO: Вынести в отдельный класс
+    public WeaponType CurrentWeapon;
+    [SerializeField] private Weapon Rifle;
+    [SerializeField] private Shotgun Shotgun;
 
     [SerializeField] private float blindness;
     private Coroutine blindnessCoroutine;
@@ -149,5 +153,23 @@ public class Hunter : NetworkBehaviour
     {
         symbolMeshRendererFront.material = material;
         symbolMeshRendererBack.material = material;
+    }
+
+
+    public void SelectWeapon(WeaponType weapon)
+    {
+        switch (weapon)
+        {
+            case WeaponType.Rifle:
+                Rifle.enabled = true;
+                Shotgun.enabled = false;
+                break;
+            case WeaponType.Shotgun:
+                Rifle.enabled = false;
+                Shotgun.enabled = true;
+                break;
+            default: throw new ArgumentException("Unknown weapon type");
+        }
+        CurrentWeapon = weapon;
     }
 }
