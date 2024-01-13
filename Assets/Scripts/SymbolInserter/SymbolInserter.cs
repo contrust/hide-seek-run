@@ -22,6 +22,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     [SerializeField] private Color expireAfterSomeTimeColor;
     [SerializeField] private Color expireNotSoonColor;
     [SerializeField] private Color expireBlack;
+    [SerializeField] private float expireColorIntensity = 5;
     [SerializeField] private float blinkingTime = 5;
     [SerializeField] private float insertionTimeOut = 10f;
     [SerializeField] private MeshRenderer meshRenderer;
@@ -36,7 +37,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     
     private SymbolManager symbolManager;
     private MatchSettings matchSettings;
-    
+    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+
 
     protected override void CallbackAll(SymbolManager instance)
     {
@@ -66,7 +68,9 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     }
 
     private void SetColor(Color _, Color newColor) => meshRenderer.material.color = newColor;
-    private void SetExpirationColor(Color _, Color newColor) => expirationSignal.material.color = newColor;
+
+    private void SetExpirationColor(Color _, Color newColor) =>
+        expirationSignal.material.SetColor(EmissionColor, newColor * expireColorIntensity);
 
     private void SetDisplay(int _, int newNumber)
     {

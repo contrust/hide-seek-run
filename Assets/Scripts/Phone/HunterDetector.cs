@@ -20,6 +20,9 @@ namespace Phone
         [SerializeField] private Vector3 scanDirection;
         [SerializeField] private int scanAngle = 30;
         [SerializeField] private float angleToHunter;
+        [SerializeField] private float hunterDetectorColorIntensity = 5;
+        
+        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
         private float signalDelay
         {
@@ -117,9 +120,9 @@ namespace Phone
 
         private IEnumerator ChangeColor()
         {
-            detector.material.color = activeColor;
+            detector.material.SetColor(EmissionColor, activeColor * hunterDetectorColorIntensity);
             yield return new WaitForSeconds(0.2f);
-            detector.material.color = defaultColor;
+            detector.material.SetColor(EmissionColor, defaultColor * hunterDetectorColorIntensity);
         }
 
         private void MakeSignal()
