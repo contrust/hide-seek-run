@@ -10,21 +10,53 @@ public class PhoneControllerSounds : RequireInstance<Victim>
 
     private void Start()
     {
-        phoneController.onShowPhone.AddListener(PlayShowPhoneSound);
-        phoneController.onHidePhone.AddListener(PlayHidePhoneSound);
+        phoneController.onShowPhone.AddListener(CmdPlayShowPhoneSound);
+        phoneController.onHidePhone.AddListener(CmdPlayHidePhoneSound);
+    }
+
+    [Command]
+    private void CmdPlayShowPhoneSound()
+    {
+        PlayShowPhoneSound();
+    }
+
+    private void PlayShowPhoneSound()
+    {
+        PlayShowPhoneSoundCommand();
+    }
+    
+    private void PlayHidePhoneSound()
+    {
+        PlayHidePhoneSoundCommand();
+    }
+
+    [Command]
+    private void PlayShowPhoneSoundCommand()
+    {
+        PlayShowPhoneSoundRpc();
+    }
+    
+    [Command]
+    private void PlayHidePhoneSoundCommand()
+    {
+        PlayHidePhoneSoundRpc();
     }
 
     [ClientRpc]
-    private void PlayShowPhoneSound()
+    private void PlayShowPhoneSoundRpc()
     {
-        Debug.Log("SHOw");
         showPhoneSound.Play();
     }
     
-    [ClientRpc]
-    private void PlayHidePhoneSound()
+    [Command]
+    private void CmdPlayHidePhoneSound()
     {
-        Debug.Log("HIDe");
+        PlayHidePhoneSound();
+    }
+    
+    [ClientRpc]
+    private void PlayHidePhoneSoundRpc()
+    {
         hidePhoneSound.Play();
     }
 }

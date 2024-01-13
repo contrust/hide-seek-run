@@ -166,12 +166,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1854931234875001173}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &93696880447917758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1220,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -1270,7 +1270,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1537,7 +1537,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -1587,7 +1587,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1877,12 +1877,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3183861854984518607}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &2393587737055020990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,12 +2723,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2857658235375695371}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &3427733102014633769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3215,12 +3215,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7713144859598136502}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &3835534642920256984
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,7 +3274,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -3324,7 +3324,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5104,12 +5104,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 5618908847625469778}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &6671451129361743054
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,7 +5606,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -5656,7 +5656,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5734,7 +5734,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -5784,7 +5784,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6633,7 +6633,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -6683,7 +6683,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7247,6 +7247,14 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   Health: 100
+  color: 3
+  hatTextures:
+  - {fileID: 2100000, guid: 523edba82f4c45847a656cd64c7d1eeb, type: 2}
+  - {fileID: 2100000, guid: cc65d995e0f7afb47bd23ff576fc3980, type: 2}
+  - {fileID: 2100000, guid: b8710e9ee9efa0e42a417b0276cce501, type: 2}
+  - {fileID: 2100000, guid: c2c125858dada904eb95049db817cc63, type: 2}
+  hat: {fileID: 9201314639952327051}
+  MaxHealth: 100
   DamageSound: {fileID: 1755683656676298019}
   skybox: {fileID: 2100000, guid: aeab33f69c199e54794f516d31450ec4, type: 2}
   view: {fileID: 9201314639952327051}
@@ -7354,9 +7362,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 15
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -7404,7 +7412,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7641,7 +7649,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -7691,7 +7699,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 0.083333336
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7901,7 +7909,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: 6efe841846c35a44ab5ba98a92f036da, type: 2}
   - {fileID: 2100000, guid: 260f33530cd55f8499df006e3663b8b5, type: 2}
   - {fileID: 2100000, guid: 7118eea20c1953d4fb440a87c5e2c153, type: 2}
-  - {fileID: 2100000, guid: 4fb8a500a71ea0941989b4bc01224eb4, type: 2}
+  - {fileID: 2100000, guid: c2c125858dada904eb95049db817cc63, type: 2}
   - {fileID: 2100000, guid: 1570bb74c9137404cac97cefe79bacb9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mirror;
-using Mirror.Examples.NetworkRoom;
+using Network.Lobby;
 using Steamworks;
 using UI;
 using UnityEngine;
@@ -21,8 +21,8 @@ namespace Network
         private readonly UnityEvent onRoomClientSceneChangedGameplayScene = new ();
         private readonly UnityEvent onRoomServerSceneLoadedForPlayerEvent = new ();
         private readonly UnityEvent onRoomServerSceneChangedRoomScene = new ();
-        [SerializeField] private GameObject hunterPrefab;
-        [SerializeField] private GameObject victimPrefab;
+        [SerializeField] public GameObject hunterPrefab;
+        [SerializeField] public GameObject victimPrefab;
 
         public override void OnRoomStartServer()
         {
@@ -45,7 +45,12 @@ namespace Network
                 : Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
             var victim = player.GetComponent<Victim>();
             if (victim)
-                victim.steamName = roomPlayer.GetComponent<NetworkRoomPlayerExt>().steamName;
+            {
+                var roomPlayerExt = roomPlayer.GetComponent<NetworkRoomPlayerExt>();
+                victim.steamName = roomPlayerExt.steamName;
+                roomPlayerExt.SetNewColor();
+                victim.color = roomPlayerExt.PlayerColor;
+            }
             return player;
         }
     

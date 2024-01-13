@@ -1,5 +1,7 @@
 using HUD.Effects;
 using Mirror;
+using Player;
+using Player.Weapons;
 using UnityEngine;
 
 namespace HUD
@@ -14,6 +16,7 @@ namespace HUD
         [SerializeField] private HUDEffect camNumbers;
         [SerializeField] private GameObject staticElements;
         [SerializeField] private HealthBar healthBar;
+        [SerializeField] private HealthManager healthManager;
         
         public static HUDController instance;
 
@@ -25,12 +28,14 @@ namespace HUD
         public void SetupHUD()
         {
             var weapon = NetworkClient.localPlayer.GetComponent<Weapon>();
+            var shotgun = NetworkClient.localPlayer.GetComponent<Shotgun>(); //TODO: Сделать интерфейс IWeapon и получать его
             var fourCams = NetworkClient.localPlayer.GetComponent<FourCamerasView>();
             var isHunter = weapon != null && fourCams;
             if (isHunter)
             {
                 (reloadEffect as ReloadEffect).reloadTime = weapon.TimeReload; //TODO: нормально получать время перезарядки
                 weapon.onEnemyHit.AddListener(instance.OnEnemyHitHandler);
+                shotgun.onEnemyHit.AddListener(instance.OnEnemyHitHandler); 
                 //weapon.onShot.AddListener(instance.OnShotHandler);
                 SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
                 fourCams.onFourCamModeChange.AddListener(instance.OnFourCamerasHandler);
@@ -41,7 +46,8 @@ namespace HUD
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
                 var slap = NetworkClient.localPlayer.GetComponent<Slap>();
                 slap.onSlap.AddListener(instance.OnSlapHandler);
-                healthBar.gameObject.SetActive(true);
+                healthManager.gameObject.SetActive(true);
+                healthManager.Setup();
             }
         }
 

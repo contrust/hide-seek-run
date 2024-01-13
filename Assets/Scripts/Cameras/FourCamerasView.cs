@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,33 +5,34 @@ using Cameras;
 using DefaultNamespace;
 using StarterAssets;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
-using MouseButton = UnityEngine.UIElements.MouseButton;
 
 public class FourCamerasView : MonoBehaviour
 { 
+    public static FourCamerasView instance;
+    public UnityEvent onFourCamModeChange;
+    
+    private bool isEnabled;
+    
+    private Hunter hunter;
     private new Camera camera;
-    private List<Camera> Cameras => FindObjectsOfType<Victim>().Select(v => v.GetComponentInChildren<Camera>()).ToList();
+    private Camera weaponCamera;
     private StarterAssetsInputs input;
     private FixedCameraView fixedCamView;
-    private bool isEnabled;
-    public UnityEvent onFourCamModeChange;
-    [SerializeField] private Placeholder placeholder;
-    private Camera weaponCamera;
-    public static FourCamerasView instance;
+    private Placeholder placeholder;
+    private NicknamesOnCameras nicknamesOnCameras;
+    
+    private List<Victim> victims => FindObjectsOfType<Victim>().ToList();
+    private List<Camera> cameras => victims.Select(v => v.GetComponentInChildren<Camera>()).ToList();
+    
 
-    private Rect[] rects = {
+    private readonly Rect[] rects = {
         new Rect(0, 0.5f, 0.5f, 0.5f),
         new Rect(0.5f, 0.5f, 0.5f, 0.5f),
         new Rect(0, 0, 0.5f, 0.5f),
         new Rect(0.5f, 0, 0.5f, 0.5f),
     };
-
-    private Hunter hunter;
 
     private void Start()
     {
@@ -41,6 +41,7 @@ public class FourCamerasView : MonoBehaviour
         fixedCamView = hunter.GetComponent<FixedCameraView>();
         input = GetComponent<StarterAssetsInputs>();
         placeholder = GameObject.FindGameObjectWithTag("CameraPlaceholder").GetComponent<Placeholder>();
+        nicknamesOnCameras = FindObjectOfType<NicknamesOnCameras>();
         weaponCamera = GameObject.FindGameObjectWithTag("WeaponCamera").GetComponent<Camera>();
         instance = this;
     }
@@ -75,29 +76,14 @@ public class FourCamerasView : MonoBehaviour
 
         // if (isEnabled)
         // {
-            if (input.fixedCamNum == 1)
+        for (int i = 0; i < 4; i++)
+        {
+            if (input.fixedCamNum == i + 1)
             {
-                SetFixedCam(0);
+                SetFixedCam(i);
                 input.fixedCamNum = 0;
             }
-
-            if (input.fixedCamNum == 2)
-            {
-                SetFixedCam(1);
-                input.fixedCamNum = 0;
-            }
-
-            if (input.fixedCamNum == 3)
-            {
-                SetFixedCam(2);
-                input.fixedCamNum = 0;
-            }
-
-            if (input.fixedCamNum == 4)
-            {
-                SetFixedCam(3);
-                input.fixedCamNum = 0;
-            }
+        }
         // }
         // else
         //     input.fixedCamNum = 0;
@@ -111,14 +97,16 @@ public class FourCamerasView : MonoBehaviour
     {
         Debug.Log("EnableView");
         placeholder.Show();
+        nicknamesOnCameras.UpdateNicknames(victims);
         weaponCamera.enabled = false;
         yield return 0; //ждем один кадр, чтобы отрисовалась заглушка
         onFourCamModeChange.Invoke();
         camera.enabled = false;
-        for (var i = 0; i < Cameras.Count; i++)
+        var _cameras = cameras;
+        for (var i = 0; i < _cameras.Count; i++)
         {
-            Cameras[i].enabled = true;
-            Cameras[i].rect = rects[i];
+            _cameras[i].enabled = true;
+            _cameras[i].rect = rects[i];
         }
         isEnabled = true;
         hunter.SetLight();
@@ -129,7 +117,7 @@ public class FourCamerasView : MonoBehaviour
         if (!isEnabled)
             return;
         onFourCamModeChange.Invoke();
-        foreach (var cam in Cameras)
+        foreach (var cam in cameras)
         {
             cam.enabled = false;
         }
@@ -138,14 +126,16 @@ public class FourCamerasView : MonoBehaviour
         camera.enabled = true;
         hunter.SetDark();
         placeholder.Hide();
+        nicknamesOnCameras.ClearNicknames();
     }
 
     private void SetFixedCam(int camNumber)
     {
-        if (Cameras.Count < camNumber + 1)
+        var _cameras = cameras;
+        if (_cameras.Count < camNumber + 1)
             return;
         DisableView();
         fixedCamView.DisableFixedCam();
-        fixedCamView.SetFixedCam(Cameras[camNumber]);
+        fixedCamView.SetFixedCam(_cameras[camNumber]);
     }
 }

@@ -12,9 +12,20 @@ public class SymbolButtonSounds : NetworkBehaviour
     {
         symbolButton.Pressed.AddListener(PlayPressedButtonSound);
     }
+
+    private void PlayPressedButtonSound()
+    {
+        PlayPressedButtonSoundRpc();
+    }
+    
+    [Command]
+    private void PlayPressedButtonSoundCommand()
+    {
+        PlayPressedButtonSoundRpc();
+    }
     
     [ClientRpc]
-    private void PlayPressedButtonSound()
+    private void PlayPressedButtonSoundRpc()
     {
         buttonSound.Play();
     }

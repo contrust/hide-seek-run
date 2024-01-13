@@ -13,14 +13,24 @@ public class SymbolInserterSounds : NetworkBehaviour
         symbolInserter.onWrongSymbol.AddListener(PlayWrongAnswerSound);
     }
 
-    [ClientRpc]
     private void PlayCorrectAnswerSound()
+    {
+        PlayCorrectAnswerSoundRpc();
+    }
+
+    private void PlayWrongAnswerSound()
+    {
+        PlayWrongAnswerSoundRpc();
+    }
+
+    [ClientRpc]
+    private void PlayCorrectAnswerSoundRpc()
     {
         correctAnswerSound.Play();
     }
     
     [ClientRpc]
-    private void PlayWrongAnswerSound()
+    private void PlayWrongAnswerSoundRpc()
     {
         wrongAnswerSound.Play();
     }

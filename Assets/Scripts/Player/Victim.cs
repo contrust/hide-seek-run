@@ -10,6 +10,10 @@ using UnityEngine.Rendering.Universal;
 public class Victim : NetworkBehaviour
 {
     [SyncVar(hook = nameof(SetHealth))] public int Health;
+    [SyncVar(hook = nameof(SetColor))] public ColorPlayerEnum color;
+    [SerializeField] private Material[] hatTextures;
+    [SerializeField] private GameObject hat;
+    public int MaxHealth = 100;
     public AudioSource DamageSound;
 
     [SerializeField] private Material skybox;
@@ -20,7 +24,6 @@ public class Victim : NetworkBehaviour
     private const float ClippingPlaneDistance = 0.15f;
     private const int OverlayCameraDepth = 1000;
     private PlayerCamera playerCamera;
-    private HealthBar healthBar;
     
     [SerializeField] private PhoneController phone;
     public bool IsPhoneActive => phone.isPhoneActive;
@@ -43,7 +46,6 @@ public class Victim : NetworkBehaviour
         playerCamera = GetComponent<PlayerCamera>();
         if (isLocalPlayer)
         {
-            InitHealthBar();
             InitCamera();
             SetupLayers();
         }
@@ -56,7 +58,7 @@ public class Victim : NetworkBehaviour
         {
             GetHit = false;
             GetDamage(1, null);
-            onDamageTaken.Invoke();
+            CmdOnDamageTaken();
         }
     }
 
@@ -65,9 +67,18 @@ public class Victim : NetworkBehaviour
         Health = newValue;
         if (isLocalPlayer)
         {
-            healthBar.SetHealth(Health);
-            onDamageTaken.Invoke();
+            CmdOnDamageTaken();
+            if (Health <= 0)
+                CmdOnDeath();
         }
+    }
+
+    private void SetColor(ColorPlayerEnum _, ColorPlayerEnum newValue)
+    {
+        color = newValue;
+        var newMaterials = hat.GetComponent<SkinnedMeshRenderer>().materials;
+        newMaterials[3] = hatTextures[(int)newValue];
+        hat.GetComponent<SkinnedMeshRenderer>().materials = newMaterials;
     }
 
     public override void OnStartLocalPlayer()
@@ -86,21 +97,14 @@ public class Victim : NetworkBehaviour
         if(Health <=0)
             return;
         Health -= damage;
-        onDamageTaken.Invoke();
+        CmdOnDamageTaken();
         if (Health <= 0)
         {
             var hitAngle = Vector3.Angle(hunterCamera.forward * -1, overlayCamera.transform.forward);
-            Die(hunterCamera.position, hitAngle);
+            CmdDie(hunterCamera.position, hitAngle);
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
-            onDeath.Invoke();
         }
-    }
-
-    private void InitHealthBar()
-    {
-        healthBar = FindObjectOfType<HealthBar>();
-        healthBar.SetMaxHealth(Health);
     }
 
     private void InitCamera()
@@ -124,6 +128,12 @@ public class Victim : NetworkBehaviour
         {
             child.gameObject.layer = layer;
         }
+    }
+
+    [Command]
+    private void CmdDie(Vector3 lookAt, float hitAngle)
+    {
+        Die(lookAt, hitAngle);
     }
 
     [ClientRpc]
@@ -156,5 +166,29 @@ public class Victim : NetworkBehaviour
     private void RpcPlayDamageSound()
     {
         DamageSound.Play();
+    }
+
+    [Command]
+    private void CmdOnDamageTaken()
+    {
+        RpcOnDamageTaken();
+    }
+    
+    [ClientRpc]
+    private void RpcOnDamageTaken()
+    {
+        onDamageTaken.Invoke();
+    }
+
+    [Command]
+    private void CmdOnDeath()
+    {
+        RpcOnDeath();
+    }
+
+    [ClientRpc]
+    private void RpcOnDeath()
+    {
+        onDeath.Invoke();
     }
 }
