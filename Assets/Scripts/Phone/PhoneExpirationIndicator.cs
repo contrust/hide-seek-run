@@ -10,10 +10,12 @@ namespace Phone
         [SerializeField] private Color expireAfterSomeTimeColor;
         [SerializeField] private Color expireNotSoonColor;
         [SerializeField] private Color expireBlack;
+        [SerializeField] private float expireColorIntensity = 5;
         [SerializeField] private float blinkingTime = 5;
         [SerializeField] private float changeExpirationSignalTime = -1;
         private SymbolManager symbolManager;
         private MatchSettings matchSettings;
+        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
         private void Start()
         {
@@ -27,18 +29,18 @@ namespace Phone
             var material = expirationSignal.material;
             while (true)
             {
-                material.color = expireNotSoonColor;
+                material.SetColor(EmissionColor, expireNotSoonColor * expireColorIntensity);
                 yield return new WaitForSeconds(changeExpirationSignalTime);
-                material.color = expireAfterSomeTimeColor;
+                material.SetColor(EmissionColor, expireAfterSomeTimeColor * expireColorIntensity);
                 yield return new WaitForSeconds(changeExpirationSignalTime);
-                material.color = expireSoonColor;
+                material.SetColor(EmissionColor, expireSoonColor * expireColorIntensity);
                 yield return new WaitForSeconds(changeExpirationSignalTime - blinkingTime);
             
                 for (var i = 0; i < blinkingTime; i++)
                 {
-                    material.color = expireBlack;
+                    material.SetColor(EmissionColor, expireBlack * expireColorIntensity);
                     yield return new WaitForSeconds(0.5f);
-                    material.color = expireSoonColor;
+                    material.SetColor(EmissionColor, expireSoonColor * expireColorIntensity);
                     yield return new WaitForSeconds(0.5f);
                 }
             }
