@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Press E \n"
+  m_text: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u0423"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1761,9 +1761,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 463000309}
     m_Modifications:
+    - target: {fileID: 1068848793280353214, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0425\u041E\u0422\u041D\u0418\u041A \u041F\u041E\u0411\u0415\u0414\u0418\u041B"
+      objectReference: {fileID: 0}
     - target: {fileID: 7707831351799507067, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707831351799507069, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
+      propertyPath: m_text
+      value: "\u0416\u0415\u0420\u0422\u0412\u042B \u041F\u041E\u0411\u0415\u0414\u0418\u041B\u0418"
       objectReference: {fileID: 0}
     - target: {fileID: 7707831352409136780, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
       propertyPath: m_Name
@@ -1857,6 +1865,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7714179503315660338, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714179503315660338, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050291376692659000, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043B\u043E\u0431\u0431\u0438"
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b20230591e95c6e4f9e11b4a1997d4f1, type: 3}
@@ -1878,6 +1898,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 463000309}
     m_Modifications:
+    - target: {fileID: 439236085700233463, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0432 \u043B\u043E\u0431\u0431\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514317336118958789, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514317336118958789, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 7187582582994609364, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.1
@@ -1890,6 +1922,19 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7187582583660805268, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_text
+      value: "\u0427\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+        \u043C\u044B\u0448\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187582583660805269, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187582583660805269, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
+      objectReference: {fileID: 0}
     - target: {fileID: 7187582584545790862, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.1
@@ -1897,6 +1942,10 @@ PrefabInstance:
     - target: {fileID: 7187582584545790862, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162083650990708873, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u0430\u0443\u0437\u0430"
       objectReference: {fileID: 0}
     - target: {fileID: 8162083652798599953, guid: 1d78d054dc958ab49a44736f49778066, type: 3}
       propertyPath: m_Pivot.x
