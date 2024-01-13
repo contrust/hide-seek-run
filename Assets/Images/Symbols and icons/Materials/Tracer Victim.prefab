@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8832936899188790776}
   - component: {fileID: 2008762343611410957}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Tracer Victim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
