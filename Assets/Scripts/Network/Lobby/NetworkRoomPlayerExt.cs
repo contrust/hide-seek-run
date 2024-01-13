@@ -89,12 +89,12 @@ namespace Network.Lobby
             GUILayout.BeginArea(new Rect(20f, 300f, 120f, 20f));
             if (readyToBegin)
             {
-                if (GUILayout.Button("Cancel"))
+                if (GUILayout.Button("Не готов"))
                     CmdChangeReadyState(false);
             }
             else
             {
-                if (GUILayout.Button("Ready"))
+                if (GUILayout.Button("Готов"))
                     CmdChangeReadyState(true);
             }
 
@@ -113,11 +113,11 @@ namespace Network.Lobby
             GUILayout.BeginArea(new Rect(20f + (index * 100), 250f, 100f, 50f));
 
             if (readyToBegin)
-                GUILayout.Label("Ready", currentStyle);
+                GUILayout.Label("Готов", currentStyle);
             else
-                GUILayout.Label("Not Ready", currentStyle);
+                GUILayout.Label("Не готов", currentStyle);
 
-            if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE", currentStyle))
+            if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("Удалить", currentStyle))
             {
                 GetComponent<NetworkIdentity>().connectionToClient.Disconnect();
             }
