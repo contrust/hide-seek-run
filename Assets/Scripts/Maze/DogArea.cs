@@ -31,7 +31,7 @@ public class DogArea: NetworkBehaviour
         }
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void SetVictimCommand(Victim victim, Dog dog)
     {
         SetVictimRpc(victim, dog);
@@ -43,7 +43,7 @@ public class DogArea: NetworkBehaviour
         dog.SetVictim(victim);
     }
     
-    [Command]
+    [Command(requiresAuthority = false)]
     private void UnsetVictimCommand(Dog dog)
     {
         UnsetVictimRpc(dog);
