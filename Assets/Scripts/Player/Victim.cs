@@ -126,10 +126,13 @@ public class Victim : NetworkBehaviour
         onStartStun.Invoke();
         IsStunned = true;
         var tmpSpeed = movementController.MoveSpeed;
+        var tmpSprintSpeed = movementController.SprintSpeed;
         movementController.MoveSpeed = 0;
+        movementController.SprintSpeed = 0;
         movementController.CanJump = false;
         yield return new WaitForSeconds(stunTimeInSeconds);
         movementController.MoveSpeed = tmpSpeed;
+        movementController.SprintSpeed = tmpSprintSpeed;
         movementController.CanJump = true;
         IsStunned = false;
         onEndStun.Invoke();
