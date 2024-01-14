@@ -14,7 +14,6 @@ public class DogArea: NetworkBehaviour
         {
             return;
         }
-        Debug.Log("New collider entered");
         var victim = other.gameObject.GetComponent<Victim>();
         victims.Add(victim);
         SetVictimToInactiveDog(victim);
@@ -61,8 +60,7 @@ public class DogArea: NetworkBehaviour
         {
             return;
         }
-        dog.SetVictim(unusedVictim);
-        
+        SetVictimRpc(unusedVictim, dog);
     }
 
     private Dog GetDogWithVictim(Victim victim)
