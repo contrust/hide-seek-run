@@ -33,7 +33,6 @@ public class DogArea: NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Collider exited");
         var victim = other.gameObject.GetComponent<Victim>();
         victims.Remove(victim);
         var dog = GetDogWithVictim(victim);
