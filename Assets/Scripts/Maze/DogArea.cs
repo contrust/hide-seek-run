@@ -14,6 +14,7 @@ public class DogArea: NetworkBehaviour
         {
             var dogToAddListener = dog;
             dog.onUnsetVictim.AddListener(() => FindAndSetVictimToDog(dogToAddListener));
+            dog.onVictimDeath.AddListener(victim => victims.Remove(victim));
         }
     }
 
