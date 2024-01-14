@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 691176605745307512}
   - component: {fileID: 7293312382512057964}
   - component: {fileID: 1523577939177064951}
+  - component: {fileID: 8386439533172086121}
+  - component: {fileID: 6474570041338018557}
   m_Layer: 0
   m_Name: trap
   m_TagString: Untagged
@@ -101,6 +103,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 0.540669, z: 1.6}
   m_Center: {x: 0, y: 0.27432266, z: 0}
+--- !u!114 &8386439533172086121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206142871222486466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 1843788016
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
+--- !u!114 &6474570041338018557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206142871222486466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb131bc8c244662928aadc625dede6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &2156151209379034836
 GameObject:
   m_ObjectHideFlags: 0

@@ -9575,6 +9575,7 @@ MonoBehaviour:
   JumpingSound: {fileID: 1555238269203382961}
   GroundingSound: {fileID: 4390904744145848914}
   FootstepsSound: {fileID: 8119318806303477447}
+  CanJump: 1
   cinemachineTargetPitch: 0
   input: {fileID: 0}
   showPauseKey: 27
@@ -10168,7 +10169,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  trapPrefab: {fileID: -1803578319727930397, guid: d601a18a4204e5d42b2cb9f54d4b7b22, type: 3}
+  trapPrefab: {fileID: 6474570041338018557, guid: 5bcdf25d7689ca74ebc24e3acfbe12c6, type: 3}
 --- !u!1 &8673958367749496276
 GameObject:
   m_ObjectHideFlags: 0
