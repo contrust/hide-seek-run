@@ -25,16 +25,28 @@ public class DogArea: NetworkBehaviour
         {
             if (dog.GetVictim() == null)
             {
-                SetVictimRpc(victim, dog);
+                SetVictimCommand(victim, dog);
                 break;
             }
         }
+    }
+
+    [Command]
+    private void SetVictimCommand(Victim victim, Dog dog)
+    {
+        SetVictimRpc(victim, dog);
     }
 
     [ClientRpc]
     private void SetVictimRpc(Victim victim, Dog dog)
     {
         dog.SetVictim(victim);
+    }
+    
+    [Command]
+    private void UnsetVictimCommand(Dog dog)
+    {
+        UnsetVictimRpc(dog);
     }
     
     [ClientRpc]
@@ -54,13 +66,13 @@ public class DogArea: NetworkBehaviour
             return;
         }
 
-        UnsetVictimRpc(dog);
+        UnsetVictimCommand(dog);
         var unusedVictim = GetUnusedVictim();
         if (unusedVictim is null)
         {
             return;
         }
-        SetVictimRpc(unusedVictim, dog);
+        SetVictimCommand(unusedVictim, dog);
     }
 
     private Dog GetDogWithVictim(Victim victim)
