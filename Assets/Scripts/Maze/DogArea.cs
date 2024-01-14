@@ -8,6 +8,15 @@ public class DogArea: NetworkBehaviour
     [SyncVar] private List<Victim> victims = new List<Victim>();
     [SyncVar] public List<Dog> dogs = new List<Dog>();
 
+    private void Start()
+    {
+        foreach (var dog in dogs)
+        {
+            var dogToAddListener = dog;
+            dog.onUnsetVictim.AddListener(() => FindAndSetVictimToDog(dogToAddListener));
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -16,59 +25,118 @@ public class DogArea: NetworkBehaviour
         }
         var victim = other.gameObject.GetComponent<Victim>();
         victims.Add(victim);
-        SetVictimToInactiveDog(victim);
+        if (SetVictimToInactiveDogs(victim))
+        {
+            return;
+        }
+        SetVictimToDogWithDuplicateVictim(victim);
     }
 
-    private void SetVictimToInactiveDog(Victim victim)
+    private bool SetVictimToDogWithDuplicateVictim(Victim victim)
     {
+        var usedVictims = new HashSet<Victim>();
+        foreach (var dog in dogs)
+        {
+            var dogVictim = dog.GetVictim();
+            if (usedVictims.Contains(dogVictim))
+            {
+                dog.UnsetVictimCommand();
+                dog.SetVictimCommand(victim);
+                return true;
+            }
+
+            usedVictims.Add(dogVictim);
+        }
+
+        return false;
+    }
+
+    private bool SetVictimToInactiveDogs(Victim victim)
+    {
+        var doesInactiveDogExist = false;
         foreach (var dog in dogs)
         {
             if (dog.GetVictim() == null)
             {
                 dog.SetVictimCommand(victim);
-                break;
+                doesInactiveDogExist = true;
             }
         }
+
+        return doesInactiveDogExist;
     }
 
     private void OnTriggerExit(Collider other)
     {
         var victim = other.gameObject.GetComponent<Victim>();
+        RemoveVictim(victim);
+    }
+
+    private void RemoveVictim(Victim victim)
+    {
         victims.Remove(victim);
-        var dog = GetDogWithVictim(victim);
-        if (dog is null)
+        foreach (var dog in dogs)
+        {
+            if (dog.GetVictim() == victim)
+            {
+                ResetVictim(dog);
+            }
+        }
+    }
+
+    private void ResetVictim(Dog dog)
+    {
+        dog.UnsetVictimCommand();
+        FindAndSetVictimToDog(dog);
+    }
+
+    private void FindAndSetVictimToDog(Dog dog)
+    {
+        if (SetUnusedVictimToDog(dog))
         {
             return;
         }
+        SetFirstVictimToDog(dog);
+    }
 
-        dog.UnsetVictimCommand();
+    private void SetFirstVictimToDog(Dog dog)
+    {
+        foreach (var victim in victims)
+        {
+            dog.SetVictimCommand(victim);
+            break;
+        }
+    }
+
+    private bool SetUnusedVictimToDog(Dog dog)
+    {
         var unusedVictim = GetUnusedVictim();
         if (unusedVictim is null)
         {
-            return;
+            return false;
         }
         dog.SetVictimCommand(unusedVictim);
+        return true;
     }
 
-    private Dog GetDogWithVictim(Victim victim)
+    private bool DoesDogWithVictimExist(Victim victim)
     {
         foreach (var dog in dogs)
         {
             if (dog.GetVictim() == victim)
             {
-                return dog;
+                return true;
             }
         }
 
-        return null;
+        return false;
     }
 
     private Victim GetUnusedVictim()
     {
         foreach (var victim in victims)
         {
-            var dog = GetDogWithVictim(victim);
-            if (dog is null)
+            if (!DoesDogWithVictimExist(victim))
             {
                 return victim;
             }

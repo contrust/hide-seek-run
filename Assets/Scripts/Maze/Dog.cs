@@ -1,6 +1,7 @@
 using Mirror;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class Dog: RequireInstance<DogArea>
 {
@@ -11,7 +12,7 @@ public class Dog: RequireInstance<DogArea>
     public float bitePeriod;
     private float biteCooldown;
     public UnityEvent onBite = new UnityEvent();
-
+    public UnityEvent onUnsetVictim = new UnityEvent();
     private bool CanReachVictim()
     {
         return agent.GetDistance() < biteDistance;
@@ -61,20 +62,21 @@ public class Dog: RequireInstance<DogArea>
         return victim;
     }
 
-    public void SetVictim(Victim victim)
+    private void SetVictim(Victim victim)
     {
         this.victim = victim;
         this.victim.onDeath.AddListener(UnsetVictimCommand);
         agent.SetTarget(this.victim.transform);
     }
 
-    public void UnsetVictim()
+    private void UnsetVictim()
     {
         agent.UnsetTarget();
         victim = null;
+        onUnsetVictim.Invoke();
     }
 
-    public void BiteVictim()
+    private void BiteVictim()
     {
         victim.GetDamage(biteDamage, transform);
         victim.GetStun();
