@@ -23,6 +23,7 @@ namespace StarterAssets
 		public bool nextCamera;
 		public bool previousCamera;
 		public int fixedCamNum;
+		public bool setTrap;
 		// public bool setFixedCamera1;
 		// public bool setFixedCamera2;
 		// public bool setFixedCamera3;
@@ -112,6 +113,11 @@ namespace StarterAssets
 		{
 			FixedCamera1Input(value.isPressed, 4);
 		}
+		
+		public void OnSetTrap(InputValue value)
+		{
+			SetTrapInput(value.isPressed);
+		}
 #endif
 
 
@@ -184,6 +190,11 @@ namespace StarterAssets
 		{
 			if (fixedCam)
 				fixedCamNum = num;
+		}
+		
+		public void SetTrapInput(bool setTrap)
+		{
+			this.setTrap = setTrap;
 		}
 	}
 	

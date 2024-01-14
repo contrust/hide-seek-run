@@ -9475,6 +9475,7 @@ GameObject:
   - component: {fileID: 2474162057753418387}
   - component: {fileID: 6680117438645454515}
   - component: {fileID: 2036278973244250725}
+  - component: {fileID: 1170981497297743638}
   m_Layer: 9
   m_Name: Hunter
   m_TagString: Player
@@ -9619,6 +9620,7 @@ MonoBehaviour:
   nextCamera: 0
   previousCamera: 0
   fixedCamNum: 0
+  setTrap: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -10151,6 +10153,22 @@ MonoBehaviour:
   syncInterval: 0.1
   hunter: {fileID: 2326760244444516364}
   stunSound: {fileID: 4556784744423931891}
+--- !u!114 &1170981497297743638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4143a066fc3d459ba3486321ce141a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+  trapPrefab: {fileID: -1803578319727930397, guid: d601a18a4204e5d42b2cb9f54d4b7b22, type: 3}
 --- !u!1 &8673958367749496276
 GameObject:
   m_ObjectHideFlags: 0
