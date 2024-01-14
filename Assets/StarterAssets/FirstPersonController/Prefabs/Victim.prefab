@@ -7280,7 +7280,6 @@ MonoBehaviour:
   view: {fileID: 9201314639952327051}
   ignoreCameraLayer: 8
   overlayCamera: {fileID: 424342002749871896}
-  stunTimeInSeconds: 5
   phone: {fileID: 4832553494243204017}
   steamName: 
   onDamageTaken:
@@ -7297,7 +7296,7 @@ MonoBehaviour:
       m_Calls: []
   Render:
     serializedVersion: 2
-    m_Bits: 1719
+    m_Bits: 5815
   GetHit: 0
 --- !u!136 &194772003508196257
 CapsuleCollider:

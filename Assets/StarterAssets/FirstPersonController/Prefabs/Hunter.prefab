@@ -9829,8 +9829,8 @@ MonoBehaviour:
   syncInterval: 0.1
   Render:
     serializedVersion: 2
-    m_Bits: 183
-  CurrentWeapon: 0
+    m_Bits: 4279
+  CurrentWeapon: 1
   Rifle: {fileID: 6469024593486652518}
   Shotgun: {fileID: 6052580650494772511}
   blindness: 0
@@ -9855,7 +9855,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab9d7b81923b900409acd2592a8c69f8, type: 3}
   m_Name: 
@@ -9887,7 +9887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2766803616904b5088144bf81fbd58a3, type: 3}
   m_Name: 
