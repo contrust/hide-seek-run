@@ -6996,6 +6996,7 @@ MonoBehaviour:
   JumpingSound: {fileID: 4903093336964572913}
   GroundingSound: {fileID: 2703914149432308956}
   FootstepsSound: {fileID: 5706337881170596081}
+  CanJump: 1
   cinemachineTargetPitch: 0
   input: {fileID: 0}
   showPauseKey: 27
@@ -7260,9 +7261,16 @@ MonoBehaviour:
   view: {fileID: 9201314639952327051}
   ignoreCameraLayer: 8
   overlayCamera: {fileID: 424342002749871896}
+  stunTimeInSeconds: 2
   phone: {fileID: 4832553494243204017}
   steamName: 
   onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onStartStun:
+    m_PersistentCalls:
+      m_Calls: []
+  onEndStun:
     m_PersistentCalls:
       m_Calls: []
   onDeath:
