@@ -37,6 +37,12 @@ public class DogArea: NetworkBehaviour
     {
         dog.SetVictim(victim);
     }
+    
+    [ClientRpc]
+    private void UnsetVictimRpc(Dog dog)
+    {
+        dog.UnsetVictim();
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -48,7 +54,8 @@ public class DogArea: NetworkBehaviour
         {
             return;
         }
-        dog.UnsetVictim();
+
+        UnsetVictimRpc(dog);
         var unusedVictim = GetUnusedVictim();
         if (unusedVictim is null)
         {
