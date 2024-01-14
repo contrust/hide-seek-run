@@ -30,14 +30,20 @@ namespace Player.HunterAbilities.Trap
         private void HitVictim(Victim victim)
         {
             Debug.Log("Trigger trap");
-            RunAnimation();
+            CmdRunAnimation();
             victim.GetStun(stunTimeInSeconds);
             isActive = false;
             StartCoroutine(DestroyCoroutine());
         }
 
         [Command(requiresAuthority = false)]
-        private void RunAnimation()
+        private void CmdRunAnimation()
+        {
+            RpcRunAnimation();
+        }
+
+        [ClientRpc]
+        private void RpcRunAnimation()
         {
             animator.SetTrigger(CatchHash);
         }
