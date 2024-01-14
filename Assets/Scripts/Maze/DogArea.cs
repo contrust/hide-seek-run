@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class DogArea: MonoBehaviour
+public class DogArea: NetworkBehaviour
 {
-    private List<Transform> victimsTransforms = new List<Transform>();
-    public List<Dog> dogs = new List<Dog>();
+    [SyncVar] private List<Victim> victims = new List<Victim>();
+    [SyncVar] public List<Dog> dogs = new List<Dog>();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,17 +15,18 @@ public class DogArea: MonoBehaviour
             return;
         }
         Debug.Log("New collider entered");
-        victimsTransforms.Add(other.transform);
-        SetTargetToInactiveDog(other.transform);
+        var victim = other.gameObject.GetComponent<Victim>();
+        victims.Add(victim);
+        SetVictimToInactiveDog(victim);
     }
 
-    private void SetTargetToInactiveDog(Transform target)
+    private void SetVictimToInactiveDog(Victim victim)
     {
         foreach (var dog in dogs)
         {
-            if (!dog.agent.IsActive())
+            if (dog.GetVictim() == null)
             {
-                dog.agent.SetTarget(target);
+                dog.SetVictim(victim);
             }
         }
     }
@@ -32,27 +34,28 @@ public class DogArea: MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("Collider exited");
-        victimsTransforms.Remove(other.transform);
-        var dog = GetDogWithTarget(other.transform);
+        var victim = other.gameObject.GetComponent<Victim>();
+        victims.Remove(victim);
+        var dog = GetDogWithVictim(victim);
         if (dog is null)
         {
             return;
         }
-        dog.agent.Disable();
-        var victimTransform = GetUnusedVictimTransform();
-        if (victimTransform is null)
+        dog.UnsetVictim();
+        var unusedVictim = GetUnusedVictim();
+        if (unusedVictim is null)
         {
             return;
         }
-        dog.agent.SetTarget(victimTransform);
+        dog.SetVictim(unusedVictim);
         
     }
 
-    private Dog GetDogWithTarget(Transform target)
+    private Dog GetDogWithVictim(Victim victim)
     {
         foreach (var dog in dogs)
         {
-            if (dog.agent.GetTarget() == target)
+            if (dog.GetVictim() == victim)
             {
                 return dog;
             }
@@ -61,14 +64,14 @@ public class DogArea: MonoBehaviour
         return null;
     }
 
-    private Transform GetUnusedVictimTransform()
+    private Victim GetUnusedVictim()
     {
-        foreach (var victimTransform in victimsTransforms)
+        foreach (var victim in victims)
         {
-            var dog = GetDogWithTarget(victimTransform);
+            var dog = GetDogWithVictim(victim);
             if (dog is null)
             {
-                return victimTransform;
+                return victim;
             }
         }
 
