@@ -1,11 +1,9 @@
-﻿using System;
-using DefaultNamespace;
+﻿using DefaultNamespace;
 using UnityEngine;
 using Mirror;
 using UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace StarterAssets
 {
@@ -62,6 +60,8 @@ namespace StarterAssets
 		public AudioSource JumpingSound;
 		public AudioSource GroundingSound;
 		public AudioSource FootstepsSound;
+
+		public bool CanJump = true;
 
 		// cinemachine
 		public float cinemachineTargetPitch;
@@ -144,7 +144,6 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			if(!controller.enabled || Cursor.visible) return;
-			Debug.Log("Cursor !visible");
 			CameraRotation();
 		}
 
@@ -259,7 +258,7 @@ namespace StarterAssets
 				}
 
 				// Jump
-				if (input.jump && jumpTimeoutDelta <= 0.0f)
+				if (input.jump && jumpTimeoutDelta <= 0.0f && CanJump)
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
