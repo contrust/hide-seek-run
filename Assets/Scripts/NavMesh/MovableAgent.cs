@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -34,10 +33,9 @@ public class MovableAgent : MonoBehaviour
         this.target = target;
         agent.isStopped = false;
         StartCoroutine(UpdatePathCoroutine());
-        Debug.Log("Target set successfully");
     }
 
-    public void Disable()
+    public void UnsetTarget()
     {
         target = null;
         agent.isStopped = true;
@@ -69,6 +67,5 @@ public class MovableAgent : MonoBehaviour
         }
 
         agent.SetDestination(target.position);
-        Debug.Log("Destination set successfully");
     }
 }
