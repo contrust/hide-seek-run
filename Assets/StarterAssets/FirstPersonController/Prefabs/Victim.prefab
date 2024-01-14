@@ -7280,6 +7280,7 @@ MonoBehaviour:
   view: {fileID: 9201314639952327051}
   ignoreCameraLayer: 8
   overlayCamera: {fileID: 424342002749871896}
+  stunTimeInSeconds: 2
   phone: {fileID: 4832553494243204017}
   steamName: 
   onDamageTaken:
