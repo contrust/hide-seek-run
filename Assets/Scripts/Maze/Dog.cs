@@ -31,7 +31,6 @@ public class Dog: RequireInstance<DogArea>
 
     private void Start()
     {
-        onBite.AddListener(LogBite);
         onBite.AddListener(BiteVictim);
     }
 
@@ -65,7 +64,7 @@ public class Dog: RequireInstance<DogArea>
     public void SetVictim(Victim victim)
     {
         this.victim = victim;
-        this.victim.onDeath.AddListener(UnsetVictim);
+        this.victim.onDeath.AddListener(UnsetVictimCommand);
         agent.SetTarget(this.victim.transform);
     }
 
@@ -86,9 +85,29 @@ public class Dog: RequireInstance<DogArea>
     {
         biteCooldown = bitePeriod;
     }
-
-    private void LogBite()
+    
+    
+    [Command(requiresAuthority = false)]
+    public void SetVictimCommand(Victim victim)
     {
-        Debug.Log("I'm gonna bite this chubby little girl.");
+        SetVictimRpc(victim);
+    }
+
+    [ClientRpc]
+    private void SetVictimRpc(Victim victim)
+    {
+        SetVictim(victim);
+    }
+    
+    [Command(requiresAuthority = false)]
+    public void UnsetVictimCommand()
+    {
+        UnsetVictimRpc();
+    }
+    
+    [ClientRpc]
+    private void UnsetVictimRpc()
+    {
+        UnsetVictim();
     }
 }

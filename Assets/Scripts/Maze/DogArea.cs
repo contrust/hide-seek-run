@@ -25,34 +25,10 @@ public class DogArea: NetworkBehaviour
         {
             if (dog.GetVictim() == null)
             {
-                SetVictimCommand(victim, dog);
+                dog.SetVictimCommand(victim);
                 break;
             }
         }
-    }
-
-    [Command(requiresAuthority = false)]
-    private void SetVictimCommand(Victim victim, Dog dog)
-    {
-        SetVictimRpc(victim, dog);
-    }
-
-    [ClientRpc]
-    private void SetVictimRpc(Victim victim, Dog dog)
-    {
-        dog.SetVictim(victim);
-    }
-    
-    [Command(requiresAuthority = false)]
-    private void UnsetVictimCommand(Dog dog)
-    {
-        UnsetVictimRpc(dog);
-    }
-    
-    [ClientRpc]
-    private void UnsetVictimRpc(Dog dog)
-    {
-        dog.UnsetVictim();
     }
 
     private void OnTriggerExit(Collider other)
@@ -66,13 +42,13 @@ public class DogArea: NetworkBehaviour
             return;
         }
 
-        UnsetVictimCommand(dog);
+        dog.UnsetVictimCommand();
         var unusedVictim = GetUnusedVictim();
         if (unusedVictim is null)
         {
             return;
         }
-        SetVictimCommand(unusedVictim, dog);
+        dog.SetVictimCommand(unusedVictim);
     }
 
     private Dog GetDogWithVictim(Victim victim)
