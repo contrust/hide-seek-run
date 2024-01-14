@@ -39,6 +39,10 @@ public class DogArea: NetworkBehaviour
         foreach (var dog in dogs)
         {
             var dogVictim = dog.GetVictim();
+            if (dogVictim is null)
+            {
+                continue;
+            }
             if (usedVictims.Contains(dogVictim))
             {
                 dog.UnsetVictimCommand();
