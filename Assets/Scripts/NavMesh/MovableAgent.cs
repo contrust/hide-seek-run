@@ -25,7 +25,7 @@ public class MovableAgent : MonoBehaviour
 
     public bool IsActive()
     {
-        return !agent.isStopped;
+        return  !(target is null || agent.isStopped);
     }
 
     public void SetTarget(Transform target)
