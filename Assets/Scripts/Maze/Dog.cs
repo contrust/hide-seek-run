@@ -79,7 +79,6 @@ public class Dog: RequireInstance<DogArea>
     private void UnsetVictim()
     {
         agent.UnsetTarget();
-        victim.onDeath.RemoveListener(UnsetDeadVictim);
         victim = null;
         onUnsetVictim.Invoke();
     }
