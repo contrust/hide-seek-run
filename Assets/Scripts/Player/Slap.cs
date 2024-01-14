@@ -42,7 +42,7 @@ public class Slap : NetworkBehaviour
         input.slap = false;
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void SlapHunter(Hunter hunter)
     {
         hunter.Slapped();
