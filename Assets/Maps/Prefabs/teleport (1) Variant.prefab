@@ -4977,6 +4977,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: f5d737d2ce9bdf5438ada49837fabcc2, type: 2}
+    - target: {fileID: -7511558181221131132, guid: eda344b1f777dcd45afee340f3d02ea9, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f52a2834eb5b769439fefcbab485216b, type: 2}
     - target: {fileID: 919132149155446097, guid: eda344b1f777dcd45afee340f3d02ea9, type: 3}
       propertyPath: m_Name
       value: teleport (1) Variant
