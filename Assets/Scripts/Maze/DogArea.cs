@@ -26,9 +26,16 @@ public class DogArea: NetworkBehaviour
         {
             if (dog.GetVictim() == null)
             {
-                dog.SetVictim(victim);
+                SetVictimRpc(victim, dog);
+                break;
             }
         }
+    }
+
+    [ClientRpc]
+    private void SetVictimRpc(Victim victim, Dog dog)
+    {
+        dog.SetVictim(victim);
     }
 
     private void OnTriggerExit(Collider other)
