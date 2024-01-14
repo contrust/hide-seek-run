@@ -1,6 +1,5 @@
 using HUD.Effects;
 using Mirror;
-using Player;
 using Player.Weapons;
 using UnityEngine;
 
@@ -8,7 +7,9 @@ namespace HUD
 {
     public class HUDController : MonoBehaviour
     { 
-        [SerializeField] private HUDEffect blurEffect;
+        [SerializeField] private HUDEffect hitBlurEffect;
+        [SerializeField] private HUDEffect stunBlurEffect;
+        [SerializeField] private GameObject stunnedText;
         [SerializeField] private HUDEffect hitMarkerEffect;
         [SerializeField] private HUDEffect reloadEffect;
         [SerializeField] private HUDEffect symbolInsertedEffect;
@@ -44,6 +45,8 @@ namespace HUD
             {
                 var victim = NetworkClient.localPlayer.GetComponent<Victim>();
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
+                victim.onStartStun.AddListener(instance.OnStartStunHandler);
+                victim.onEndStun.AddListener(instance.OnEndStunHandler);
                 var slap = NetworkClient.localPlayer.GetComponent<Slap>();
                 slap.onSlap.AddListener(instance.OnSlapHandler);
                 healthManager.gameObject.SetActive(true);
@@ -78,7 +81,18 @@ namespace HUD
 
         public void OnDamageTakenHandler()
         {
-            ShowEffect(blurEffect);
+            ShowEffect(hitBlurEffect);
+        }
+
+        public void OnStartStunHandler()
+        {
+            stunnedText.SetActive(true);
+            ShowEffect(stunBlurEffect);
+        }
+
+        public void OnEndStunHandler()
+        {
+            stunnedText.SetActive(false);
         }
 
         public void OnSymbolInsertedEffect(bool _)
