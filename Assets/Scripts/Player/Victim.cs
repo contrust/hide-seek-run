@@ -31,6 +31,7 @@ public class Victim : NetworkBehaviour
     
     [SerializeField] private PhoneController phone;
     public bool IsPhoneActive => phone.isPhoneActive;
+    public bool IsStunned { get; private set; }
 
     [SyncVar]
     public string steamName;
@@ -116,18 +117,21 @@ public class Victim : NetworkBehaviour
 
     public void GetStun()
     {
+        if(IsStunned) return;
         StartCoroutine(StunCoroutine());
     }
 
     private IEnumerator StunCoroutine()
     {
         onStartStun.Invoke();
+        IsStunned = true;
         var tmpSpeed = movementController.MoveSpeed;
         movementController.MoveSpeed = 0;
         movementController.CanJump = false;
         yield return new WaitForSeconds(stunTimeInSeconds);
         movementController.MoveSpeed = tmpSpeed;
         movementController.CanJump = true;
+        IsStunned = false;
         onEndStun.Invoke();
     }
 
