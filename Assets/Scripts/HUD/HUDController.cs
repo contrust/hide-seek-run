@@ -1,5 +1,6 @@
 using HUD.Effects;
 using Mirror;
+using Player.HunterAbilities.Trap;
 using Player.Weapons;
 using UnityEngine;
 
@@ -18,7 +19,8 @@ namespace HUD
         [SerializeField] private GameObject staticElements;
         [SerializeField] private HealthBar healthBar;
         [SerializeField] private HealthManager healthManager;
-        
+        [SerializeField] private TrapInfo trapInfo;
+
         public static HUDController instance;
 
         public void Start()
@@ -40,6 +42,10 @@ namespace HUD
                 //weapon.onShot.AddListener(instance.OnShotHandler);
                 SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
                 fourCams.onFourCamModeChange.AddListener(instance.OnFourCamerasHandler);
+                var trapSpawner = NetworkClient.localPlayer.GetComponent<TrapSpawner>();
+                trapSpawner.trapReady.AddListener(OnTrapReadyHandler);
+                trapSpawner.trapSpawned.AddListener(OnTrapSpawnedHandler);
+                trapInfo.gameObject.SetActive(true);
             }
             else
             {
@@ -108,6 +114,16 @@ namespace HUD
         public void OnFourCamerasHandler()
         {
             ShowEffect(camNumbers);
+        }
+
+        public void OnTrapReadyHandler()
+        {
+            trapInfo.ShowTrapReady();
+        }
+
+        public void OnTrapSpawnedHandler()
+        {
+            trapInfo.ShowTrapReload();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Mirror;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.HunterAbilities.Trap
 {
@@ -8,9 +9,12 @@ namespace Player.HunterAbilities.Trap
     {
         public readonly float reloadTimeInSeconds = 10;
 
-        [SerializeField] private Trap trapPrefab;
+        [SerializeField] private GameObject trapPrefab;
         private StarterAssetsInputs input;
-        private bool canSpawn => timeFromLastSpawn > reloadTimeInSeconds;
+        public UnityEvent trapSpawned;
+        public UnityEvent trapReady;
+
+        private bool canSpawn;
         private float lastSpawnTime;
         private float timeFromLastSpawn => Time.time - lastSpawnTime;
 
@@ -22,12 +26,19 @@ namespace Player.HunterAbilities.Trap
         private void Update()
         {
             if(!isLocalPlayer) return;
-            
-            if (canSpawn && input.setTrap)
-            {
-                SpawnTrap();
-            }
 
+            if (timeFromLastSpawn > reloadTimeInSeconds)
+            {
+                if (!canSpawn)
+                {
+                    canSpawn = true;
+                    trapReady.Invoke();
+                }
+                if (input.setTrap)
+                {
+                    SpawnTrap();
+                }
+            }
             input.setTrap = false;
         }
 
@@ -36,6 +47,8 @@ namespace Player.HunterAbilities.Trap
             var trap = Instantiate(trapPrefab, transform.position, transform.rotation);
             NetworkServer.Spawn(trap.gameObject);
             lastSpawnTime = Time.time;
+            trapSpawned.Invoke();
+            canSpawn = false;
         }
     }
 }

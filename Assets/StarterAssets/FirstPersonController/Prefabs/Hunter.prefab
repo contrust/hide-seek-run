@@ -10169,7 +10169,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  trapPrefab: {fileID: 6474570041338018557, guid: 5bcdf25d7689ca74ebc24e3acfbe12c6, type: 3}
+  trapPrefab: {fileID: 206142871222486466, guid: 5bcdf25d7689ca74ebc24e3acfbe12c6, type: 3}
+  trapSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  trapReady:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8673958367749496276
 GameObject:
   m_ObjectHideFlags: 0
