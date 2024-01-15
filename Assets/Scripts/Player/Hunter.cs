@@ -4,6 +4,7 @@ using Assets.Scripts.Lobby.Enums;
 using HUD;
 using Mirror;
 using Network;
+using Player.HunterAbilities.Trap;
 using Player.Weapons;
 using StarterAssets;
 using UnityEngine;
@@ -30,6 +31,7 @@ public class Hunter : NetworkBehaviour
 
     //TODO: Вынести в отдельный класс
     public WeaponType CurrentWeapon;
+    public SkillType CurrentSkill;
     [SerializeField] private Weapon Rifle;
     [SerializeField] private Shotgun Shotgun;
 
@@ -57,12 +59,17 @@ public class Hunter : NetworkBehaviour
     [SerializeField] private MeshRenderer symbolMeshRendererFront;
     [SerializeField] private MeshRenderer symbolMeshRendererBack;
 
+    [SerializeField] private TrapSpawner trapSpawner;
+    [SerializeField] private GameObject trapPrefab;
+    [SerializeField] private GameObject birdTrapPrefab;
+
     private void Start()
     {
         networkManager = GameObject.Find("NetworkRoomManager (1)").GetComponent<CustomNetworkRoomManager>();
         //networkManager = GameObject.Find("KcpNetworkManager").GetComponent<KcpNetworkManager>();
         matchSettings = FindObjectOfType<MatchSettings>();
         firstPersonController = GetComponent<FirstPersonController>();
+        trapSpawner = GetComponent<TrapSpawner>();
         if (isLocalPlayer) Init();
     }
 
@@ -170,5 +177,21 @@ public class Hunter : NetworkBehaviour
             default: throw new ArgumentException("Unknown weapon type");
         }
         CurrentWeapon = weapon;
+    }
+
+    public void SelectSkill(SkillType skill)
+    {
+        switch (skill)
+        {
+            case SkillType.Bird:
+                trapSpawner.trapPrefab = birdTrapPrefab;
+                break;
+            case SkillType.Trap:
+                trapSpawner.trapPrefab = trapPrefab;
+                break;
+            default: throw new ArgumentException("Unknown skill type");
+        }
+
+        CurrentSkill = skill;
     }
 }

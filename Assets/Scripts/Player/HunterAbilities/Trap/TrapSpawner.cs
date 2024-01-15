@@ -9,7 +9,7 @@ namespace Player.HunterAbilities.Trap
     {
         public readonly float reloadTimeInSeconds = 10;
 
-        [SerializeField] private GameObject trapPrefab;
+        [SerializeField] public GameObject trapPrefab;
         private StarterAssetsInputs input;
         public UnityEvent trapSpawned;
         public UnityEvent trapReady;
@@ -44,7 +44,7 @@ namespace Player.HunterAbilities.Trap
 
         private void SpawnTrap()
         {
-            var trap = Instantiate(trapPrefab, transform.position, transform.rotation);
+            var trap = Instantiate(trapPrefab, transform.position + Vector3.up, transform.rotation);
             NetworkServer.Spawn(trap.gameObject);
             lastSpawnTime = Time.time;
             trapSpawned.Invoke();

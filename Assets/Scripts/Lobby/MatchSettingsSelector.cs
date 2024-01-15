@@ -26,7 +26,7 @@ namespace DefaultNamespace.Lobby
 
 		public void SelectSkill()
 		{
-			//hunter.SelectSkill((SkillType)skillSelector.value);
+			hunter.SelectSkill((SkillType)skillSelector.value);
 		}
 
 		public void SelectMap() => networkRoomManager.GameplayScene = maps[mapSelector.value];
