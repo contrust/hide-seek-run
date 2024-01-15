@@ -377,9 +377,9 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  spawnSound: {fileID: 0}
-  flySound: {fileID: 0}
-  destroySound: {fileID: 0}
+  spawnSound: {fileID: 5879573569279885225}
+  flySound: {fileID: 4485130283851311822}
+  destroySound: {fileID: 7706487880870547084}
   target: {fileID: 0}
   raycastPoint: {fileID: 2149391666942511200}
   distanceToObjectForVerticalFly: 2
