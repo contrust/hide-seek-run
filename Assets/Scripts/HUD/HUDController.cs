@@ -9,8 +9,7 @@ namespace HUD
     public class HUDController : MonoBehaviour
     { 
         [SerializeField] private HUDEffect hitBlurEffect;
-        [SerializeField] private HUDEffect stunBlurEffect;
-        [SerializeField] private GameObject stunnedText;
+        [SerializeField] private GameObject stunBlurEffect;
         [SerializeField] private HUDEffect hitMarkerEffect;
         [SerializeField] private HUDEffect reloadEffect;
         [SerializeField] private HUDEffect symbolInsertedEffect;
@@ -92,13 +91,12 @@ namespace HUD
 
         public void OnStartStunHandler()
         {
-            stunnedText.SetActive(true);
-            ShowEffect(stunBlurEffect);
+            stunBlurEffect.SetActive(true);
         }
 
         public void OnEndStunHandler()
         {
-            stunnedText.SetActive(false);
+            stunBlurEffect.SetActive(false);
         }
 
         public void OnSymbolInsertedEffect(bool _)

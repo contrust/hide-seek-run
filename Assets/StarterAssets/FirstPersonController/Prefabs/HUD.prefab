@@ -108,7 +108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5618902861541703026
 RectTransform:
   m_ObjectHideFlags: 0
@@ -702,7 +702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7750009907538705100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -899,8 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBlurEffect: {fileID: 6193342556301363114}
-  stunBlurEffect: {fileID: 6895557081818508173}
-  stunnedText: {fileID: 5596106013257123184}
+  stunBlurEffect: {fileID: 1051028528640254186}
   hitMarkerEffect: {fileID: 8858852458136131407}
   reloadEffect: {fileID: 3503226529482394021}
   symbolInsertedEffect: {fileID: 4042054436518920668}
