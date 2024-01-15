@@ -35,7 +35,10 @@ namespace DefaultNamespace.Lobby
 		{
 			networkRoomManager = FindObjectOfType<CustomNetworkRoomManager>();
 			hunter = networkRoomManager.hunterPrefab.GetComponent<Hunter>();
-			Debug.Log(hunter);
+			SelectSkill();
+			SelectMap();
+			SelectWeapon();
+		
 			//if (hunter.isServer)
 			{
 				InitHostUI();
