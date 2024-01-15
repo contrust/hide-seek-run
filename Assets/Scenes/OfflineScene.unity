@@ -250,6 +250,7 @@ MonoBehaviour:
   - {fileID: 477707006827837575, guid: 6c7a1b27d9caeb4439a5e354576a985c, type: 3}
   - {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   - {fileID: 206142871222486466, guid: 5bcdf25d7689ca74ebc24e3acfbe12c6, type: 3}
+  - {fileID: 2149391665832809163, guid: 947fc88d64dacba4fb2d1a73f0fc07d9, type: 3}
   timeInterpolationGui: 0
   showRoomGUI: 1
   minPlayers: 1
