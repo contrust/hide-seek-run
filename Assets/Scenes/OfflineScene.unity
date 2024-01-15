@@ -940,6 +940,7 @@ MonoBehaviour:
   scenes:
   - Map2
   - Map3
+  - Map1
 --- !u!114 &961966451
 MonoBehaviour:
   m_ObjectHideFlags: 0

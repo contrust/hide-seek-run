@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 
 public class BirdSkill : MonoBehaviour
@@ -10,6 +12,10 @@ public class BirdSkill : MonoBehaviour
 	[SerializeField]
 	private LayerMask layerMask = Physics.DefaultRaycastLayers;
 
+	private void Start()
+	{
+		FindTarget();
+	}
 
 	private void Update()
 	{
@@ -17,6 +23,25 @@ public class BirdSkill : MonoBehaviour
 		{
 			Follow();
 		}
+	}
+
+	private void FindTarget()
+	{
+		var victims = FindObjectsOfType<Victim>().Select(x => x.transform).ToArray();
+
+		var minDist = float.MaxValue;
+		Transform targetVictim = null;
+
+		foreach (Transform victim in victims)
+		{
+			var dist = Vector3.Distance(victim.position, view.position);
+			if (dist < minDist)
+			{
+				minDist = dist;
+				targetVictim = victim;
+			}
+		}
+		target = targetVictim;
 	}
 
 	private void Follow()
