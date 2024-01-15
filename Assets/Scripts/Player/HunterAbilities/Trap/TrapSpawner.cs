@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using StarterAssets;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,7 @@ namespace Player.HunterAbilities.Trap
     {
         public readonly float reloadTimeInSeconds = 10;
 
-        [SerializeField] private GameObject trapPrefab;
+        [SerializeField] public GameObject trapPrefab;
         private StarterAssetsInputs input;
         public UnityEvent trapSpawned;
         public UnityEvent trapReady;
@@ -44,7 +45,14 @@ namespace Player.HunterAbilities.Trap
 
         private void SpawnTrap()
         {
-            var trap = Instantiate(trapPrefab, transform.position, transform.rotation);
+            var spawnPosition = transform.position + Vector3.up;
+            var spawnRotation = transform.rotation;
+            if (trapPrefab.GetComponent<BirdSkill>() != null)
+            {
+                spawnPosition = transform.position + Vector3.up * 3;
+                spawnRotation = quaternion.identity;
+            }
+            var trap = Instantiate(trapPrefab, spawnPosition,spawnRotation);
             NetworkServer.Spawn(trap.gameObject);
             lastSpawnTime = Time.time;
             trapSpawned.Invoke();

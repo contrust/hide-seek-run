@@ -92,11 +92,22 @@ public class BirdSkill : NetworkBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		Debug.Log("On Trigger Enter");
 		var victim = other.gameObject.GetComponent<Victim>();
 		if (victim != null)
 		{
+			Debug.Log("Trigger bird");
 			victim.GetStun(stunTimeInSeconds);
-			NetworkServer.Destroy(gameObject);
+			DestroyOnServer();
+			Debug.Log("Network destroy");
+			Debug.Log("Destroy");
 		}
+	}
+
+	[Command(requiresAuthority = false)]
+	private void DestroyOnServer()
+	{
+		Debug.Log("Destroy on server");
+		NetworkServer.Destroy(gameObject);
 	}
 }

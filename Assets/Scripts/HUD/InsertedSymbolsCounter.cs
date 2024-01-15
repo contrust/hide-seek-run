@@ -13,6 +13,7 @@ public class InsertedSymbolsCounter : MonoBehaviour
     {
         matchSettings = FindObjectOfType<MatchSettings>();
         count = matchSettings.CountCorrectSymbolsToWin;
+        textMesh.text = ValueTemplate.Replace("{count}", count.ToString());
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class InsertedSymbolsCounter : MonoBehaviour
 
     private void UpdateTextIfValueChanged()
     {
-        if (count != symbolManager.CurrentCorrectInsertions)
+        if (count != matchSettings.CountCorrectSymbolsToWin - symbolManager.CurrentCorrectInsertions)
         {
             count = matchSettings.CountCorrectSymbolsToWin - symbolManager.CurrentCorrectInsertions;
             textMesh.text = ValueTemplate.Replace("{count}", count.ToString());
