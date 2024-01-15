@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Button = UnityEngine.UIElements.Button;
 
 public class Tutorial : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Tutorial : MonoBehaviour
     public List<Sprite> girlTutorial;
     public bool isHunterTutorial;
     public TextMeshProUGUI text;
+    public GameObject girlButton;
+    public GameObject hunterButton;
 
     private int currentIndex;
     private List<Sprite> currentList;
@@ -22,7 +25,6 @@ public class Tutorial : MonoBehaviour
     {
         currentList = hunterTutorial;
         imageBlock.sprite = currentList[currentIndex];
-        text.text = "Показать обучение девочки";
     }
 
     public void Next()
@@ -45,7 +47,16 @@ public class Tutorial : MonoBehaviour
     {
         currentList = isHunterTutorial ? hunterTutorial : girlTutorial;
         isHunterTutorial = !isHunterTutorial;
-        text.text = isHunterTutorial ? "Показать обучение охотника" : "Показать обучение девочки";
+        if (isHunterTutorial)
+        {
+            girlButton.SetActive(true);
+            hunterButton.SetActive(false);
+        }
+        else
+        {
+            girlButton.SetActive(false);
+            hunterButton.SetActive(true);
+        }
         currentIndex = 0;
         imageBlock.sprite = currentList[CurrentIndex];
     }
