@@ -34,7 +34,9 @@ public class TntRun : MonoBehaviour
         while (t <= 1)
         {
             transform.position = Vector3.Lerp(startPos, endPos, t);
-            material.color = material.color.WithAlpha(Mathf.Lerp(1, 0, t));
+            var newColor = material.color;
+            newColor.a = Mathf.Lerp(1, 0, t);
+            material.color = newColor;
             t += Time.deltaTime / fallTime;
             yield return null;
         }
@@ -42,7 +44,9 @@ public class TntRun : MonoBehaviour
         yield return new WaitForSeconds(restoreTime);
 
         transform.position = startPos;
-        material.color = material.color.WithAlpha(1);
+        var newNewColor = material.color;
+        newNewColor.a = 1;
+        material.color = newNewColor;
         boxCollider.enabled = true;
         fallBlockCoroutine = null;
     }
