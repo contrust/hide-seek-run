@@ -15,5 +15,5 @@ MonoBehaviour:
   StartHunterBlindness: 1
   EndHunterBlindness: 0.1
   DurationHunterBlindnessSeconds: 100
-  CountCorrectSymbolsToWin: 3
+  CountCorrectSymbolsToWin: 5
   timeChangeSymbol: 60
