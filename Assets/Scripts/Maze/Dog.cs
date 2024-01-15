@@ -1,4 +1,5 @@
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,7 +42,7 @@ public class Dog: RequireInstance<DogArea>
 
     private void Update()
     {
-        if (agent.GetTarget() is null && agent.IsActive())
+        if (agent.GetTarget().IsDestroyed() && agent.IsActive())
         {
             UnsetVictim();
         }
