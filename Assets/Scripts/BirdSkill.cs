@@ -1,14 +1,15 @@
-using System;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 
-public class BirdSkill : MonoBehaviour
+public class BirdSkill : NetworkBehaviour
 {
 	[SerializeField] private Transform target;
 	[SerializeField] private Transform raycastPoint;
 	[SerializeField] private float distanceToObjectForVerticalFly = 2f;
 	[SerializeField] private Transform view;
 	[SerializeField] private float speed;
+	[SerializeField] private float stunTimeInSeconds = 5;
 	[SerializeField]
 	private LayerMask layerMask = Physics.DefaultRaycastLayers;
 
@@ -87,5 +88,15 @@ public class BirdSkill : MonoBehaviour
 		transform.Translate(flyDirection * speed * Time.deltaTime);
 		view.LookAt(targetPos);
 		view.rotation = Quaternion.Euler(0, view.rotation.eulerAngles.y, 0);
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		var victim = other.gameObject.GetComponent<Victim>();
+		if (victim != null)
+		{
+			victim.GetStun(stunTimeInSeconds);
+			NetworkServer.Destroy(gameObject);
+		}
 	}
 }
