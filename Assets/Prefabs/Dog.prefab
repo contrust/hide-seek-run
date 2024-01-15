@@ -320,9 +320,10 @@ MonoBehaviour:
   agent: {fileID: 3864542384177827343}
   barkSound: {fileID: 4720165360321207776}
   biteSound: {fileID: 1965163906233620646}
-  biteDistance: 3
+  biteDistance: 1
   biteDamage: 5
   bitePeriod: 7
+  stunDuration: 1
   onBite:
     m_PersistentCalls:
       m_Calls: []
@@ -332,7 +333,6 @@ MonoBehaviour:
   onVictimDeath:
     m_PersistentCalls:
       m_Calls: []
-  stunDuration: 1
 --- !u!1 &5786420937151777620
 GameObject:
   m_ObjectHideFlags: 0
