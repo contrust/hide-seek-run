@@ -43,6 +43,10 @@ public class Dog: RequireInstance<DogArea>
 
     private void Update()
     {
+        if (agent.GetTarget() is null && agent.IsActive())
+        {
+            UnsetVictim();
+        }
         if (agent.IsActive())
         {
             if (!barkSound.isPlaying)
