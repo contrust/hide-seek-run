@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Mirror;
 using UnityEngine;
@@ -96,7 +97,13 @@ public class BirdSkill : NetworkBehaviour
 		if (victim != null)
 		{
 			victim.GetStun(stunTimeInSeconds);
-			NetworkServer.Destroy(gameObject);
+			StartCoroutine(DestroyCoroutine());
 		}
+	}
+
+	private IEnumerator DestroyCoroutine()
+	{
+		yield return new WaitForSeconds(1);
+		NetworkServer.Destroy(gameObject);
 	}
 }
