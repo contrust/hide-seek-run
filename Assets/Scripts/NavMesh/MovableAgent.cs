@@ -52,9 +52,13 @@ public class MovableAgent : MonoBehaviour
 
     private void UpdatePath()
     {
-        if (!agent || !target)
+        if (!agent)
         {
-            Debug.Log(agent, target);
+            return;
+        }
+        if (!target)
+        {
+            UnsetTarget();
             return;
         }
         
