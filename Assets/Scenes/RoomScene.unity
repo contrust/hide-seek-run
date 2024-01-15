@@ -548,14 +548,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1022529814, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
-      propertyPath: maps.Array.data[0]
-      value: Assets/Maps/Map3.unity
-      objectReference: {fileID: 0}
-    - target: {fileID: 1022529814, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
-      propertyPath: maps.Array.data[1]
-      value: Assets/Maps/Map2.unity
-      objectReference: {fileID: 0}
     - target: {fileID: 545252671667723624, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
       propertyPath: m_Name
       value: LobbyUI

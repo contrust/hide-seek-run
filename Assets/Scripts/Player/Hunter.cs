@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Assets.Scripts.Lobby.WeaponSelection;
+using Assets.Scripts.Lobby.Enums;
 using HUD;
 using Mirror;
 using Network;
