@@ -938,6 +938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenes:
   - Map2
+  - Map3
 --- !u!114 &961966451
 MonoBehaviour:
   m_ObjectHideFlags: 0
