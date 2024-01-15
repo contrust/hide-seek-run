@@ -7,6 +7,7 @@ namespace Player.HunterAbilities.Trap
     [RequireComponent(typeof(Animator))]
     public class Trap: NetworkBehaviour
     {
+        public AudioSource hitSound;
         private Animator animator;
         private static readonly int CatchHash = Animator.StringToHash("Catch");
         private bool isActive = true;
@@ -32,8 +33,21 @@ namespace Player.HunterAbilities.Trap
             Debug.Log("Trigger trap");
             CmdRunAnimation();
             victim.GetStun(stunTimeInSeconds);
+            PlayHitSoundCommand();
             isActive = false;
             StartCoroutine(DestroyCoroutine());
+        }
+
+        [Command(requiresAuthority = false)]
+        private void PlayHitSoundCommand()
+        {
+            PlayHitSoundRpc();
+        }
+
+        [ClientRpc]
+        private void PlayHitSoundRpc()
+        {
+            hitSound.Play();
         }
 
         [Command(requiresAuthority = false)]
