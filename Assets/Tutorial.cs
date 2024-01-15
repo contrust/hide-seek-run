@@ -31,7 +31,11 @@ public class Tutorial : MonoBehaviour
     private void OnEnable()
     {
         currentIndex = 0;
+        currentList = hunterTutorial;
+        isHunterTutorial = false;
         imageBlock.sprite = currentList[currentIndex];
+        girlButton.SetActive(false);
+        hunterButton.SetActive(true);
     }
 
     public void Next()
