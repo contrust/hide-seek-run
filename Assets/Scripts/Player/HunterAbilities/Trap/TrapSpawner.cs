@@ -44,7 +44,12 @@ namespace Player.HunterAbilities.Trap
 
         private void SpawnTrap()
         {
-            var trap = Instantiate(trapPrefab, transform.position + Vector3.up, transform.rotation);
+            var spawnPosition = transform.position + Vector3.up;
+            if (trapPrefab.GetComponent<BirdSkill>() != null)
+            {
+                spawnPosition = transform.position + Vector3.up * 3;
+            }
+            var trap = Instantiate(trapPrefab, spawnPosition, transform.rotation);
             NetworkServer.Spawn(trap.gameObject);
             lastSpawnTime = Time.time;
             trapSpawned.Invoke();
