@@ -2,7 +2,7 @@ using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class DogAnimation : NetworkBehaviour
+public class DogAnimation : MonoBehaviour
 {
 	private static readonly int RunningHash = Animator.StringToHash("Running");
 
@@ -16,13 +16,9 @@ public class DogAnimation : NetworkBehaviour
 
 	private void Update()
 	{
-		if (!isServer) return;
-		Debug.Log(agent.agent.velocity);
-		Debug.Log(agent.agent.path.status);
 		SetRunning(agent.agent.velocity != Vector3.zero);
 	}
-
-	[ClientRpc]
+	
 	private void SetRunning(bool running)
 	{
 		animator.SetBool(RunningHash, running);
