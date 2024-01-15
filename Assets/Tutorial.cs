@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,6 +25,12 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         currentList = hunterTutorial;
+        imageBlock.sprite = currentList[currentIndex];
+    }
+
+    private void OnEnable()
+    {
+        currentIndex = 0;
         imageBlock.sprite = currentList[currentIndex];
     }
 
