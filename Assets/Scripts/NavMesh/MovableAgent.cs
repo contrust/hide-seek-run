@@ -25,7 +25,7 @@ public class MovableAgent : MonoBehaviour
 
     public bool IsActive()
     {
-        return  !(target is null || agent.isStopped);
+        return  !(target is null) && !agent.isStopped;
     }
 
     public void SetTarget(Transform target)
@@ -66,7 +66,6 @@ public class MovableAgent : MonoBehaviour
         agent.CalculatePath(target.position, path);
         if (path.status != NavMeshPathStatus.PathComplete)
         {
-            Debug.Log(path.status);
             return;
         }
 
