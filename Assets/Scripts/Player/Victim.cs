@@ -115,13 +115,13 @@ public class Victim : NetworkBehaviour
         }
     }
 
-    public void GetStun()
+    public void GetStun(float timeInSeconds)
     {
         if(IsStunned) return;
-        StartCoroutine(StunCoroutine());
+        StartCoroutine(StunCoroutine(timeInSeconds));
     }
 
-    private IEnumerator StunCoroutine()
+    private IEnumerator StunCoroutine(float timeInSeconds)
     {
         onStartStun.Invoke();
         IsStunned = true;
@@ -130,7 +130,7 @@ public class Victim : NetworkBehaviour
         movementController.MoveSpeed = 0;
         movementController.SprintSpeed = 0;
         movementController.CanJump = false;
-        yield return new WaitForSeconds(stunTimeInSeconds);
+        yield return new WaitForSeconds(timeInSeconds);
         movementController.MoveSpeed = tmpSpeed;
         movementController.SprintSpeed = tmpSprintSpeed;
         movementController.CanJump = true;

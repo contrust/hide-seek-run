@@ -15,6 +15,8 @@ public class Dog: RequireInstance<DogArea>
     public UnityEvent onBite = new UnityEvent();
     public UnityEvent onUnsetVictim = new UnityEvent();
     public UnityEvent<Victim> onVictimDeath = new UnityEvent<Victim>();
+
+    public float stunDuration = 1f;
     
     private bool CanReachVictim()
     {
@@ -142,7 +144,7 @@ public class Dog: RequireInstance<DogArea>
     private void BiteVictim()
     {
         victim.GetDamage(biteDamage, transform);
-        victim.GetStun();
+        victim.GetStun(stunDuration);
         ResetBiteCooldown();
     }
 

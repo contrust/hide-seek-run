@@ -1,4 +1,4 @@
-﻿﻿using DefaultNamespace;
+using DefaultNamespace;
 using UnityEngine;
 using Mirror;
 using UI;

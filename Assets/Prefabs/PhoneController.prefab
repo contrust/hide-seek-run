@@ -245,7 +245,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6527670528093515950, guid: 7e0223e1d3e1733499accfa5ebffb67e, type: 3}
+  - {fileID: 2100000, guid: c8ede222697f4ff4cadba84544ccade7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -599,7 +599,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: e17dc2abb15d73744a7b90af09fcb6de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -823,7 +823,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: e148740ee1a86be42b05dce80543263a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1106,6 +1106,7 @@ MonoBehaviour:
   expireAfterSomeTimeColor: {r: 0.5647059, g: 0.27058825, b: 0, a: 0}
   expireNotSoonColor: {r: 0.1254902, g: 0.4509804, b: 0, a: 0}
   expireBlack: {r: 0, g: 0, b: 0, a: 0}
+  expireColorIntensity: 5
   blinkingTime: 5
   changeExpirationSignalTime: -1
 --- !u!114 &1754161986294829955
@@ -1131,6 +1132,7 @@ MonoBehaviour:
   scanDirection: {x: 0, y: 0, z: 0}
   scanAngle: 30
   angleToHunter: 0
+  hunterDetectorColorIntensity: 5
   directionMultiplier: 1
 --- !u!1 &3564357526819393180
 GameObject:
@@ -1409,7 +1411,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6527670528093515950, guid: c6a55ba99e9e99d41b7eef123e311a43, type: 3}
+  - {fileID: 2100000, guid: c8ede222697f4ff4cadba84544ccade7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1990,7 +1992,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Send symbol
+  m_text: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u0441\u0438\u043C\u0432\u043E\u043B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2017,8 +2019,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 21
+  m_fontSizeBase: 21
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2466,7 +2468,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6527670528093515950, guid: c6a55ba99e9e99d41b7eef123e311a43, type: 3}
+  - {fileID: 2100000, guid: c54868e059ffe4446b10a98f49d5410c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2956,7 +2958,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6527670528093515950, guid: c6a55ba99e9e99d41b7eef123e311a43, type: 3}
+  - {fileID: 2100000, guid: c8ede222697f4ff4cadba84544ccade7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
