@@ -7,8 +7,10 @@ public class Teleport : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
-        StartCoroutine(TeleportCoroutine(other.gameObject));
+        if (other.GetComponent<Victim>() || other.GetComponent<Hunter>())
+        {
+            StartCoroutine(TeleportCoroutine(other.gameObject));
+        }
     }
 
     private IEnumerator TeleportCoroutine(GameObject player)
