@@ -320,7 +320,7 @@ namespace StarterAssets
 			}
 		}
 
-		[Command]
+		[Command(requiresAuthority = false)]
 		private void PlayJumpingSoundCommand()
 		{
 			PlayJumpingSoundRpc();
@@ -340,7 +340,7 @@ namespace StarterAssets
 			}
 		}
 
-		[Command]
+		[Command(requiresAuthority = false)]
 		private void PlayGroundingSoundCommand()
 		{
 			PlayGroundingSoundRpc();
@@ -367,7 +367,7 @@ namespace StarterAssets
 			}
 		}
 
-		[Command]
+		[Command(requiresAuthority = false)]
 		private void PlayFootstepsSoundCommand()
 		{
 			PlayFootstepsSoundRpc();
@@ -384,7 +384,7 @@ namespace StarterAssets
 			StopPlayingFootstepsSoundCommand();
 		}
 
-		[Command]
+		[Command(requiresAuthority = false)]
 		private void StopPlayingFootstepsSoundCommand()
 		{
 			StopPlayingFootstepsSoundRpc();

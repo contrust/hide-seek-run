@@ -160,7 +160,7 @@ public class Victim : NetworkBehaviour
         }
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void CmdDie(Vector3 lookAt, float hitAngle)
     {
         Die(lookAt, hitAngle);
@@ -186,7 +186,7 @@ public class Victim : NetworkBehaviour
         PlayDamageSoundCommand();
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void PlayDamageSoundCommand()
     {
         RpcPlayDamageSound();
@@ -198,7 +198,7 @@ public class Victim : NetworkBehaviour
         DamageSound.Play();
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void CmdOnDamageTaken()
     {
         RpcOnDamageTaken();
@@ -210,7 +210,7 @@ public class Victim : NetworkBehaviour
         onDamageTaken.Invoke();
     }
 
-    [Command]
+    [Command(requiresAuthority = false)]
     private void CmdOnDeath()
     {
         RpcOnDeath();
