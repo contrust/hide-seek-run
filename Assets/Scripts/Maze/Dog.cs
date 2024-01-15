@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class Dog: RequireInstance<DogArea>
 {
     public MovableAgent agent;
+    public AudioSource barkSound;
+    public AudioSource biteSound;
     private Victim victim;
     public float biteDistance;
     public int biteDamage;
@@ -13,6 +15,7 @@ public class Dog: RequireInstance<DogArea>
     public UnityEvent onBite = new UnityEvent();
     public UnityEvent onUnsetVictim = new UnityEvent();
     public UnityEvent<Victim> onVictimDeath = new UnityEvent<Victim>();
+    
     private bool CanReachVictim()
     {
         return agent.GetDistance() < biteDistance;
@@ -33,16 +36,69 @@ public class Dog: RequireInstance<DogArea>
     private void Start()
     {
         onBite.AddListener(BiteVictim);
+        onBite.AddListener(PlayBiteSoundCommand);
     }
 
     private void Update()
     {
+        if (agent.IsActive())
+        {
+            if (!barkSound.isPlaying)
+            {
+                Debug.Log("OK, let's go!");
+                PlayBarkSoundCommand();
+            }
+        }
+        else
+        {
+            if (barkSound.isPlaying)
+            {
+                StopBarkSoundCommand();
+            }
+        }
         UpdateBiteCooldown();
         if (ShouldBite())
         {
             Bite();
         }
     }
+    
+    [Command(requiresAuthority = false)]
+    private void PlayBiteSoundCommand()
+    {
+        PlayBiteSoundRpc();
+    }
+
+    [ClientRpc]
+    private void PlayBiteSoundRpc()
+    {
+        biteSound.Play();
+    }
+
+    [Command(requiresAuthority = false)]
+    private void StopBarkSoundCommand()
+    {
+        StopBarkSoundRpc();
+    }
+
+    [ClientRpc]
+    private void StopBarkSoundRpc()
+    {
+        barkSound.Stop();
+    }
+
+    [Command(requiresAuthority = false)]
+    private void PlayBarkSoundCommand()
+    {
+        PlayBarkSoundRpc();
+    }
+
+    [ClientRpc]
+    private void PlayBarkSoundRpc()
+    {
+        barkSound.Play();
+    }
+    
 
     private void UpdateBiteCooldown()
     {
