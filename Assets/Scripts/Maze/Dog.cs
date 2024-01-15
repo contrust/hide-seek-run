@@ -49,7 +49,6 @@ public class Dog: RequireInstance<DogArea>
         {
             if (!barkSound.isPlaying)
             {
-                Debug.Log("OK, let's go!");
                 PlayBarkSoundCommand();
             }
         }
@@ -124,6 +123,10 @@ public class Dog: RequireInstance<DogArea>
 
     private void SetVictim(Victim victim)
     {
+        if (victim is null)
+        {
+            return;
+        }
         this.victim = victim;
         this.victim.onDeath.AddListener(UnsetDeadVictim);
         agent.SetTarget(this.victim.transform);
