@@ -2453,6 +2453,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428549356}
   m_CullTransparentMesh: 1
+--- !u!1 &433399562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 433399563}
+  m_Layer: 7
+  m_Name: SpawnSymbol (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &433399563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433399562}
+  m_LocalRotation: {x: 0, y: 0.5735764, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: -33.139, y: 3.509, z: -31.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8554133318141647314}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 70, z: 0}
 --- !u!1 &445982402 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1342154540022912104, guid: a2a185d4824d4f94cba7b07b389b8df9, type: 3}
@@ -3275,6 +3306,7 @@ MonoBehaviour:
   nextCamera: 0
   previousCamera: 0
   fixedCamNum: 0
+  setTrap: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -9865,6 +9897,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4429394457615511653, guid: e47afac0590023142ae5dbf654937db2, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819014821610601588, guid: e47afac0590023142ae5dbf654937db2, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7402705362318547757, guid: e47afac0590023142ae5dbf654937db2, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -11025,6 +11065,7 @@ Transform:
   - {fileID: 535830040}
   - {fileID: 1201193073}
   - {fileID: 1445514846}
+  - {fileID: 433399563}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11051,6 +11092,7 @@ MonoBehaviour:
   - {fileID: 535830040}
   - {fileID: 1201193073}
   - {fileID: 1445514846}
+  - {fileID: 433399563}
 --- !u!1 &8554133318141647325
 GameObject:
   m_ObjectHideFlags: 0
