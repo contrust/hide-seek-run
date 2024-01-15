@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BirdSkill : NetworkBehaviour
 {
+	public AudioSource spawnSound;
+	public AudioSource flySound;
+	public AudioSource destroySound;
 	[SerializeField] private Transform target;
 	[SerializeField] private Transform raycastPoint;
 	[SerializeField] private float distanceToObjectForVerticalFly = 2f;
@@ -16,6 +19,8 @@ public class BirdSkill : NetworkBehaviour
 	private void Start()
 	{
 		FindTarget();
+		spawnSound.Play();
+		flySound.Play();
 	}
 
 	private void Update()
@@ -109,5 +114,11 @@ public class BirdSkill : NetworkBehaviour
 	{
 		Debug.Log("Destroy on server");
 		NetworkServer.Destroy(gameObject);
+	}
+
+	[ClientRpc]
+	private void PlayDestorySoundRpc()
+	{
+		destroySound.Play();
 	}
 }
