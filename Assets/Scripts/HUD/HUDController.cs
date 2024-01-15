@@ -1,6 +1,6 @@
 using HUD.Effects;
 using Mirror;
-using Player;
+using Player.HunterAbilities.Trap;
 using Player.Weapons;
 using UnityEngine;
 
@@ -8,7 +8,8 @@ namespace HUD
 {
     public class HUDController : MonoBehaviour
     { 
-        [SerializeField] private HUDEffect blurEffect;
+        [SerializeField] private HUDEffect hitBlurEffect;
+        [SerializeField] private GameObject stunBlurEffect;
         [SerializeField] private HUDEffect hitMarkerEffect;
         [SerializeField] private HUDEffect reloadEffect;
         [SerializeField] private HUDEffect symbolInsertedEffect;
@@ -17,7 +18,8 @@ namespace HUD
         [SerializeField] private GameObject staticElements;
         [SerializeField] private HealthBar healthBar;
         [SerializeField] private HealthManager healthManager;
-        
+        [SerializeField] private TrapInfo trapInfo;
+
         public static HUDController instance;
 
         public void Start()
@@ -39,11 +41,17 @@ namespace HUD
                 //weapon.onShot.AddListener(instance.OnShotHandler);
                 SymbolManager.OnSymbolInserted.AddListener(instance.OnSymbolInsertedEffect);
                 fourCams.onFourCamModeChange.AddListener(instance.OnFourCamerasHandler);
+                var trapSpawner = NetworkClient.localPlayer.GetComponent<TrapSpawner>();
+                trapSpawner.trapReady.AddListener(OnTrapReadyHandler);
+                trapSpawner.trapSpawned.AddListener(OnTrapSpawnedHandler);
+                trapInfo.gameObject.SetActive(true);
             }
             else
             {
                 var victim = NetworkClient.localPlayer.GetComponent<Victim>();
                 victim.onDamageTaken.AddListener(instance.OnDamageTakenHandler);
+                victim.onStartStun.AddListener(instance.OnStartStunHandler);
+                victim.onEndStun.AddListener(instance.OnEndStunHandler);
                 var slap = NetworkClient.localPlayer.GetComponent<Slap>();
                 slap.onSlap.AddListener(instance.OnSlapHandler);
                 healthManager.gameObject.SetActive(true);
@@ -78,7 +86,17 @@ namespace HUD
 
         public void OnDamageTakenHandler()
         {
-            ShowEffect(blurEffect);
+            ShowEffect(hitBlurEffect);
+        }
+
+        public void OnStartStunHandler()
+        {
+            stunBlurEffect.SetActive(true);
+        }
+
+        public void OnEndStunHandler()
+        {
+            stunBlurEffect.SetActive(false);
         }
 
         public void OnSymbolInsertedEffect(bool _)
@@ -94,6 +112,16 @@ namespace HUD
         public void OnFourCamerasHandler()
         {
             ShowEffect(camNumbers);
+        }
+
+        public void OnTrapReadyHandler()
+        {
+            trapInfo.ShowTrapReady();
+        }
+
+        public void OnTrapSpawnedHandler()
+        {
+            trapInfo.ShowTrapReload();
         }
     }
 }

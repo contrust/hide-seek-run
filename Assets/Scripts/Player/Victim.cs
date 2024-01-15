@@ -1,8 +1,10 @@
+using System.Collections;
 using DefaultNamespace;
 using HUD;
 using Mirror;
 using Phone;
 using Player;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
@@ -24,14 +26,18 @@ public class Victim : NetworkBehaviour
     private const float ClippingPlaneDistance = 0.15f;
     private const int OverlayCameraDepth = 1000;
     private PlayerCamera playerCamera;
+    private FirstPersonController movementController;
     
     [SerializeField] private PhoneController phone;
     public bool IsPhoneActive => phone.isPhoneActive;
+    public bool IsStunned { get; private set; }
 
     [SyncVar]
     public string steamName;
 
     public UnityEvent onDamageTaken;
+    public UnityEvent onStartStun;
+    public UnityEvent onEndStun;
     public UnityEvent onDeath;
     public LayerMask Render;
     private AnimationHelper animationHelper;
@@ -44,6 +50,7 @@ public class Victim : NetworkBehaviour
         animationHelper = GetComponent<AnimationHelper>();
         onDamageTaken.AddListener(PlayDamageSound);
         playerCamera = GetComponent<PlayerCamera>();
+        movementController = gameObject.GetComponent<FirstPersonController>();
         if (isLocalPlayer)
         {
             InitCamera();
@@ -105,6 +112,29 @@ public class Victim : NetworkBehaviour
             view.layer = LayerMask.NameToLayer("Default");
             animationHelper.TriggerDead(hitAngle);
         }
+    }
+
+    public void GetStun(float timeInSeconds)
+    {
+        if(IsStunned) return;
+        StartCoroutine(StunCoroutine(timeInSeconds));
+    }
+
+    private IEnumerator StunCoroutine(float timeInSeconds)
+    {
+        onStartStun.Invoke();
+        IsStunned = true;
+        var tmpSpeed = movementController.MoveSpeed;
+        var tmpSprintSpeed = movementController.SprintSpeed;
+        movementController.MoveSpeed = 0;
+        movementController.SprintSpeed = 0;
+        movementController.CanJump = false;
+        yield return new WaitForSeconds(timeInSeconds);
+        movementController.MoveSpeed = tmpSpeed;
+        movementController.SprintSpeed = tmpSprintSpeed;
+        movementController.CanJump = true;
+        IsStunned = false;
+        onEndStun.Invoke();
     }
 
     private void InitCamera()

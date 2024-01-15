@@ -27,7 +27,16 @@ namespace Player.Weapons
                     : mainCamera.transform.position + direction * ShootingDistance;
                 if (isHitSomethingFromCamera)
                 {
-                    TryDoDamage(cameraHitInfo, cameraTransform);
+                    if (!TryDoDamage(cameraHitInfo, cameraTransform))
+                    {
+                        var isHitSomethingFromBulletPos = TryHitWithRaycast(bulletPos.position, hitPoint - bulletPos.position, out var bulletHitInfo); //выстрел из дула, если не попали из камеры
+
+                        if (isHitSomethingFromBulletPos)
+                        {
+                            TryDoDamage(bulletHitInfo, cameraTransform);
+                        }
+                    }
+                    
                 }
                 DrawTrail(hitPoint);
                 ShootLaserHit(hitPoint);

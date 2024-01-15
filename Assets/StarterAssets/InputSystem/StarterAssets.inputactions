@@ -148,6 +148,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SetTrap",
+                    "type": "Button",
+                    "id": "e95a1e3c-4e80-4b2a-86cd-72013c64d0a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -456,6 +465,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "FixedCamera4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6868717-5f7c-42d4-b0ad-1c863ee6250b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "SetTrap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
