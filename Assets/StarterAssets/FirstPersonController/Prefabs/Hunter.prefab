@@ -9830,7 +9830,7 @@ MonoBehaviour:
   Render:
     serializedVersion: 2
     m_Bits: 4279
-  CurrentWeapon: 1
+  CurrentWeapon: 0
   CurrentSkill: 0
   Rifle: {fileID: 6469024593486652518}
   Shotgun: {fileID: 6052580650494772511}
@@ -9859,7 +9859,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab9d7b81923b900409acd2592a8c69f8, type: 3}
   m_Name: 
@@ -9891,7 +9891,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2766803616904b5088144bf81fbd58a3, type: 3}
   m_Name: 
@@ -10173,7 +10173,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  trapPrefab: {fileID: 206142871222486466, guid: 5bcdf25d7689ca74ebc24e3acfbe12c6, type: 3}
+  trapPrefab: {fileID: 2149391665832809163, guid: 947fc88d64dacba4fb2d1a73f0fc07d9, type: 3}
   trapSpawned:
     m_PersistentCalls:
       m_Calls: []

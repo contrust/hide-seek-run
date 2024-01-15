@@ -92,6 +92,7 @@ public class BirdSkill : NetworkBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		Debug.Log("On Trigger Enter");
 		var victim = other.gameObject.GetComponent<Victim>();
 		if (victim != null)
 		{
@@ -100,13 +101,14 @@ public class BirdSkill : NetworkBehaviour
 			NetworkServer.Destroy(gameObject);
 			Debug.Log("Network destroy");
 			DestroyOnServer();
-			Debug.Log("Destroy on server");
+			Debug.Log("Destroy");
 		}
 	}
 
 	[Command]
 	private void DestroyOnServer()
 	{
-		Destroy(gameObject);
+		Debug.Log("Destroy on server");
+		NetworkServer.Destroy(gameObject);
 	}
 }
