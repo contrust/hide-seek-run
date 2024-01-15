@@ -5,8 +5,15 @@ public class InsertedSymbolsCounter : MonoBehaviour
 {
     public SymbolManager symbolManager;
     public TextMeshProUGUI textMesh;
-    private const string ValueTemplate = "Введено символов: {count}";
-    private int count = -1;
+    private MatchSettings matchSettings;
+    private const string ValueTemplate = "Осталось ввести символов: {count}";
+    private int count;
+
+    private void Start()
+    {
+        matchSettings = FindObjectOfType<MatchSettings>();
+        count = matchSettings.CountCorrectSymbolsToWin;
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,7 +25,7 @@ public class InsertedSymbolsCounter : MonoBehaviour
     {
         if (count != symbolManager.CurrentCorrectInsertions)
         {
-            count = symbolManager.CurrentCorrectInsertions;
+            count = matchSettings.CountCorrectSymbolsToWin - symbolManager.CurrentCorrectInsertions;
             textMesh.text = ValueTemplate.Replace("{count}", count.ToString());
         }
     }
