@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using StarterAssets;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,11 +46,13 @@ namespace Player.HunterAbilities.Trap
         private void SpawnTrap()
         {
             var spawnPosition = transform.position + Vector3.up;
+            var spawnRotation = transform.rotation;
             if (trapPrefab.GetComponent<BirdSkill>() != null)
             {
                 spawnPosition = transform.position + Vector3.up * 3;
+                spawnRotation = quaternion.identity;
             }
-            var trap = Instantiate(trapPrefab, spawnPosition, transform.rotation);
+            var trap = Instantiate(trapPrefab, spawnPosition,spawnRotation);
             NetworkServer.Spawn(trap.gameObject);
             lastSpawnTime = Time.time;
             trapSpawned.Invoke();
