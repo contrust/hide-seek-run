@@ -104,7 +104,7 @@ public class BirdSkill : NetworkBehaviour
 		}
 	}
 
-	[Command]
+	[Command(requiresAuthority = false)]
 	private void DestroyOnServer()
 	{
 		Debug.Log("Destroy on server");
