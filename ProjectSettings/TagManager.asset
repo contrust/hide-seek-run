@@ -15,6 +15,7 @@ TagManager:
   - WeaponCamera
   - NicknameOnCameras
   - SpectatorNickname
+  - Teleportable
   layers:
   - Default
   - TransparentFX
