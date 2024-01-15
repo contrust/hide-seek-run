@@ -1600,6 +1600,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dog (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6004905411427977573, guid: 6f5a0168ed014fe54ac89a8e2340de55, type: 3}
+      propertyPath: sceneId
+      value: 3725088254
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f5a0168ed014fe54ac89a8e2340de55, type: 3}
 --- !u!114 &377737223 stripped
@@ -3347,6 +3351,7 @@ MonoBehaviour:
   nextCamera: 0
   previousCamera: 0
   fixedCamNum: 0
+  setTrap: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -4250,11 +4255,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3864542384177827335, guid: 6f5a0168ed014fe54ac89a8e2340de55, type: 3}
       propertyPath: sceneId
-      value: 467209292
+      value: 1047378409
       objectReference: {fileID: 0}
     - target: {fileID: 3864542384177827341, guid: 6f5a0168ed014fe54ac89a8e2340de55, type: 3}
       propertyPath: m_Name
       value: Dog
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004905411427977573, guid: 6f5a0168ed014fe54ac89a8e2340de55, type: 3}
+      propertyPath: sceneId
+      value: 1291364905
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f5a0168ed014fe54ac89a8e2340de55, type: 3}
@@ -10070,6 +10079,14 @@ PrefabInstance:
     - target: {fileID: 4371980372457752166, guid: e47afac0590023142ae5dbf654937db2, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4429394457615511653, guid: e47afac0590023142ae5dbf654937db2, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819014821610601588, guid: e47afac0590023142ae5dbf654937db2, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7402705362318547757, guid: e47afac0590023142ae5dbf654937db2, type: 3}
       propertyPath: m_RootOrder

@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: hatkid_body
-    second: {fileID: 2100000, guid: 6efe841846c35a44ab5ba98a92f036da, type: 2}
+    second: {fileID: 2100000, guid: efa02d74ee1ff854a91466053b6e375b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -28,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: hatkid_hat
-    second: {fileID: 2100000, guid: 4fb8a500a71ea0941989b4bc01224eb4, type: 2}
+    second: {fileID: 2100000, guid: d28e6037ae61cc14a8c48180bf16a491, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
