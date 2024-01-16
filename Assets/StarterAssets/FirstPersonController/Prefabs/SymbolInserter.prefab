@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2165914052972424829}
   - component: {fileID: 6814198904031679907}
   - component: {fileID: 1704024023541947189}
+  - component: {fileID: 8183235223671086150}
   m_Layer: 0
   m_Name: SymbolInserter
   m_TagString: Untagged
@@ -88,6 +89,24 @@ MonoBehaviour:
   meshRenderer: {fileID: 7740347927400781284}
   screen: {fileID: 6499081458025053893}
   expirationSignal: {fileID: 4254967060432734514}
+  onCorrectSymbol:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8183235223671086150}
+        m_TargetAssemblyTypeName: DefaultNamespace.SymbolInserter.Heal, Assembly-CSharp
+        m_MethodName: HealVictim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onWrongSymbol:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5619524112309281432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +178,19 @@ MonoBehaviour:
   correctAnswerEffect: {fileID: 6966079317653204121}
   correctAnswerEffectTransform: {fileID: 477707006827837572}
   correctAnswerEffectDestroyDelayInSeconds: 5
+--- !u!114 &8183235223671086150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477707006827837575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecaa78d4a41401da4cc673e2634cf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healCount: 20
 --- !u!1 &1239087782914044010
 GameObject:
   m_ObjectHideFlags: 0

@@ -73,6 +73,7 @@ public class TntRun : NetworkBehaviour
             t += Time.deltaTime / fallTime;
             yield return null;
         }
+        alpha = 0;
         colliderEnabled = false;
         yield return new WaitForSeconds(restoreTime);
 

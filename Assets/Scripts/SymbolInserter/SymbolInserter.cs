@@ -28,8 +28,8 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private MeshRenderer screen;
     [SerializeField] private MeshRenderer expirationSignal;
-    public readonly UnityEvent onCorrectSymbol = new ();
-    public readonly UnityEvent onWrongSymbol = new ();
+    public UnityEvent onCorrectSymbol = new ();
+    public UnityEvent onWrongSymbol = new ();
 
     private int chosenSymbol;
     private float changeExpirationSignalTime = -1;
