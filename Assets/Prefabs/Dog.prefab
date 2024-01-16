@@ -516,6 +516,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: hat kid (blend) 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4167280743394806330, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167280743394806330, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167280743394806330, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc9f04e738c4b1049a4fb71479741252, type: 3}
 --- !u!1 &5906169468376760191 stripped

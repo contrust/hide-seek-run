@@ -49,10 +49,10 @@ namespace Phone
         [SerializeField] private float directionMultiplier = 1;
 
         //distance to hunter constants
-        private const float VeryFar = 20;
-        private const float Far = 16;
-        private const float Midrange = 10;
-        private const float Close = 6;
+        private const float VeryFar = 40;
+        private const float Far = 32;
+        private const float Midrange = 20;
+        private const float Close = 12;
 
         public void TurnOn()
         {

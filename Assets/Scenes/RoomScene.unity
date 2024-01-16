@@ -548,6 +548,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1102910323, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 720
+      objectReference: {fileID: 0}
     - target: {fileID: 545252671667723624, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
       propertyPath: m_Name
       value: LobbyUI
@@ -701,6 +705,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3013077428668008868, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409939377037479557, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409939377037479557, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409939377037479557, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409939377037479557, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409939377037479557, guid: 466e786acbea08640a2e620abfcd23b7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

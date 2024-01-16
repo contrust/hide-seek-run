@@ -1,30 +1,65 @@
 using System.Collections;
-using Unity.VisualScripting;
+using Mirror;
 using UnityEngine;
 
-public class TntRun : MonoBehaviour
+public class TntRun : NetworkBehaviour
 {
     [SerializeField] private float fallDistance = 2f;
     [SerializeField] private float fallTime = 1f;
     [SerializeField] private float waitTime = 3f;
     [SerializeField] private float restoreTime = 5f;
 
+    [SyncVar(hook = nameof(SetAlpha))] public float alpha;
+    [SyncVar(hook = nameof(SetColliderEnabled))] public bool colliderEnabled;
+    
     private Coroutine fallBlockCoroutine;
+    private Material material;
+    private BoxCollider boxCollider;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        material = gameObject.GetComponent<MeshRenderer>().material;
+        boxCollider = gameObject.GetComponent<BoxCollider>();
+    }
+
+    private void SetAlpha(float _, float newValue)
+    {
+        alpha = newValue;
+        var newColor = material.color;
+        newColor.a = alpha;
+        material.color = newColor;
+    }
+
+    private void SetColliderEnabled(bool _, bool newValue)
+    {
+        colliderEnabled = newValue;
+        boxCollider.enabled = newValue;
+    }
+    
+    
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (other.GetComponent<Victim>())
         {
-            fallBlockCoroutine ??= StartCoroutine(FallBlock());
+            if (isServer)
+            {   
+                fallBlockCoroutine ??= StartCoroutine(FallBlock());
+            }
+            else
+            {
+                TriggerOnServer();
+            }
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    private void TriggerOnServer()
+    {
+        fallBlockCoroutine ??= StartCoroutine(FallBlock());
     }
 
     private IEnumerator FallBlock()
     {
-        var material = gameObject.GetComponent<MeshRenderer>().material;
-        var boxCollider = gameObject.GetComponent<BoxCollider>();
         var t = 0f;
         var position = transform.position;
         var startPos = position;
@@ -34,20 +69,16 @@ public class TntRun : MonoBehaviour
         while (t <= 1)
         {
             transform.position = Vector3.Lerp(startPos, endPos, t);
-            var newColor = material.color;
-            newColor.a = Mathf.Lerp(1, 0, t);
-            material.color = newColor;
+            alpha = Mathf.Lerp(1, 0, t);
             t += Time.deltaTime / fallTime;
             yield return null;
         }
-        boxCollider.enabled = false;
+        colliderEnabled = false;
         yield return new WaitForSeconds(restoreTime);
 
         transform.position = startPos;
-        var newNewColor = material.color;
-        newNewColor.a = 1;
-        material.color = newNewColor;
-        boxCollider.enabled = true;
+        alpha = 1;
+        colliderEnabled = true;
         fallBlockCoroutine = null;
     }
 }

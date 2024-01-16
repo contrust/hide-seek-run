@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6912316119348798755}
   - component: {fileID: 6040665310795005231}
   - component: {fileID: 1178041957231480569}
+  - component: {fileID: 1486336624823832613}
   m_Layer: 7
   m_Name: FlyingPlatformSmall
   m_TagString: Untagged
@@ -111,10 +112,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891884502ad02904abf193ee72a11ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
   fallDistance: 2
   fallTime: 1
   waitTime: 1
   restoreTime: 5
+  alpha: 0
+  colliderEnabled: 0
 --- !u!65 &1178041957231480569
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,5 +132,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9, z: 0.9}
+  m_Size: {x: 0.95, y: 0.95, z: 0.95}
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &1486336624823832613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187886339311786170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  _assetId: 2355522315
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0

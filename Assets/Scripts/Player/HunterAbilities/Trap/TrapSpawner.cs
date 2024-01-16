@@ -8,7 +8,7 @@ namespace Player.HunterAbilities.Trap
 {
     public class TrapSpawner: NetworkBehaviour
     {
-        public readonly float reloadTimeInSeconds = 10;
+        public float reloadTimeInSeconds = 10;
 
         [SerializeField] public GameObject trapPrefab;
         private StarterAssetsInputs input;
