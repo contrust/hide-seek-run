@@ -6,7 +6,7 @@ using UnityEngine;
 public class DogArea: NetworkBehaviour
 {
     [SyncVar] private List<Victim> victims = new List<Victim>();
-    [SyncVar] public List<Dog> dogs = new List<Dog>();
+    public Dog[] dogs;
 
     private void Start()
     {
