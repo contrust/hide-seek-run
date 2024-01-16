@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using Network;
 using Steamworks;
@@ -21,6 +22,7 @@ namespace Transport
         private string pchValue;
         [SerializeField] private GameObject button;
         [SerializeField] private GameObject slider;
+        [SerializeField] private GameObject errorPanel;
         private UIController uiController;
         private readonly UnityEvent onHostLobby = new ();
         private readonly UnityEvent onLeaveLobby = new ();
@@ -50,7 +52,15 @@ namespace Transport
         public void HostLobby()
         {
             Debug.Log("hosted");
-            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkRoomManager.maxConnections);
+            try
+            {
+                errorPanel.SetActive(false);
+                SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, networkRoomManager.maxConnections);
+            }
+            catch (InvalidOperationException e)
+            {
+                errorPanel.SetActive(true);
+            }
             onHostLobby.Invoke();
         }
 
