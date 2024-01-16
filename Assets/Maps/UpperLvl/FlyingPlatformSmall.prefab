@@ -120,8 +120,8 @@ MonoBehaviour:
   fallTime: 1
   waitTime: 1
   restoreTime: 5
-  alpha: 0
-  colliderEnabled: 0
+  alpha: 1
+  colliderEnabled: 1
 --- !u!65 &1178041957231480569
 BoxCollider:
   m_ObjectHideFlags: 0
