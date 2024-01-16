@@ -111,7 +111,7 @@ public class SymbolInserter : RequireInstance<SymbolManager>
     
     private IEnumerator ChangeExpirationSignalColors()
     {
-        while (possibleToInsert)
+        while (true)
         {
             currentExpirationColor = expireNotSoonColor;
             yield return new WaitForSeconds(changeExpirationSignalTime);
