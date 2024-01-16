@@ -71,13 +71,13 @@ public class Victim : NetworkBehaviour
 
     private void SetHealth(int oldValue, int newValue)
     {
-        Health = newValue;
-        if (isLocalPlayer)
+        if (isLocalPlayer && newValue < Health)
         {
             CmdOnDamageTaken();
             if (Health <= 0)
                 CmdOnDeath();
         }
+        Health = newValue;
     }
 
     private void SetColor(ColorPlayerEnum _, ColorPlayerEnum newValue)
